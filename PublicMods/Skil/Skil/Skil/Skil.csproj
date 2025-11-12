@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{65CEC5E6-84B3-410E-A424-C9ECA95B3B27}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Skil</RootNamespace>
+    <AssemblyName>Skil</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\..\tPlainModLoader\tPlainModLoader\bin\Debug\Mods\Skil\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommandHelp">
+      <HintPath>..\..\..\..\tPlainModLoader\tPlainModLoader\bin\Debug\CommandHelp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\dll\Microsoft.Xna.Framework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\dll\Microsoft.Xna.Framework.Game.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\dll\Microsoft.Xna.Framework.Graphics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ReLogic">
+      <HintPath>..\..\..\..\dll\ReLogic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="tContentPatch">
+      <HintPath>..\..\..\..\tPlainModLoader\tPlainModLoader\bin\Debug\tContentPatch.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Terraria_v1.4.4.9">
+      <HintPath>..\..\..\..\dll\Terraria_v1.4.4.9.exe</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Command.cs" />
+    <Compile Include="Content\action_skil13.cs" />
+    <Compile Include="Content\action_skil12.cs" />
+    <Compile Include="Content\action_skil11.cs" />
+    <Compile Include="Content\action_skil10.cs" />
+    <Compile Include="Content\action_skil9.cs" />
+    <Compile Include="Content\action_skil8.cs" />
+    <Compile Include="Content\action_skil7.cs" />
+    <Compile Include="Content\action_skil6.cs" />
+    <Compile Include="Content\action_skil5.cs" />
+    <Compile Include="Content\action_skil4.cs" />
+    <Compile Include="Content\action_skil3.cs" />
+    <Compile Include="Content\action_skil2.cs" />
+    <Compile Include="Content\SkilListControls.cs" />
+    <Compile Include="Content\action_skil14.cs" />
+    <Compile Include="Content\action_skil1.cs" />
+    <Compile Include="Content\UI\UIItemButton.cs" />
+    <Compile Include="Content\UI\UIItemMouseText.cs" />
+    <Compile Include="Content\UI\UIItemSwitchBind.cs" />
+    <Compile Include="Content\UI\UIItemTextBoxAButtonBind.cs" />
+    <Compile Include="Content\UI\UIItemTextBoxASwitchBind.cs" />
+    <Compile Include="Content\UI\UIItemTextBoxBind.cs" />
+    <Compile Include="Content\UI\UITextBoxBind.cs" />
+    <Compile Include="Content\UI\UITextButton.cs" />
+    <Compile Include="Content\Utils.cs" />
+    <Compile Include="ModLinkage\LinkageSetting.cs" />
+    <Compile Include="ModLinkage\ModQuickSetting.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SettingUI.cs" />
+    <Compile Include="Utils\BindUIAVal.cs" />
+    <Compile Include="Utils\CommandHRA.cs" />
+    <Compile Include="Utils\CommandString.cs" />
+    <Compile Include="Utils\CommandVariable.cs" />
+    <Compile Include="Utils\GetSetReset.cs" />
+    <Compile Include="Utils\quickBuild\CommandBuild.cs" />
+    <Compile Include="Utils\quickBuild\UIBuild.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

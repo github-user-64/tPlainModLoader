@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7BAD17D-ECAC-4F51-BA57-AD78B9BC02BF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>tContentPatch</RootNamespace>
+    <AssemblyName>tContentPatch</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\tContentPatch.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony, Version=2.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lib.Harmony.2.4.1\lib\net472\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553" />
+    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553" />
+    <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ReLogic">
+      <HintPath>..\..\dll\ReLogic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Terraria_v1.4.4.9">
+      <HintPath>..\..\dll\Terraria_v1.4.4.9.exe</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Command\ProgramCommand.cs" />
+    <Compile Include="Command\Utils.cs" />
+    <Compile Include="ContentPatch.cs" />
+    <Compile Include="Content\AutoLoadMod.cs" />
+    <Compile Include="Content\DrawTip.cs" />
+    <Compile Include="Content\Menus\ModInfo\ModInfo.cs" />
+    <Compile Include="Content\Menus\ModInfo\UIModInfo.cs" />
+    <Compile Include="Content\Menus\ModSetSwitch\ModSetSwitch.cs" />
+    <Compile Include="Content\Menus\ModSetSwitch\Patch.cs" />
+    <Compile Include="Content\Menus\ModSetSwitch\UIModScrollViewer.cs" />
+    <Compile Include="Content\Menus\ModSetSwitch\UIModSetSwitch.cs" />
+    <Compile Include="Content\Menus\ModSet\ModSet.cs" />
+    <Compile Include="Content\Menus\ModSet\UIModSet.cs" />
+    <Compile Include="Content\TitleInfo.cs" />
+    <Compile Include="Content\UI\ModSet\UIItemSwitch.cs" />
+    <Compile Include="Content\UI\ModSet\UIItemTextBox.cs" />
+    <Compile Include="Content\UI\ModSet\UIItemTitle.cs" />
+    <Compile Include="Content\UI\ModSet\UIItemValueSlider.cs" />
+    <Compile Include="Content\UI\ModSet\UIItem.cs" />
+    <Compile Include="Content\UI\UIRadioButton.cs" />
+    <Compile Include="Content\UI\UIScrollViewer2.cs" />
+    <Compile Include="Content\UI\UIScrollViewer.cs" />
+    <Compile Include="Content\UI\UISwitch.cs" />
+    <Compile Include="Content\UI\UITextBox.cs" />
+    <Compile Include="Content\UI\UIWindow.cs" />
+    <Compile Include="ModLoad\Inheritance\ModProjectile.cs" />
+    <Compile Include="ModLoad\Inheritance\ModItem.cs" />
+    <Compile Include="ModLoad\Inheritance\ModNPC.cs" />
+    <Compile Include="ModLoad\Inheritance\ModRemadeChatMonitor.cs" />
+    <Compile Include="ModLoad\Inheritance\ModTileLightScanner.cs" />
+    <Compile Include="ModLoad\Inheritance\ModSetting.cs" />
+    <Compile Include="ModLoad\LoadInstance\LoadInstance.cs" />
+    <Compile Include="ModLoad\LoadInstance\LoadInstance_IModLoader.cs" />
+    <Compile Include="ModLoad\Intercept.cs" />
+    <Compile Include="ModLoad\ModInfo.cs" />
+    <Compile Include="ModLoad\ModLoader\Initialize.cs" />
+    <Compile Include="ModPatch\Patch_ModProjectile.cs" />
+    <Compile Include="ModPatch\Patch_ModMain.cs" />
+    <Compile Include="ModPatch\Patch_ModItem.cs" />
+    <Compile Include="ModPatch\Patch_ModNPC.cs" />
+    <Compile Include="ModPatch\Patch_ModRemadeChatMonitor.cs" />
+    <Compile Include="ModPatch\Patch_ModPlayer.cs" />
+    <Compile Include="ModPatch\Patch_ModTileLightScanner.cs" />
+    <Compile Include="Utils\ConfigHelp.cs" />
+    <Compile Include="Content\Menus\ModLoadException\UIModLoadException.cs" />
+    <Compile Include="Content\Menus\ModLoadException\ModLoadException.cs" />
+    <Compile Include="Content\Menus\ModManager\ModManager.cs" />
+    <Compile Include="Content\Menus\ModManager\UIModItem.cs" />
+    <Compile Include="Content\Menus\ModManager\UIModManager.cs" />
+    <Compile Include="Content\Menus\Patch_UIWorkshopHub\Patch.cs" />
+    <Compile Include="Content\MenuUI\Menu.cs" />
+    <Compile Include="Content\Menus\ModLoadingMenu\ModLoadingMenu.cs" />
+    <Compile Include="Content\Menus\ModLoadingMenu\UILoadProgressBar.cs" />
+    <Compile Include="Content\Menus\ModLoadingMenu\UIProgressBar.cs" />
+    <Compile Include="Content\UI\UIButton1.cs" />
+    <Compile Include="Content\UI\UIStackPanel.cs" />
+    <Compile Include="Content\UI\UIWrapPanel.cs" />
+    <Compile Include="Content\UI\Utils.cs" />
+    <Compile Include="InfoList.cs" />
+    <Compile Include="ModLoad\LoadAssembly\LoadAssembly_IModLoader.cs" />
+    <Compile Include="ModLoad\LoadAssembly\LoadAssembly.cs" />
+    <Compile Include="ModLoad\LoadConfig\LoadConfig.cs" />
+    <Compile Include="ModLoad\LoadConfig\LoadConfig_IModLoader.cs" />
+    <Compile Include="ModLoad\Utils.cs" />
+    <Compile Include="ModLoad\Inheritance\ModPlayer.cs" />
+    <Compile Include="ModLoad\LoaderControl.cs" />
+    <Compile Include="ModLoad\IModLoader.cs" />
+    <Compile Include="ModLoad\Inheritance\ModMain.cs" />
+    <Compile Include="ModLoad\Inheritance\Mod.cs" />
+    <Compile Include="ModLoad\ModLoader\ModLoader_IModLoader.cs" />
+    <Compile Include="ModLoad\ModConfig.cs" />
+    <Compile Include="ModLoad\ModLoader\ModLoader.cs" />
+    <Compile Include="ModLoad\ModObject.cs" />
+    <Compile Include="Patch\AddPatch.cs" />
+    <Compile Include="Utils\CopyClass.cs" />
+    <Compile Include="Utils\Log.cs" />
+    <Compile Include="Utils\ModFile.cs" />
+    <Compile Include="Utils\MyJson1.cs" />
+    <Compile Include="Patch\IAddPatch.cs" />
+    <Compile Include="Patch\PatchUtil.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\OutputDebug.cs" />
+    <Compile Include="Utils\Resource.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\UI.Workshop.HudModManager.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\UI.ModIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\CommandHelp\CommandHelp\CommandHelp\CommandHelp.csproj">
+      <Project>{28032285-ba86-4a99-88c3-82a8483dc05c}</Project>
+      <Name>CommandHelp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\TitleLinkButtons.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
