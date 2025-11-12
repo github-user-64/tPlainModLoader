@@ -22,4 +22,9 @@
 
 ## 引用
 ### 项目引用
-****
+**Harmony**<https:https://github.com/pardeike/Harmony/>
+### 模组引用
+**WandsTool**使用部分图片资源<https:https://github.com/ForOne-Club/ImproveGame/>
+
+## ✨特别感谢
+[Azmi21](https://space.bilibili.com/289591350)提供测试
