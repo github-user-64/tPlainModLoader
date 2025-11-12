@@ -17,7 +17,7 @@
 
 ## 模组
 关于示例模组的制作还在新建文件夹中...<br/>
-在**tPlainModLoader**中制作模组和在**tModLoader**中完全不同，**tPlainModLoader**只是对游戏原有的内容修补，没人家灵活。<br/>
+在**tPlainModLoader**中制作模组和在**tModLoader**中完全不同，**tPlainModLoader**基本上只是添加了加载模组的功能，需要制作模组的话会更艰难且没人家灵活。<br/>
 不过你可以使用`tContentPatch.Mod.AddPatch`对游戏的任何地方进行修补，不过再次加载模组时可能会导致程序使用已卸载的模组中的方法来修补，所以使用该方法的模组需要重新加载时最好是关闭软件重新打开。
 
 ## 引用
