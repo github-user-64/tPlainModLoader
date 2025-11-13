@@ -35,6 +35,10 @@
 ## 引用
 ### 项目引用
 **Harmony**<https:https://github.com/pardeike/Harmony/>
+
+**Newtonsoft.Json**<https:https://github.com/JamesNK/Newtonsoft.Json/>
+
+**CommandHelp**<https:https://github.com/github-user-64/CommandHelp/>
 ### 模组引用
 [WandsTool](PublicMods/WandsTool)使用**更好的体验**中部分图片资源<https:https://github.com/ForOne-Club/ImproveGame/>
 
