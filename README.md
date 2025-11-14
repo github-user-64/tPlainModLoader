@@ -20,13 +20,17 @@
 在运行软件后会自动生成一个`launchConfigS.json`文件，在里面修改需要启动的游戏文件位置。如果需要启动游戏的服务端也是在这里修改。
 
 ## 模组
-关于示例模组的制作还在新建文件夹中...
-
 > 目前[PublicMods](PublicMods)中的模组在游戏里的UI可能会无法被鼠标点击，还不知道为什么，重新打开基本能解决问题。
 
 > 最近在试的时候发现最切出游戏窗口再切回来时，原本不能点击的UI又可以用了，而且在全屏状态下UI不能点击的问题好像必定出现，不知道是不是游戏窗口没刷新大小的原因。啊啊啊~未来再修吧:L
 
 > 我靠，录视频的时候又发现一些功能在全屏模式下会出问题，比如点亮全图在客户端点亮的时候会不知道为啥点不亮，这全屏模式是什么鬼东西！都别给我用全屏，不想改了~呜呜呜:(
+
+### 1. 安装
+安装模组只需将模组放在自动生成的`Mods`文件夹中。
+
+### 2. 制作
+关于示例模组的制作还在新建文件夹中...
 
 在**tPlainModLoader**中制作模组和在**tModLoader**中完全不同，**tPlainModLoader**基本上只是添加了加载模组的功能，需要制作模组的话会更艰难且没人家灵活。
 
@@ -39,6 +43,8 @@
 **Newtonsoft.Json**<https:https://github.com/JamesNK/Newtonsoft.Json/>
 
 **CommandHelp**<https:https://github.com/github-user-64/CommandHelp/>
+### 外观
+**tModLoader**<https:https://github.com/tModLoader/tModLoader/>
 ### 模组引用
 [WandsTool](PublicMods/WandsTool)使用**更好的体验**中部分图片资源<https:https://github.com/ForOne-Club/ImproveGame/>
 
