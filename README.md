@@ -38,15 +38,15 @@
 
 ## 引用
 ### 项目引用
-**Harmony**<https:https://github.com/pardeike/Harmony/>
+**Harmony**<https://github.com/pardeike/Harmony/>
 
-**Newtonsoft.Json**<https:https://github.com/JamesNK/Newtonsoft.Json/>
+**Newtonsoft.Json**<https://github.com/JamesNK/Newtonsoft.Json/>
 
-**CommandHelp**<https:https://github.com/github-user-64/CommandHelp/>
+**CommandHelp**<https://github.com/github-user-64/CommandHelp/>
 ### 外观
-**tModLoader**<https:https://github.com/tModLoader/tModLoader/>
+**tModLoader**<https://github.com/tModLoader/tModLoader/>
 ### 模组引用
-[WandsTool](PublicMods/WandsTool)使用**更好的体验**中部分图片资源<https:https://github.com/ForOne-Club/ImproveGame/>
+[WandsTool](PublicMods/WandsTool)使用**更好的体验**中部分图片资源<https://github.com/ForOne-Club/ImproveGame/>
 
 ## ✨特别感谢
 [Azmi21](https://space.bilibili.com/289591350)提供测试
