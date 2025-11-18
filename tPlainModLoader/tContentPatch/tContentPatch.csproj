@@ -59,8 +59,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\Pipe.cs" />
     <Compile Include="Command\ProgramCommand.cs" />
     <Compile Include="Command\Utils.cs" />
+    <Compile Include="ContentPatch_Initialize.cs" />
     <Compile Include="ContentPatch.cs" />
     <Compile Include="Content\AutoLoadMod.cs" />
     <Compile Include="Content\DrawTip.cs" />
@@ -84,24 +86,28 @@
     <Compile Include="Content\UI\UISwitch.cs" />
     <Compile Include="Content\UI\UITextBox.cs" />
     <Compile Include="Content\UI\UIWindow.cs" />
-    <Compile Include="ModLoad\Inheritance\ModProjectile.cs" />
-    <Compile Include="ModLoad\Inheritance\ModItem.cs" />
-    <Compile Include="ModLoad\Inheritance\ModNPC.cs" />
-    <Compile Include="ModLoad\Inheritance\ModRemadeChatMonitor.cs" />
-    <Compile Include="ModLoad\Inheritance\ModTileLightScanner.cs" />
-    <Compile Include="ModLoad\Inheritance\ModSetting.cs" />
     <Compile Include="ModLoad\LoadInstance\LoadInstance.cs" />
     <Compile Include="ModLoad\LoadInstance\LoadInstance_IModLoader.cs" />
     <Compile Include="ModLoad\Intercept.cs" />
     <Compile Include="ModLoad\ModInfo.cs" />
     <Compile Include="ModLoad\ModLoader\Initialize.cs" />
-    <Compile Include="ModPatch\Patch_ModProjectile.cs" />
-    <Compile Include="ModPatch\Patch_ModMain.cs" />
-    <Compile Include="ModPatch\Patch_ModItem.cs" />
-    <Compile Include="ModPatch\Patch_ModNPC.cs" />
-    <Compile Include="ModPatch\Patch_ModRemadeChatMonitor.cs" />
-    <Compile Include="ModPatch\Patch_ModPlayer.cs" />
-    <Compile Include="ModPatch\Patch_ModTileLightScanner.cs" />
+    <Compile Include="ModPatch\Inheritance\PatchItem.cs" />
+    <Compile Include="ModPatch\ListPatch.cs" />
+    <Compile Include="ModPatch\Inheritance\PatchMain.cs" />
+    <Compile Include="ModPatch\Inheritance\PatchNPC.cs" />
+    <Compile Include="ModPatch\Inheritance\PatchPlayer.cs" />
+    <Compile Include="ModPatch\Inheritance\PatchProjectile.cs" />
+    <Compile Include="ModPatch\Inheritance\PatchRemadeChatMonitor.cs" />
+    <Compile Include="ModLoad\Inheritance\ModSetting.cs" />
+    <Compile Include="ModPatch\Inheritance\PatchTileLightScanner.cs" />
+    <Compile Include="ModPatch\IPatch.cs" />
+    <Compile Include="ModPatch\Patch_Projectile.cs" />
+    <Compile Include="ModPatch\Patch_Main.cs" />
+    <Compile Include="ModPatch\Patch_Item.cs" />
+    <Compile Include="ModPatch\Patch_NPC.cs" />
+    <Compile Include="ModPatch\Patch_RemadeChatMonitor.cs" />
+    <Compile Include="ModPatch\Patch_Player.cs" />
+    <Compile Include="ModPatch\Patch_TileLightScanner.cs" />
     <Compile Include="Utils\ConfigHelp.cs" />
     <Compile Include="Content\Menus\ModLoadException\UIModLoadException.cs" />
     <Compile Include="Content\Menus\ModLoadException\ModLoadException.cs" />
@@ -123,10 +129,8 @@
     <Compile Include="ModLoad\LoadConfig\LoadConfig.cs" />
     <Compile Include="ModLoad\LoadConfig\LoadConfig_IModLoader.cs" />
     <Compile Include="ModLoad\Utils.cs" />
-    <Compile Include="ModLoad\Inheritance\ModPlayer.cs" />
     <Compile Include="ModLoad\LoaderControl.cs" />
     <Compile Include="ModLoad\IModLoader.cs" />
-    <Compile Include="ModLoad\Inheritance\ModMain.cs" />
     <Compile Include="ModLoad\Inheritance\Mod.cs" />
     <Compile Include="ModLoad\ModLoader\ModLoader_IModLoader.cs" />
     <Compile Include="ModLoad\ModConfig.cs" />
@@ -141,6 +145,7 @@
     <Compile Include="Patch\PatchUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\OutputDebug.cs" />
+    <Compile Include="Utils\Pipe.cs" />
     <Compile Include="Utils\Resource.cs" />
   </ItemGroup>
   <ItemGroup>

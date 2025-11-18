@@ -19,7 +19,12 @@ namespace tContentPatch.Command
 
             cos.Add(Utils.GetCO_OutputCOList(cos));
 
-            Utils.CommandRun(command, cos);
+            string msg = Utils.CommandRun(command, cos);
+
+            if (msg == null) return;
+            
+            Console.WriteLine(msg);
+            if (Pipe.EnablePipe) tContentPatch.Utils.Pipe.Pipe_send(Pipe.pipe_toOutput, msg);
         }
 
         private static List<CommandObject> GetCO()
@@ -61,7 +66,11 @@ namespace tContentPatch.Command
 
                 return cos_mod;
             }
-            catch { return null; }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"获取模组指令列表失败:{ex.Message}");
+                return null;
+            }
         }
     }
 }

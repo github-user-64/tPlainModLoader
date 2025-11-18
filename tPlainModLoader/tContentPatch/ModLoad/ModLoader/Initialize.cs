@@ -39,19 +39,19 @@ namespace tContentPatch.ModLoad
                 {
                     stateText = $"初始化模组:{mo.info?.name ?? mo.config.key}";
 
-                    Utils.ForHelp(mo.inheritance_modMain, item => item.Initialize(), ex => exMess(mo, ex));
+                    Utils.ForHelp(mo.inheritance_patchMain, item => item.Initialize(), ex => exMess(mo, ex));
 
-                    Utils.ForHelp(mo.inheritance_modPlayer, item => item.Initialize(), ex => exMess(mo, ex));
+                    Utils.ForHelp(mo.inheritance_patchPlayer, item => item.Initialize(), ex => exMess(mo, ex));
 
-                    Utils.ForHelp(mo.inheritance_modNPC, item => item.Initialize(), ex => exMess(mo, ex));
+                    Utils.ForHelp(mo.inheritance_patchNPC, item => item.Initialize(), ex => exMess(mo, ex));
 
-                    Utils.ForHelp(mo.inheritance_modItem, item => item.Initialize(), ex => exMess(mo, ex));
+                    Utils.ForHelp(mo.inheritance_patchItem, item => item.Initialize(), ex => exMess(mo, ex));
 
-                    Utils.ForHelp(mo.inheritance_modProjectile, item => item.Initialize(), ex => exMess(mo, ex));
+                    Utils.ForHelp(mo.inheritance_patchProjectile, item => item.Initialize(), ex => exMess(mo, ex));
 
-                    Utils.ForHelp(mo.inheritance_tileLightScanner, item => item.Initialize(), ex => exMess(mo, ex));
+                    Utils.ForHelp(mo.inheritance_patchTileLightScanner, item => item.Initialize(), ex => exMess(mo, ex));
 
-                    Utils.ForHelp(mo.inheritance_remadeChatMonitor, item => item.Initialize(), ex => exMess(mo, ex));
+                    Utils.ForHelp(mo.inheritance_patchRemadeChatMonitor, item => item.Initialize(), ex => exMess(mo, ex));
                 },
                 mo =>
                 {
@@ -59,19 +59,20 @@ namespace tContentPatch.ModLoad
 
                     Utils.ForHelp(mo.inheritance_mod, item => item.AddPatch(modPatch), ex => exMess2(mo, ex));
 
-                    Utils.ForHelp(mo.inheritance_modMain, item => ModPatch.Patch_ModMain.mod.Add(item), ex => exMess2(mo, ex));
-
-                    Utils.ForHelp(mo.inheritance_modPlayer, item => ModPatch.Patch_ModPlayer.mod.Add(item), ex => exMess2(mo, ex));
-                    
-                    Utils.ForHelp(mo.inheritance_modNPC, item => ModPatch.Patch_ModNPC.mod.Add(item), ex => exMess2(mo, ex));
-
-                    Utils.ForHelp(mo.inheritance_modItem, item => ModPatch.Patch_ModItem.mod.Add(item), ex => exMess2(mo, ex));
-
-                    Utils.ForHelp(mo.inheritance_modProjectile, item => ModPatch.Patch_ModProjectile.mod.Add(item), ex => exMess2(mo, ex));
-
-                    Utils.ForHelp(mo.inheritance_tileLightScanner, item => ModPatch.Patch_ModTileLightScanner.mod.Add(item), ex => exMess2(mo, ex));
-
-                    Utils.ForHelp(mo.inheritance_remadeChatMonitor, item => ModPatch.Patch_ModRemadeChatMonitor.mod.Add(item), ex => exMess2(mo, ex));
+                    try
+                    {
+                        ContentPatch.listPatch.Get<PatchMain>().AddRange(mo.inheritance_patchMain);
+                        ContentPatch.listPatch.Get<PatchPlayer>().AddRange(mo.inheritance_patchPlayer);
+                        ContentPatch.listPatch.Get<PatchNPC>().AddRange(mo.inheritance_patchNPC);
+                        ContentPatch.listPatch.Get<PatchItem>().AddRange(mo.inheritance_patchItem);
+                        ContentPatch.listPatch.Get<PatchProjectile>().AddRange(mo.inheritance_patchProjectile);
+                        ContentPatch.listPatch.Get<PatchTileLightScanner>().AddRange(mo.inheritance_patchTileLightScanner);
+                        ContentPatch.listPatch.Get<PatchRemadeChatMonitor>().AddRange(mo.inheritance_patchRemadeChatMonitor);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(exMess2(mo, ex), ex);
+                    }
                 }
             };
 

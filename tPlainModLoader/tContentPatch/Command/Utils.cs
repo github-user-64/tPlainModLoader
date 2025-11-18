@@ -15,29 +15,36 @@ namespace tContentPatch.Command
         /// </summary>
         /// <param name="command">一段指令</param>
         /// <param name="cos"></param>
-        public static void CommandRun(string command, List<CommandObject> cos)
+        /// <returns>异常信息</returns>
+        public static string CommandRun(string command, List<CommandObject> cos)
         {
             CommandException ex = RunCommand.ParseRun(command, cos);
 
-            if (ex != null)
+            if (ex == null) return null;
+
+            string msg = null;
+
+            if (ex as CommandLackException != null || ex.InnerException as CommandLackException != null)
             {
-                if (ex as CommandLackException != null || ex.InnerException as CommandLackException != null)
-                {
-                    Console.WriteLine($"\n指令缺失:{ex.ExceptionMessage}");
-                    if (ex.Line > -1) Console.WriteLine($"位于:{command.Substring(0, ex.Line)}<");
-                }
-                else
-                if (ex as CommandParseException != null || ex.InnerException as CommandParseException != null)
-                {
-                    Console.WriteLine($"\n指令错误:{ex.ExceptionMessage}");
-                    if (ex.Line > -1) Console.WriteLine($"位于: {command.Substring(0, ex.Line)}>{command.Substring(ex.Line)?.TrimStart()}<");
-                }
-                else
-                {
-                    Console.WriteLine($"\n指令错误:{ex.ExceptionMessage}");
-                    if (ex.Line > -1) Console.WriteLine($"位于: {command.Substring(0, ex.Line)}>{command.Substring(ex.Line)?.TrimStart()}<");
-                }
+                msg = $"\n指令缺失:{ex.ExceptionMessage}";
+                if (ex.Line > -1)
+                    msg += $"\n位于:{command.Substring(0, ex.Line)}<";
             }
+            else
+                if (ex as CommandParseException != null || ex.InnerException as CommandParseException != null)
+            {
+                msg = $"\n指令错误:{ex.ExceptionMessage}";
+                if (ex.Line > -1)
+                    msg += $"\n位于: {command.Substring(0, ex.Line)}>{command.Substring(ex.Line)?.TrimStart()}<";
+            }
+            else
+            {
+                msg = $"\n指令错误:{ex.ExceptionMessage}";
+                if (ex.Line > -1)
+                    msg += $"\n位于: {command.Substring(0, ex.Line)}>{command.Substring(ex.Line)?.TrimStart()}<";
+            }
+
+            return msg;
         }
 
         public static CommandObject GetCO_OutputCOList(List<CommandObject> cos, string tip = null)

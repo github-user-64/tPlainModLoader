@@ -42,25 +42,25 @@ namespace tContentPatch.ModLoad
                     mo.inheritance_setting = Utils.CreateInstance<ModSetting>(mo.assembly);
 
                     CheckLoadCancel();
-                    mo.inheritance_modMain = Utils.CreateInstance<ModMain>(mo.assembly);
+                    mo.inheritance_patchMain = Utils.CreateInstance<PatchMain>(mo.assembly);
 
                     CheckLoadCancel();
-                    mo.inheritance_modPlayer = Utils.CreateInstance<ModPlayer>(mo.assembly);
+                    mo.inheritance_patchPlayer = Utils.CreateInstance<PatchPlayer>(mo.assembly);
 
                     CheckLoadCancel();
-                    mo.inheritance_modNPC = Utils.CreateInstance<ModNPC>(mo.assembly);
+                    mo.inheritance_patchNPC = Utils.CreateInstance<PatchNPC>(mo.assembly);
 
                     CheckLoadCancel();
-                    mo.inheritance_modItem = Utils.CreateInstance<ModItem>(mo.assembly);
+                    mo.inheritance_patchItem = Utils.CreateInstance<PatchItem>(mo.assembly);
 
                     CheckLoadCancel();
-                    mo.inheritance_modProjectile = Utils.CreateInstance<ModProjectile>(mo.assembly);
+                    mo.inheritance_patchProjectile = Utils.CreateInstance<PatchProjectile>(mo.assembly);
 
                     CheckLoadCancel();
-                    mo.inheritance_tileLightScanner = Utils.CreateInstance<ModTileLightScanner>(mo.assembly);
+                    mo.inheritance_patchTileLightScanner = Utils.CreateInstance<PatchTileLightScanner>(mo.assembly);
 
                     CheckLoadCancel();
-                    mo.inheritance_remadeChatMonitor = Utils.CreateInstance<ModRemadeChatMonitor>(mo.assembly);
+                    mo.inheritance_patchRemadeChatMonitor = Utils.CreateInstance<PatchRemadeChatMonitor>(mo.assembly);
                 }
                 finally
                 {

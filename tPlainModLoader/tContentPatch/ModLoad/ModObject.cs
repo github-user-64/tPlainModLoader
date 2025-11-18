@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using tContentPatch.Utils;
-using Terraria;
 
 namespace tContentPatch.ModLoad
 {
@@ -42,24 +41,18 @@ namespace tContentPatch.ModLoad
         /// </summary>
         public List<ModSetting> inheritance_setting = null;
         /// <summary>
-        /// 继承了<see cref="ModMain"/>的类
+        /// 继承了<see cref="PatchMain"/>的类
         /// </summary>
-        public List<ModMain> inheritance_modMain = null;
+        public List<PatchMain> inheritance_patchMain = null;
         /// <summary>
-        /// 继承了<see cref="ModPlayer"/>的类
+        /// 继承了<see cref="PatchPlayer"/>的类
         /// </summary>
-        public List<ModPlayer> inheritance_modPlayer = null;
-        public List<ModNPC> inheritance_modNPC = null;
-        public List<ModItem> inheritance_modItem = null;
-        public List<ModProjectile> inheritance_modProjectile = null;
-        /// <summary>
-        /// 继承了<see cref="ModTileLightScanner"/>的类
-        /// </summary>
-        public List<ModTileLightScanner> inheritance_tileLightScanner = null;
-        /// <summary>
-        /// 继承了<see cref="ModRemadeChatMonitor"/>的类
-        /// </summary>
-        public List<ModRemadeChatMonitor> inheritance_remadeChatMonitor = null;
+        public List<PatchPlayer> inheritance_patchPlayer = null;
+        public List<PatchNPC> inheritance_patchNPC = null;
+        public List<PatchItem> inheritance_patchItem = null;
+        public List<PatchProjectile> inheritance_patchProjectile = null;
+        public List<PatchTileLightScanner> inheritance_patchTileLightScanner = null;
+        public List<PatchRemadeChatMonitor> inheritance_patchRemadeChatMonitor = null;
 
         /// <summary>
         /// 复制模组对象的字段, <see cref="config"/>,<see cref="info"/>也为复制对象

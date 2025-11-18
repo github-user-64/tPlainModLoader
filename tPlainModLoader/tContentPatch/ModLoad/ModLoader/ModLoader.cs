@@ -54,13 +54,7 @@ namespace tContentPatch.ModLoad
             {
                 stateText = "清理";
 
-                ModPatch.Patch_ModMain.mod.Clear();
-                ModPatch.Patch_ModPlayer.mod.Clear();
-                ModPatch.Patch_ModNPC.mod.Clear();
-                ModPatch.Patch_ModItem.mod.Clear();
-                ModPatch.Patch_ModProjectile.mod.Clear();
-                ModPatch.Patch_ModTileLightScanner.mod.Clear();
-                ModPatch.Patch_ModRemadeChatMonitor.mod.Clear();
+                ContentPatch.listPatch.ClearAllPatch();
                 PatchUtil.ClearPathc(patchId);
 
                 ++progressV;
