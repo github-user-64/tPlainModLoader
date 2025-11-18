@@ -22,7 +22,7 @@ tPML是使用**替换方法**的方式实现的，具体看[Harmony](https://git
 在运行软件后会自动生成一个`launchConfigS.json`文件，在里面修改需要启动的游戏文件位置。如果需要启动游戏的服务端也是在这里修改。
 
 ## 模组
-> 目前[PublicMods](PublicMods)中的模组在游戏里的UI可能会无法被鼠标点击，还不知道为什么，重新打开基本能解决问题。
+> 目前[Mods](Mods)中的模组在游戏里的UI可能会无法被鼠标点击，还不知道为什么，重新打开基本能解决问题。
 
 > 最近在试的时候发现最切出游戏窗口再切回来时，原本不能点击的UI又可以用了，而且在全屏状态下UI不能点击的问题好像必定出现，不知道是不是游戏窗口没刷新大小的原因。啊啊啊~未来再修吧:L
 
@@ -48,7 +48,7 @@ tPML是使用**替换方法**的方式实现的，具体看[Harmony](https://git
 ### 外观
 **tModLoader**<https://github.com/tModLoader/tModLoader/>
 ### 模组引用
-[WandsTool](PublicMods/WandsTool)使用**更好的体验**中部分图片资源<https://github.com/ForOne-Club/ImproveGame/>
+[WandsTool](Mods/WandsTool)使用**更好的体验**中部分图片资源<https://github.com/ForOne-Club/ImproveGame/>
 
 ## ✨特别感谢
 [Azmi21](https://space.bilibili.com/289591350)提供测试
