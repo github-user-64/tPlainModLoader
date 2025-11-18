@@ -34,9 +34,14 @@ namespace SuspiciousPlayer.Content.VirtualPlayer
             };
         }
 
+        public override void OnEnterWorld()
+        {
+            vps.Clear();
+        }
+
         public override void DoUpdateInWorldPrefix(Stopwatch sw)
         {
-            if (Main.netMode == 1) return;
+            if (Main.netMode != 0 && Main.netMode != 2) return;
 
             for (int i = 0; i < vps.Count; i++)
             {
