@@ -1,3 +1,3 @@
-[submodule "FastWin32"]
+[submodule "tPlainModLoader/FastWin32-master"]
 path = tPlainModLoader/FastWin32-master
 url = https://github.com/liang9539/FastWin32.git
