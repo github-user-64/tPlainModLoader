@@ -64,7 +64,7 @@ namespace tContentPatch.Content
 
         private static void DrawVersionNumber(Color menuColor, float upBump)
         {
-            string text = "tPlainModLoader v1.4.4.9.1";
+            string text = $"tPlainModLoader v{ContentPatch.VersionTPlainModLoader}";
 
             Vector2 pos = new Vector2(10, upBump);
 

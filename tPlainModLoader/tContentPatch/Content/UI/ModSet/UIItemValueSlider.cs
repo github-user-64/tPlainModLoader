@@ -15,13 +15,22 @@ namespace tContentPatch.Content.UI.ModSet
         /// <summary>
         /// 值会显示在标题右方, <see cref="FloatToString"/>则用于修改显示的文本, 为<see langword="null"/>时显示原本的值
         /// </summary>
-        public Func<float, string> FloatToString = null;
+        public Func<float, string> FloatToString {
+            get => _floatToString;
+            set
+            {
+                _floatToString = value;
+                if (_floatToString != null) UpdateFloatToString();
+            }
+        }
+        private Func<float, string> _floatToString = null;
         private string text = null;
         private float min = 0;
         private float max = 0;
         private float val = 0;
         private float proportion = 0;
         private bool isInt = false;
+        private bool hasSetVal = false;
 
         public UIItemValueSlider(int min, int max, Texture2D ico = null, string text = null) : this((float)min, max, ico, text)
         {
@@ -77,16 +86,21 @@ namespace tContentPatch.Content.UI.ModSet
 
             if (isInt) v = (float)(Math.Floor(v * proportion) / proportion);
 
-            if (v == val) return;
+            if (v == val && hasSetVal) return;
+            hasSetVal = true;
             val = v;
 
             float getV = GetVal(val);
             OnValUpdate?.Invoke(getV);
-            if (text != null)
-            {
-                if (FloatToString == null) SetTitle($"{text}: {getV}");
-                else SetTitle($"{text}: {FloatToString.Invoke(getV)}");
-            }
+            if (text != null) UpdateFloatToString();
+        }
+
+        public void UpdateFloatToString()
+        {
+            float getV = GetVal(val);
+
+            if (FloatToString == null) SetTitle($"{text}: {getV}");
+            else SetTitle($"{text}: {FloatToString.Invoke(getV)}");
         }
     }
 }

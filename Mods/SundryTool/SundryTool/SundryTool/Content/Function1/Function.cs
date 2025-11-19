@@ -10,7 +10,7 @@ namespace SundryTool.Content.Function1
 {
     internal partial class Function : PatchPlayer
     {
-        public const bool NoPublic = true;
+        public const bool NoPublic = false;
         public static GetSetReset<bool> noDead = new GetSetReset<bool>();
         public static GetSetReset<bool> manaMax = new GetSetReset<bool>();
         

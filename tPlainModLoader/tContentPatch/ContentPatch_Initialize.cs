@@ -43,7 +43,11 @@ namespace tContentPatch
             //加载时
             LoaderControl.OnModLoad_Start += (e) => Content.Menus.ModLoadingMenu.ModLoadingMenu.OpenLoadMenu(e, LoaderControl.CancelLoad);
             //加载完成时
-            LoaderControl.OnModLoad_Ok += () => Main.menuMode = MenuID.Title;
+            LoaderControl.OnModLoad_Ok += () =>
+            {
+                if (Main.netMode != 0 && Main.netMode != 1) return;
+                Main.menuMode = MenuID.Title;
+            };
             //取消时
             LoaderControl.OnModLoad_Cancel += (e) => Content.Menus.ModLoadingMenu.ModLoadingMenu.OpenLoadMenu(e, LoaderControl.CancelLoad);
             //取消完成
@@ -51,6 +55,7 @@ namespace tContentPatch
             //加载异常时
             LoaderControl.OnModLoad_Exception += (e) =>
             {
+                Log.SaveTry();
                 ModLoadException.OpenModLoadExceptionMenu(e);
                 ModLoadException.WaitMenuClose();
                 ModManager.OpenModManagerMenu(null);

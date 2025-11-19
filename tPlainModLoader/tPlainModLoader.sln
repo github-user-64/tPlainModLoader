@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tContentPatch", "tContentPa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandHelp", "..\..\CommandHelp\CommandHelp\CommandHelp\CommandHelp.csproj", "{28032285-BA86-4A99-88C3-82A8483DC05C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastWin32", "FastWin32-master\FastWin32\FastWin32.csproj", "{0B6AC808-3A51-4072-954F-D55DE4F0209B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{28032285-BA86-4A99-88C3-82A8483DC05C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28032285-BA86-4A99-88C3-82A8483DC05C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28032285-BA86-4A99-88C3-82A8483DC05C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B6AC808-3A51-4072-954F-D55DE4F0209B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B6AC808-3A51-4072-954F-D55DE4F0209B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B6AC808-3A51-4072-954F-D55DE4F0209B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B6AC808-3A51-4072-954F-D55DE4F0209B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

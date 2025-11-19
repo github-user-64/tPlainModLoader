@@ -9,6 +9,7 @@ namespace tContentPatch
 {
     public partial class ContentPatch
     {
+        public const string VersionTPlainModLoader = "1.4.4.9.1";
         public static string ModDirectory { get; private set; } = null;
 
         internal const string patchId_tContentPatch = "tContentPatch.gamePatch";
