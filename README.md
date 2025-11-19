@@ -49,6 +49,8 @@ tPML是使用**替换方法**的方式实现的，具体看[Harmony](https://git
 **tModLoader**<https://github.com/tModLoader/tModLoader/>
 ### 模组引用
 [WandsTool](Mods/WandsTool)使用**更好的体验**中部分图片资源<https://github.com/ForOne-Club/ImproveGame/>
+### 该项目地址
+<https://github.com/github-user-64/tPlainModLoader/>
 
 ## ✨特别感谢
 [Azmi21](https://space.bilibili.com/289591350)提供测试
