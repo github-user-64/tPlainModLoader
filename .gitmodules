@@ -1,3 +1,3 @@
-[submodule "FastWin32"]
-path = tPlainModLoader/FastWin32-master
-url = https://github.com/liang9539/FastWin32.git
+[submodule "tPlainModLoader/CommandHelp"]
+	path = tPlainModLoader/CommandHelp
+	url = https://github.com/github-user-64/CommandHelp.git
