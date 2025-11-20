@@ -13,13 +13,7 @@
 tPML是使用**替换方法**的方式实现的，具体看[Harmony](https://github.com/pardeike/Harmony)。这种方法只要程序的代码结构没有更改就能正常使用，也就是说只要1.4.5没有改变被替换的方法的位置和名字tPML就能正常使用，即使之后游戏再次更新也不会影响。
 
 ## 使用
-直接运行`tPlainModLoader.exe`即可，不过需要设置启动游戏的位置
-### 1. 自动
-将软件所在文件夹放在游戏所在目录的上一个目录中，软件会在目录中寻找对应的游戏文件，示例：<br/>
-游戏位置：`C:/Game/game.exe`<br/>
-软件位置：`C:/tPlainModLoader/tPlainModLoader.exe`
-### 2. 手动设置
-在运行软件后会自动生成一个`launchConfigS.json`文件，在里面修改需要启动的游戏文件位置。如果需要启动游戏的服务端也是在这里修改。
+直接运行`tPlainModLoader.exe`即可，[详细信息](https://github.com/github-user-64/tPlainModLoader/wiki/%E4%BD%BF%E7%94%A8)。
 
 ## 模组
 > 目前[Mods](Mods)中的模组在游戏里的UI可能会无法被鼠标点击，还不知道为什么，重新打开基本能解决问题。
@@ -45,6 +39,8 @@ tPML是使用**替换方法**的方式实现的，具体看[Harmony](https://git
 **Newtonsoft.Json**<https://github.com/JamesNK/Newtonsoft.Json/>
 
 **CommandHelp**<https://github.com/github-user-64/CommandHelp/>
+
+**FastWin32**<https://github.com/liang9539/FastWin32/>
 ### 外观
 **tModLoader**<https://github.com/tModLoader/tModLoader/>
 ### 模组引用
