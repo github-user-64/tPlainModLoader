@@ -17,7 +17,12 @@ namespace tPlainModLoader
             try
             {
                 ProgramPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                if (Directory.Exists(ProgramPath) == false) return;
+                if (Directory.Exists(ProgramPath) == false)
+                {
+                    Console.WriteLine($"路径不存在:[{ProgramPath}]");
+                    Console.ReadKey(true);
+                    return;
+                }
 
                 Log.SetPath(Path.Combine(ProgramPath, InfoList.Files.Log));
                 Log.Add($"{nameof(Program)}:初始化");

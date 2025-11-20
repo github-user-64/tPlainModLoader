@@ -26,20 +26,20 @@ namespace tContentPatch.Command
 
             if (ex as CommandLackException != null || ex.InnerException as CommandLackException != null)
             {
-                msg = $"\n指令缺失:{ex.ExceptionMessage}";
+                msg = $"指令缺失:{ex.ExceptionMessage}";
                 if (ex.Line > -1)
                     msg += $"\n位于:{command.Substring(0, ex.Line)}<";
             }
             else
                 if (ex as CommandParseException != null || ex.InnerException as CommandParseException != null)
             {
-                msg = $"\n指令错误:{ex.ExceptionMessage}";
+                msg = $"指令错误:{ex.ExceptionMessage}";
                 if (ex.Line > -1)
                     msg += $"\n位于: {command.Substring(0, ex.Line)}>{command.Substring(ex.Line)?.TrimStart()}<";
             }
             else
             {
-                msg = $"\n指令错误:{ex.ExceptionMessage}";
+                msg = $"指令错误:{ex.ExceptionMessage}";
                 if (ex.Line > -1)
                     msg += $"\n位于: {command.Substring(0, ex.Line)}>{command.Substring(ex.Line)?.TrimStart()}<";
             }
@@ -70,6 +70,7 @@ namespace tContentPatch.Command
                 if (s == null) s = "no cmd";
                 if (tip != null) s = $"{s}//{tip}";
                 Console.WriteLine(s);
+                if (Pipe.EnablePipe) tContentPatch.Utils.Pipe.Pipe_send(Pipe.pipe_toOutput, s);
             };
 
             return help;

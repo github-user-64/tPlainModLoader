@@ -21,7 +21,9 @@ namespace tContentPatch.Utils
 
                             using (StreamReader sr = new StreamReader(pipeServer1))
                             {
-                                action?.Invoke(sr.ReadToEnd());
+                                string s = sr.ReadToEnd();
+                                if (path == Command.Pipe.pipe_toTContentPatch) s = s.Trim();
+                                action?.Invoke(s);
                             }
                         }
                         catch

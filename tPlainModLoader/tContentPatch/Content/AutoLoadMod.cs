@@ -22,6 +22,10 @@ namespace tContentPatch.Content
                 if (Main.dedServ) return;
                 if (Main.showSplash) return;
 
+                if (Main.gameMenu == false) return;
+                if (Main.menuMode != Terraria.ID.MenuID.Title) return;
+                if (LoaderControl.CanLoad == false) return;
+
                 oneLoadMod = false;
                 LoaderControl.Load();
             }

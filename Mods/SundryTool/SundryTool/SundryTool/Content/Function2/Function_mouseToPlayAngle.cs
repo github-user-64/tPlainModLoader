@@ -4,13 +4,14 @@ using SundryTool.Utils;
 using SundryTool.Utils.quickBuild;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using tContentPatch;
 using Terraria;
 using Terraria.UI;
 
 namespace SundryTool.Content.Function2
 {
-    internal class Function_mouseToPlayAngle : PatchPlayer
+    internal class Function_mouseToPlayAngle : PatchMain
     {
         public static GetSetReset<bool> mtpa = new GetSetReset<bool>();
         public static GetSetReset<int> mtpa_play = new GetSetReset<int>(-1, -1);
@@ -20,9 +21,9 @@ namespace SundryTool.Content.Function2
             mtpa_play.OnValUpdate += v => Utils.OutputPlayerName(mtpa_play.val);
         }
 
-        public override void UpdatePrefix(Player This, int playerI)
+        public override void DoUpdateInWorldPrefix(Stopwatch sw)
         {
-            if (This != Main.LocalPlayer) return;
+            Player This = Main.LocalPlayer;
 
             if (mtpa.val == false) return;
 

@@ -62,6 +62,10 @@ namespace tContentPatch.ModLoad
                     CheckLoadCancel();
                     mo.inheritance_patchRemadeChatMonitor = Utils.CreateInstance<PatchRemadeChatMonitor>(mo.assembly);
                 }
+                catch (Exception ex)
+                {
+                    throw new Exception($"创建模组实例失败:{stateText}", ex);
+                }
                 finally
                 {
                     ++progressV;

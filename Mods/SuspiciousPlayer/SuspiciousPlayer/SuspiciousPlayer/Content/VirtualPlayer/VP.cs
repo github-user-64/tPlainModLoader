@@ -22,13 +22,11 @@ namespace SuspiciousPlayer.Content.VirtualPlayer
                 foreach (Player vp in vps)
                 {
                     //玩家加入时同步数据到玩家
-                    NetMessage.SendData(4, v, number: vp.whoAmI);//外观
-                    NetMessage.SendData(16, v, number: vp.whoAmI);//血量
                     NetMessage.SendData(14, v, number: vp.whoAmI, number2: 1);//活动
+                    NetMessage.SendData(4, v, number: vp.whoAmI);//外观
                     NetMessage.SendData(13, v, number: vp.whoAmI);//控制,属性,位置
+                    NetMessage.SendData(16, v, number: vp.whoAmI);//血量
                     NetMessage.SendData(30, v, number: vp.whoAmI);//pvp
-                    NetMessage.SendData(4, number: vp.whoAmI);//外观
-                    NetMessage.SendData(16, number: vp.whoAmI);//血量
                     SendItems(vp);
                 }
             };
@@ -98,10 +96,10 @@ namespace SuspiciousPlayer.Content.VirtualPlayer
 
             if (Main.netMode == 2)
             {
-                NetMessage.SendData(4, -1, whoAmI, number: whoAmI);//外观
-                NetMessage.SendData(16, -1, whoAmI, number: whoAmI);//血量
                 NetMessage.SendData(14, -1, whoAmI, number: whoAmI, number2: 1);//活动
+                NetMessage.SendData(4, -1, whoAmI, number: whoAmI);//外观
                 NetMessage.SendData(13, -1, whoAmI, number: whoAmI);//控制,属性,位置
+                NetMessage.SendData(16, -1, whoAmI, number: whoAmI);//血量
                 NetMessage.SendData(30, -1, whoAmI, number: whoAmI);//pvp
                 NetMessage.SendData(42, -1, whoAmI, number: whoAmI);//魔力
                 NetMessage.SendData(50, number: whoAmI);//buff

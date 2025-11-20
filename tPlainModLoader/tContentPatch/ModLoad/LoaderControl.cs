@@ -14,6 +14,7 @@ namespace tContentPatch.ModLoad
         public static Action OnModLoad_Canceled = null;
         public static Action<Exception> OnModLoad_Exception = null;
         public static Action<Exception> OnModUnload_Exception = null;
+        public static bool CanLoad => ContentPatch.Initialized;
 
         private static List<ModObject> loadedMod = null;
         private static IModLoader modLoader = null;
@@ -42,8 +43,16 @@ namespace tContentPatch.ModLoad
         /// </summary>
         internal static void Load()
         {
+            if (CanLoad == false)
+            {
+                Log.Add($"{nameof(LoaderControl)}:当前不可加载模组");
+                Console.WriteLine("当前不可加载模组");
+                return;
+            }
+
             Log.Add($"{nameof(LoaderControl)}:加载模组");
-            Console.Clear();
+
+            ConsoleUtils.Clear();
             Console.WriteLine("加载模组");
 
             OnModLoad_Start?.Invoke(modLoader);
@@ -88,7 +97,7 @@ namespace tContentPatch.ModLoad
         internal static void CancelLoad()
         {
             Log.Add($"{nameof(LoaderControl)}:取消加载模组");
-            Console.Clear();
+            ConsoleUtils.Clear();
             Console.WriteLine("取消加载");
 
             modLoader.CancelLoad();

@@ -11,6 +11,7 @@ namespace tContentPatch
     {
         public const string VersionTPlainModLoader = "1.4.4.9.1";
         public static string ModDirectory { get; private set; } = null;
+        public static bool Initialized { get; private set; } = false;
 
         internal const string patchId_tContentPatch = "tContentPatch.gamePatch";
         internal const string patchId_mod = "tContentPatch.mod.patch";

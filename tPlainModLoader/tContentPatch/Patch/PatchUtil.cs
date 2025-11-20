@@ -42,7 +42,7 @@ namespace tContentPatch.Patch
                 harmonyList.Add(harmony);
             }
 
-            harmony.PatchAll();
+            harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
 
         internal static void AddPatchPrefix(string patchId, MethodBase original, MethodInfo prefix)

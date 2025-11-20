@@ -137,6 +137,7 @@
     <Compile Include="ModLoad\ModLoader\ModLoader.cs" />
     <Compile Include="ModLoad\ModObject.cs" />
     <Compile Include="Patch\AddPatch.cs" />
+    <Compile Include="Utils\ConsoleUtils.cs" />
     <Compile Include="Utils\CopyClass.cs" />
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\ModFile.cs" />

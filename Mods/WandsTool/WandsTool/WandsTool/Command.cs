@@ -28,7 +28,7 @@ namespace WandsTool
 
             root.SubCommand.Add(enable);
 
-            bool NoPublic = false;
+            bool NoPublic = true;
 
             if (NoPublic == false)
             {

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using tContentPatch.Content.Menus.ModLoadException;
@@ -19,11 +18,14 @@ namespace tContentPatch
             if (Instance == null) Instance = this;
             else throw new Exception("不可重复初始化");
 
+            Initialized = false;
+
+            Command.Pipe.Initialize(pipe);
             Initialize_ModDirectory();
             Initialize_AddPatch();
-            Command.Pipe.Initialize(pipe);
-
             Initialize_ModLoader();
+
+            Initialized = true;
 
             if (Main.dedServ)
             {

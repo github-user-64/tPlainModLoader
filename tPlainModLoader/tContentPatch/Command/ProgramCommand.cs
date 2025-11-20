@@ -35,7 +35,7 @@ namespace tContentPatch.Command
             CommandMethod console_clear = new CommandMethod("clear");
             console_clear.Runing += args =>
             {
-                Console.Clear();
+                tContentPatch.Utils.ConsoleUtils.Clear();
             };
             console.SubCommand.Add(console_clear);
             console.SubCommand.Add(Utils.GetCO_OutputCOList(console.SubCommand));

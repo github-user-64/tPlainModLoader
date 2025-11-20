@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandHelp", "..\..\Comman
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastWin32", "FastWin32-master\FastWin32\FastWin32.csproj", "{0B6AC808-3A51-4072-954F-D55DE4F0209B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tPlainModLoaderInjector", "tPlainModLoaderInjector\tPlainModLoaderInjector.csproj", "{F00447E9-BA2A-41FB-AE78-933BFED21611}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{0B6AC808-3A51-4072-954F-D55DE4F0209B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B6AC808-3A51-4072-954F-D55DE4F0209B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B6AC808-3A51-4072-954F-D55DE4F0209B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F00447E9-BA2A-41FB-AE78-933BFED21611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F00447E9-BA2A-41FB-AE78-933BFED21611}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F00447E9-BA2A-41FB-AE78-933BFED21611}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F00447E9-BA2A-41FB-AE78-933BFED21611}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
