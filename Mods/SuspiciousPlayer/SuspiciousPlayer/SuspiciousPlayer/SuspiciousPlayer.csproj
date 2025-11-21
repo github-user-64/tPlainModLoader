@@ -93,6 +93,7 @@
     <Compile Include="Content\PlayerNPC.cs" />
     <Compile Include="Content\VirtualPlayer\Utils.cs" />
     <Compile Include="Content\VirtualPlayer\VP.cs" />
+    <Compile Include="Patch\PatchItem.cs" />
     <Compile Include="Patch\PatchNetMessage.cs" />
     <Compile Include="Patch\PatchNPC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

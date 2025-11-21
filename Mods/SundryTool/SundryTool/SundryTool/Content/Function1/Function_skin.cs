@@ -94,9 +94,9 @@ namespace SundryTool.Content.Function1
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get4("清空", skinClear, "Images/Buff", "皮肤清空"),
-                UIBuild.get4("穿上", skin1, "Images/Buff_299", "皮肤1"),
-                UIBuild.get4("穿上", skin2, "Images/Buff_287", "皮肤2"),
+                UIBuild.get4("清空", skinClear, null, "Images/Buff", "皮肤清空"),
+                UIBuild.get4("穿上", skin1, null, "Images/Buff_299", "皮肤1"),
+                UIBuild.get4("穿上", skin2, null, "Images/Buff_287", "皮肤2"),
             };
 
             return uis;

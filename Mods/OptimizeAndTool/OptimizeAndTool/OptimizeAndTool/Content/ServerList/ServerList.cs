@@ -1,15 +1,17 @@
 ﻿using CommandHelp;
+using Microsoft.Xna.Framework;
 using OptimizeAndTool.Utils;
 using OptimizeAndTool.Utils.quickBuild;
 using System;
 using System.Collections.Generic;
+using tContentPatch;
 using Terraria;
 using Terraria.Localization;
 using Terraria.UI;
 
 namespace OptimizeAndTool.Content.ServerList
 {
-    internal class ServerList
+    internal class ServerList : PatchMain
     {
         public static GetSetReset<bool> Enable = new GetSetReset<bool>(true, true);
         public static Action OnSave = null;
@@ -41,11 +43,24 @@ namespace OptimizeAndTool.Content.ServerList
             if (uistate == null)
             {
                 uistate = new UIServerList();
-                ModifyInterfaceLayers.ui_menu_state.Append(uistate);
             }
 
             ServerList.data = data;
             uistate.Initialize(ServerList.data);
+        }
+
+        public override void UpdatePrefix(GameTime gameTime)
+        {
+            if (uistate == null) return;
+
+            if (Main.menuMode == 13 && Enable.val)
+            {
+                if (uistate.Parent == null) ModifyInterfaceLayers.ui_menu_state.Append(uistate);
+            }
+            else
+            {
+                uistate.Parent?.RemoveChild(uistate);
+            }
         }
 
         public static void AddItem(ServerInfo addTo = null)

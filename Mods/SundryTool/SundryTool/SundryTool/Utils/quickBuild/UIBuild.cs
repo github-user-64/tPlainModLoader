@@ -66,11 +66,12 @@ namespace SundryTool.Utils.quickBuild
             return sv;
         }
 
-        public static UIElement get4(string btnTxt, Action click, string ico = null, string text = null)
+        public static UIElement get4(string btnTxt, Action click, string mouseText = null, string ico = null, string text = null)
         {
             Texture2D texture = ico == null ? null : Main.Assets.Request<Texture2D>(ico, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
 
             UIItemButton ui = new UIItemButton(btnTxt, texture, text);
+            ui.MouseText = mouseText;
             ui.OnClick = click;
 
             return ui;

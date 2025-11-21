@@ -54,9 +54,6 @@ namespace OptimizeAndTool.Content.ServerList
 
         public override void Update(GameTime gameTime)
         {
-            if (Main.menuMode != 13) return;
-            if (ServerList.Enable.val == false) return;
-
             base.Update(gameTime);
 
             if (IsMouseHovering)
@@ -71,14 +68,6 @@ namespace OptimizeAndTool.Content.ServerList
             }
 
             Update_Drag();
-        }
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            if (Main.menuMode != 13) return;
-            if (ServerList.Enable.val == false) return;
-
-            base.Draw(spriteBatch);
         }
 
         public void Initialize(List<ServerInfo> data)

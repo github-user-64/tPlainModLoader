@@ -89,6 +89,7 @@
     <Compile Include="Content\Function2\Function_newProjectileToPlay.cs" />
     <Compile Include="Content\ClientUUIDSetting.cs" />
     <Compile Include="Content\getPlayers.cs" />
+    <Compile Include="Content\UI\UIDrawer.cs" />
     <Compile Include="Content\UI\UIItemTextBoxAButtonBind.cs" />
     <Compile Include="Content\UI\UITextButton.cs" />
     <Compile Include="Content\UI\UIItemMouseText.cs" />

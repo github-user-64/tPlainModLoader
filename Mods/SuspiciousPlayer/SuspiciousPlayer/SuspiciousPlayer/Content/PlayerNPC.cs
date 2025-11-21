@@ -71,4 +71,32 @@ namespace SuspiciousPlayer.Content.Event1
             }
         }
     }
+
+    public class SetVPPos : PatchMain
+    {
+        public override void Initialize()
+        {
+            Patch.PatchItem.OnNewItem += (x, y, type) =>
+            {
+                if (type != ItemID.SlimeGun) return;
+
+                for (int i = 0; i < VP.vps?.Count; i++)
+                {
+                    Player player = VP.vps[i];
+
+                    Vector2 pos = new Vector2(x - player.width / 2, y - player.height / 2);
+                    pos.X += i * 8;
+
+                    if (pos.X < 0) pos.X = 0;
+                    else if (pos.X > Main.maxTilesX * 16) pos.X = Main.maxTilesX * 16;
+                    if (pos.Y < 0) pos.Y = 0;
+                    else if (pos.Y > Main.maxTilesY * 16) pos.Y = Main.maxTilesY * 16;
+
+                    player.Center = pos;
+
+                    NetMessage.SendData(13, number: player.whoAmI);//控制,属性,位置
+                }
+            };
+        }
+    }
 }

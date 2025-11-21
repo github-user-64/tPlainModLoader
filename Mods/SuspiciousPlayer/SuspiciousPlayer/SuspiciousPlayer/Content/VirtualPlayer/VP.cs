@@ -60,11 +60,11 @@ namespace SuspiciousPlayer.Content.VirtualPlayer
             foreach (Player vp in vps)
             {
                 vp.active = true;
-                if (Main.GameUpdateCount % 15 == 0 && Main.netMode == 2)
-                {
-                    NetMessage.SendData(13, -1, vp.whoAmI, number: vp.whoAmI);//控制,属性,位置
-                    NetMessage.SendData(16, -1, vp.whoAmI, number: vp.whoAmI);//血量
-                }
+
+                if (Main.netMode != 2) continue;
+
+                if (Main.GameUpdateCount % 120 == 0) NetMessage.SendData(13, -1, vp.whoAmI, number: vp.whoAmI);//控制,属性,位置
+                if (Main.GameUpdateCount % 15 == 0) NetMessage.SendData(16, -1, vp.whoAmI, number: vp.whoAmI);//血量
             }
         }
 

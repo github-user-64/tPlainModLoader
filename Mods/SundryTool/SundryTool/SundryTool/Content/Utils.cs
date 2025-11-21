@@ -69,23 +69,33 @@ namespace SundryTool.Content
             return getPlayerArmor(player, 3 + 7 + 3, 7);
         }
 
-        public static void OutputPlayerName(int i)
+        public static void OutputEntityListName<T>(T[] list, int i, Func<T, string> getName) where T : Entity
         {
             string msg = null;
 
-            if (i < 0 || i >= Main.player.Length)
+            if (Main.player.IndexInRange(i) == false)
             {
-                msg = $"[{i}] no player";
+                msg = $"[{i}] no entity";
                 Console.WriteLine(msg);
                 Main.NewText(msg);
                 return;
             }
 
-            Player player = Main.player[i];
-            msg = $"[{player.name}]";
-            if (player.active == false) msg += " no active";
+            T o = list[i];
+            msg = $"[{getName(o)}]";
+            if (o.active == false) msg += " no active";
             Console.WriteLine(msg);
             Main.NewText(msg);
+        }
+
+        public static void OutputPlayerName(int i)
+        {
+            OutputEntityListName(Main.player, i, v => v.name);
+        }
+
+        public static void OutputNPCName(int i)
+        {
+            OutputEntityListName(Main.npc, i, v => Lang.GetNPCName(v.netID).Value);
         }
 
         public static int getNearbyChestIndex(Vector2 position)
