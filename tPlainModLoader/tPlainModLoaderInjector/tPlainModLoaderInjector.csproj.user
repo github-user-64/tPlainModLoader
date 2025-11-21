@@ -2,7 +2,7 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartAction>Program</StartAction>
-    <StartProgram>F:\F_MY1\AZ\AZWZ\tlry\Terraria.v1.4.4.9_v4\Terraria_g\TerrariaServer.exe</StartProgram>
+    <StartProgram>F:\F_MY1\快速存储%28记得清理%29\TShock-5.2.4-for-Terraria-1.4.4.9-win-amd64-Release\TShock.Installer.exe</StartProgram>
     <StartWorkingDirectory>F:\F_MY1\AZ\AZWZ\tlry\Terraria.v1.4.4.9_v4\Terraria_g\</StartWorkingDirectory>
   </PropertyGroup>
 </Project>
