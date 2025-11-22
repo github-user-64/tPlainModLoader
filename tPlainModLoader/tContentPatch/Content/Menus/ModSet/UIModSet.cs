@@ -16,7 +16,7 @@ namespace tContentPatch.Content.Menus.ModSet
         private ModSetting ms_this = null;
         private int mssIndex = -1;
 
-        private UIList ui_list = null;
+        private UIStackPanel ui_sp = null;
         private UITextPanel<string> ui_title = null;
         private UIPanel ui_panel = null;
         private UIElement ui_set = null;
@@ -26,12 +26,12 @@ namespace tContentPatch.Content.Menus.ModSet
 
         public UIModSet()
         {
-            ui_list = new UIList();
-            ui_list.Width.Pixels = 600;
-            ui_list.Height.Set(-100, 1);
-            ui_list.HAlign = 0.5f;
-            ui_list.VAlign = 0.5f;
-            ui_list.ListPadding = 4;
+            ui_sp = new UIStackPanel();
+            ui_sp.Width.Pixels = 600;
+            ui_sp.Height.Set(-100, 1);
+            ui_sp.HAlign = 0.5f;
+            ui_sp.VAlign = 0.5f;
+            ui_sp.ItemMargin = 4;
 
             ui_title = new UITextPanel<string>(string.Empty, 0.8f, true);
             ui_title.HAlign = 0.5f;
@@ -74,11 +74,11 @@ namespace tContentPatch.Content.Menus.ModSet
             btn2_setDeft.HAlign = 1f;
             btn2_setDeft.OnLeftClick += (e, s) => ms_this?.SetDefault();
 
-            Append(ui_list);
-            ui_list.Add(ui_title);
-            ui_list.Add(ui_panel);
-            ui_list.Add(ui_btns1);
-            ui_list.Add(ui_btns2);
+            Append(ui_sp);
+            ui_sp.Append(ui_title);
+            ui_sp.Append(ui_panel);
+            ui_sp.Append(ui_btns1);
+            ui_sp.Append(ui_btns2);
             ui_panel.Append(ui_set);
             ui_btns1.Append(btn_prev);
             ui_btns1.Append(btn_next);
@@ -160,11 +160,11 @@ namespace tContentPatch.Content.Menus.ModSet
 
             //
 
-            float height = ui_list.GetInnerDimensions().Height;
-            foreach (UIElement i in ui_list)
+            float height = ui_sp.GetInnerDimensions().Height;
+            foreach (UIElement i in ui_sp.Children)
             {
                 if (i == ui_panel) continue;
-                height -= i.GetOuterDimensions().Height + ui_list.ListPadding;
+                height -= i.GetOuterDimensions().Height + ui_sp.ItemMargin;
                 i.UpdateContainer_Height();
             }
 
