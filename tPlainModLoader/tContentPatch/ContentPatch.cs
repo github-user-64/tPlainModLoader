@@ -9,7 +9,7 @@ namespace tContentPatch
 {
     public partial class ContentPatch
     {
-        public const string VersionTPlainModLoader = "1.4.4.9.1";
+        public const string VersionTPlainModLoader = "1.4.4.9.1-beta1";
         public static string ModDirectory { get; private set; } = null;
         public static bool Initialized { get; private set; } = false;
 
@@ -19,7 +19,7 @@ namespace tContentPatch
         private static ContentPatch Instance = null;
 
         private static AddPatch gamePatch = null;
-        internal static ModPatch.ListPatch listPatch = null;
+        internal static ModPatch.TypePatch typePatch = null;
 
         private static FieldInfo reflection_Terraria_Main_inRun = null;
 

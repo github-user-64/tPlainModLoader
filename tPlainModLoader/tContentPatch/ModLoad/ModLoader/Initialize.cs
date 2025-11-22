@@ -61,13 +61,13 @@ namespace tContentPatch.ModLoad
 
                     try
                     {
-                        ContentPatch.listPatch.Get<PatchMain>().AddRange(mo.inheritance_patchMain);
-                        ContentPatch.listPatch.Get<PatchPlayer>().AddRange(mo.inheritance_patchPlayer);
-                        ContentPatch.listPatch.Get<PatchNPC>().AddRange(mo.inheritance_patchNPC);
-                        ContentPatch.listPatch.Get<PatchItem>().AddRange(mo.inheritance_patchItem);
-                        ContentPatch.listPatch.Get<PatchProjectile>().AddRange(mo.inheritance_patchProjectile);
-                        ContentPatch.listPatch.Get<PatchTileLightScanner>().AddRange(mo.inheritance_patchTileLightScanner);
-                        ContentPatch.listPatch.Get<PatchRemadeChatMonitor>().AddRange(mo.inheritance_patchRemadeChatMonitor);
+                        ContentPatch.typePatch.Get<PatchMain>().AddRange(mo.inheritance_patchMain);
+                        ContentPatch.typePatch.Get<PatchPlayer>().AddRange(mo.inheritance_patchPlayer);
+                        ContentPatch.typePatch.Get<PatchNPC>().AddRange(mo.inheritance_patchNPC);
+                        ContentPatch.typePatch.Get<PatchItem>().AddRange(mo.inheritance_patchItem);
+                        ContentPatch.typePatch.Get<PatchProjectile>().AddRange(mo.inheritance_patchProjectile);
+                        ContentPatch.typePatch.Get<PatchTileLightScanner>().AddRange(mo.inheritance_patchTileLightScanner);
+                        ContentPatch.typePatch.Get<PatchRemadeChatMonitor>().AddRange(mo.inheritance_patchRemadeChatMonitor);
                     }
                     catch (Exception ex)
                     {

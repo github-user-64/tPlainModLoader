@@ -75,14 +75,14 @@ namespace tContentPatch
             gamePatch = new AddPatch(patchId_tContentPatch);
             gamePatch.AllPatch();
 
-            listPatch = new ModPatch.ListPatch(gamePatch);
-            listPatch.AddPatchAndInit(new ModPatch.Patch_Main());
-            listPatch.AddPatchAndInit(new ModPatch.Patch_Player());
-            listPatch.AddPatchAndInit(new ModPatch.Patch_NPC());
-            listPatch.AddPatchAndInit(new ModPatch.Patch_Item());
-            listPatch.AddPatchAndInit(new ModPatch.Patch_Projectile());
-            listPatch.AddPatchAndInit(new ModPatch.Patch_TileLightScanner());
-            listPatch.AddPatchAndInit(new ModPatch.Patch_RemadeChatMonitor());
+            typePatch = new ModPatch.TypePatch();
+            typePatch.AddPatch(new ModPatch.Patch_Main());
+            typePatch.AddPatch(new ModPatch.Patch_Player());
+            typePatch.AddPatch(new ModPatch.Patch_NPC());
+            typePatch.AddPatch(new ModPatch.Patch_Item());
+            typePatch.AddPatch(new ModPatch.Patch_Projectile());
+            typePatch.AddPatch(new ModPatch.Patch_TileLightScanner());
+            typePatch.AddPatch(new ModPatch.Patch_RemadeChatMonitor());
         }
 
         private void Initialize_ModDirectory()

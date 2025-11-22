@@ -1,51 +1,21 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HarmonyLib;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
-using tContentPatch.Patch;
 using tContentPatch.Utils;
 using Terraria;
 using Terraria.UI;
 
 namespace tContentPatch.ModPatch
 {
-    internal class Patch_Main : ClassPatch<PatchMain>
+    [HarmonyPatch(typeof(Main))]
+    internal class Patch_Main : ListCopy<PatchMain>
     {
         private static List<PatchMain> mod = new List<PatchMain>();
 
         public Patch_Main() : base(mod) { }
-
-        public override void Initialize(IAddPatch addPatch)
-        {
-            Type oType = typeof(Main);
-            Type tType = typeof(Patch_Main);
-            Action<string, string, BindingFlags> addPre = (m, m2, bf) =>
-            {
-                addPatch.AddPrefix(oType.GetMethod(m, bf), tType.GetMethod(m2));
-            };
-            Action<string, string, BindingFlags> addPo = (m, m2, bf) =>
-            {
-                addPatch.AddPostfix(oType.GetMethod(m, bf), tType.GetMethod(m2));
-            };
-
-            addPre("Update", nameof(UpdatePrefix), BindingFlags.NonPublic | BindingFlags.Instance);
-            addPo("Update", nameof(UpdatePostfix), BindingFlags.NonPublic | BindingFlags.Instance);
-
-            addPo("SetupDrawInterfaceLayers", nameof(SetupDrawInterfaceLayersPostfix), BindingFlags.NonPublic | BindingFlags.Instance);
-
-            addPre("UpdateUIStates", nameof(UpdateUIStatesPrefix), BindingFlags.NonPublic | BindingFlags.Static);
-            addPo("UpdateUIStates", nameof(UpdateUIStatesPostfix), BindingFlags.NonPublic | BindingFlags.Static);
-
-            addPre("DoUpdateInWorld", nameof(DoUpdateInWorldPrefix), BindingFlags.NonPublic | BindingFlags.Instance);
-            addPo("DoUpdateInWorld", nameof(DoUpdateInWorldPostfix), BindingFlags.NonPublic | BindingFlags.Instance);
-
-            addPo("DrawMap", nameof(DrawMapPostfix), BindingFlags.NonPublic | BindingFlags.Instance);
-
-            addPre("DrawMenu", nameof(DrawMenuPrefix), BindingFlags.NonPublic | BindingFlags.Instance);
-
-            addPo("MouseText_DrawItemTooltip_GetLinesInfo", nameof(MouseText_DrawItemTooltip_GetLinesInfoPostfix), BindingFlags.Public | BindingFlags.Static);
-        }
 
         #region
         private static FieldInfo _gameInterfaceLayers_fi = null;
@@ -53,6 +23,8 @@ namespace tContentPatch.ModPatch
 
         private static bool _UpdatePrefix_CanUpdateGameplay_old = false;
 
+        [HarmonyPatch("Update")]
+        [HarmonyPrefix]
         public static void UpdatePrefix(GameTime gameTime)
         {
             try
@@ -62,10 +34,10 @@ namespace tContentPatch.ModPatch
 
                 if (___CanUpdateGameplay_old == false && _UpdatePrefix_CanUpdateGameplay_old == true)
                 {
-                    foreach (PatchMain item in mod) item.OnEnterWorld();
+                    mod.For(item => item.OnEnterWorld());
                 }
 
-                foreach (PatchMain item in mod) item.UpdatePrefix(gameTime);
+                mod.For(item => item.UpdatePrefix(gameTime));
             }
             catch (Exception ex)
             {
@@ -73,11 +45,13 @@ namespace tContentPatch.ModPatch
             }
         }
 
+        [HarmonyPatch("Update")]
+        [HarmonyPostfix]
         public static void UpdatePostfix(GameTime gameTime)
         {
             try
             {
-                foreach (PatchMain item in mod) item.UpdatePostfix(gameTime);
+                mod.For(item => item.UpdatePostfix(gameTime));
             }
             catch (Exception ex)
             {
@@ -85,6 +59,8 @@ namespace tContentPatch.ModPatch
             }
         }
 
+        [HarmonyPatch("SetupDrawInterfaceLayers")]
+        [HarmonyPostfix]
         public static void SetupDrawInterfaceLayersPostfix()
         {
             try
@@ -96,7 +72,7 @@ namespace tContentPatch.ModPatch
 
                 List<GameInterfaceLayer> gameInterfaceLayers = (List<GameInterfaceLayer>)_gameInterfaceLayers_fi.GetValue(Main.instance);
 
-                foreach (PatchMain item in mod) item.SetupDrawInterfaceLayersPostfix(gameInterfaceLayers);
+                mod.For(item => item.SetupDrawInterfaceLayersPostfix(gameInterfaceLayers));
             }
             catch (Exception ex)
             {
@@ -104,11 +80,13 @@ namespace tContentPatch.ModPatch
             }
         }
 
+        [HarmonyPatch("UpdateUIStates")]
+        [HarmonyPrefix]
         public static void UpdateUIStatesPrefix(GameTime gameTime)
         {
             try
             {
-                foreach (PatchMain item in mod) item.UpdateUIStatesPrefix(gameTime);
+                mod.For(item => item.UpdateUIStatesPrefix(gameTime));
             }
             catch (Exception ex)
             {
@@ -116,11 +94,13 @@ namespace tContentPatch.ModPatch
             }
         }
 
+        [HarmonyPatch("UpdateUIStates")]
+        [HarmonyPostfix]
         public static void UpdateUIStatesPostfix(GameTime gameTime)
         {
             try
             {
-                foreach (PatchMain item in mod) item.UpdateUIStatesPostfix(gameTime);
+                mod.For(item => item.UpdateUIStatesPostfix(gameTime));
             }
             catch (Exception ex)
             {
@@ -128,11 +108,13 @@ namespace tContentPatch.ModPatch
             }
         }
 
+        [HarmonyPatch("DoUpdateInWorld")]
+        [HarmonyPrefix]
         public static void DoUpdateInWorldPrefix(Stopwatch sw)
         {
             try
             {
-                foreach (PatchMain item in mod) item.DoUpdateInWorldPrefix(sw);
+                mod.For(item => item.DoUpdateInWorldPrefix(sw));
             }
             catch (Exception ex)
             {
@@ -140,11 +122,13 @@ namespace tContentPatch.ModPatch
             }
         }
 
+        [HarmonyPatch("DoUpdateInWorld")]
+        [HarmonyPostfix]
         public static void DoUpdateInWorldPostfix(Stopwatch sw)
         {
             try
             {
-                foreach (PatchMain item in mod) item.DoUpdateInWorldPostfix(sw);
+                mod.For(item => item.DoUpdateInWorldPostfix(sw));
             }
             catch (Exception ex)
             {
@@ -152,11 +136,13 @@ namespace tContentPatch.ModPatch
             }
         }
 
+        [HarmonyPatch("DrawMap")]
+        [HarmonyPostfix]
         public static void DrawMapPostfix(GameTime gameTime)
         {
             try
             {
-                foreach (PatchMain item in mod) item.DrawMapPostfix(gameTime);
+                mod.For(item => item.DrawMapPostfix(gameTime));
             }
             catch (Exception ex)
             {
@@ -164,11 +150,13 @@ namespace tContentPatch.ModPatch
             }
         }
 
+        [HarmonyPatch("DrawMenu")]
+        [HarmonyPrefix]
         public static void DrawMenuPrefix(GameTime gameTime)
         {
             try
             {
-                foreach (PatchMain item in mod) item.DrawMenuPrefix(gameTime);
+                mod.For(item => item.DrawMenuPrefix(gameTime));
             }
             catch (Exception ex)
             {
@@ -176,6 +164,8 @@ namespace tContentPatch.ModPatch
             }
         }
 
+        [HarmonyPatch("MouseText_DrawItemTooltip_GetLinesInfo")]
+        [HarmonyPostfix]
         public static void MouseText_DrawItemTooltip_GetLinesInfoPostfix(Item item, ref int yoyoLogo, ref int researchLine,
             ref float oldKB, ref int numLines, ref string[] toolTipLine, ref bool[] preFixLine, ref bool[] badPreFixLine)
         {

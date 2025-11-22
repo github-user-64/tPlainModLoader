@@ -54,7 +54,7 @@ namespace tContentPatch.ModLoad
             {
                 stateText = "清理";
 
-                ContentPatch.listPatch.ClearAllPatch();
+                ContentPatch.typePatch.ClearAllPatch();
                 PatchUtil.ClearPathc(patchId);
 
                 ++progressV;

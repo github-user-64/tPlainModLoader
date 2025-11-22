@@ -92,7 +92,7 @@
     <Compile Include="ModLoad\ModInfo.cs" />
     <Compile Include="ModLoad\ModLoader\Initialize.cs" />
     <Compile Include="ModPatch\Inheritance\PatchItem.cs" />
-    <Compile Include="ModPatch\ListPatch.cs" />
+    <Compile Include="ModPatch\TypePatch.cs" />
     <Compile Include="ModPatch\Inheritance\PatchMain.cs" />
     <Compile Include="ModPatch\Inheritance\PatchNPC.cs" />
     <Compile Include="ModPatch\Inheritance\PatchPlayer.cs" />
@@ -100,7 +100,7 @@
     <Compile Include="ModPatch\Inheritance\PatchRemadeChatMonitor.cs" />
     <Compile Include="ModLoad\Inheritance\ModSetting.cs" />
     <Compile Include="ModPatch\Inheritance\PatchTileLightScanner.cs" />
-    <Compile Include="ModPatch\IPatch.cs" />
+    <Compile Include="ModPatch\IListPlain.cs" />
     <Compile Include="ModPatch\Patch_Projectile.cs" />
     <Compile Include="ModPatch\Patch_Main.cs" />
     <Compile Include="ModPatch\Patch_Item.cs" />
@@ -108,6 +108,7 @@
     <Compile Include="ModPatch\Patch_RemadeChatMonitor.cs" />
     <Compile Include="ModPatch\Patch_Player.cs" />
     <Compile Include="ModPatch\Patch_TileLightScanner.cs" />
+    <Compile Include="ModPatch\Utils.cs" />
     <Compile Include="Utils\ConfigHelp.cs" />
     <Compile Include="Content\Menus\ModLoadException\UIModLoadException.cs" />
     <Compile Include="Content\Menus\ModLoadException\ModLoadException.cs" />
