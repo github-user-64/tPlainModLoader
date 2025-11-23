@@ -23,8 +23,7 @@ namespace tContentPatch.Command
 
             if (msg == null) return;
             
-            Console.WriteLine(msg);
-            if (Pipe.EnablePipe) tContentPatch.Utils.Pipe.Pipe_send(Pipe.pipe_toOutput, msg);
+            ContentPatch.PrintTry(msg);
         }
 
         private static List<CommandObject> GetCO()

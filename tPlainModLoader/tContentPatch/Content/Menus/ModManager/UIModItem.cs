@@ -2,7 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using tContentPatch.Content.UI;
 using tContentPatch.ModLoad;
@@ -39,6 +41,7 @@ namespace tContentPatch.Content.Menus.ModManager
         private readonly static Texture2D defaultIco = null;
 
         private ModObject mo = null;
+        private List<ModObject> mos = null;
 
         private bool modIcoOneLoad = true;
         private string modIcoPath = null;
@@ -56,9 +59,10 @@ namespace tContentPatch.Content.Menus.ModManager
             defaultIco = Utils.Resource.GetTexture2D($"{nameof(tContentPatch)}.Resources.UI.ModIcon.png");
         }
 
-        public UIModItem(UIState backUI, ModObject mo_)
+        public UIModItem(UIState backUI, ModObject mo_, List<ModObject> mos)
         {
             mo = mo_;
+            this.mos = mos;
 
             Width.Precent = 1;
             Height.Pixels = 100;
@@ -212,7 +216,9 @@ namespace tContentPatch.Content.Menus.ModManager
                     s[1] = "必须的前置模组:";
                     for (int i = 2; i < s.Length; i++)
                     {
-                        s[i] = mo.config.frontModKeys[i - 2];
+                        ModObject frontMod = mos.FirstOrDefault(m => m.config.key == mo.config.frontModKeys[i - 2]);
+
+                        s[i] = frontMod?.info?.name ?? mo.config.frontModKeys[i - 2];
                     }
                 }
                 else

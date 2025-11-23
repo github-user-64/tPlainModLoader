@@ -43,7 +43,8 @@ namespace tContentPatch.ModLoad
                 foreach (string key in mo.config.frontModKeys)
                 {
                     if (mos.Exists(i => i.config.key == key)) continue;
-                    throw new Exception($"模组[{mo.config.key}]的前置未加载:[{key}]");
+
+                    throw new Exception($"模组[{mo.info?.name ?? mo.config.key}]的前置未加载:[{key}]");
                 }
 
                 ++progressV;

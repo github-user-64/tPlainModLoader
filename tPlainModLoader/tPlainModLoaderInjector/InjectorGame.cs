@@ -23,7 +23,7 @@ namespace tPlainModLoaderInjector
         {
             Program.ProgramPath = args;
 
-            Log.SetPath(Path.Combine(Program.ProgramPath, InfoList.Files.Log));
+            if (Log.path == null) Log.SetPath(Path.Combine(Program.ProgramPath, InfoList.Files.Log));
 
             try
             {

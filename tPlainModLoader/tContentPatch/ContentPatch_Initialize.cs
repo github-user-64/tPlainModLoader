@@ -15,6 +15,8 @@ namespace tContentPatch
     {
         public void Initialize(bool pipe = false)
         {
+            Log.Add($"{nameof(ContentPatch)}:初始化");
+
             if (Instance == null) Instance = this;
             else throw new Exception("不可重复初始化");
 
@@ -31,6 +33,8 @@ namespace tContentPatch
             {
                 LoaderControl.Load();
             }
+
+            Log.Add($"{nameof(ContentPatch)}:初始化完成");
         }
 
         private void Initialize_ModLoader()
@@ -87,6 +91,8 @@ namespace tContentPatch
 
         private void Initialize_ModDirectory()
         {
+            Log.Add($"{nameof(ContentPatch)}:初始化模组目录");
+
             string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             if (Directory.Exists(path) == false) throw new Exception($"目录不存在[{path}]");
 

@@ -77,5 +77,19 @@ namespace tContentPatch
         {
             Command.ProgramCommand.Run(command);
         }
+
+        /// <summary>
+        /// 输出到控制台, 如果管道启用则同时发送到管道
+        /// </summary>
+        /// <param name="s"></param>
+        public static void PrintTry(string s)
+        {
+            try
+            {
+                Console.WriteLine(s);
+                if (Command.Pipe.EnablePipe) Utils.Pipe.Pipe_send(Command.Pipe.pipe_toOutput, s);
+            }
+            catch { }
+        }
     }
 }

@@ -69,8 +69,7 @@ namespace tContentPatch.Command
 
                 if (s == null) s = "no cmd";
                 if (tip != null) s = $"{s}//{tip}";
-                Console.WriteLine(s);
-                if (Pipe.EnablePipe) tContentPatch.Utils.Pipe.Pipe_send(Pipe.pipe_toOutput, s);
+                ContentPatch.PrintTry(s);
             };
 
             return help;

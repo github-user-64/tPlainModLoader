@@ -84,8 +84,8 @@ namespace tContentPatch.Content.Menus.ModManager
             ui_sv.ClearChild();
             if (mos != null)
             {
-                foreach (ModObject mo in mos) if (mo.config.isEnable) ui_sv.AddChild(new UIModItem(this, mo));
-                foreach (ModObject mo in mos) if (!mo.config.isEnable) ui_sv.AddChild(new UIModItem(this, mo));
+                foreach (ModObject mo in mos) if (mo.config.isEnable) ui_sv.AddChild(new UIModItem(this, mo, mos));
+                foreach (ModObject mo in mos) if (!mo.config.isEnable) ui_sv.AddChild(new UIModItem(this, mo, mos));
             }
         }
 
