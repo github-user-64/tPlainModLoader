@@ -22,7 +22,7 @@ namespace QuickSetting
         {
             if (ui == null) return;
 
-            if (Main.gameMenu)
+            if (Main.gameMenu || Main.mapFullscreen)
             {
                 ui.SetState(null);
             }

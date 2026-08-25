@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Diagnostics;
 using tContentPatch;
 using Terraria;
 using Terraria.UI;
@@ -23,7 +22,7 @@ namespace QuickButton
         {
             if (ui == null) return;
 
-            if (Main.gameMenu)
+            if (Main.gameMenu || Main.mapFullscreen)
             {
                 ui.SetState(null);
             }

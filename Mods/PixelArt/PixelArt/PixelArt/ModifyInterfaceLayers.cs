@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using PixelArt.Content;
 using System.Collections.Generic;
-using System.Diagnostics;
 using tContentPatch;
 using Terraria;
 using Terraria.UI;
@@ -58,7 +57,7 @@ namespace PixelArt
         {
             if (ui == null) return;
 
-            if (Main.gameMenu)
+            if (Main.gameMenu || Main.mapFullscreen)
             {
                 ui.SetState(null);
             }
