@@ -11,12 +11,14 @@ namespace BatchSapwn
     {
         public delegate void ForMod(string form, string to, string name);
 
+        public string SetVersionPath = "C:\\";
         public string form = "C:\\";
         public string to = "C:\\";
         public List<string> mods = new List<string>();
 
         public void Check()
         {
+            if (SetVersionPath == null) throw new Exception($"{nameof(SetVersionPath)}为null");
             if (form == null) throw new Exception($"{nameof(form)}为null");
             if (to == null) throw new Exception($"{nameof(to)}为null");
             if (mods == null) throw new Exception($"{nameof(mods)}为null");

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace BatchSapwn
 {
@@ -22,10 +24,7 @@ namespace BatchSapwn
                     Console.WriteLine($"{i}:{config.mods[i]}");
                 }
 
-                Console.WriteLine("准备开始生成");
-                Console.ReadLine();
-                Console.Clear();
-                Spawn(config);
+                SwitchAction(config);
             }
             catch (Exception ex)
             {
@@ -34,6 +33,41 @@ namespace BatchSapwn
 
             Console.WriteLine("ok");
             Console.ReadLine();
+        }
+
+        private static void SwitchAction(SpawnConfig config)
+        {
+            while (true)
+            {
+                Console.WriteLine("选择操作(0:生成,1:修改版本)");
+                string v = Console.ReadLine();
+
+                switch (v)
+                {
+                    case "0": ActionSpawn(config); return;
+                    case "1": ActionSetVersion(config); return;
+                    default: break;
+                }
+            }
+        }
+
+        private static void ActionSpawn(SpawnConfig config)
+        {
+            Console.WriteLine("开始生成");
+            Spawn(config);
+        }
+
+        private static void ActionSetVersion(SpawnConfig config)
+        {
+            Console.WriteLine("现在版本:");
+            string v1 = Console.ReadLine();
+            Console.WriteLine("设置版本:");
+            string v2 = Console.ReadLine();
+
+            if (v1 == null || v2 == null) throw new Exception("版本为null");
+            if (v1 == v2) throw new Exception("版本相同");
+
+            SetVersion(config, v1, v2);
         }
 
         private static void Spawn(SpawnConfig config)
@@ -63,6 +97,37 @@ namespace BatchSapwn
                 return;
             }
             File.Copy(form, to);
+        }
+
+        private static void SetVersion(SpawnConfig config, string v1, string v2)
+        {
+            config.mods.ForEach(name =>
+            {
+                Console.WriteLine($"设置:{name}");
+
+                string file = $"{Path.Combine(config.SetVersionPath, name, name, name, $"{name}.csproj")}";
+                if (File.Exists(file) == false) throw new Exception($"文件不存在:{file}");
+
+                SetProjectVersion(file, v1, v2);
+            });
+        }
+
+        private static void SetProjectVersion(string file, string v1, string v2)
+        {
+            XDocument doc = XDocument.Load(file);
+            XNamespace ns = "http://schemas.microsoft.com/developer/msbuild/2003";//MSBuild命名空间
+
+            XElement Reference = doc.Descendants(ns + "Reference")
+                .FirstOrDefault(r => r.Attribute("Include")?.Value == v1);
+
+            if (Reference == null) throw new Exception($"未找到引用:{v1}");
+
+            Reference.Attribute("Include").Value = v2;
+
+            XElement HintPath = Reference.Element(ns + "HintPath");
+            HintPath.Value = HintPath.Value.Replace(v1, v2);
+
+            doc.Save(file);
         }
     }
 }

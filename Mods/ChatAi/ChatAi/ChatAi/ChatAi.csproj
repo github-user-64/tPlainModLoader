@@ -70,8 +70,8 @@
       <HintPath>..\..\..\..\tPlainModLoader\tPlainModLoader\bin\Debug\tContentPatch.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Terraria_v1.4.5.7">
-      <HintPath>..\..\..\..\dll\Terraria_v1.4.5.7.exe</HintPath>
+    <Reference Include="Terraria_v1.4.5.8">
+      <HintPath>..\..\..\..\dll\Terraria_v1.4.5.8.exe</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
