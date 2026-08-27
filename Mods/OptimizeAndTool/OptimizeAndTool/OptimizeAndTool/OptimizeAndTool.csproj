@@ -94,9 +94,11 @@
     <Compile Include="Content\ServerList\UIServerItem.cs" />
     <Compile Include="Content\ServerList\UIServerList.cs" />
     <Compile Include="Content\ServerList\ServerList.cs" />
+    <Compile Include="Content\TimeSet.cs" />
     <Compile Include="Content\UI\UIItemMouseText.cs" />
     <Compile Include="Content\UI\UIItemSwitchBind.cs" />
     <Compile Include="Content\UI\UIItemTextBoxASwitchBind.cs" />
+    <Compile Include="Content\UI\UIItemValueSliderSwitch.cs" />
     <Compile Include="Content\UI\UITextBoxBind.cs" />
     <Compile Include="ModifyInterfaceLayers.cs" />
     <Compile Include="ModLinkage\LinkageSetting.cs" />

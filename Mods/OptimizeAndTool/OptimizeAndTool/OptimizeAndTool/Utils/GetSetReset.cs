@@ -1,5 +1,4 @@
 ﻿using System;
-using static Terraria.ID.ArmorIDs;
 
 namespace OptimizeAndTool.Utils
 {

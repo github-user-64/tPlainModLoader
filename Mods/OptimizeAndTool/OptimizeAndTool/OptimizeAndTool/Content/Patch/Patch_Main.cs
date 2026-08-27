@@ -13,5 +13,12 @@ namespace OptimizeAndTool.Content.Patch
         {
             return PatchGameViewMatrixZoomLimit.TranspilerDoDraw(instructions);
         }
+
+        [HarmonyPatch("UpdateTimeRate")]
+        [HarmonyPostfix]
+        public static void UpdateTimeRatePostfix()
+        {
+            TimeSet.UpdateTimeRate();
+        }
     }
 }
