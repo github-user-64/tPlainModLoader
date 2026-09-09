@@ -21,7 +21,9 @@ namespace tContentPatch.ModLoad
                 {
                     stateText = $"初始化模组:{mo.info?.name ?? mo.config.key}";
 
-                    Utils.ForHelp(mo.inheritance_mod, item => item.Load(), ex => exMess(mo, ex));
+                    ModObject copyMo = ModObject.Copy(mo);
+
+                    Utils.ForHelp(mo.inheritance_mod, item => item.Load(copyMo), ex => exMess(mo, ex));
                 },
                 mo =>
                 {

@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Reflection;
 using tContentPatch.Utils;
 using Terraria;
@@ -47,10 +46,6 @@ namespace tContentPatch.ModPatch
             if (_UpdatePrefix_CanUpdateGameplay_old == false && Main.CanUpdateGameplay == true)
             {
                 mod.ForTry(item => item.OnEnterWorld());
-            }
-            else if (_UpdatePrefix_CanUpdateGameplay_old && Main.CanUpdateGameplay == false)
-            {
-                mod.ForTry(item => item.OnEnterWorldPrefix());
             }
 
             _UpdatePrefix_CanUpdateGameplay_old = Main.CanUpdateGameplay;

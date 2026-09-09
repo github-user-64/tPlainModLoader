@@ -1,5 +1,6 @@
 ﻿using CommandHelp;
 using System.Collections.Generic;
+using tContentPatch.ModLoad;
 
 namespace tContentPatch
 {
@@ -7,9 +8,10 @@ namespace tContentPatch
     public abstract class Mod
     {
         /// <summary>
-        /// 类被创建时调用
+        /// 类被创建时调用(当前模组对象)
         /// </summary>
-        public virtual void Load() { }
+        /// <param name="mo">当前模组对象</param>
+        public virtual void Load(ModObject mo) { }
         /// <summary>
         /// <see cref="ModSetting.Load(object)"/>之后调用
         /// </summary>

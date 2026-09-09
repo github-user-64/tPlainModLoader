@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using tContentPatch.Content.UI;
@@ -166,7 +165,7 @@ namespace tContentPatch.Content.Menus.ModInfo
 
             if (PlayerInput.Triggers.JustPressed.Inventory) Back(BackUI);
 
-            if (ui_btn3.IsMouseHovering && ui_btn3.isEnable == false) DrawTip.SetDraw("卸载模组以删除" );
+            if (ui_btn3.IsMouseHovering && ui_btn3.isEnable == false) DrawTip.SetDraw("卸载模组以删除");
             if (ui_btn4.IsMouseHovering && ui_btn4.isEnable)
             {
                 string path = mo.info?.jumpPath;

@@ -16,7 +16,7 @@ namespace tContentPatch.Command
 
             string msg = Utils.CommandRun(command, cos);
             if (msg == null) return;
-            
+
             ContentPatch.PrintTry(msg);
         }
 

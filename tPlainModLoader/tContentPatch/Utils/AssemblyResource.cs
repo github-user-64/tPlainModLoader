@@ -76,7 +76,7 @@ namespace tContentPatch.Utils
 
             return (T)Assets[path];
         }
-        
+
         /// <summary>
         /// 加载新的资源&lt;资源类型&gt;("程序集名.图片.png", 程序集)
         /// </summary>
