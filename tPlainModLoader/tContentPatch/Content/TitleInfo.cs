@@ -96,7 +96,7 @@ namespace tContentPatch.Content
             private static int height = -1;
             static TitleLinkButton()
             {
-                texture = Utils.Resource.GetTexture2D($"{nameof(tContentPatch)}.Resources.TitleLinkButtons.png");
+                texture = Utils.AssemblyResource.LoadNew<Texture2D>($"{nameof(tContentPatch)}.Resources.TitleLinkButtons.png");
                 width = texture.Width / 1;
                 height = texture.Height / 2;
             }

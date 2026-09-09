@@ -59,6 +59,8 @@ namespace tContentPatch.ModLoad
                 ContentPatch.typePatch.ClearAllPatch();
                 PatchUtil.ClearPathc(patchId);
 
+                tContentPatch.Utils.AssemblyResource.Reset();
+
                 ++progressV;
             }
         }
