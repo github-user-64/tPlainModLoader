@@ -32,13 +32,16 @@ namespace tContentPatch.ModPatch
         [HarmonyPrefix]
         public static void AddNewMessagePrefix(ref string text, Color color, int widthLimitInPixels = -1)
         {
-            try
+            foreach (PatchRemadeChatMonitor item in mod)
             {
-                foreach (PatchRemadeChatMonitor item in mod) item.AddNewMessagePrefix(ref text, color, widthLimitInPixels);
-            }
-            catch (Exception ex)
-            {
-                OutputDebug.OutputException(ex);
+                try
+                {
+                    item.AddNewMessagePrefix(ref text, color, widthLimitInPixels);
+                }
+                catch (Exception ex)
+                {
+                    OutputDebug.OutputException(ex);
+                }
             }
         }
     }

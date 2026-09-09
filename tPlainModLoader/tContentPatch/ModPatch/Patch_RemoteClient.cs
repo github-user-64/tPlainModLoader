@@ -13,7 +13,7 @@ namespace tContentPatch.ModPatch
 
         [HarmonyPatch("Reset")]
         [HarmonyPrefix]
-        public static void UpdateNPCPostfix(RemoteClient __instance)
+        public static void ResetPrefix(RemoteClient __instance)
         {
             mod.ForTry(item => item.ResetPrefix(__instance));
         }

@@ -149,14 +149,17 @@ namespace tContentPatch.ModPatch
         public static void MouseText_DrawItemTooltip_GetLinesInfoPostfix(Item item, ref int yoyoLogo,
             ref float oldKB, ref int numLines, ref string[] toolTipLine, ref Color[] lineColors)
         {
-            try
+            foreach (PatchMain i in mod)
             {
-                foreach (PatchMain i in mod) i.MouseText_DrawItemTooltip_GetLinesInfoPostfix(item, ref yoyoLogo,
-                    ref oldKB, ref numLines, ref toolTipLine, ref lineColors);
-            }
-            catch (Exception ex)
-            {
-                OutputDebug.OutputException(ex);
+                try
+                {
+                    i.MouseText_DrawItemTooltip_GetLinesInfoPostfix(item, ref yoyoLogo,
+                       ref oldKB, ref numLines, ref toolTipLine, ref lineColors);
+                }
+                catch (Exception ex)
+                {
+                    OutputDebug.OutputException(ex);
+                }
             }
         }
 
