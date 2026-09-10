@@ -1,8 +1,8 @@
-﻿using System;
+﻿using FastWin32.Diagnostics;
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
-using FastWin32.Diagnostics;
 using static FastWin32.NativeMethods;
 using size_t = System.IntPtr;
 
@@ -1418,8 +1418,9 @@ namespace FastWin32.Memory
                     }
                 }
                 bufferList.AddRange(buffer);
-            };
-            addLastRange:
+            }
+            ;
+        addLastRange:
             numberOfBytesRead -= doubleZero ? 2 : 1;
             for (int i = 0; i < (int)numberOfBytesRead; i++)
                 bufferList.Add(buffer[i]);

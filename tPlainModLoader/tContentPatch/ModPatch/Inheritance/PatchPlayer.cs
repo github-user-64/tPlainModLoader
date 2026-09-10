@@ -47,7 +47,7 @@ namespace tContentPatch
         /// <summary>
         /// 被击中后
         /// </summary>
-        public virtual void HurtPostfix(Player This, ref double __result, PlayerDeathReason damageSource,
+        public virtual void HurtPostfix(Player This, ref double result, PlayerDeathReason damageSource,
             int Damage, int hitDirection, bool pvp, bool quiet, bool Crit, int cooldownCounter, bool dodgeable)
         { }
         /// <summary>

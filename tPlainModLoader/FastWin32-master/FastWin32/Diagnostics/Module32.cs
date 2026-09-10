@@ -1,6 +1,6 @@
-﻿using System;
+﻿using FastWin32.Memory;
+using System;
 using System.Text;
-using FastWin32.Memory;
 using static FastWin32.NativeMethods;
 using size_t = System.IntPtr;
 

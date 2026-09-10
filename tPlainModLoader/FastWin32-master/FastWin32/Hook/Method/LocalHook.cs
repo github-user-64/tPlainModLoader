@@ -1,7 +1,7 @@
-﻿using System;
-using System.Reflection;
-using FastWin32.Diagnostics;
+﻿using FastWin32.Diagnostics;
 using FastWin32.Memory;
+using System;
+using System.Reflection;
 using static FastWin32.NativeMethods;
 
 namespace FastWin32.Hook.Method
