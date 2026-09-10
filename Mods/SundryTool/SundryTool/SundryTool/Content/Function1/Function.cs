@@ -12,7 +12,7 @@ namespace SundryTool.Content.Function1
     {
         public static GetSetReset<bool> noDead = new GetSetReset<bool>();
         public static GetSetReset<bool> manaMax = new GetSetReset<bool>();
-        
+
         public override void UpdatePrefix(Player This, int playerI)
         {
             if (This != Main.LocalPlayer) return;

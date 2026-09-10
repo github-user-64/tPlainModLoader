@@ -1,5 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using ChatAi.Utils;
+﻿using ChatAi.Utils;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using tContentPatch.Content.UI;
 using Terraria.UI;

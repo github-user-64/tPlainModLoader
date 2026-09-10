@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using System.Diagnostics;
 using System.Linq;
 using tContentPatch;
 using Terraria;

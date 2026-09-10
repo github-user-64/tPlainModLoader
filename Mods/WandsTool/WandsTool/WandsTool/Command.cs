@@ -44,7 +44,7 @@ namespace WandsTool
 
                 root.SubCommand.Add(updateCount);
             }
-            
+
             cos.Add(root);
             return cos;
         }

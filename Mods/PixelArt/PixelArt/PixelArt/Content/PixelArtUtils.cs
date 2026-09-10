@@ -39,7 +39,7 @@ namespace PixelArt.Content
                             Color color = new Color(c.R, c.G, c.B, c.A);
                             pi = new PixelInfo(color, x, y);
                         }
-                        
+
                         pixelInfos.Add(pi);
                     }
                 }

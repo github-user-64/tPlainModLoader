@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Diagnostics;
 using tContentPatch;
+using tContentPatch.ModLoad;
 using Terraria;
 using Terraria.ID;
 
@@ -59,7 +59,7 @@ namespace SuspiciousPlayer.Content.Event1
         public static int playerCount = 0;
         private static Dictionary<int, ActionState> states = null;
 
-        public override void Load()
+        public override void Load(ModObject mo)
         {
             states = new Dictionary<int, ActionState>
             {

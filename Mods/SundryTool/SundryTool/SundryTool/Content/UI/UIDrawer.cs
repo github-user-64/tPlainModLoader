@@ -1,7 +1,6 @@
 ﻿using SundryTool.Utils;
 using SundryTool.Utils.quickBuild;
 using tContentPatch.Content.UI;
-using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 
 namespace SundryTool.Content.UI

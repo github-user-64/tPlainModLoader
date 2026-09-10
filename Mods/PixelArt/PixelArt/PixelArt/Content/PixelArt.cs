@@ -169,7 +169,7 @@ namespace PixelArt.Content
             ++pixelInfo_index;
             if (pi == null) return true;
             if (pi.wall == WallID.None) return true;
-            
+
             int x = spawPos.X + pi.x;
             int y = spawPos.Y + pi.y;
 

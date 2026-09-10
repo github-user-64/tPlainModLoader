@@ -108,7 +108,7 @@ namespace WandsTool.Content
                         }
                     }
                 }
-                
+
                 shapes = null;
             }
         }

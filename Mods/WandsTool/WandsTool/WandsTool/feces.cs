@@ -84,7 +84,7 @@ namespace WandsTool
                 Wands.Update();
 
                 WandAction.Update();
-                
+
             }
             else
             {

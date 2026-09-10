@@ -1,5 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using ChatAi.Content.UI;
+﻿using ChatAi.Content.UI;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using tContentPatch.Content.UI;

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using tContentPatch;
+using tContentPatch.ModLoad;
 using Terraria;
 using Terraria.UI;
 
@@ -11,7 +12,7 @@ namespace QuickButton.QuickButton
         private static UIQuickButton ui_qb = null;
         private static List<string> keys = null;
 
-        public override void Load()
+        public override void Load(ModObject mo)
         {
             if (Main.dedServ) return;
 

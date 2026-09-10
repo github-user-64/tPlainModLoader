@@ -35,7 +35,7 @@ namespace ChatAi
         public static async void InputAsync(string text, int type)
         {
             if (CanRequest?.Invoke() != true) return;
-            
+
             RequestStart?.Invoke();
 
             try

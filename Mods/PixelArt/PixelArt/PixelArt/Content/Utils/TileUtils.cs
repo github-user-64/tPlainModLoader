@@ -44,7 +44,7 @@ namespace PixelArt.Content.Utils
                     WorldGen.PlaceWall(x, y, wall, true);
                     if (Main.netMode == 1) NetMessage.TrySendData(MessageID.TileManipulation, -1, -1, null, 3, x, y, wall);
                 }
-                
+
                 return true;
             });
         }

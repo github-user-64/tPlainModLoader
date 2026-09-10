@@ -3,11 +3,9 @@ using Microsoft.Xna.Framework;
 using SundryTool.Utils;
 using SundryTool.Utils.quickBuild;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Threading.Tasks;
 using tContentPatch;
 using Terraria;
-using Terraria.Map;
 using Terraria.UI;
 
 namespace SundryTool.Content.Function2

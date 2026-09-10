@@ -27,7 +27,7 @@ namespace SuspiciousPlayer.Content.Event1
 
                 NetMessage.PlayNetSound(new NetMessage.NetSoundInfo(This.position,
                     341, SoundID.NPCDeath59.Style));
-                
+
             }
             else
             {
@@ -94,7 +94,7 @@ namespace SuspiciousPlayer.Content.Event1
                     else if (pos.Y > Main.maxTilesY * 16) pos.Y = Main.maxTilesY * 16;
 
                     player.Center = pos;
-                    
+
                     Rectangle location = new Rectangle((int)pos.X, (int)pos.Y, 0, 0);
                     Color color = Color.Green;
                     string text = $"传送到:{location.X},{location.Y}";

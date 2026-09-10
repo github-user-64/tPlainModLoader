@@ -83,7 +83,7 @@ namespace ChatAi.Content
             print_oldText = null;
 
             text = getRequestText(text);
-            
+
             if (text == null) return;
 
             if (DisplayText.val) ContentPatch.PrintTry($"请求文本: [{text}]");

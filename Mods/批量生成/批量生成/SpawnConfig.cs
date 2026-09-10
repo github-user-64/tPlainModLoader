@@ -38,7 +38,7 @@ namespace BatchSapwn
             {
                 return Get2(FilePath1);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }

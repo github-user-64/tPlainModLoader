@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework;
 using OptimizeAndTool.Utils;
 using OptimizeAndTool.Utils.quickBuild;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Reflection.Emit;
 using tContentPatch;
 using Terraria;

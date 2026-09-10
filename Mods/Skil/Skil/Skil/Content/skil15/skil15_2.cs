@@ -11,7 +11,7 @@ namespace Skil.Content.skil15
     internal static class skil15_2
     {
         public static GetSetReset<bool> Enable = new GetSetReset<bool>();
-        
+
         public static List<UIElement> GetUI()
         {
             return new List<UIElement>()

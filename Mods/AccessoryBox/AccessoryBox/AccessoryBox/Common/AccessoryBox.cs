@@ -27,7 +27,7 @@ namespace AccessoryBox.Common
             armor = new List<Item>();
 
             if (items == null) return;
-            
+
             foreach (Item i in items)
             {
                 if (AddItem(i) == null) break;
