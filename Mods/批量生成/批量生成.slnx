@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="../AccessoryBox/AccessoryBox/AccessoryBox/AccessoryBox.csproj" Id="3940870e-a084-46cd-b7ed-6260e58e78a6" />
+  <Project Path="../DeadEffect/DeadEffect/DeadEffect/DeadEffect.csproj" Id="f3e5c741-ea32-49a6-95af-b0975dc43f67" />
   <Project Path="F:/F_MY1/File/RJWJ/C#/Projects/tPlainModLoader/Mods/ChatAi/ChatAi/ChatAi/ChatAi.csproj" Id="ec4d850d-9bea-4237-be95-2451255fefde" />
   <Project Path="F:/F_MY1/File/RJWJ/C#/Projects/tPlainModLoader/Mods/CreativeInventory/CreativeInventory/CreativeInventory/CreativeInventory.csproj" Id="6c30cd98-f031-45e9-8a94-b31738d349ae" />
   <Project Path="F:/F_MY1/File/RJWJ/C#/Projects/tPlainModLoader/Mods/OptimizeAndTool/OptimizeAndTool/OptimizeAndTool/OptimizeAndTool.csproj" Id="1f9f3473-c4d6-4ddb-a010-ee21b19e9e7b" />

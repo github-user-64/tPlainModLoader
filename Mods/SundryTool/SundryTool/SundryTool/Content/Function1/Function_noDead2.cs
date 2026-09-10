@@ -3,24 +3,19 @@ using SundryTool.Utils;
 using SundryTool.Utils.quickBuild;
 using System.Collections.Generic;
 using tContentPatch;
-using tContentPatch.Patch;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.UI;
 
 namespace SundryTool.Content.Function1
 {
-    internal class Function_noDead2 : Mod
+    internal class Function_noDead2 : PatchPlayer
     {
         public static GetSetReset<bool> noDead2 = new GetSetReset<bool>();
 
-        public override void AddPatch(IAddPatch addPatch)
+        public override bool KillMePrefix(Player This, PlayerDeathReason damageSource, double dmg, int hitDirection, bool pvp)
         {
-            addPatch.AddPrefix(typeof(Player).GetMethod("KillMe"), typeof(Function_noDead2).GetMethod("KillMe"));
-        }
-
-        public static bool KillMe(Player __instance, Terraria.DataStructures.PlayerDeathReason damageSource, double dmg, int hitDirection, bool pvp = false)
-        {
-            if (__instance != Main.LocalPlayer) return true;
+            if (This != Main.LocalPlayer) return true;
             return noDead2.val == false;
         }
 
