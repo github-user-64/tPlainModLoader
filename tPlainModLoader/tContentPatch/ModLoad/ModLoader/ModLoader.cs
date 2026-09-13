@@ -41,10 +41,9 @@ namespace tContentPatch.ModLoad
                 {
                     foreach (ModObject mo in mods)
                     {
-                        stateText = $"卸载模组:{mo.info?.name ?? mo.config.key}";
+                        stateText = $"卸载模组:{GetModName(mo)}";
 
-                        Utils.ForHelp(mo.inheritance_mod, item => item.Unload(),
-                            ex => $"卸载模组[{mo.info?.name ?? mo.config.key}]时失败:{ex.Message}");
+                        Utils.ForHelp(mo.inheritance_mod, item => item.Unload(), mo, "卸载模组时失败:[{0}]:{1}");
 
                         ++progressV;
                     }

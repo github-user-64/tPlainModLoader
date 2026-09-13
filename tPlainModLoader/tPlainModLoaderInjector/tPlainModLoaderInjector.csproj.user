@@ -2,7 +2,7 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartAction>Program</StartAction>
-    <StartProgram>F:\F_MY1\AZ\AZWZ\tlry\Terraria.v1.4.5\Terraria_g\Terraria_v1.4.5.0.exe</StartProgram>
-    <StartWorkingDirectory>F:\F_MY1\AZ\AZWZ\tlry\Terraria.v1.4.5\Terraria_g\</StartWorkingDirectory>
+    <StartProgram>F:\F_MY1\AZ\AZWZ\tlry\Terraria_v1.4.5.8\Terraria\Terraria_v1.4.5.8.exe</StartProgram>
+    <StartWorkingDirectory>F:\F_MY1\AZ\AZWZ\tlry\Terraria_v1.4.5.8\Terraria\</StartWorkingDirectory>
   </PropertyGroup>
 </Project>

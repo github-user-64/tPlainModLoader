@@ -11,67 +11,61 @@ namespace tContentPatch.ModLoad
         {
             progressV = 0;
             progressMax = 1;
-            stateText = "初始化模组";
+            stateText = "加载模组";
 
-            Func<ModObject, Exception, string> exMess = (m, ex) => $"初始化模组[{m.info?.name ?? m.config.key}]失败:{ex.Message}";
-            Func<ModObject, Exception, string> exMess2 = (m, ex) => $"添加模组[{m.info?.name ?? m.config.key}]的补丁失败:{ex.Message}";
+            string exMess = "初始化模组失败:[{0}]:{1}";
+            string exMess2 = "添加模组补丁失败:[{0}]:{1}";
 
             Action<ModObject>[] action = new Action<ModObject>[] {
                 mo =>
                 {
-                    stateText = $"初始化模组:{mo.info?.name ?? mo.config.key}";
+                    stateText = $"加载模组:{GetModName(mo)}";
 
                     ModObject copyMo = ModObject.Copy(mo);
 
-                    Utils.ForHelp(mo.inheritance_mod, item => item.Load(copyMo), ex => exMess(mo, ex));
+                    Utils.ForHelp(mo.inheritance_mod, item => item.Load(copyMo), mo, "加载模组失败:[{0}]:{1}");
                 },
                 mo =>
                 {
-                    stateText = $"初始化模组设置:{mo.info?.name ?? mo.config.key}";
+                    stateText = $"加载模组设置:{GetModName(mo)}";
 
-                    Utils.ForHelp(mo.inheritance_setting, item => LoadModSet(mo, item), ex => exMess(mo, ex));
+                    Utils.ForHelp(mo.inheritance_setting, item => LoadModSet(mo, item), mo, "加载模组设置失败:[{0}]:{1}");
                 },
                 mo =>
                 {
-                    stateText = $"初始化模组:{mo.info?.name ?? mo.config.key}";
+                    stateText = $"初始化模组:{GetModName(mo)}";
 
-                    Utils.ForHelp(mo.inheritance_mod, item => item.Loaded(), ex => exMess(mo, ex));
+                    Utils.ForHelp(mo.inheritance_netPacket, item => item.Initialize(), mo, exMess);
+
+                    Utils.ForHelp(mo.inheritance_patchMain, item => item.Initialize(), mo, exMess);
+
+                    Utils.ForHelp(mo.inheritance_patchPlayer, item => item.Initialize(), mo, exMess);
+
+                    Utils.ForHelp(mo.inheritance_patchNPC, item => item.Initialize(), mo, exMess);
+
+                    Utils.ForHelp(mo.inheritance_patchItem, item => item.Initialize(), mo, exMess);
+
+                    Utils.ForHelp(mo.inheritance_patchProjectile, item => item.Initialize(), mo, exMess);
+
+                    Utils.ForHelp(mo.inheritance_patchTileLightScanner, item => item.Initialize(), mo, exMess);
+
+                    Utils.ForHelp(mo.inheritance_patchRemadeChatMonitor, item => item.Initialize(), mo, exMess);
+
+                    Utils.ForHelp(mo.inheritance_patchWorldFile, item => item.Initialize(), mo, exMess);
+
+                    Utils.ForHelp(mo.inheritance_patchNetMessage, item => item.Initialize(), mo, exMess);
+
+                    Utils.ForHelp(mo.inheritance_patchMessageBuffer, item => item.Initialize(), mo, exMess);
+
+                    Utils.ForHelp(mo.inheritance_patchChest, item => item.Initialize(), mo, exMess);
+
+                    Utils.ForHelp(mo.inheritance_patchRemoteClient, item => item.Initialize(), mo, exMess);
+
+                    Utils.ForHelp(mo.inheritance_patchWorldGen, item => item.Initialize(), mo, exMess);
                 },
                 mo =>
                 {
-                    stateText = $"初始化模组:{mo.info?.name ?? mo.config.key}";
-
-                    Utils.ForHelp(mo.inheritance_netPacket, item => item.Initialize(), ex => exMess(mo, ex));
-
-                    Utils.ForHelp(mo.inheritance_patchMain, item => item.Initialize(), ex => exMess(mo, ex));
-
-                    Utils.ForHelp(mo.inheritance_patchPlayer, item => item.Initialize(), ex => exMess(mo, ex));
-
-                    Utils.ForHelp(mo.inheritance_patchNPC, item => item.Initialize(), ex => exMess(mo, ex));
-
-                    Utils.ForHelp(mo.inheritance_patchItem, item => item.Initialize(), ex => exMess(mo, ex));
-
-                    Utils.ForHelp(mo.inheritance_patchProjectile, item => item.Initialize(), ex => exMess(mo, ex));
-
-                    Utils.ForHelp(mo.inheritance_patchTileLightScanner, item => item.Initialize(), ex => exMess(mo, ex));
-
-                    Utils.ForHelp(mo.inheritance_patchRemadeChatMonitor, item => item.Initialize(), ex => exMess(mo, ex));
-
-                    Utils.ForHelp(mo.inheritance_patchWorldFile, item => item.Initialize(), ex => exMess(mo, ex));
-
-                    Utils.ForHelp(mo.inheritance_patchNetMessage, item => item.Initialize(), ex => exMess(mo, ex));
-
-                    Utils.ForHelp(mo.inheritance_patchMessageBuffer, item => item.Initialize(), ex => exMess(mo, ex));
-
-                    Utils.ForHelp(mo.inheritance_patchChest, item => item.Initialize(), ex => exMess(mo, ex));
-
-                    Utils.ForHelp(mo.inheritance_patchRemoteClient, item => item.Initialize(), ex => exMess(mo, ex));
-
-                    Utils.ForHelp(mo.inheritance_patchWorldGen, item => item.Initialize(), ex => exMess(mo, ex));
-                },
-                mo =>
-                {
-                    string text = $"注册网络包:{mo.info?.name ?? mo.config.key}";
+                    string text = $"注册网络包:{GetModName(mo)}";
                     stateText = text;
 
                     try
@@ -85,9 +79,9 @@ namespace tContentPatch.ModLoad
                 },
                 mo =>
                 {
-                    stateText = $"添加模组补丁:{mo.info?.name ?? mo.config.key}";
+                    stateText = $"添加模组补丁:{GetModName(mo)}";
 
-                    Utils.ForHelp(mo.inheritance_mod, item => item.AddPatch(modPatch), ex => exMess2(mo, ex));
+                    Utils.ForHelp(mo.inheritance_mod, item => item.AddPatch(modPatch), mo, exMess2);
 
                     try
                     {
@@ -107,9 +101,15 @@ namespace tContentPatch.ModLoad
                     }
                     catch (Exception ex)
                     {
-                        throw new Exception(exMess2(mo, ex), ex);
+                        throw new Exception(string.Format(exMess2, GetModName(mo), ex.Message), ex);
                     }
-                }
+                },
+                mo =>
+                {
+                    stateText = $"完成加载模组:{GetModName(mo)}";
+
+                    Utils.ForHelp(mo.inheritance_mod, item => item.Loaded(), mo, "完成加载模组失败:[{0}]:{1}");
+                },
             };
 
             progressMax = mods.Count * action.Length;
@@ -136,6 +136,11 @@ namespace tContentPatch.ModLoad
             fi.SetValue(Main.instance, true);
 
             progressV = 1;
+        }
+
+        private string GetModName(ModObject mo)
+        {
+            return mo.info?.name ?? mo.config.key;
         }
     }
 }

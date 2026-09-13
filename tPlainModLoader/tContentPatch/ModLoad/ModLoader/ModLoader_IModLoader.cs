@@ -19,17 +19,14 @@ namespace tContentPatch.ModLoad
                 stateText = string.Empty;
 
                 modObjects = null;
-
-                List<ModObject> modList = loadInstance.Load();
+                modObjects = loadInstance.Load();
                 CheckLoadCancel();
 
-                Initialize_Mod(modList);
+                Initialize_Mod(modObjects);
                 CheckLoadCancel();
 
                 Initialize_SetupDrawInterfaceLayers();
                 CheckLoadCancel();
-
-                modObjects = modList;
 
                 return modObjects;
             }

@@ -29,9 +29,9 @@ namespace tContentPatch.ModLoad
             return instance;
         }
 
-        internal static void ForHelp<T>(List<T> list, Action<T> item, Func<Exception, string> mess)
+        internal static void ForHelp<T>(List<T> list, Action<T> item, ModObject mo, string exMsg)
         {
-            if (list == null || item == null) return;
+            if (list == null) return;
 
             for (int i = 0; i < list.Count; ++i)
             {
@@ -41,7 +41,9 @@ namespace tContentPatch.ModLoad
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception(mess?.Invoke(ex), ex);
+                    string msg = string.Format(exMsg, mo.info?.name ?? mo.config.key, ex.Message);
+
+                    throw new Exception(msg, ex);
                 }
             }
         }
