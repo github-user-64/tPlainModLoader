@@ -145,5 +145,19 @@ namespace tContentPatch.ModPatch
         {
             mod.ForTry(item => item.KillMePostfix(__instance, damageSource, dmg, hitDirection, pvp));
         }
+
+        [HarmonyPatch("ItemCheck_Shoot")]
+        [HarmonyPrefix]
+        public static void ItemCheck_ShootPrefix(Player __instance, int i, Item sItem, int weaponDamage, bool withAudioVisualFeedback)
+        {
+            mod.ForTry(item => item.ItemCheck_ShootPrefix(__instance, sItem, weaponDamage, withAudioVisualFeedback));
+        }
+
+        [HarmonyPatch("ItemCheck_Shoot")]
+        [HarmonyPostfix]
+        public static void ItemCheck_ShootPostfix(Player __instance, int i, Item sItem, int weaponDamage, bool withAudioVisualFeedback)
+        {
+            mod.ForTry(item => item.ItemCheck_ShootPostfix(__instance, sItem, weaponDamage, withAudioVisualFeedback));
+        }
     }
 }
