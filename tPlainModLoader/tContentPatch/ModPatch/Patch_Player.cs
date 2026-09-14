@@ -69,6 +69,24 @@ namespace tContentPatch.ModPatch
             mod.ForTry(item => item.SavePlayerPostfix(playerFile, skipMapSave));
         }
 
+        [HarmonyPatch("LoadPlayer")]
+        [HarmonyPrefix]
+        public static void LoadPlayerPrefix(string playerPath, bool cloudSave)
+        {
+            if (Main.netMode != 0 && Main.netMode != 1) return;
+
+            mod.ForTry(item => item.LoadPlayerPrefix(playerPath, cloudSave));
+        }
+
+        [HarmonyPatch("LoadPlayer")]
+        [HarmonyPostfix]
+        public static void LoadPlayerPostfix(PlayerFileData __result, string playerPath, bool cloudSave)
+        {
+            if (Main.netMode != 0 && Main.netMode != 1) return;
+
+            mod.ForTry(item => item.LoadPlayerPostfix(__result, playerPath, cloudSave));
+        }
+
         [HarmonyPatch("DropTombstone")]
         [HarmonyPrefix]
         internal static bool CanDropTombstone(Player __instance, long coinsOwned, NetworkText deathText, int hitDirection)

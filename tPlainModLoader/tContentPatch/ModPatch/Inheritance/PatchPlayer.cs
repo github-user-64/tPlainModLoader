@@ -35,6 +35,14 @@ namespace tContentPatch
         /// </summary>
         public virtual void SavePlayerPostfix(PlayerFileData playerFile, bool skipMapSave) { }
         /// <summary>
+        /// 加载玩家数据前, 单人和客户端有效
+        /// </summary>
+        public virtual void LoadPlayerPrefix(string playerPath, bool cloudSave) { }
+        /// <summary>
+        /// 加载玩家数据后, 单人和客户端有效
+        /// </summary>
+        public virtual void LoadPlayerPostfix(PlayerFileData result, string playerPath, bool cloudSave) { }
+        /// <summary>
         /// 能否掉落墓碑
         /// </summary>
         public virtual bool CanDropTombstone(Player This, long coinsOwned, NetworkText deathText, int hitDirection) => true;
