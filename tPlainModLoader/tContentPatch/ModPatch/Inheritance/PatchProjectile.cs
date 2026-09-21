@@ -34,5 +34,7 @@ namespace tContentPatch
         { }
         /// <summary/>
         public virtual Color AI_203_GetLightningColor(Projectile This, Color color) => color;
+        /// <summary/>
+        public virtual void AIPostfix(Projectile This) { }
     }
 }

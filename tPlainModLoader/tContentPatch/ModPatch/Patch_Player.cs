@@ -146,18 +146,18 @@ namespace tContentPatch.ModPatch
             mod.ForTry(item => item.KillMePostfix(__instance, damageSource, dmg, hitDirection, pvp));
         }
 
-        [HarmonyPatch("ItemCheck_Shoot")]
-        [HarmonyPrefix]
-        public static void ItemCheck_ShootPrefix(Player __instance, int i, Item sItem, int weaponDamage, bool withAudioVisualFeedback)
+        [HarmonyPatch("ApplyEquipFunctional")]
+        [HarmonyPostfix]
+        public static void ApplyEquipFunctionalPostfix(Player __instance, int itemSlot, Item currentItem)
         {
-            mod.ForTry(item => item.ItemCheck_ShootPrefix(__instance, sItem, weaponDamage, withAudioVisualFeedback));
+            mod.ForTry(item => item.ApplyEquipFunctionalPostfix(__instance, itemSlot, currentItem));
         }
 
-        [HarmonyPatch("ItemCheck_Shoot")]
+        [HarmonyPatch("ApplyEquipVanity")]
         [HarmonyPostfix]
-        public static void ItemCheck_ShootPostfix(Player __instance, int i, Item sItem, int weaponDamage, bool withAudioVisualFeedback)
+        public static void ApplyEquipVanityPostfix(Player __instance, int itemSlot, Item currentItem)
         {
-            mod.ForTry(item => item.ItemCheck_ShootPostfix(__instance, sItem, weaponDamage, withAudioVisualFeedback));
+            mod.ForTry(item => item.ApplyEquipVanityPostfix(__instance, itemSlot, currentItem));
         }
     }
 }

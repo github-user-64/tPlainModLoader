@@ -188,5 +188,25 @@ namespace tContentPatch.ModPatch
 
             __result = modifi;
         }
+
+        [HarmonyPatch("DrawProjDirect")]
+        [HarmonyPrefix]
+        public static bool DrawProjDirectPrefix(Projectile proj, Player overridePlayer = null)
+        {
+            bool ok = true;
+            mod.ForTry(item =>
+            {
+                ok &= item.DrawProjDirectPrefix(proj, overridePlayer);
+            });
+
+            return ok;
+        }
+
+        [HarmonyPatch("DrawProjDirect")]
+        [HarmonyPostfix]
+        public static void DrawProjDirectPostfix(Projectile proj, Player overridePlayer = null)
+        {
+            mod.ForTry(item => item.DrawProjDirectPostfix(proj, overridePlayer));
+        }
     }
 }

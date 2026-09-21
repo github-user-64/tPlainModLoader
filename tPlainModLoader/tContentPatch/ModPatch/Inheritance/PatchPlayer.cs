@@ -68,13 +68,9 @@ namespace tContentPatch
         public virtual bool KillMePrefix(Player This, PlayerDeathReason damageSource, double dmg, int hitDirection, bool pvp) => true;
         /// <summary/>
         public virtual void KillMePostfix(Player This, PlayerDeathReason damageSource, double dmg, int hitDirection, bool pvp) { }
-        /// <summary>
-        /// 使用物品发射射弹前
-        /// </summary>
-        public virtual void ItemCheck_ShootPrefix(Player This, Item item, int weaponDamage, bool withAudioVisualFeedback) { }
-        /// <summary>
-        /// 使用物品发射射弹后
-        /// </summary>
-        public virtual void ItemCheck_ShootPostfix(Player This, Item item, int weaponDamage, bool withAudioVisualFeedback) { }
+        /// <summary/>
+        public virtual void ApplyEquipFunctionalPostfix(Player This, int itemSlot, Item currentItem) { }
+        /// <summary/>
+        public virtual void ApplyEquipVanityPostfix(Player This, int itemSlot, Item currentItem) { }
     }
 }
