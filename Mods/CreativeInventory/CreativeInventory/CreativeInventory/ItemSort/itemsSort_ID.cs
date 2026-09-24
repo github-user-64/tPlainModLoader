@@ -124,5 +124,8 @@ namespace CreativeInventory
         #region 其它
         public const int ID_Other = 10;
         #endregion
+        #region 模组
+        public const int ID_Mod = 11;
+        #endregion
     }
 }

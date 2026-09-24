@@ -4,7 +4,6 @@ using System;
 using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
-using Terraria.ID;
 
 namespace CreativeInventory.CreativeInventory
 {
@@ -121,6 +120,7 @@ namespace CreativeInventory.CreativeInventory
             action_rb.Invoke("Item_557", "boss召唤物", itemsSort.ID_BossSpawn, -1, 9);
             action_rb.Invoke("Item_5", "消耗品", itemsSort.ID_Consumable, -1, 10);
             action_rb.Invoke("Item_9", "其他", itemsSort.ID_Other, -1, 11);
+            action_rb.Invoke("UI/ChestCraft_0", "模组", itemsSort.ID_Mod, -1, 12);
             #endregion
             #region 每个分类2级的单选框
             panel_row2_sp_row2_rbs = new UIRadioButton[12][];
@@ -213,10 +213,10 @@ namespace CreativeInventory.CreativeInventory
 
             itemsID.for_ItemsAll((i) =>
             {
-                if (i >= ItemID.Count) return;
+                if (i >= ModLinkage.ModExtenContent.ItemCount) return;
                 Item item = new Item();
                 item.SetDefaults(i);
-                if (item.type < 1 || item.type >= ItemID.Count) return;
+                if (item.type < 1 || item.type >= ModLinkage.ModExtenContent.ItemCount) return;
 
                 //根据搜索文本筛选
                 if (Search_Text != null && Search_Text.Length > 0)

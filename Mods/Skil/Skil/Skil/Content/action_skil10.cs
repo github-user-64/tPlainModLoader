@@ -1,5 +1,6 @@
 ﻿using CommandHelp;
 using Microsoft.Xna.Framework;
+using Skil.ModLinkage;
 using Skil.Utils;
 using Skil.Utils.quickBuild;
 using System.Collections.Generic;
@@ -78,7 +79,7 @@ namespace Skil.Content
                 p += v;
 
                 Item item = new Item();
-                item.SetDefaults(Utils.getRand(1, Terraria.ID.ItemID.Count));
+                item.SetDefaults(Utils.getRand(1, ModExtenContent.ItemCount));
 
                 Chest.ItemTransferVisualizationSettings settings = new Chest.ItemTransferVisualizationSettings();
                 settings.TransitionIn = true;

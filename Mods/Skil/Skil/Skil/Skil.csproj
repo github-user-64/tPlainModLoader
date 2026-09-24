@@ -103,6 +103,7 @@
     <Compile Include="Content\UI\UITextButton.cs" />
     <Compile Include="Content\Utils.cs" />
     <Compile Include="ModLinkage\LinkageSetting.cs" />
+    <Compile Include="ModLinkage\ModExtenContent.cs" />
     <Compile Include="ModLinkage\ModQuickSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingUI.cs" />

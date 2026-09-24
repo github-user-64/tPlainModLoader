@@ -1,11 +1,11 @@
 ﻿using CommandHelp;
 using Microsoft.Xna.Framework;
+using Skil.ModLinkage;
 using Skil.Utils;
 using Skil.Utils.quickBuild;
 using System.Collections.Generic;
 using tContentPatch;
 using Terraria;
-using Terraria.ID;
 using Terraria.UI;
 
 namespace Skil.Content
@@ -14,7 +14,7 @@ namespace Skil.Content
     {
         //技能6, 一直转的射弹
         public static GetSetReset<bool> Enable = new GetSetReset<bool>();
-        public static GetSetReset<int> ID = new GetSetReset<int>(132, 132, GetSetReset.GetIntFunc(0, ProjectileID.Count - 1));
+        public static GetSetReset<int> ID = new GetSetReset<int>(132, 132);
 
         public static List<CommandObject> GetCO()
         {
@@ -46,6 +46,9 @@ namespace Skil.Content
         public static void a1_skil6(Player player)
         {
             if (player == null) return;
+
+            if (ID.val < 0) ID.val = 0;
+            if (ID.val >= ModExtenContent.ProjectileCount) ID.val = ModExtenContent.ProjectileCount - 1;
 
             if (skil6_ps == null)
             {
