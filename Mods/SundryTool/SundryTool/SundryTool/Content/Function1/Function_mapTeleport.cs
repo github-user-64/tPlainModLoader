@@ -47,6 +47,8 @@ namespace SundryTool.Content.Function1
             This.fallStart = This.fallStart2 = (int)(This.position.Y / 16f);//重置下落高度
 
             Function_fly2.fly2_resume = true;
+
+            NetMessage.SendData(13, number: This.whoAmI);
         }
 
         public static List<CommandObject> GetCO()
