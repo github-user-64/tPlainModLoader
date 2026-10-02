@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using tContentPatch;
 using tContentPatch.ModLoad;
 using Terraria.ID;
@@ -19,19 +20,25 @@ namespace CreativeInventory.ModLinkage
             System.Collections.Generic.List<ModObject> mos = ContentPatch.GetModObjects();
             if (mos == null) return;
 
-            ModObject mo = mos.FirstOrDefault(i => i.assembly?.GetName().Name == "ExtenContent");
+            ModObject mo = mos.FirstOrDefault(i => i.config.key == "StaticTile.ExtenContent");
             if (mo == null) return;
 
-            ItemCount = LoadCount(mo, ItemID.Count, "ExtenContent.Extens.ItemLoad", "ItemCount");
-            ProjectileCount = LoadCount(mo, ProjectileID.Count, "ExtenContent.Extens.ProjectileLoad", "ProjectileCount");
+            Assembly assembly = (Assembly)mo.assembly?.GetType("ExtenContentPatch.ThisMod")?.GetProperty("assembly")?.GetValue(null);
+            if (assembly == null) return;
+
+            ItemCount = LoadCount(assembly, ItemID.Count, "ExtenContent.Extens.ItemLoad", "ItemCount");
+            ContentPatch.PrintTry($"{nameof(CreativeInventory)}:ModLinkage:ExtenContent:{nameof(ItemCount)}:{ItemCount}");
+
+            ProjectileCount = LoadCount(assembly, ProjectileID.Count, "ExtenContent.Extens.ProjectileLoad", "ProjectileCount");
+            ContentPatch.PrintTry($"{nameof(CreativeInventory)}:ModLinkage:ExtenContent:{nameof(ProjectileCount)}:{ProjectileCount}");
         }
 
-        protected int LoadCount(ModObject mo, int def, string path, string name)
+        protected int LoadCount(Assembly assembly, int def, string path, string name)
         {
-            Type type = mo.assembly.GetType(path);
+            Type type = assembly.GetType(path);
             if (type == null) return def;
 
-            System.Reflection.PropertyInfo pi = type.GetProperty(name);
+            PropertyInfo pi = type.GetProperty(name);
             if (pi == null) return def;
 
             return pi.GetValue(null) as int? ?? def;
