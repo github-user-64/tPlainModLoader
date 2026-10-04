@@ -26,11 +26,16 @@ namespace CreativeInventory.ModLinkage
             Assembly assembly = (Assembly)mo.assembly?.GetType("ExtenContentPatch.ThisMod")?.GetProperty("assembly")?.GetValue(null);
             if (assembly == null) return;
 
-            ItemCount = LoadCount(assembly, ItemID.Count, "ExtenContent.Extens.ItemLoad", "ItemCount");
-            ContentPatch.PrintTry($"{nameof(CreativeInventory)}:ModLinkage:ExtenContent:{nameof(ItemCount)}:{ItemCount}");
+            ItemCount = LoadCount(assembly, ItemID.Count, "ExtenContent.Extens.ItemLoader", "ItemCount");
+            Print($"{nameof(ItemCount)}:{ItemCount}");
 
-            ProjectileCount = LoadCount(assembly, ProjectileID.Count, "ExtenContent.Extens.ProjectileLoad", "ProjectileCount");
-            ContentPatch.PrintTry($"{nameof(CreativeInventory)}:ModLinkage:ExtenContent:{nameof(ProjectileCount)}:{ProjectileCount}");
+            ProjectileCount = LoadCount(assembly, ProjectileID.Count, "ExtenContent.Extens.ProjectileLoader", "ProjectileCount");
+            Print($"{nameof(ProjectileCount)}:{ProjectileCount}");
+        }
+
+        protected void Print(string s)
+        {
+            ContentPatch.PrintTry($"{nameof(CreativeInventory)}:模组联动:扩展内容:{s}");
         }
 
         protected int LoadCount(Assembly assembly, int def, string path, string name)
