@@ -39,7 +39,17 @@ namespace AccessoryBox.Common
 
         public void Load()
         {
-            ItemDataLoad.LoadData();
+            List<Item> items = ItemDataLoad.LoadData();
+
+            if (items == null)
+            {
+                items = new List<Item>();
+                items.Add(new Item());
+                items.Add(new Item());
+            }
+
+            LoadItems(items);
+
             OnLoaded?.Invoke();
         }
 

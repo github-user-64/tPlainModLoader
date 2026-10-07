@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reflection;
 using tContentPatch;
@@ -16,10 +17,17 @@ namespace AccessoryBox.Common
             set => Config.Instance?.SetVal(value);
         }
         protected static List<Item> armor = new List<Item>();
+        protected static readonly ConcurrentDictionary<string, MethodInfo> mis = new ConcurrentDictionary<string, MethodInfo>();
+        protected static IBoxConsole console = null;
+
+        private class EnterWorldLoad : PatchMain
+        {
+            public override void OnEnterWorld() => console?.Load();
+        }
 
         public override void Initialize()
         {
-            ModifyInterfaceLayers.SetConsole(this);
+            ModifyInterfaceLayers.SetConsole(console = this);
         }
 
         public static void LoadItems(List<Item> items)
@@ -103,7 +111,8 @@ namespace AccessoryBox.Common
 
         private static object F(Player This, string name, params object[] args)
         {
-            MethodInfo m = typeof(Player).GetMethod(name, BindingFlags.Instance | BindingFlags.NonPublic);
+            MethodInfo m = mis.GetOrAdd(name, typeof(Player).GetMethod(name, BindingFlags.Instance | BindingFlags.NonPublic));
+
             return m.Invoke(This, args);
         }
     }

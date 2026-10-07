@@ -1,4 +1,5 @@
 {"name":"饰品箱","author":"[c/00ffff:固态地面]","jumpPath":"https://github.com/github-user-64/tPlainModLoader",
 "description":"拿着饰品点击格子复制饰品，什么都不拿则清除，右键删除格子。
 没有做数据同步，所以多人模式别人看你会很奇怪。
-其实啥都可以往里放~"}
+其实啥都可以往里放~
+联动了扩展物品"}

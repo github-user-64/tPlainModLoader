@@ -31,15 +31,14 @@ namespace AccessoryBox.ModLinkage
             _ExtenItem_Item = ExtenItem.GetProperty("Item");
             if (_ExtenItem_Item == null) return;
 
-            Type ItemLoad = assembly.GetType("ExtenContent.Extens.ItemLoader");
-            if (ItemLoad == null) return;
+            Type ExtenManag = assembly.GetType("ExtenContent.Extens.ExtenManag");
+            if (ExtenManag == null) return;
 
-            if (Register(nameof(TypeInRange), ItemLoad.GetMethod("TypeInRange"))) return;
-            if (Register(nameof(GetItemType), ItemLoad.GetMethod("GetItemType"))) return;
-            if (Register(nameof(GetItemKey), ItemLoad.GetMethod("GetItem", new Type[] { typeof(int) }))) return;
-            if (Register(nameof(RegisterUnload), ItemLoad.GetMethod("RegisterUnload"))) return;
-            if (Register(nameof(GetUnloadItemKey), ItemLoad.GetMethod("GetUnloadItemKey"))) return;
-            if (Register(nameof(SetUnloadItem), ItemLoad.GetMethod("SetUnloadItem"))) return;
+            if (Register(nameof(GetExtenItemType), ExtenManag.GetMethod("GetExtenItemType"))) return;
+            if (Register(nameof(GetExtenItemKey), ExtenManag.GetMethod("GetExtenItemKey"))) return;
+            if (Register(nameof(RegisterUnloadItem), ExtenManag.GetMethod("RegisterUnloadItem"))) return;
+            if (Register(nameof(GetUnloadItemKey), ExtenManag.GetMethod("GetUnloadItemKey"))) return;
+            if (Register(nameof(SetUnloadItem), ExtenManag.GetMethod("SetUnloadItem"))) return;
         }
 
         public override void Unload()
@@ -55,7 +54,7 @@ namespace AccessoryBox.ModLinkage
                 return true;
             }
             mis.Add(key, mi);
-            return true;
+            return false;
         }
 
         private static bool Invoke<T>(string name, out T val, params object[] args)
@@ -68,35 +67,23 @@ namespace AccessoryBox.ModLinkage
             return true;
         }
 
-        public static bool TypeInRange(int type)
+        public static int GetExtenItemType(string key)
         {
-            if (Invoke(nameof(TypeInRange), out bool v, type)) return v;
+            if (Invoke(nameof(GetExtenItemType), out int v, key)) return v;
 
-            return false;
+            return ItemID.None;
         }
 
-        public static int GetItemType(string key)
+        public static string GetExtenItemKey(int type)
         {
-            int? type = null;
-
-            if (Invoke(nameof(GetItemType), out object v, key))
-            {
-                type = _ExtenItem_Item.GetValue(v) as int?;
-            }
-
-            return type ?? ItemID.None;
-        }
-
-        public static string GetItemKey(int type)
-        {
-            if (Invoke(nameof(GetItemKey), out string v, type)) return v;
+            if (Invoke(nameof(GetExtenItemKey), out string v, type)) return v;
 
             return null;
         }
 
-        public static void RegisterUnload(string key)
+        public static void RegisterUnloadItem(string key)
         {
-            Invoke(nameof(RegisterUnload), out object _, key);
+            Invoke(nameof(RegisterUnloadItem), out object _, key);
         }
 
         public static string GetUnloadItemKey(string key)
@@ -112,14 +99,12 @@ namespace AccessoryBox.ModLinkage
         }
 
         /// <summary>
-        /// 获取扩展物品的key, 没有则获取卸载物品的key, 没有则返回<see langword="null"/>
+        /// 获取卸载物品的key, 没有则获取扩展物品的key, 没有则返回<see langword="null"/>
         /// </summary>
-        public static string GetExtenKey(Item item)
+        public static string GetExtenItemOrUnLoadItemKey(Item item)
         {
-            if (TypeInRange(item.type) != true) return null;
-
-            string key = GetItemKey(item.type);
-            if (key == null) key = GetUnloadItemKey(item.Name);
+            string key = GetUnloadItemKey(item.Name);
+            if (key == null) key = GetExtenItemKey(item.type);
 
             return key;
         }
