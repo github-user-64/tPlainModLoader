@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
 using tContentPatch.Content.UI;
+using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 
@@ -67,7 +69,9 @@ namespace tContentPatch.Content.Menus.ModLoadException
         {
             ui_text_sp.RemoveAllChildren();
 
+            int widthMax = (int)ui_text_sp.GetInnerDimensions().Width - 80;
             string s = $"{ex.Message}\n{ex}";
+            List<string> texts = new List<string>();
 
             while (s.Length > 0)
             {
@@ -79,8 +83,19 @@ namespace tContentPatch.Content.Menus.ModLoadException
 
                 s = s.Remove(0, rLen);
 
-                ui_text_sp.Append(new UIText(text));
+                //
+
+                string[] ss = Terraria.Utils.WordwrapString(text, FontAssets.MouseText.Value,
+                    widthMax, 16, out int lineAmount);
+
+                for (int i = 0; i < lineAmount + 1; ++i)
+                {
+                    if (ss[i] == null) continue;
+                    texts.Add(ss[i]);
+                }
             }
+
+            foreach (string i in texts) ui_text_sp.Append(new UIText(i));
         }
 
         public override void Update(GameTime gameTime)
