@@ -41,7 +41,6 @@ namespace tContentPatch
             Initialized = true;
 
             Log.Add($"{nameof(ContentPatch)}:初始化完成");
-            Log.SaveTry();
 
             if (Main.dedServ)
             {
@@ -68,8 +67,6 @@ namespace tContentPatch
             //加载完成时
             LoaderControl.OnModLoad_Ok += () =>
             {
-                Log.SaveTry();
-
                 if (Main.netMode != 0 && Main.netMode != 1) return;
                 Main.menuMode = MenuID.Title;
             };
@@ -80,7 +77,6 @@ namespace tContentPatch
             //加载异常时
             LoaderControl.OnModLoad_Exception += (e) =>
             {
-                Log.SaveTry();
                 ModLoadException.OpenModLoadExceptionMenu(e);
                 ModLoadException.WaitMenuClose();
                 ModManager.OpenModManagerMenu(null);
@@ -88,7 +84,6 @@ namespace tContentPatch
             //卸载异常时
             LoaderControl.OnModUnload_Exception += (e) =>
             {
-                Log.SaveTry();
                 Environment.Exit(0);
             };
         }

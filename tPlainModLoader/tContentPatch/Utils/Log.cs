@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -9,40 +8,58 @@ namespace tContentPatch.Utils
     public static class Log
     {
         /// <summary/>
-        public static string path { get; private set; } = null;
-        private static List<string> logs = new List<string>();
+        public static string File { get; private set; } = null;
+        private readonly static object _lock = new object();
 
         /// <summary/>
-        public static void Add(string s)
+        public static void Add(string s, bool addTime = true)
         {
-            DateTime time = DateTime.Now;
+            if (s == null) return;
+            if (File == null) return;
 
-            string ss = $"[{time.Hour}:{time.Minute}:{time.Millisecond}]:{s}\n";
-            logs.Add(ss);
-        }
-
-        /// <summary/>
-        public static void SaveTry()
-        {
-            try
+            lock (_lock)
             {
-                string file = path;
-                string s = "";
-                for (int i = 0; i < logs.Count; ++i) s += logs[i];
+                if (addTime)
+                {
+                    DateTime time = DateTime.Now;
 
-                if (Directory.Exists(Path.GetDirectoryName(file)) == false) file = Path.GetFileName(file);
-                File.WriteAllText(file, s, Encoding.UTF8);
+                    s = $"[{time.Hour}:{time.Minute}:{time.Millisecond}]:{s}\n";
+                }
+
+                try
+                {
+                    System.IO.File.AppendAllText(File, s, Encoding.UTF8);
+                }
+                catch { }
             }
-            catch { }
         }
 
         /// <summary/>
         public static void SetPath(string filePath)
         {
             if (filePath == null) return;
-            if (Directory.Exists(Path.GetDirectoryName(filePath)) == false) return;
 
-            Log.path = filePath;
+            try
+            {
+                if (Directory.Exists(Path.GetDirectoryName(filePath)) != true) filePath = Path.GetFileName(filePath);
+            }
+            catch { }
+
+            if (filePath == null) return;
+            filePath = filePath.TrimEnd();
+            if (filePath.Length < 1) return;
+
+            File = filePath;
+        }
+
+        /// <summary/>
+        public static void Clear()
+        {
+            if (File == null) return;
+
+            if (System.IO.File.Exists(File) != true) return;
+
+            System.IO.File.Delete(File);
         }
     }
 }

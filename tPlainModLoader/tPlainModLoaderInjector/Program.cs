@@ -30,6 +30,7 @@ namespace tPlainModLoaderInjector
                 }
 
                 Log.SetPath(Path.Combine(ProgramPath, InfoList.Files.Log));
+                Log.Clear();
                 DateTime time = DateTime.Now;
                 Log.Add($"{nameof(Program)}:{time.Year}.{time.Month}.{time.Day}");
                 Log.Add($"{nameof(tPlainModLoaderInjector)}:初始化");
@@ -43,7 +44,6 @@ namespace tPlainModLoaderInjector
             catch (Exception ex)
             {
                 Log.Add($"{nameof(tPlainModLoaderInjector)}:初始化失败:{ex}");
-                Log.SaveTry();
 
                 Console.WriteLine($"初始化失败:");
                 Console.WriteLine($"{ex}");
@@ -63,7 +63,6 @@ namespace tPlainModLoaderInjector
             catch (Exception ex)
             {
                 Log.Add($"{nameof(tPlainModLoaderInjector)}:选择失败:{ex}");
-                Log.SaveTry();
 
                 Console.WriteLine($"选择失败:");
                 Console.WriteLine($"{ex}");
@@ -102,7 +101,6 @@ namespace tPlainModLoaderInjector
             catch (Exception ex)
             {
                 Log.Add($"{nameof(tPlainModLoaderInjector)}:注入失败:{ex}");
-                Log.SaveTry();
 
                 Console.WriteLine($"注入失败:");
                 Console.WriteLine($"{ex}");

@@ -26,6 +26,7 @@ namespace tPlainModLoader
                 }
 
                 Log.SetPath(Path.Combine(ProgramPath, InfoList.Files.Log));
+                Log.Clear();
                 DateTime time = DateTime.Now;
                 Log.Add($"{nameof(Program)}:{time.Year}.{time.Month}.{time.Day}");
                 Log.Add($"{nameof(Program)}:初始化");
@@ -40,7 +41,6 @@ namespace tPlainModLoader
             catch (Exception ex)
             {
                 Log.Add($"{nameof(Program)}:初始化失败:{ex}");
-                Log.SaveTry();
 
                 Console.WriteLine($"初始化失败:");
                 Console.WriteLine($"{ex}");
@@ -61,7 +61,6 @@ namespace tPlainModLoader
             else
             {
                 Log.Add($"{nameof(Program)}:启动目标程序失败");
-                Log.SaveTry();
 
                 Console.WriteLine("启动失败");
                 return;
@@ -79,7 +78,6 @@ namespace tPlainModLoader
             else
             {
                 Log.Add($"{nameof(Program)}:初始化内容补丁失败");
-                Log.SaveTry();
                 Console.WriteLine("初始化内容补丁失败");
                 return;
             }
@@ -117,7 +115,6 @@ namespace tPlainModLoader
         private static void OnProgramExit()
         {
             Log.Add($"{nameof(Program)}:目标程序退出");
-            Log.SaveTry();
             Console.WriteLine("目标程序退出");
 
             Environment.Exit(0);
