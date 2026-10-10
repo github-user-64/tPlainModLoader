@@ -97,7 +97,7 @@ namespace OptimizeAndTool.Content
             if (pai.val)
                 text = stringHelp(text, "ai: ", p.ai);
             if (plocalAI.val)
-                text = stringHelp(text, "localAI: ", p.ai);
+                text = stringHelp(text, "localAI: ", p.localAI);
 
             if (text != null)
                 Terraria.Utils.DrawBorderString(Main.spriteBatch, text, textP, color, anchorx: 0f, anchory: 0f);
