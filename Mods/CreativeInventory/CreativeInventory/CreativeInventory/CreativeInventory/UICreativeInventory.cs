@@ -20,6 +20,10 @@ namespace CreativeInventory.CreativeInventory
         //
         protected Terraria.UI.UIState panel_row1 = null;//搜索框
         protected UITextBox panel_row1_tb = null;
+        protected UIStackPanel panel_row1_sp = null;//搜索维度的开关
+        protected UISearchSwitch panel_row1_sw_tile = null;//按图格id搜索
+        protected UISearchSwitch panel_row1_sw_buff = null;//按buffid搜索
+        protected UISearchSwitch panel_row1_sw_proj = null;//按弹幕id搜索
         //
         protected UIPanel panel_row2 = null;//筛选
         protected UIStackPanel panel_row2_sp = null;
@@ -38,6 +42,10 @@ namespace CreativeInventory.CreativeInventory
             panel_rows = new UIStackPanel();
             panel_row1 = new Terraria.UI.UIState();
             panel_row1_tb = new UITextBox("搜索物品");
+            panel_row1_sp = new UIStackPanel();
+            panel_row1_sw_tile = new UISearchSwitch("图格");
+            panel_row1_sw_buff = new UISearchSwitch("Buff");
+            panel_row1_sw_proj = new UISearchSwitch("弹幕");
             panel_row2 = new UIPanel();
             panel_row2_sp = new UIStackPanel();
             panel_row2_sp_row1 = new UIStackPanel();
@@ -53,12 +61,29 @@ namespace CreativeInventory.CreativeInventory
             panel_row1_tb.Width.Set(150, 0);
             panel_row1_tb.Height.Set(30, 0);
             panel_row1_tb.Left.Set(-panel_row1_tb.Width.Pixels, 1);
+            panel_row1_tb.VAlign = 0.5f;
             panel_row1_tb.Text_MaxLength = 8;
             panel_row1_tb.OnTextChanged += (e) =>
             {
                 Search_Text_cd = (int)((1 / 16f) * 250);
                 Search_Text_new = e;
             };
+
+            panel_row1_sp.Horizontal = true;
+            panel_row1_sp.ItemMargin = 6;
+            panel_row1_sp.Width.Set(80 * 3 + 6 * 2, 0);//80是一个开关的宽度, 6是间距
+            panel_row1_sp.Height.Set(20, 0);
+            panel_row1_sp.VAlign = 0.5f;
+            //贴着搜索框的左边
+            panel_row1_sp.Left.Set(-panel_row1_tb.Width.Pixels - panel_row1_sp.Width.Pixels - 10, 1);
+
+            Action<bool> sw_update = v =>
+            {
+                if (Search_Text != null && Search_Text.Length > 0) update_itemUI();
+            };
+            panel_row1_sw_tile.OnValUpdate += sw_update;
+            panel_row1_sw_buff.OnValUpdate += sw_update;
+            panel_row1_sw_proj.OnValUpdate += sw_update;
 
             panel_row2.Height.Set(40 + 5 + 5, 0);
             panel_row2.MarginTop = 2;
@@ -89,6 +114,10 @@ namespace CreativeInventory.CreativeInventory
             panel_rows.Append(panel_row1);
             panel_rows.Append(panel_row2);
             panel_row1.Append(panel_row1_tb);
+            panel_row1.Append(panel_row1_sp);
+            panel_row1_sp.Append(panel_row1_sw_tile);
+            panel_row1_sp.Append(panel_row1_sw_buff);
+            panel_row1_sp.Append(panel_row1_sw_proj);
             panel_row2.Append(panel_row2_sp);
             panel_row2_sp.Append(panel_row2_sp_row1);
             panel_row2_sp.Append(panel_row2_sp_row2);
@@ -222,10 +251,7 @@ namespace CreativeInventory.CreativeInventory
                 if (item.type < 1 || item.type >= ModLinkage.ModExtenContent.ItemCount) return;
 
                 //根据搜索文本筛选
-                if (Search_Text != null && Search_Text.Length > 0)
-                {
-                    if (searchItem(item.Name, Search_Text) < 0 && searchItem(i.ToString(), Search_Text) < 0) return;
-                }
+                if (search_rank(item) < 0) return;
 
                 items.Add(item);
             });
@@ -235,10 +261,8 @@ namespace CreativeInventory.CreativeInventory
             {
                 items.Sort((a, b) =>
                 {
-                    int ra = searchItem(a.type.ToString(), Search_Text);
-                    int rb = searchItem(b.type.ToString(), Search_Text);
-                    if (ra < 0) ra = int.MaxValue;
-                    if (rb < 0) rb = int.MaxValue;
+                    int ra = search_rank(a);
+                    int rb = search_rank(b);
                     if (ra != rb) return ra.CompareTo(rb);
 
                     return a.type.CompareTo(b.type);
@@ -290,6 +314,27 @@ namespace CreativeInventory.CreativeInventory
             UIRadioButton[] rbs = panel_row2_sp_row2_rbs[index];
 
             for (int i = 0; i < rbs?.Length; ++i) panel_row2_sp_row2.Append(rbs[i]);
+        }
+
+        //搜索文本的匹配强度, 越小排越前; -1=没命中
+        public int search_rank(Item item)
+        {
+            if (Search_Text == null || Search_Text.Length < 1) return 0;
+
+            //图格/buff/弹幕: 开了开关才参与, 只在输入是纯数字时按精确相等
+            if (int.TryParse(Search_Text, out int id) && id > 0)
+            {
+                if (panel_row1_sw_tile.GetVal() && (item.createTile == id || item.createWall == id)) return 0;
+                if (panel_row1_sw_buff.GetVal() && item.buffType == id) return 1;
+                if (panel_row1_sw_proj.GetVal() && item.shoot == id) return 2;
+            }
+
+            int pos = searchItem(item.type.ToString(), Search_Text);
+            if (pos >= 0) return 3 + pos;
+
+            if (searchItem(item.Name, Search_Text) >= 0) return int.MaxValue;
+
+            return -1;
         }
 
         public int searchItem(string name, string s)//name中有包含s的文本, 返回首次命中的下标, 没命中返回-1
