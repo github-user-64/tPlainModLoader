@@ -273,6 +273,14 @@ namespace CreativeInventory.CreativeInventory
             {
                 panel_items_wp.Append(new UIItemGrid(item, Terraria.UI.ItemSlot.Context.CreativeInfinite));
             }
+
+            //搜不到东西时在第一格位置提示
+            if (items.Count < 1 && Search_Text != null && Search_Text.Length > 0)
+            {
+                UIText ui_none = new UIText("未找到此物品", 1f);
+                ui_none.TextColor = Color.Gray;
+                panel_items_wp.Append(ui_none);
+            }
         }
 
         public void update_item(int id1, int id2)
