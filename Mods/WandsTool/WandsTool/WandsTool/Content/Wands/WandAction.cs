@@ -85,7 +85,7 @@ namespace WandsTool.Content
 
                 tilePlace.RemoveAt(0);
             }
-            
+
             if (tileKill.Count > 0)
             {
                 killTile(tileKill[0]);
@@ -428,7 +428,7 @@ namespace WandsTool.Content
                     if (item.createWall > 0) return item;
                 }
             }
-            
+
             if (player?.inventory == null) return null;
 
             for (int i = 0; i < player.inventory.Length; ++i)

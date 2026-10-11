@@ -16,7 +16,8 @@ namespace tContentPatch.Content.UI.ModSet
         /// <summary>
         /// 值会显示在标题右方, <see cref="FloatToString"/>则用于修改显示的文本, 为<see langword="null"/>时显示原本的值
         /// </summary>
-        public Func<float, string> FloatToString {
+        public Func<float, string> FloatToString
+        {
             get => _floatToString;
             set
             {

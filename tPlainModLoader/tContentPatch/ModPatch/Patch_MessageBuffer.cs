@@ -1,6 +1,5 @@
 ﻿using HarmonyLib;
 using System.Collections.Generic;
-using tContentPatch.Content.Network;
 using Terraria;
 using Terraria.ID;
 

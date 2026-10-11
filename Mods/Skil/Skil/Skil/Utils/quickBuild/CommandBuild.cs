@@ -1,5 +1,4 @@
 ﻿using CommandHelp;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Skil.Utils.quickBuild
 {

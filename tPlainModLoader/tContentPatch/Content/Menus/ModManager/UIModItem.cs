@@ -56,7 +56,7 @@ namespace tContentPatch.Content.Menus.ModManager
 
         static UIModItem()
         {
-            defaultIco = Utils.Resource.GetTexture2D($"{nameof(tContentPatch)}.Resources.UI.ModIcon.png");
+            defaultIco = Utils.AssemblyResource.LoadNew<Texture2D>($"{nameof(tContentPatch)}.Resources.UI.ModIcon.png");
         }
 
         public UIModItem(UIState backUI, ModObject mo_, List<ModObject> mos)

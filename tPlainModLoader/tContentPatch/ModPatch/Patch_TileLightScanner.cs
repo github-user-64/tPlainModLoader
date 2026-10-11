@@ -20,13 +20,16 @@ namespace tContentPatch.ModPatch
         [HarmonyPrefix]
         public static void ApplyTileLightPrefix(Tile tile, int x, int y, ref FastRandom localRandom, ref Vector3 lightColor)
         {
-            try
+            foreach (PatchTileLightScanner item in mod)
             {
-                foreach (PatchTileLightScanner item in mod) item.ApplyTileLightPrefix(tile, x, y, ref localRandom, ref lightColor);
-            }
-            catch (Exception ex)
-            {
-                OutputDebug.OutputException(ex);
+                try
+                {
+                    item.ApplyTileLightPrefix(tile, x, y, ref localRandom, ref lightColor);
+                }
+                catch (Exception ex)
+                {
+                    OutputDebug.OutputException(ex);
+                }
             }
         }
     }

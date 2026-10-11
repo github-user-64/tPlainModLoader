@@ -75,7 +75,8 @@ namespace QuickSetting.QuickSetting
                     switchRb_rb2 = rb;
                     return;
                 }
-            };
+            }
+            ;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework;
 using SundryTool.Utils;
 using SundryTool.Utils.quickBuild;
 using System.Collections.Generic;
-using System.Diagnostics;
 using tContentPatch;
 using Terraria;
 using Terraria.GameInput;

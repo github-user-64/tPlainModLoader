@@ -69,7 +69,7 @@ namespace tContentPatch.Content.Menus.Patch_UIWorkshopHub
                 UIElement[] uies = uIElement2.Children.ToArray();
 
                 uies[0] = MakeFancyButton(__instance,
-                    Utils.Resource.GetTexture2D($"{nameof(tContentPatch)}.Resources.UI.Workshop.HudModManager.png"),
+                    Utils.AssemblyResource.LoadNew<Texture2D>($"{nameof(tContentPatch)}.Resources.UI.Workshop.HudModManager.png"),
                     "模组管理器",
                     ShowOptionDescription);
                 uies[0].OnLeftClick += (e, s) => ModManager.ModManager.OpenModManagerMenu(__instance);

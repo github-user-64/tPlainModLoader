@@ -4,7 +4,7 @@
     public abstract class PatchWorldFile
     {
         /// <summary>
-        /// <see cref="Mod.Loaded"/>后调用
+        /// <see cref="ModSetting.Load(object)"/>后调用
         /// </summary>
         public virtual void Initialize() { }
         /// <summary>

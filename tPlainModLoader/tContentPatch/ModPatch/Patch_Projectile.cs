@@ -89,5 +89,12 @@ namespace tContentPatch.ModPatch
 
             __result = color;
         }
+
+        [HarmonyPatch("AI")]
+        [HarmonyPostfix]
+        public static void AIPostfix(Projectile __instance)
+        {
+            mod.ForTry(item => item.AIPostfix(__instance));
+        }
     }
 }

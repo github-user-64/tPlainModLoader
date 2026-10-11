@@ -74,11 +74,14 @@
     <Compile Include="Common\UI\BoxItem.cs" />
     <Compile Include="Common\UI\UIButtonImage.cs" />
     <Compile Include="Common\BoxWindow.cs" />
-    <Compile Include="ItemListConfig.cs" />
+    <Compile Include="LoadItem\ItemData.cs" />
+    <Compile Include="LoadItem\ItemDataLoad.cs" />
     <Compile Include="ModifyInterfaceLayers.cs" />
+    <Compile Include="ModLinkage\ModExtenContent.cs" />
     <Compile Include="ModLinkage\ModQuickButton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="ThisMod.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

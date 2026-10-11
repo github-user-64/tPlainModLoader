@@ -32,7 +32,7 @@ namespace tContentPatch.ModPatch
 
             if (msgType == Terraria.ID.MessageID.PlayerSpawn && Main.netMode == 1 && ContentPatch.NoPublic) NetTPMLModule.SendToServer();
         }
-        
+
         [HarmonyPatch("SyncConnectedPlayer")]
         [HarmonyPrefix]
         public static void SyncConnectedPlayerPrefix(int plr)

@@ -30,7 +30,7 @@ namespace QuickSetting.QuickSetting
                 if (s1 == s2 || s1 == null || s2 == null) return;
                 int index1 = data.IndexOf(s1);
                 int index2 = data.IndexOf(s2);
-                if (index1 ==  -1 || index2 == -1) return;
+                if (index1 == -1 || index2 == -1) return;
                 data[index1] = s2;
                 data[index2] = s1;
 

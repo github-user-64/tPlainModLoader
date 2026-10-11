@@ -39,6 +39,7 @@ namespace CreativeInventory
             ID.ItemsSort.Add(ID_BossSpawn, new ItemSort<int>());
             ID.ItemsSort.Add(ID_Consumable, new ItemSort<int>());
             ID.ItemsSort.Add(ID_Other, new ItemSort<int>());
+            ID.ItemsSort.Add(ID_Mod, new ItemSort<int>());
 
             ID.ItemsSort[ID_Weapon].ItemsSort.Add(ID_Weapon_Melee, new ItemSort<int>());
             ID.ItemsSort[ID_Weapon].ItemsSort.Add(ID_Weapon_Ranged, new ItemSort<int>());
@@ -71,11 +72,11 @@ namespace CreativeInventory
             int exception_id = 0;
             int exception_sort = 0;
 
-            for (int i = 1; i < ItemID.Count; ++i)
+            for (int i = 1; i < ModLinkage.ModExtenContent.ItemCount; ++i)
             {
                 if (ItemID.Sets.Deprecated[i]) continue;//已弃用
                 item.SetDefaults(i);
-                if (item.type < 1 || item.type >= ItemID.Count)
+                if (item.type < 1 || item.type >= ModLinkage.ModExtenContent.ItemCount)
                 {
                     ++exception_id;
                     continue;
@@ -94,6 +95,8 @@ namespace CreativeInventory
 
         protected static void load_id_sort(Item i)
         {
+            if (i.type >= ItemID.Count) ItemsSort_Gets2(ID_Mod)?.Items?.Add(i.type);
+
             #region 工具
             if (i.pick > 0)//稿
             {

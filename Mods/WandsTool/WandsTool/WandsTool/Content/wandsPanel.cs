@@ -49,7 +49,7 @@ namespace WandsTool.Content
         public wandsPanel_btn1(string img1, string mouseText) :
             this(Main.Assets.Request<Texture2D>(img1, AssetRequestMode.ImmediateLoad)?.Value, mouseText)
         {
-            
+
         }
 
         public override void Update(GameTime gameTime)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccessoryBox.LoadItem;
+using System;
 using System.Collections.Generic;
 using Terraria;
 
@@ -38,13 +39,23 @@ namespace AccessoryBox.Common
 
         public void Load()
         {
-            ItemListConfig.LoadData();
+            List<Item> items = ItemDataLoad.LoadData();
+
+            if (items == null)
+            {
+                items = new List<Item>();
+                items.Add(new Item());
+                items.Add(new Item());
+            }
+
+            LoadItems(items);
+
             OnLoaded?.Invoke();
         }
 
         public void Save()
         {
-            ItemListConfig.SaveData(armor);
+            ItemDataLoad.SaveData(armor);
             Config.Instance?.Save();
         }
 

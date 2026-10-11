@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.OS;
 using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -96,7 +95,7 @@ namespace tContentPatch.Content
             private static int height = -1;
             static TitleLinkButton()
             {
-                texture = Utils.Resource.GetTexture2D($"{nameof(tContentPatch)}.Resources.TitleLinkButtons.png");
+                texture = Utils.AssemblyResource.LoadNew<Texture2D>($"{nameof(tContentPatch)}.Resources.TitleLinkButtons.png");
                 width = texture.Width / 1;
                 height = texture.Height / 2;
             }

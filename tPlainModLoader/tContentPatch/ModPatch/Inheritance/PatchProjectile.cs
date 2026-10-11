@@ -8,7 +8,7 @@ namespace tContentPatch
     public abstract class PatchProjectile
     {
         /// <summary>
-        /// <see cref="Mod.Loaded"/>后调用
+        /// <see cref="ModSetting.Load(object)"/>后调用
         /// </summary>
         public virtual void Initialize() { }
         /// <summary>
@@ -34,5 +34,7 @@ namespace tContentPatch
         { }
         /// <summary/>
         public virtual Color AI_203_GetLightningColor(Projectile This, Color color) => color;
+        /// <summary/>
+        public virtual void AIPostfix(Projectile This) { }
     }
 }

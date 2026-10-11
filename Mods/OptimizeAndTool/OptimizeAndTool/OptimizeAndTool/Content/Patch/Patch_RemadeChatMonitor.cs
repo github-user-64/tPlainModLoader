@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using tContentPatch;
 using tContentPatch.Patch;
-using Terraria.UI.Chat;
 using Terraria.GameContent.UI.Chat;
+using Terraria.UI.Chat;
 
 namespace OptimizeAndTool.Content.Patch
 {
@@ -24,7 +24,7 @@ namespace OptimizeAndTool.Content.Patch
         }
         private static int __showCount = 0;
         public static int _showCount
-        { 
+        {
             get
             {
                 int? v = ReflectionHelp(nameof(_showCount)) as int?;

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Diagnostics;
 using tContentPatch;
 using Terraria;
 using Terraria.ID;
@@ -51,7 +50,7 @@ namespace SuspiciousPlayer.Content.Event1
             }
 
             if (countTime-- > 0) return;
-            
+
             Vector2 pos = Vector2.Zero;
             if (count < 7 && Event.player != null)
             {
@@ -67,7 +66,7 @@ namespace SuspiciousPlayer.Content.Event1
                 pos.Y += Utils.getRand(50, ActionSpawnTile.height * 16 - 50);
                 countTime = 10;
             }
-            
+
             ps.Add(Main.projectile[Projectile.NewProjectile(null, pos, Vector2.Zero,
                 ProjectileID.DD2DarkMageRaise, 0, 0)]);
 

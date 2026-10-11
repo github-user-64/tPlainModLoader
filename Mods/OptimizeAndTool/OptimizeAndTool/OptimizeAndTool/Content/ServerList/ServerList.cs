@@ -80,7 +80,7 @@ namespace OptimizeAndTool.Content.ServerList
                 if (index == -1) return;
                 data.Insert(index, new ServerInfo());
             }
-            
+
             uistate.Initialize(data);
         }
 
@@ -120,7 +120,7 @@ namespace OptimizeAndTool.Content.ServerList
             int index1 = data.IndexOf(si1);
             int index2 = data.IndexOf(si2);
             if (index1 == -1 || index2 == -1) return;
-            if(index1 == index2) return;
+            if (index1 == index2) return;
 
             data[index1] = si2;
             data[index2] = si1;

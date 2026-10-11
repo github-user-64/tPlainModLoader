@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Terraria;
 using Terraria.UI;
 
@@ -10,17 +9,13 @@ namespace tContentPatch
     public abstract class PatchMain
     {
         /// <summary>
-        /// <see cref="Mod.Loaded"/>后调用
+        /// <see cref="ModSetting.Load(object)"/>后调用
         /// </summary>
         public virtual void Initialize() { }
         /// <summary>
         /// 进入世界时, 仅在单人和客户端有效
         /// </summary>
         public virtual void OnEnterWorld() { }
-        /// <summary>
-        /// 进入世界前, 仅在单人和客户端有效
-        /// </summary>
-        public virtual void OnEnterWorldPrefix() { }
         /// <summary>
         /// <see cref="Main.Update(GameTime)"/>前调用
         /// </summary>
@@ -58,5 +53,9 @@ namespace tContentPatch
         /// <para/>如果不想影响其它<see cref="PlayerFocusedScreenPosition(Vector2, Vector2)"/>修改值就直接返回<paramref name="modifi"/>
         /// </summary>
         public virtual Vector2 PlayerFocusedScreenPosition(Vector2 origin, Vector2 modifi) => modifi;
+        /// <summary/>
+        public virtual bool DrawProjDirectPrefix(Projectile proj, Player overridePlayer = null) => true;
+        /// <summary/>
+        public virtual void DrawProjDirectPostfix(Projectile proj, Player overridePlayer = null) { }
     }
 }

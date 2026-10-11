@@ -1,8 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using SuspiciousPlayer.Content.Event1;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using tContentPatch;
 using Terraria;
 using Terraria.DataStructures;
@@ -57,7 +54,7 @@ namespace SuspiciousPlayer.Content.VirtualPlayer
                 --i;
             }
 
-            if (vps.Count < 1 && Main.GameUpdateCount % (60 * 5) == 0  && Event1.Event.CanSpawnVirtualPlayer) spaw();
+            if (vps.Count < 1 && Main.GameUpdateCount % (60 * 5) == 0 && Event1.Event.CanSpawnVirtualPlayer) spaw();
 
             foreach (Player vp in vps)
             {

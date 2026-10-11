@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using tContentPatch;
+using tContentPatch.ModLoad;
 using Terraria;
 using Terraria.UI;
 
@@ -15,7 +16,7 @@ namespace QuickSetting.QuickSetting
         private static List<string> keyOrder = null;
         private static string key = null;
 
-        public override void Load()
+        public override void Load(ModObject mo)
         {
             if (Main.dedServ) return;
 

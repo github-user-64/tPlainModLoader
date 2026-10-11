@@ -67,6 +67,7 @@
     <Compile Include="KeyBind\UIKeyBind.cs" />
     <Compile Include="ListenInput.cs" />
     <Compile Include="ModifyInterfaceLayers.cs" />
+    <Compile Include="ModLinkage\ModExtenContent.cs" />
     <Compile Include="ModLinkage\ModQuickButton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setting.cs" />

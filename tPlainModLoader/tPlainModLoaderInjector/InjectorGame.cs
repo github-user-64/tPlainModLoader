@@ -24,9 +24,10 @@ namespace tPlainModLoaderInjector
         {
             Program.ProgramPath = args;
 
-            if (Log.path == null)
+            if (Log.File == null)
             {
                 Log.SetPath(Path.Combine(Program.ProgramPath, InfoList.Files.Log));
+                Log.Clear();
 
                 DateTime time = DateTime.Now;
                 Log.Add($"{nameof(Program)}:{time.Year}.{time.Month}.{time.Day}");
@@ -35,7 +36,7 @@ namespace tPlainModLoaderInjector
             try
             {
                 Log.Add($"{nameof(InjectorGame)}:已附加到程序");
-                Log.Add($"{nameof(InjectorGame)}:日志位置:[{Log.path}]");
+                Log.Add($"{nameof(InjectorGame)}:日志位置:[{Log.File}]");
 
                 if (ContentPatch.Initialized) return GetMsgCommandPort(-3);//如果已注入
 
@@ -66,10 +67,6 @@ namespace tPlainModLoaderInjector
             {
                 Log.Add($"{nameof(InjectorGame)}:未知异常:{ex}");
                 return -1;
-            }
-            finally
-            {
-                Log.SaveTry();
             }
         }
 

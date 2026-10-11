@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Linq;
+using System.Reflection;
 using tContentPatch;
 using Terraria;
 using Terraria.Audio;
@@ -26,10 +28,12 @@ namespace WandsTool.ModLinkage
             Type type = mo.assembly.GetType("QuickButton.QuickButton.QuickButton");
             if (type == null) return;
 
-            System.Reflection.MethodInfo mi = type.GetMethod("Add", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public);
+            MethodInfo mi = type.GetMethod("Add", BindingFlags.Static | BindingFlags.Public);
             if (mi == null) return;
 
-            UIImage ui_img = new UIImage(tContentPatch.Utils.Resource.GetTexture2D($"{nameof(WandsTool)}.Resources.Wand.png"));
+            UIImage ui_img = new UIImage(tContentPatch.Utils.AssemblyResource.Load<Texture2D>(
+                $"{nameof(WandsTool)}.Resources.Wand.png",
+                Assembly.GetExecutingAssembly()));
             ui_img.Width.Pixels = 32;
             ui_img.Height.Pixels = 32;
             ui_img.ScaleToFit = true;

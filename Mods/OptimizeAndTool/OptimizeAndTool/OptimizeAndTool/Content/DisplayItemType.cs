@@ -1,5 +1,6 @@
 ﻿using System;
 using tContentPatch;
+using tContentPatch.ModLoad;
 
 namespace OptimizeAndTool.Content
 {
@@ -9,7 +10,7 @@ namespace OptimizeAndTool.Content
         private int g = 85 * 2;
         private int b = 85 * 3;
 
-        public override void Load()
+        public override void Load(ModObject mo)
         {
             ItemToolTipAdditional.ItemInfo.Add(item =>
             {

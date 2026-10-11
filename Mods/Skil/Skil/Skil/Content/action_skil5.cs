@@ -1,12 +1,12 @@
 ﻿using CommandHelp;
 using Microsoft.Xna.Framework;
 using Skil.Content.UI;
+using Skil.ModLinkage;
 using Skil.Utils;
 using Skil.Utils.quickBuild;
 using System.Collections.Generic;
 using tContentPatch;
 using Terraria;
-using Terraria.ID;
 using Terraria.UI;
 using static Skil.Content.Utils;
 
@@ -117,7 +117,7 @@ namespace Skil.Content
             if (Mode.val < 0) Mode.val = 0;
             if (Mode.val > 3) Mode.val = 3;
             if (ShootId.val < 0) ShootId.val = 0;
-            if (ShootId.val >= ProjectileID.Count) ShootId.val = ProjectileID.Count - 1;
+            if (ShootId.val >= ModExtenContent.ProjectileCount) ShootId.val = ModExtenContent.ProjectileCount - 1;
 
             //
             skil5_time.setCD(52 - Size.val);

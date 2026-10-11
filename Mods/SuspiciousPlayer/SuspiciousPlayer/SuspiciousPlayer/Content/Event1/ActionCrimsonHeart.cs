@@ -1,13 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using tContentPatch;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.Localization;
-using static Terraria.DataStructures.GameDifficultyData.LinearCurve;
 
 namespace SuspiciousPlayer.Content.Event1
 {
@@ -69,7 +67,7 @@ namespace SuspiciousPlayer.Content.Event1
         {
             if (state.norun) return;
 
-            for (int i = 0; i < poss.Count; )
+            for (int i = 0; i < poss.Count;)
             {
                 Tile tile = Main.tile[poss[i].X, poss[i].Y];
                 if (tile.type == TileID.ShadowOrbs && tile.active())
@@ -85,10 +83,10 @@ namespace SuspiciousPlayer.Content.Event1
             if (poss.Count != NPC.ShieldStrengthTowerSolar)
             {
                 NPC.ShieldStrengthTowerSolar = poss.Count;
-                
+
                 if (Main.netMode == 2) NetMessage.SendData(MessageID.UpdateTowerShieldStrengths);
             }
-            
+
             //心脏没了
             if (poss.Count < 1)
             {

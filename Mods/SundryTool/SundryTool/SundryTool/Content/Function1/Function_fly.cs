@@ -54,6 +54,8 @@ namespace SundryTool.Content.Function1
                     This.velocity.Y = 0f;
                 }
             }
+
+            This.fallStart = This.fallStart2 = (int)(This.position.Y / 16f);//重置下落高度
         }
 
         public static List<CommandObject> GetCO()

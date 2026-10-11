@@ -76,7 +76,7 @@ namespace OptimizeAndTool.Content.ServerList
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            
+
             if (isLight)
             {
                 isLight = false;

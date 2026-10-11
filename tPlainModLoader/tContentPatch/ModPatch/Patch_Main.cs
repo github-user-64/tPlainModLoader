@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Reflection;
 using tContentPatch.Utils;
 using Terraria;
@@ -47,10 +46,6 @@ namespace tContentPatch.ModPatch
             if (_UpdatePrefix_CanUpdateGameplay_old == false && Main.CanUpdateGameplay == true)
             {
                 mod.ForTry(item => item.OnEnterWorld());
-            }
-            else if (_UpdatePrefix_CanUpdateGameplay_old && Main.CanUpdateGameplay == false)
-            {
-                mod.ForTry(item => item.OnEnterWorldPrefix());
             }
 
             _UpdatePrefix_CanUpdateGameplay_old = Main.CanUpdateGameplay;
@@ -154,14 +149,17 @@ namespace tContentPatch.ModPatch
         public static void MouseText_DrawItemTooltip_GetLinesInfoPostfix(Item item, ref int yoyoLogo,
             ref float oldKB, ref int numLines, ref string[] toolTipLine, ref Color[] lineColors)
         {
-            try
+            foreach (PatchMain i in mod)
             {
-                foreach (PatchMain i in mod) i.MouseText_DrawItemTooltip_GetLinesInfoPostfix(item, ref yoyoLogo,
-                    ref oldKB, ref numLines, ref toolTipLine, ref lineColors);
-            }
-            catch (Exception ex)
-            {
-                OutputDebug.OutputException(ex);
+                try
+                {
+                    i.MouseText_DrawItemTooltip_GetLinesInfoPostfix(item, ref yoyoLogo,
+                       ref oldKB, ref numLines, ref toolTipLine, ref lineColors);
+                }
+                catch (Exception ex)
+                {
+                    OutputDebug.OutputException(ex);
+                }
             }
         }
 
@@ -189,6 +187,26 @@ namespace tContentPatch.ModPatch
             mod.ForTry(item => modifi = item.PlayerFocusedScreenPosition(origin, modifi));
 
             __result = modifi;
+        }
+
+        [HarmonyPatch("DrawProjDirect")]
+        [HarmonyPrefix]
+        public static bool DrawProjDirectPrefix(Projectile proj, Player overridePlayer = null)
+        {
+            bool ok = true;
+            mod.ForTry(item =>
+            {
+                ok &= item.DrawProjDirectPrefix(proj, overridePlayer);
+            });
+
+            return ok;
+        }
+
+        [HarmonyPatch("DrawProjDirect")]
+        [HarmonyPostfix]
+        public static void DrawProjDirectPostfix(Projectile proj, Player overridePlayer = null)
+        {
+            mod.ForTry(item => item.DrawProjDirectPostfix(proj, overridePlayer));
         }
     }
 }
