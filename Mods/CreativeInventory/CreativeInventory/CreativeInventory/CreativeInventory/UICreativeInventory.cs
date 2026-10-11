@@ -243,12 +243,26 @@ namespace CreativeInventory.CreativeInventory
 
             List<Item> items = new List<Item>();
 
+            int sid = 0;
+            bool is_num = Search_Text != null && Search_Text.Length > 0 && int.TryParse(Search_Text, out sid) && sid > 0;
+            bool hit_tile = false;
+            bool hit_buff = false;
+            bool hit_proj = false;
+
             itemsID.for_ItemsAll((i) =>
             {
                 if (i >= ModLinkage.ModExtenContent.ItemCount) return;
                 Item item = new Item();
                 item.SetDefaults(i);
                 if (item.type < 1 || item.type >= ModLinkage.ModExtenContent.ItemCount) return;
+
+                //各维度有没有命中
+                if (is_num)
+                {
+                    if (panel_row1_sw_tile.GetVal() && match_tile(item, sid)) hit_tile = true;
+                    if (panel_row1_sw_buff.GetVal() && match_buff(item, sid)) hit_buff = true;
+                    if (panel_row1_sw_proj.GetVal() && match_proj(item, sid)) hit_proj = true;
+                }
 
                 //根据搜索文本筛选
                 if (search_rank(item) < 0) return;
@@ -269,13 +283,37 @@ namespace CreativeInventory.CreativeInventory
                 });
             }
 
+            //开了开关却一条都没命中的维度, 提示占满第一行, 物品从第二行开始
+            string dims = null;
+
+            if (is_num)
+            {
+                if (panel_row1_sw_tile.GetVal() && !hit_tile) dims += "图格、";
+                if (panel_row1_sw_buff.GetVal() && !hit_buff) dims += "Buff、";
+                if (panel_row1_sw_proj.GetVal() && !hit_proj) dims += "弹幕、";
+            }
+
+            if (dims != null)
+            {
+                Terraria.UI.UIElement row = new Terraria.UI.UIElement();
+                row.Width.Set(10000, 0);//宽到放不下第二个元素, 物品就被挤到下一行
+                row.Height.Set(32, 0);
+
+                UIText ui_dims = new UIText(dims.Substring(0, dims.Length - 1) + "未找到（或许需要你点击全部列表）", 1.2f);
+                ui_dims.TextColor = Color.Gray;
+                ui_dims.VAlign = 0.5f;
+                row.Append(ui_dims);
+
+                panel_items_wp.Append(row);
+            }
+
             foreach (Item item in items)
             {
                 panel_items_wp.Append(new UIItemGrid(item, Terraria.UI.ItemSlot.Context.CreativeInfinite));
             }
 
             //搜不到东西时在第一格位置提示
-            if (items.Count < 1 && Search_Text != null && Search_Text.Length > 0)
+            if (dims == null && items.Count < 1 && Search_Text != null && Search_Text.Length > 0)
             {
                 UIText ui_none = new UIText("未找到此物品", 1f);
                 ui_none.TextColor = Color.Gray;
@@ -332,9 +370,9 @@ namespace CreativeInventory.CreativeInventory
             //图格/buff/弹幕: 开了开关才参与, 只在输入是纯数字时按精确相等
             if (int.TryParse(Search_Text, out int id) && id > 0)
             {
-                if (panel_row1_sw_tile.GetVal() && (item.createTile == id || item.createWall == id)) return 0;
-                if (panel_row1_sw_buff.GetVal() && item.buffType == id) return 1;
-                if (panel_row1_sw_proj.GetVal() && item.shoot == id) return 2;
+                if (panel_row1_sw_tile.GetVal() && match_tile(item, id)) return 0;
+                if (panel_row1_sw_buff.GetVal() && match_buff(item, id)) return 1;
+                if (panel_row1_sw_proj.GetVal() && match_proj(item, id)) return 2;
             }
 
             int pos = searchItem(item.type.ToString(), Search_Text);
@@ -344,6 +382,10 @@ namespace CreativeInventory.CreativeInventory
 
             return -1;
         }
+
+        public bool match_tile(Item item, int id) => item.createTile == id || item.createWall == id;
+        public bool match_buff(Item item, int id) => item.buffType == id;
+        public bool match_proj(Item item, int id) => item.shoot == id;
 
         public int searchItem(string name, string s)//name中有包含s的文本, 返回首次命中的下标, 没命中返回-1
         {
