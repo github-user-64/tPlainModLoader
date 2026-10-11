@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\tPlainModLoader\tPlainModLoader\bin\Debug\Mods\CreativeInventory\</OutputPath>
+    <OutputPath>G:\a-2yx\Terraria1.4.5.8\tPlainModLoader\Mods\CreativeInventory\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -35,7 +35,7 @@
     <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553" />
     <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553" />
     <Reference Include="ReLogic">
-      <HintPath>..\..\..\..\dll\ReLogic.dll</HintPath>
+      <HintPath>G:\a-2yx\Terraria\ReLogic.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -47,11 +47,11 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="tContentPatch">
-      <HintPath>..\..\..\..\tPlainModLoader\tPlainModLoader\bin\Debug\tContentPatch.dll</HintPath>
+      <HintPath>G:\a-2yx\Terraria1.4.5.8\tPlainModLoader\tContentPatch.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Terraria_v1.4.5.8">
-      <HintPath>..\..\..\..\dll\Terraria_v1.4.5.8.exe</HintPath>
+    <Reference Include="Terraria">
+      <HintPath>G:\a-2yx\Terraria1.4.5.8\Terraria.exe</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>

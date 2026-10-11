@@ -2,6 +2,6 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartAction>Program</StartAction>
-    <StartProgram>F:\F_MY1\File\RJWJ\C#\Projects\tPlainModLoader\tPlainModLoader\tPlainModLoader\bin\Debug\tPlainModLoader.exe</StartProgram>
+    <StartProgram>G:\a-2yx\Terraria1.4.5.8\tPlainModLoader\tPlainModLoader.exe</StartProgram>
   </PropertyGroup>
 </Project>
