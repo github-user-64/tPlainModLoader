@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
@@ -211,6 +212,8 @@ namespace CreativeInventory.CreativeInventory
 
             if (itemsID == null) return;
 
+            List<Item> items = new List<Item>();
+
             itemsID.for_ItemsAll((i) =>
             {
                 if (i >= ModLinkage.ModExtenContent.ItemCount) return;
@@ -221,12 +224,31 @@ namespace CreativeInventory.CreativeInventory
                 //根据搜索文本筛选
                 if (Search_Text != null && Search_Text.Length > 0)
                 {
-                    if (!searchItem(item.Name, Search_Text)) return;
+                    if (searchItem(item.Name, Search_Text) < 0 && searchItem(i.ToString(), Search_Text) < 0) return;
                 }
 
-                UIItemGrid it = new UIItemGrid(item, Terraria.UI.ItemSlot.Context.CreativeInfinite);
-                panel_items_wp.Append(it);
+                items.Add(item);
             });
+
+            //越匹配id的排越前, 只有名字匹配的排最后
+            if (Search_Text != null && Search_Text.Length > 0)
+            {
+                items.Sort((a, b) =>
+                {
+                    int ra = searchItem(a.type.ToString(), Search_Text);
+                    int rb = searchItem(b.type.ToString(), Search_Text);
+                    if (ra < 0) ra = int.MaxValue;
+                    if (rb < 0) rb = int.MaxValue;
+                    if (ra != rb) return ra.CompareTo(rb);
+
+                    return a.type.CompareTo(b.type);
+                });
+            }
+
+            foreach (Item item in items)
+            {
+                panel_items_wp.Append(new UIItemGrid(item, Terraria.UI.ItemSlot.Context.CreativeInfinite));
+            }
         }
 
         public void update_item(int id1, int id2)
@@ -270,15 +292,15 @@ namespace CreativeInventory.CreativeInventory
             for (int i = 0; i < rbs?.Length; ++i) panel_row2_sp_row2.Append(rbs[i]);
         }
 
-        public bool searchItem(string name, string s)//name中有包含s的文本
+        public int searchItem(string name, string s)//name中有包含s的文本, 返回首次命中的下标, 没命中返回-1
         {
-            if (name == null || name.Length < 1) return false;
-            if (s == null || s.Length < 1) return false;
+            if (name == null || name.Length < 1) return -1;
+            if (s == null || s.Length < 1) return -1;
 
             for (int i = 0; i < name.Length; ++i)
             {
                 bool isEquals = true;
-                if (name.Length - i < s.Length) return false;
+                if (name.Length - i < s.Length) return -1;
 
                 for (int i2 = 0; i2 < s.Length; ++i2)
                 {
@@ -289,10 +311,10 @@ namespace CreativeInventory.CreativeInventory
                     }
                 }
 
-                if (isEquals) return true;
+                if (isEquals) return i;
             }
 
-            return false;
+            return -1;
         }
     }
 }
