@@ -1,0 +1,27 @@
+<!--复制一份该文件并重命名为"ConfigModReference.targets"-->
+
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<tPMLDllPath>F:\F_MY1\File\RJWJ\C#\Projects\tPlainModLoader\tPlainModLoader\tPlainModLoader\bin\Debug</tPMLDllPath>
+
+		<Dll0Harmony>$(tPMLDllPath)\0Harmony.dll</Dll0Harmony>
+		<DllCommandHelp>$(tPMLDllPath)\CommandHelp.dll</DllCommandHelp>
+		<DlltContentPatch>$(tPMLDllPath)\tContentPatch.dll</DlltContentPatch>
+	</PropertyGroup>
+	
+	<!--引用-->
+	<ItemGroup>
+		<Reference Include="0Harmony">
+			<HintPath>$(Dll0Harmony)</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="CommandHelp">
+			<HintPath>$(DllCommandHelp)</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="tContentPatch">
+			<HintPath>$(DlltContentPatch)</HintPath>
+			<Private>False</Private>
+		</Reference>
+	</ItemGroup>
+</Project>

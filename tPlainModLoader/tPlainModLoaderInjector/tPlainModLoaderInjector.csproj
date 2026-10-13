@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="..\..\ConfigPublic.targets" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -18,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\tPlainModLoader\bin\Debug\</OutputPath>
+    <OutputPath>$(tPMLOutPath)\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -36,6 +37,14 @@
     <ApplicationIcon>ico2_256.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FastWin32-master\FastWin32\FastWin32.csproj">
+      <Project>{0b6ac808-3a51-4072-954f-d55de4f0209b}</Project>
+      <Name>FastWin32</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\tContentPatch\tContentPatch.csproj">
+      <Project>{a7bad17d-ecac-4f51-ba57-ad78b9bc02bf}</Project>
+      <Name>tContentPatch</Name>
+    </ProjectReference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -56,17 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FastWin32-master\FastWin32\FastWin32.csproj">
-      <Project>{0b6ac808-3a51-4072-954f-d55de4f0209b}</Project>
-      <Name>FastWin32</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\tContentPatch\tContentPatch.csproj">
-      <Project>{a7bad17d-ecac-4f51-ba57-ad78b9bc02bf}</Project>
-      <Name>tContentPatch</Name>
-      <Private>True</Private>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ico2_256.ico" />
