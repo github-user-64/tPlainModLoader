@@ -1,5 +1,4 @@
 ﻿using System.Windows.Forms;
-
 namespace PixelArt.Utils
 {
     internal class Utils

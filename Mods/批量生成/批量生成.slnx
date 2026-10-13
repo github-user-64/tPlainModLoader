@@ -1,14 +1,13 @@
 <Solution>
   <Project Path="../AccessoryBox/AccessoryBox/AccessoryBox/AccessoryBox.csproj" Id="3940870e-a084-46cd-b7ed-6260e58e78a6" />
+  <Project Path="../ChatAi/ChatAi/ChatAi/ChatAi.csproj" Id="ec4d850d-9bea-4237-be95-2451255fefde" />
+  <Project Path="../CreativeInventory/CreativeInventory/CreativeInventory/CreativeInventory.csproj" Id="6c30cd98-f031-45e9-8a94-b31738d349ae" />
   <Project Path="../DeadEffect/DeadEffect/DeadEffect/DeadEffect.csproj" Id="f3e5c741-ea32-49a6-95af-b0975dc43f67" />
-  <Project Path="F:/F_MY1/File/RJWJ/C#/Projects/tPlainModLoader/Mods/ChatAi/ChatAi/ChatAi/ChatAi.csproj" Id="ec4d850d-9bea-4237-be95-2451255fefde" />
-  <Project Path="F:/F_MY1/File/RJWJ/C#/Projects/tPlainModLoader/Mods/CreativeInventory/CreativeInventory/CreativeInventory/CreativeInventory.csproj" Id="6c30cd98-f031-45e9-8a94-b31738d349ae" />
-  <Project Path="F:/F_MY1/File/RJWJ/C#/Projects/tPlainModLoader/Mods/OptimizeAndTool/OptimizeAndTool/OptimizeAndTool/OptimizeAndTool.csproj" Id="1f9f3473-c4d6-4ddb-a010-ee21b19e9e7b" />
-  <Project Path="F:/F_MY1/File/RJWJ/C#/Projects/tPlainModLoader/Mods/PixelArt/PixelArt/PixelArt/PixelArt.csproj" Id="54ca1b7d-b3ad-482f-9970-b1a7c2381b41" />
-  <Project Path="F:/F_MY1/File/RJWJ/C#/Projects/tPlainModLoader/Mods/QuickButton/QuickButton/QuickButton/QuickButton.csproj" Id="bd939334-2fd4-40a0-b76d-b4aa4afbde4f" />
-  <Project Path="F:/F_MY1/File/RJWJ/C#/Projects/tPlainModLoader/Mods/QuickSetting/QuickSetting/QuickSetting/QuickSetting.csproj" Id="293d9891-eb40-4605-8450-abd44380277e" />
-  <Project Path="F:/F_MY1/File/RJWJ/C#/Projects/tPlainModLoader/Mods/Skil/Skil/Skil/Skil.csproj" Id="65cec5e6-84b3-410e-a424-c9eca95b3b27" />
-  <Project Path="F:/F_MY1/File/RJWJ/C#/Projects/tPlainModLoader/Mods/SundryTool/SundryTool/SundryTool/SundryTool.csproj" Id="e7c1cce9-79a0-4131-b5cd-e62dc8500c4b" />
-  <Project Path="F:/F_MY1/File/RJWJ/C#/Projects/tPlainModLoader/Mods/WandsTool/WandsTool/WandsTool/WandsTool.csproj" Id="9edb6614-8022-472d-956c-64c4eaa482ba" />
-  <Project Path="F:/F_MY1/File/RJWJ/C#/Projects/tPlainModLoader/Mods/批量生成/批量生成/批量生成.csproj" Id="e8e81b66-2513-464c-bb08-b6d6f900480b" />
+  <Project Path="../OptimizeAndTool/OptimizeAndTool/OptimizeAndTool/OptimizeAndTool.csproj" Id="1f9f3473-c4d6-4ddb-a010-ee21b19e9e7b" />
+  <Project Path="../PixelArt/PixelArt/PixelArt/PixelArt.csproj" Id="54ca1b7d-b3ad-482f-9970-b1a7c2381b41" />
+  <Project Path="../QuickButton/QuickButton/QuickButton/QuickButton.csproj" Id="bd939334-2fd4-40a0-b76d-b4aa4afbde4f" />
+  <Project Path="../QuickSetting/QuickSetting/QuickSetting/QuickSetting.csproj" Id="293d9891-eb40-4605-8450-abd44380277e" />
+  <Project Path="../Skil/Skil/Skil/Skil.csproj" Id="65cec5e6-84b3-410e-a424-c9eca95b3b27" />
+  <Project Path="../SundryTool/SundryTool/SundryTool/SundryTool.csproj" Id="e7c1cce9-79a0-4131-b5cd-e62dc8500c4b" />
+  <Project Path="../WandsTool/WandsTool/WandsTool/WandsTool.csproj" Id="9edb6614-8022-472d-956c-64c4eaa482ba" />
 </Solution>
