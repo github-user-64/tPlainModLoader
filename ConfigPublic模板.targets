@@ -5,25 +5,24 @@
 		<!--输出位置选择-->
 		<OutPathSwitch>0</OutPathSwitch>
 
-		<GmaeDllPath>F:\F_MY1\File\RJWJ\C#\Projects\tPlainModLoader\dll</GmaeDllPath>
-		<DllTerraria>$(GmaeDllPath)\Terraria_v1.4.5.8.exe</DllTerraria>
-		<DllReLogic>$(GmaeDllPath)\ReLogic.dll</DllReLogic>
+		<DllTerraria>$(MSBuildThisFileDirectory)\dll\Terraria_v1.4.5.8.exe</DllTerraria>
+		<DllReLogic>$(MSBuildThisFileDirectory)\dll\ReLogic.dll</DllReLogic>
 	</PropertyGroup>
 	
 	<!--输出位置0-->
 	<PropertyGroup Condition="'$(OutPathSwitch)'=='0'">
-		<tPMLOutPath>F:\F_MY1\File\RJWJ\C#\Projects\tPlainModLoader\tPlainModLoader\tPlainModLoader\bin\Debug</tPMLOutPath>
+		<tPMLOutPath>$(MSBuildThisFileDirectory)\tPlainModLoader\tPlainModLoader\bin\Debug</tPMLOutPath>
 		<tPMLOutPathMod>$(tPMLOutPath)\Mods</tPMLOutPathMod>
 		
-		<DeBugStartProgram>$(tPMLOutPath)\tPlainModLoader.exe</DeBugStartProgram>
+		<tPMLStartProgram>$(tPMLOutPath)\tPlainModLoader.exe</tPMLStartProgram>
 	</PropertyGroup>
 	
 	<!--输出位置1-->
 	<PropertyGroup Condition="'$(OutPathSwitch)'=='1'">
-		<tPMLOutPath>F:\F_MY1\快速存储(记得清理)\tPlainModLoader</tPMLOutPath>
-		<tPMLOutPathMod>F:\F_MY1\快速存储(记得清理)\Mods</tPMLOutPathMod>
+		<tPMLOutPath></tPMLOutPath>
+		<tPMLOutPathMod></tPMLOutPathMod>
 		
-		<DeBugStartProgram></DeBugStartProgram>
+		<tPMLStartProgram></tPMLStartProgram>
 	</PropertyGroup>
 
 	<!--引用-->

@@ -3,6 +3,6 @@
 <Import Project="..\..\..\..\ConfigPublic.targets" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartAction>Program</StartAction>
-	<StartProgram>$(DeBugStartProgram)</StartProgram>
+	<StartProgram>$(tPMLStartProgram)</StartProgram>
   </PropertyGroup>
 </Project>
