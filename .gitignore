@@ -3,3 +3,5 @@
 **/obj/
 /dll/
 /Mods/test1/
+/ConfigPublic.targets
+/ConfigModReference.targets
