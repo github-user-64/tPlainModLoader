@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
+using Terraria.UI;
 
 namespace CreativeInventory.CreativeInventory
 {
@@ -295,30 +296,32 @@ namespace CreativeInventory.CreativeInventory
 
             if (dims != null)
             {
-                Terraria.UI.UIElement row = new Terraria.UI.UIElement();
-                row.Width.Set(10000, 0);//宽到放不下第二个元素, 物品就被挤到下一行
-                row.Height.Set(32, 0);
-
-                UIText ui_dims = new UIText(dims.Substring(0, dims.Length - 1) + "未找到（或许需要你点击全部列表）", 1f);
-                ui_dims.TextColor = Color.Gray;
-                ui_dims.VAlign = 0.5f;
-                row.Append(ui_dims);
-
-                panel_items_wp.Append(row);
+                panel_items_wp.Append(GetNoneItemTip(dims.Substring(0, dims.Length - 1) + "未找到（或许需要你点击全部列表）"));
             }
 
             foreach (Item item in items)
             {
-                panel_items_wp.Append(new UIItemGrid(item, Terraria.UI.ItemSlot.Context.CreativeInfinite));
+                panel_items_wp.Append(new UIItemGrid(item, ItemSlot.Context.CreativeInfinite));
             }
 
             //搜不到东西时在第一格位置提示
             if (dims == null && items.Count < 1 && Search_Text != null && Search_Text.Length > 0)
             {
-                UIText ui_none = new UIText("未找到此物品", 1f);
-                ui_none.TextColor = Color.Gray;
-                panel_items_wp.Append(ui_none);
+                panel_items_wp.Append(GetNoneItemTip("未找到此物品"));
             }
+        }
+
+        private UIElement GetNoneItemTip(string s)
+        {
+            UIText tip = new UIText(s, 0.8f);
+            tip.Width.Set(0, 1);//宽到放不下第二个元素, 物品就被挤到下一行
+            tip.Height.Set(20, 0);
+            tip.MarginLeft = 6;
+            tip.MarginTop = 6;
+            tip.TextOriginX = 0f;
+            tip.TextColor = Color.Gray;
+
+            return tip;
         }
 
         public void update_item(int id1, int id2)

@@ -41,14 +41,15 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
-	<Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553" />
-	<Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553" />
-	<Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553" />
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553" />
+    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553" />
+    <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CreativeInventory\Class1.cs" />
     <Compile Include="CreativeInventory\UIItemGrid.cs" />
     <Compile Include="CreativeInventory\UISearchSwitch.cs" />
+    <Compile Include="CreativeInventory\UISwitch.cs" />
     <Compile Include="ItemSort\ItemSort.cs" />
     <Compile Include="ItemSort\itemsSort.cs" />
     <Compile Include="ItemSort\itemsSort_ID.cs" />
