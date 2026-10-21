@@ -57,5 +57,13 @@ namespace tContentPatch
         public virtual bool DrawProjDirectPrefix(Projectile proj, Player overridePlayer = null) => true;
         /// <summary/>
         public virtual void DrawProjDirectPostfix(Projectile proj, Player overridePlayer = null) { }
+        /// <summary/>
+        public virtual void QuitGamePrefix() { }
+        /// <summary/>
+        public virtual void QuitGamePostfix() { }
+        /// <summary/>
+        public virtual void SaveSettingsPrefix() { }
+        /// <summary/>
+        public virtual void SaveSettingsPostfix() { }
     }
 }

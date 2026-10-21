@@ -208,5 +208,33 @@ namespace tContentPatch.ModPatch
         {
             mod.ForTry(item => item.DrawProjDirectPostfix(proj, overridePlayer));
         }
+
+        [HarmonyPatch("QuitGame")]
+        [HarmonyPrefix]
+        public static void QuitGamePrefix()
+        {
+            mod.ForTry(item => item.QuitGamePrefix());
+        }
+
+        [HarmonyPatch("QuitGame")]
+        [HarmonyPostfix]
+        public static void QuitGamePostfix()
+        {
+            mod.ForTry(item => item.QuitGamePostfix());
+        }
+
+        [HarmonyPatch("SaveSettings")]
+        [HarmonyPrefix]
+        public static void SaveSettingsPrefix()
+        {
+            mod.ForTry(item => item.SaveSettingsPrefix());
+        }
+
+        [HarmonyPatch("SaveSettings")]
+        [HarmonyPostfix]
+        public static void SaveSettingsPostfix()
+        {
+            mod.ForTry(item => item.SaveSettingsPostfix());
+        }
     }
 }
