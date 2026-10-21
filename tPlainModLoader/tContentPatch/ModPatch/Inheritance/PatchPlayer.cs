@@ -74,5 +74,7 @@ namespace tContentPatch
         public virtual void ApplyEquipVanityPostfix(Player This, int itemSlot, Item currentItem) { }
         /// <summary/>
         public virtual void UpdateBuffsPostfix(Player This, int i) { }
+        /// <summary/>
+        public virtual void GrantArmorBenefitsPostfix(Player This, Item armorPiece) { }
     }
 }

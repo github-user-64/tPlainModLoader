@@ -166,5 +166,12 @@ namespace tContentPatch.ModPatch
         {
             mod.ForTry(item => item.UpdateBuffsPostfix(__instance, i));
         }
+
+        [HarmonyPatch("GrantArmorBenefits")]
+        [HarmonyPostfix]
+        public static void GrantArmorBenefitsPostfix(Player __instance, Item armorPiece)
+        {
+            mod.ForTry(item => item.GrantArmorBenefitsPostfix(__instance, armorPiece));
+        }
     }
 }
