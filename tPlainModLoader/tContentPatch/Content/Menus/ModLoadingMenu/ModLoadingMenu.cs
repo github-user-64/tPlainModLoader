@@ -21,7 +21,7 @@ namespace tContentPatch.Content.Menus.ModLoadingMenu
             if (modLoaderState != null)
             {
                 uistate.InitializeLoader(modLoaderState, cancelLoad);
-                MenuUI.Menu.OpenMenu(uistate);
+                GameUitl.OpenMenu(uistate);
             }
         }
     }

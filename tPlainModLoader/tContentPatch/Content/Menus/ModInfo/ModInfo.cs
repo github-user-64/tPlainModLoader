@@ -24,7 +24,7 @@ namespace tContentPatch.Content.Menus.ModInfo
             uistate = new UIModInfo();
             uistate.BackUI = backUI;
             uistate.InitializeMod(mo, ActionDelMod);
-            MenuUI.Menu.OpenMenu(uistate);
+            GameUitl.OpenMenu(uistate);
         }
 
         public static void OpenModDirectory(ModObject mo)

@@ -20,21 +20,7 @@ namespace tContentPatch.Content.Menus.ModSet
 
             uistate.InitializeSetList(backUI, mss, open);
 
-            if (Main.gameMenu)
-            {
-                MenuUI.Menu.OpenMenu(uistate);
-            }
-            else
-            {
-                IngameFancyUI.CoverNextFrame();
-                Main.playerInventory = false;
-                Main.editChest = false;
-                Main.npcChatText = "";
-                Main.inFancyUI = true;
-                Main.ClosePlayerChat();
-                Main.chatText = "";
-                Main.InGameUI.SetState(uistate);
-            }
+            GameUitl.OpenMenu(uistate);
         }
 
         public static void SaveData(List<ModSetting> mss)

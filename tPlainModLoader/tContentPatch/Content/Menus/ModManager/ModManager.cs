@@ -35,7 +35,7 @@ namespace tContentPatch.Content.Menus.ModManager
 
             uistate.backUI = backUI;
             RefreshModList();
-            MenuUI.Menu.OpenMenu(uistate);
+            GameUitl.OpenMenu(uistate);
         }
 
         /// <summary>

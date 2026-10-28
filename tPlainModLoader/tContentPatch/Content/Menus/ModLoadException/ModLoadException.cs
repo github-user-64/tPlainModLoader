@@ -24,7 +24,7 @@ namespace tContentPatch.Content.Menus.ModLoadException
             menuIsClose = false;
 
             uistate.InitializeException(ex);
-            MenuUI.Menu.OpenMenu(uistate);
+            GameUitl.OpenMenu(uistate);
         }
 
         public static void WaitMenuClose()

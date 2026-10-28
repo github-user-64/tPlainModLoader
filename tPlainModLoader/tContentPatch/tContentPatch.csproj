@@ -135,7 +135,7 @@
     <Compile Include="Content\Menus\ModManager\UIModItem.cs" />
     <Compile Include="Content\Menus\ModManager\UIModManager.cs" />
     <Compile Include="Content\Menus\Patch_UIWorkshopHub\Patch.cs" />
-    <Compile Include="Content\MenuUI\Menu.cs" />
+    <Compile Include="Content\GameUitl.cs" />
     <Compile Include="Content\Menus\ModLoadingMenu\ModLoadingMenu.cs" />
     <Compile Include="Content\Menus\ModLoadingMenu\UILoadProgressBar.cs" />
     <Compile Include="Content\Menus\ModLoadingMenu\UIProgressBar.cs" />

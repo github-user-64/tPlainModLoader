@@ -90,11 +90,6 @@ namespace tPlainModLoader
             Console.Title = titles[new Random().Next(0, titles.Length - 1)];
 
             while (true) Thread.Sleep(1);
-
-            //!
-            Console.WriteLine("ok");
-            Console.ReadLine();
-            //!
         }
 
         private static bool LaunchTargetProgram()

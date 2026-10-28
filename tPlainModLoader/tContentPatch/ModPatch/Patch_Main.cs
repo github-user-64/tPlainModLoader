@@ -2,7 +2,9 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
+using tContentPatch.Content;
 using tContentPatch.Utils;
 using Terraria;
 using Terraria.GameInput;
