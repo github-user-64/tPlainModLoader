@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommandHelp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\CommandHelp\CommandHelp\CommandHelp\bin\Debug\CommandHelp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
@@ -52,11 +56,6 @@
       <HintPath>..\packages\Lib.Harmony.2.4.1\lib\net472\0Harmony.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <ProjectReference Include="..\..\..\CommandHelp\CommandHelp\CommandHelp\CommandHelp.csproj">
-      <Project>{28032285-ba86-4a99-88c3-82a8483dc05c}</Project>
-      <Name>CommandHelp</Name>
-      <Private>True</Private>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Command\MsgCommand.cs" />
