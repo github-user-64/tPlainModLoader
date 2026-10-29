@@ -5,15 +5,19 @@
 		<!--输出位置选择-->
 		<OutPathSwitch>0</OutPathSwitch>
 
+		<!--用于引用的Terraria.exe文件位置-->
 		<DllTerraria>$(MSBuildThisFileDirectory)\dll\Terraria_v1.4.5.8.exe</DllTerraria>
+		<!--用于引用的ReLogic.dll文件位置-->
 		<DllReLogic>$(MSBuildThisFileDirectory)\dll\ReLogic.dll</DllReLogic>
 	</PropertyGroup>
 	
 	<!--输出位置0-->
 	<PropertyGroup Condition="'$(OutPathSwitch)'=='0'">
+		<!--tPlainModLoader项目的输出目录-->
 		<tPMLOutPath>$(MSBuildThisFileDirectory)\tPlainModLoader\tPlainModLoader\bin\Debug</tPMLOutPath>
 		<tPMLOutPathMod>$(tPMLOutPath)\Mods</tPMLOutPathMod>
 		
+		<!--用于启动调试用的tPlainModLoader.exe文件位置-->
 		<tPMLStartProgram>$(tPMLOutPath)\tPlainModLoader.exe</tPMLStartProgram>
 	</PropertyGroup>
 	
