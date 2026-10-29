@@ -42,7 +42,7 @@ namespace AccessoryBox
         {
             if (ui == null) return;
 
-            if (Main.gameMenu || Main.mapFullscreen)//在游戏外或打开大地图时
+            if (tContentPatch.Content.GameUitl.CanGameUI() != true)
             {
                 ui.SetState(null);//禁用ui
                 return;

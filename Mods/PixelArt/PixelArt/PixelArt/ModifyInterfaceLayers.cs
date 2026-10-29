@@ -57,7 +57,7 @@ namespace PixelArt
         {
             if (ui == null) return;
 
-            if (Main.gameMenu || Main.mapFullscreen)
+            if (tContentPatch.Content.GameUitl.CanGameUI() != true)
             {
                 ui.SetState(null);
             }
