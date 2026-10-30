@@ -8,6 +8,7 @@
 		<!--用于引用的Terraria.exe文件位置-->
 		<DllTerraria>$(MSBuildThisFileDirectory)\dll\Terraria_v1.4.5.8.exe</DllTerraria>
 		<!--用于引用的ReLogic.dll文件位置-->
+		<!--原版游戏的ReLogic.dll文件无法直接引用, 可以用tModLoader那的dll替代-->
 		<DllReLogic>$(MSBuildThisFileDirectory)\dll\ReLogic.dll</DllReLogic>
 	</PropertyGroup>
 	
@@ -31,6 +32,17 @@
 
 	<!--引用-->
 	<ItemGroup>
+		<Reference Include="System" />
+		<Reference Include="System.Core" />
+		<Reference Include="System.Net.Http" />
+		<Reference Include="System.Xml" />
+		<Reference Include="System.Xml.Linq" />
+		<Reference Include="System.Data" />
+		<Reference Include="System.Data.DataSetExtensions" />
+		<Reference Include="Microsoft.CSharp" />
+		<Reference Include="Microsoft.Xna.Framework" />
+		<Reference Include="Microsoft.Xna.Framework.Game" />
+		<Reference Include="Microsoft.Xna.Framework.Graphics" />
 		<Reference Include="ReLogic">
 			<HintPath>$(DllReLogic)</HintPath>
 			<Private>False</Private>

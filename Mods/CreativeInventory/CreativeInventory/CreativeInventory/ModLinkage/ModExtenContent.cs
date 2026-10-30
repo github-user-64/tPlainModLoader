@@ -26,10 +26,10 @@ namespace CreativeInventory.ModLinkage
             Assembly assembly = (Assembly)mo.assembly?.GetType("ExtenContentPatch.ThisMod")?.GetProperty("assembly")?.GetValue(null);
             if (assembly == null) return;
 
-            ItemCount = LoadCount(assembly, ItemID.Count, "ExtenContent.Extens.ItemLoader", "ItemCount");
+            ItemCount = LoadCount(assembly, ItemID.Count, "ExtenContent.Exten.ItemLoader", "ItemCount");
             Print($"{nameof(ItemCount)}:{ItemCount}");
 
-            ProjectileCount = LoadCount(assembly, ProjectileID.Count, "ExtenContent.Extens.ProjectileLoader", "ProjectileCount");
+            ProjectileCount = LoadCount(assembly, ProjectileID.Count, "ExtenContent.Exten.ProjectileLoader", "ProjectileCount");
             Print($"{nameof(ProjectileCount)}:{ProjectileCount}");
         }
 
