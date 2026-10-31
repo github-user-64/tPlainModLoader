@@ -1,0 +1,63 @@
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<!--输出位置选择-->
+		<OutPathSwitch>0</OutPathSwitch>
+
+		<!--用于引用的Terraria.exe文件位置-->
+		<DllTerraria>{{DllTerraria}}</DllTerraria>
+		<!--用于引用的ReLogic.dll文件位置-->
+		<!--原版游戏的ReLogic.dll文件无法直接引用, 可以用tModLoader那的dll替代-->
+		<DllReLogic><!--需修改--></DllReLogic>
+
+		<!--用于引用的tPML的dll文件位置-->
+		<tPMLDllPath>{{tPMLDllPath}}</tPMLDllPath>
+		<Dll0Harmony>$(tPMLDllPath)\0Harmony.dll</Dll0Harmony>
+		<DllCommandHelp>$(tPMLDllPath)\CommandHelp.dll</DllCommandHelp>
+		<DlltContentPatch>$(tPMLDllPath)\tContentPatch.dll</DlltContentPatch>
+	</PropertyGroup>
+	
+	<!--输出位置0-->
+	<PropertyGroup Condition="'$(OutPathSwitch)'=='0'">
+		<!--tPlainModLoader项目的输出目录-->
+		<tPMLOutPath>$(tPMLDllPath)</tPMLOutPath>
+		<tPMLOutPathMod>$(tPMLOutPath)\Mods</tPMLOutPathMod>
+
+		<!--用于启动调试用的tPlainModLoader.exe文件位置-->
+		<tPMLStartProgram>$(tPMLOutPath)\tPlainModLoader.exe</tPMLStartProgram>
+	</PropertyGroup>
+	
+	<!--引用-->
+	<ItemGroup>
+		<Reference Include="System" />
+		<Reference Include="System.Core" />
+		<Reference Include="System.Net.Http" />
+		<Reference Include="System.Xml" />
+		<Reference Include="System.Xml.Linq" />
+		<Reference Include="System.Data" />
+		<Reference Include="System.Data.DataSetExtensions" />
+		<Reference Include="Microsoft.CSharp" />
+		<Reference Include="Microsoft.Xna.Framework" />
+		<Reference Include="Microsoft.Xna.Framework.Game" />
+		<Reference Include="Microsoft.Xna.Framework.Graphics" />
+		<Reference Include="ReLogic">
+			<HintPath>$(DllReLogic)</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="Terraria">
+			<HintPath>$(DllTerraria)</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="0Harmony">
+			<HintPath>$(Dll0Harmony)</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="CommandHelp">
+			<HintPath>$(DllCommandHelp)</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="tContentPatch">
+			<HintPath>$(DlltContentPatch)</HintPath>
+			<Private>False</Private>
+		</Reference>
+	</ItemGroup>
+</Project>

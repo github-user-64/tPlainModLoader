@@ -42,10 +42,10 @@
       <HintPath>..\packages\Lib.Harmony.2.4.1\lib\net472\0Harmony.dll</HintPath>
       <Private>True</Private>
     </Reference>
-	<ProjectReference Include="..\CommandHelp\CommandHelp\CommandHelp.csproj">
-	  <Project>{28032285-ba86-4a99-88c3-82a8483dc05c}</Project>
-	  <Name>CommandHelp</Name>
-	</ProjectReference>
+    <ProjectReference Include="..\CommandHelp\CommandHelp\CommandHelp.csproj">
+      <Project>{28032285-ba86-4a99-88c3-82a8483dc05c}</Project>
+      <Name>CommandHelp</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Command\MsgCommand.cs" />
@@ -54,6 +54,8 @@
     <Compile Include="Command\Utils.cs" />
     <Compile Include="ContentPatch_Initialize.cs" />
     <Compile Include="ContentPatch.cs" />
+    <Compile Include="Content\CreateMod\CreateMod.cs" />
+    <EmbeddedResource Include="Content\CreateMod\Files\ThisMod.cs" />
     <Compile Include="Content\Network\ModNetworkPacket.cs" />
     <Compile Include="Content\Network\NetTPMLModule.cs" />
     <Compile Include="Content\Network\RegisterNetModule.cs" />
@@ -160,6 +162,8 @@
     <Compile Include="Utils\TCPUtils\TCPS.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Content\CreateMod\Files\{{ModName}}.csproj" />
+    <EmbeddedResource Include="Content\CreateMod\Files\ConfigPublic.targets" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +174,13 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\TitleLinkButtons.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\CreateMod\Files\{{ModName}}.csproj.user" />
+    <EmbeddedResource Include="Content\CreateMod\Files\{{ModName}}.slnx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\CreateMod\Files\ico.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
