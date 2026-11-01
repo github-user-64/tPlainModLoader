@@ -2,54 +2,34 @@
 using System.Collections.Generic;
 using tContentPatch.Content.UI;
 using tContentPatch.ModLoad;
-using Terraria.Audio;
-using Terraria.GameContent.UI.Elements;
-using Terraria.GameInput;
-using Terraria.ID;
 using Terraria.UI;
 
 namespace tContentPatch.Content.Menus.ModManager
 {
-    internal class UIModManager : UIState
+    internal class UIModManager : UIMenuPanel
     {
         public static readonly Color color_isEnable = Color.Green;
         public static readonly Color color_isEnable_false = Color.Red;
 
-        public UIState backUI = null;
+        private UIScrollViewer2 sv = null;
 
-        private UIPanel ui_panel = null;
-        private UITextPanel<string> ui_panel_title = null;
-        private UIScrollViewer2 ui_sv = null;
-
-        private UIWrapPanel ui_buttons_wrap = null;
-        private UIButton1[] ui_buttons = null;
-
-        public UIModManager()
+        public UIModManager() : base("模组列表", titleYOff: 20f)
         {
-            ui_panel = new UIPanel();
-            ui_panel.Width.Pixels = 600;
-            ui_panel.Height.Set(-300, 1);
-            ui_panel.HAlign = 0.5f;
-            ui_panel.VAlign = 0.5f;
-            ui_panel.BackgroundColor = new Color(31, 41, 71, 200);
+            Width.Set(600f, 0f);
+            Height.Set(-100, 1f);
+            HAlign = 0.5f;
+            VAlign = 0.5f;
 
-            ui_panel_title = new UITextPanel<string>("模组列表", 0.8f, true);
-            ui_panel_title.HAlign = 0.5f;
-            ui_panel_title.BackgroundColor = new Color(73, 94, 171);
+            Panel.BackgroundColor = new Color(31, 41, 71, 200);
 
-            ui_sv = new UIScrollViewer2();
-            ui_sv.Width.Precent = 1;
-            ui_sv.Height.Set(-10, 1);
-            ui_sv.Top.Pixels = 10;
-            ui_sv.ItemMargin = 4;
+            sv = new UIScrollViewer2();
+            sv.Width.Precent = 1;
+            sv.Height.Set(-10, 1);
+            sv.Top.Pixels = 10;
+            sv.ItemMargin = 4;
+            Panel.Append(sv);
 
-            ui_buttons_wrap = new UIWrapPanel();
-            ui_buttons_wrap.Width.Pixels = 600;
-            ui_buttons_wrap.Top.Set(ui_panel.Height.Pixels / 2 + 4, 1);
-            ui_buttons_wrap.HAlign = 0.5f;
-            ui_buttons_wrap.ItemMargin = 4;
-
-            ui_buttons = new UIButton1[]
+            UIButton1[] btns = new UIButton1[]
             {
                 new UIButton1("启用全部模组"),
                 new UIButton1("禁用全部模组"),
@@ -59,49 +39,31 @@ namespace tContentPatch.Content.Menus.ModManager
                 new UIButton1("模组设置"),
             };
 
-            ui_buttons[0].TextColor = color_isEnable;
-            ui_buttons[0].OnLeftClick += (e, s) => ModManager.ModEnableAll();
-            ui_buttons[1].TextColor = color_isEnable_false;
-            ui_buttons[1].OnLeftClick += (e, s) => ModManager.ModNoEnableAll();
-            ui_buttons[2].OnLeftClick += (e, s) => ModManager.AgainLoadMod();
-            ui_buttons[2].OnUpdate += (e) => { if (ui_buttons[2].IsMouseHovering) DrawTip.SetDraw("建议重启程序"); };
-            ui_buttons[3].OnLeftClick += (e, s) => Back(backUI);
-            ui_buttons[3].OnUpdate += (e) => { if (ui_buttons[3].IsMouseHovering && ModManager.CheckModUpdate()) DrawTip.SetDraw("需要重新加载, 建议重启程序"); };
-            ui_buttons[4].OnLeftClick += (e, s) => ModManager.OpenModDirectory();
-            ui_buttons[5].OnLeftClick += (e, s) => ModManager.OpenModSetSwitch();
+            btns[0].TextColor = color_isEnable;
+            btns[0].OnLeftClick += (e, s) => ModManager.ModEnableAll();
+            btns[1].TextColor = color_isEnable_false;
+            btns[1].OnLeftClick += (e, s) => ModManager.ModNoEnableAll();
+            btns[2].OnLeftClick += (e, s) => ModManager.AgainLoadMod();
+            btns[2].OnUpdate += (e) => { if (btns[2].IsMouseHovering) DrawTip.SetDraw("建议重启程序"); };
+            btns[3].OnLeftClick += (e, s) => Back(BackUI);
+            btns[3].OnUpdate += (e) => { if (btns[3].IsMouseHovering && ModManager.CheckModUpdate()) DrawTip.SetDraw("需要重新加载, 建议重启程序"); };
+            btns[4].OnLeftClick += (e, s) => ModManager.OpenModDirectory();
+            btns[5].OnLeftClick += (e, s) => ModManager.OpenModSetSwitch();
 
-            Append(ui_panel);
-            Append(ui_buttons_wrap);
-            ui_panel.Append(ui_panel_title);
-            ui_panel.Append(ui_sv);
-
-            foreach (UIButton1 i in ui_buttons) ui_buttons_wrap.Append(i);
+            foreach (UIButton1 i in btns) AddBtn(i, 3);
         }
 
         public void InitializeModList(List<ModObject> mos)
         {
-            ui_sv.ClearChild();
+            sv.ClearChild();
             if (mos != null)
             {
-                foreach (ModObject mo in mos) if (mo.config.isEnable) ui_sv.AddChild(new UIModItem(this, mo, mos));
-                foreach (ModObject mo in mos) if (!mo.config.isEnable) ui_sv.AddChild(new UIModItem(this, mo, mos));
+                foreach (ModObject mo in mos) if (mo.config.isEnable) sv.AddChild(new UIModItem(this, mo, mos));
+                foreach (ModObject mo in mos) if (!mo.config.isEnable) sv.AddChild(new UIModItem(this, mo, mos));
             }
         }
 
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-
-            ui_panel_title.Top.Pixels = -ui_panel_title.GetOuterDimensions().Height / 2 - 20;
-
-            foreach (UIButton1 i in ui_buttons) i.Width.Pixels = (int)(ui_buttons_wrap.GetInnerDimensions().Width - ((3 - 1) * ui_buttons_wrap.ItemMargin)) / 3;
-
-            ui_buttons_wrap.UpdateContainer_Height();
-
-            if (PlayerInput.Triggers.JustPressed.Inventory) Back(backUI);
-        }
-
-        private void Back(UIState back)
+        public override void Back(UIState back = null)
         {
             if (ModManager.CheckModUpdate())
             {
@@ -109,9 +71,7 @@ namespace tContentPatch.Content.Menus.ModManager
                 return;
             }
 
-            GameUitl.BackMenu(back);
-
-            SoundEngine.PlaySound(SoundID.MenuClose);
+            base.Back(back);
         }
     }
 }

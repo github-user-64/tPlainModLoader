@@ -2,101 +2,61 @@
 using System.Collections.Generic;
 using System.Linq;
 using tContentPatch.Content.UI;
-using Terraria.Audio;
-using Terraria.GameContent.UI.Elements;
-using Terraria.GameInput;
-using Terraria.ID;
 using Terraria.UI;
 
 namespace tContentPatch.Content.Menus.ModSet
 {
-    internal class UIModSet : UIState
+    internal class UIModSet : UIMenuPanel
     {
-        private UIState backUI = null;
         private List<ModSetting> mss = null;
         private ModSetting ms_this = null;
         private int mssIndex = -1;
 
-        private UIStackPanel ui_sp = null;
-        private UITextPanel<string> ui_title = null;
-        private UIPanel ui_panel = null;
-        private UIElement ui_set = null;
-        private UIButton1 btn_save = null;
+        private UIElement uie = null;
         private UIButton1 btn_prev = null;
         private UIButton1 btn_next = null;
+        private UIButton1 btn_save = null;
 
-        public UIModSet()
+        public UIModSet() : base(string.Empty)
         {
-            ui_sp = new UIStackPanel();
-            ui_sp.Width.Pixels = 600;
-            ui_sp.Height.Set(-100, 1);
-            ui_sp.HAlign = 0.5f;
-            ui_sp.VAlign = 0.5f;
-            ui_sp.ItemMargin = 4;
+            MaxWidth.Set(700f, 0f);
+            Panel.BackgroundColor = Color.MidnightBlue * 0.8f;
 
-            ui_title = new UITextPanel<string>(string.Empty, 0.8f, true);
-            ui_title.HAlign = 0.5f;
-            ui_title.BackgroundColor = new Color(73, 94, 171);
-
-            ui_panel = new UIPanel();
-            ui_panel.Width.Precent = 1;
-            ui_panel.HAlign = 0.5f;
-            ui_panel.BackgroundColor = Color.MidnightBlue * 0.8f;
-
-            ui_set = new UIElement();
-            ui_set.Width.Precent = 1;
-            ui_set.Height.Precent = 1;
-
-            UIElement ui_btns1 = new UIElement();
-            ui_btns1.Width.Precent = 1;
-            UIElement ui_btns2 = new UIElement();
-            ui_btns2.Width.Precent = 1;
+            uie = new UIElement();
+            uie.Width.Set(0f, 1f);
+            uie.Height.Set(0f, 1f);
+            Panel.Append(uie);
 
             btn_prev = new UIButton1("<");
-            btn_prev.Width.Set(-4, 0.5f);
             btn_prev.OnLeftClick += (e, s) => SetItem(mssIndex - 1);
+            AddBtn(btn_prev, 2);
 
             btn_next = new UIButton1(">");
-            btn_next.Width.Set(-4, 0.5f);
-            btn_next.HAlign = 1;
             btn_next.OnLeftClick += (e, s) => SetItem(mssIndex + 1);
+            AddBtn(btn_next, 2);
 
             UIButton1 btn_back = new UIButton1("返回");
-            btn_back.Width.Set(-4, 1 / 3f);
-            btn_back.OnLeftClick += (e, s) => Back(backUI);
+            btn_back.OnLeftClick += (e, s) => Back(BackUI);
+            AddBtn(btn_back, 3);
 
             btn_save = new UIButton1("保存");
-            btn_save.Width.Set(-4, 1 / 3f);
-            btn_save.HAlign = 0.5f;
             btn_save.OnLeftClick += (e, s) => ModSet.SaveData(mss);
+            AddBtn(btn_save, 3);
 
-            UIButton1 btn2_setDeft = new UIButton1("恢复默认");
-            btn2_setDeft.Width.Set(-4, 1 / 3f);
-            btn2_setDeft.HAlign = 1f;
-            btn2_setDeft.OnLeftClick += (e, s) => ms_this?.SetDefault();
-
-            Append(ui_sp);
-            ui_sp.Append(ui_title);
-            ui_sp.Append(ui_panel);
-            ui_sp.Append(ui_btns1);
-            ui_sp.Append(ui_btns2);
-            ui_panel.Append(ui_set);
-            ui_btns1.Append(btn_prev);
-            ui_btns1.Append(btn_next);
-            ui_btns2.Append(btn_back);
-            ui_btns2.Append(btn_save);
-            ui_btns2.Append(btn2_setDeft);
+            UIButton1 btn_setDeft = new UIButton1("恢复默认");
+            btn_setDeft.OnLeftClick += (e, s) => ms_this?.SetDefault();
+            AddBtn(btn_setDeft, 3);
         }
 
         public void InitializeSetList(UIState backUI, List<ModSetting> mss, ModSetting open = null)
         {
-            this.backUI = backUI;
+            BackUI = backUI;
             this.mss = mss;
 
             if (mss == null)
             {
-                ui_title.SetText(string.Empty);
-                ui_set.RemoveAllChildren();
+                Title.SetText(string.Empty);
+                uie.RemoveAllChildren();
                 return;
             }
 
@@ -125,11 +85,11 @@ namespace tContentPatch.Content.Menus.ModSet
 
             //
 
-            ui_title.SetText(ms_this?.Title ?? string.Empty);
-            ui_set.RemoveAllChildren();
+            Title.SetText(ms_this?.Title ?? string.Empty);
+            this.uie.RemoveAllChildren();
 
             UIElement uie = ms_this?.GetUI();
-            if (uie != null) ui_set.Append(uie);
+            if (uie != null) this.uie.Append(uie);
         }
 
         public override void Update(GameTime gameTime)
@@ -142,31 +102,8 @@ namespace tContentPatch.Content.Menus.ModSet
 
             //
 
-            float height = ui_sp.GetInnerDimensions().Height;
-            foreach (UIElement i in ui_sp.Children)
-            {
-                if (i == ui_panel) continue;
-                height -= i.GetOuterDimensions().Height + ui_sp.ItemMargin;
-                i.UpdateContainer_Height();
-            }
-
-            ui_panel.Height.Pixels = height;
-
-            //
-
             btn_prev.isEnable = mss != null && mssIndex > 0;
             btn_next.isEnable = mss != null && mssIndex < mss.Count - 1;
-
-            //
-
-            if (PlayerInput.Triggers.JustPressed.Inventory) Back(backUI);
-        }
-
-        public void Back(UIState back)
-        {
-            GameUitl.BackMenu(back);
-
-            SoundEngine.PlaySound(SoundID.MenuClose);
         }
     }
 }

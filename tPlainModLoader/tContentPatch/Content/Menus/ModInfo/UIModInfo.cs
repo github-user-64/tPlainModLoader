@@ -3,83 +3,47 @@ using System;
 using System.Collections.Generic;
 using tContentPatch.Content.UI;
 using tContentPatch.ModLoad;
-using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
-using Terraria.GameInput;
-using Terraria.ID;
-using Terraria.UI;
 
 namespace tContentPatch.Content.Menus.ModInfo
 {
-    internal class UIModInfo : UIState
+    internal class UIModInfo : UIMenuPanel
     {
         public Action<ModObject> ActionDelMod = null;
-        public UIState BackUI = null;
         private ModObject mo = null;
         private UIScrollViewer2 ui_sv = null;
-        private Action<string> SetTitle = null;
-        private UIButton1 ui_btn3 = null;
-        private UIButton1 ui_btn4 = null;
+        private UIButton1 btn3 = null;
+        private UIButton1 btn4 = null;
 
-        public UIModInfo()
+        public UIModInfo() : base(string.Empty)
         {
-            UIElement uie = new UIElement();
-            uie.Width.Precent = .5f;
-            uie.Height.Precent = .8f;
-            uie.HAlign = .5f;
-            uie.VAlign = .5f;
-            uie.SetPadding(10);
-
-            UIPanel ui_panel = new UIPanel();
-            ui_panel.Width.Precent = 1;
-            ui_panel.Height.Set(-200, 1);
-            ui_panel.HAlign = .5f;
-            ui_panel.VAlign = .5f;
-            ui_panel.SetPadding(20);
-
             ui_sv = new UIScrollViewer2();
             ui_sv.Width.Precent = 1;
             ui_sv.Height.Precent = 1;
             ui_sv.ItemMargin = 4;
+            Panel.Append(ui_sv);
 
-            UITextPanel<string> ui_title = new UITextPanel<string>(string.Empty, 0.8f, true);
-            ui_title.Top.Pixels = -60;
-            ui_title.HAlign = .5f;
-            SetTitle = s => ui_title.SetText(s);
+            UIButton1 btn1 = new UIButton1("返回");
+            btn1.OnLeftClick += (e, s) => Back(BackUI);
 
-            UIWrapPanel ui_wp = new UIWrapPanel();
-            ui_wp.Width.Precent = 1;
-            ui_wp.Height.Pixels = 100 - 4;
-            ui_wp.Top.Set(-(100 - 4), 1);
-            ui_wp.ItemMargin = 2;
+            UIButton1 btn2 = new UIButton1("打开文件夹");
+            btn2.OnLeftClick += (e, s) => ModInfo.OpenModDirectory(mo);
 
-            Func<string, Action, UIButton1> getBtn = (text, action) =>
-            {
-                UIButton1 btn = new UIButton1(text);
-                btn.Width.Set(-ui_wp.ItemMargin, 1f / 3);
-                btn.OnLeftClick += (e, s) => action();
-                return btn;
-            };
-
-            UIButton1 ui_btn1 = getBtn("返回", () => Back(BackUI));
-            UIButton1 ui_btn2 = getBtn("打开文件夹", () => ModInfo.OpenModDirectory(mo));
-            ui_btn3 = getBtn("删除", () =>
+            btn3 = new UIButton1("删除");
+            btn3.OnLeftClick += (e, s) =>
             {
                 ActionDelMod?.Invoke(mo);
                 Back(BackUI);
-            });
-            ui_btn4 = getBtn("跳转到相关链接", () => ModInfo.JumpTo(mo.info));
+            };
 
-            Append(uie);
-            uie.Append(ui_panel);
-            uie.Append(ui_wp);
-            ui_wp.Append(ui_btn1);
-            ui_wp.Append(ui_btn2);
-            ui_wp.Append(ui_btn3);
-            ui_wp.Append(ui_btn4);
-            ui_panel.Append(ui_title);
-            ui_panel.Append(ui_sv);
+            btn4 = new UIButton1("跳转到相关链接");
+            btn4.OnLeftClick += (e, s) => ModInfo.JumpTo(mo.info);
+
+            AddBtn(btn1, 3);
+            AddBtn(btn2, 3);
+            AddBtn(btn3, 3);
+            AddBtn(btn4, 3);
         }
 
         public void InitializeMod(ModObject mo = null, Action<ModObject> ActionDelMod = null)
@@ -87,24 +51,25 @@ namespace tContentPatch.Content.Menus.ModInfo
             this.mo = mo;
 
             this.ActionDelMod = null;
-            ui_btn3.isEnable = false;
-            ui_btn4.isEnable = false;
+            btn3.isEnable = false;
+            btn4.isEnable = false;
             ui_sv.ClearChild();
 
             if (this.mo == null)
             {
-                SetTitle("模组信息");
+                Title.SetText("模组信息");
                 return;
             }
 
-            SetTitle($"模组信息: {this.mo.info?.name ?? this.mo.config.key}");
-            ui_btn3.isEnable = ModInfo.GetModIsLoaded(this.mo) == false;
-            ui_btn4.isEnable = this.mo.info?.jumpPath != null;
+            Title.SetText($"模组信息: {this.mo.info?.name ?? this.mo.config.key}");
+            btn3.isEnable = ModInfo.GetModIsLoaded(this.mo) == false;
+            btn4.isEnable = this.mo.info?.jumpPath != null;
 
             InitializeInfoText();
 
             this.ActionDelMod = ActionDelMod;
         }
+
         private void InitializeInfoText()
         {
             if (mo.info?.description == null) return;
@@ -145,21 +110,12 @@ namespace tContentPatch.Content.Menus.ModInfo
         {
             base.Update(gameTime);
 
-            if (ui_btn3.IsMouseHovering && ui_btn3.isEnable == false) DrawTip.SetDraw("卸载模组以删除");
-            if (ui_btn4.IsMouseHovering && ui_btn4.isEnable)
+            if (btn3.IsMouseHovering && btn3.isEnable == false) DrawTip.SetDraw("卸载模组以删除");
+            if (btn4.IsMouseHovering && btn4.isEnable)
             {
                 string path = mo.info?.jumpPath;
                 if (path != null) DrawTip.SetDraw($"不要相信可疑链接.跳转到:{path}");
             }
-
-            if (PlayerInput.Triggers.JustPressed.Inventory) Back(BackUI);
-        }
-
-        public void Back(UIState back)
-        {
-            GameUitl.BackMenu(back);
-
-            SoundEngine.PlaySound(SoundID.MenuClose);
         }
     }
 }

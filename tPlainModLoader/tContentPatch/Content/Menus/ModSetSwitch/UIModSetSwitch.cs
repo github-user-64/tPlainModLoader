@@ -4,73 +4,47 @@ using System.Collections.Generic;
 using System.Linq;
 using tContentPatch.Content.UI;
 using tContentPatch.ModLoad;
-using Terraria.Audio;
-using Terraria.GameContent.UI.Elements;
-using Terraria.GameInput;
-using Terraria.ID;
 using Terraria.UI;
 
 namespace tContentPatch.Content.Menus.ModSetSwitch
 {
-    internal class UIModSetSwitch : UIState
+    internal class UIModSetSwitch : UIMenuPanel
     {
-        private UIState backUI = null;
         private Action<List<(string, Action, bool)>> initModList = null;
         private Action<List<(string, Action, bool)>> initModSet = null;
 
-        public UIModSetSwitch()
+        public UIModSetSwitch() : base("模组设置")
         {
-            UIPanel ui_panel = new UIPanel();
-            ui_panel.Width.Pixels = 800;
-            ui_panel.Height.Set(-300, 1);
-            ui_panel.HAlign = 0.5f;
-            ui_panel.VAlign = 0.5f;
-            ui_panel.BackgroundColor = Color.MidnightBlue * 0.8f;
-
-            UITextPanel<string> ui_title = new UITextPanel<string>("模组设置", 0.8f, true);
-            ui_title.Top.Pixels = -40;
-            ui_title.HAlign = 0.5f;
-            ui_title.BackgroundColor = new Color(73, 94, 171);
-
-            UIStackPanel ui_sp = new UIStackPanel();
-            ui_sp.Width.Precent = 1;
-            ui_sp.Height.Precent = 1;
-            ui_sp.Horizontal = true;
-            ui_sp.IsAutoUpdateSize = true;
-            ui_sp.ItemMargin = 10;
-
-            float width = ui_panel.Width.Pixels - ui_panel.PaddingLeft - ui_panel.PaddingRight;
-            width -= ui_sp.ItemMargin;
-            width /= 2;
+            MinWidth.Set(700f, 0f);
+            MaxWidth.Set(900f, 0f);
+            Panel.BackgroundColor = Color.MidnightBlue * 0.8f;
 
             UIModScrollViewer ui_modList = new UIModScrollViewer("模组管理", true);
-            ui_modList.Width.Pixels = width;
-            ui_modList.Height.Precent = 1;
+            ui_modList.Width.Set(-5f, 0.5f);
+            ui_modList.Height.Set(0f, 1f);
+            ui_modList.HAlign = 0f;
+            Panel.Append(ui_modList);
             initModList = ui_modList.InitializeList;
 
             UIModScrollViewer ui_modSet = new UIModScrollViewer("设置", false);
-            ui_modSet.Width.Pixels = width;
-            ui_modSet.Height.Precent = 1;
+            ui_modSet.Width.Set(-5f, 0.5f);
+            ui_modSet.Height.Set(-5f, 1f);
+            ui_modSet.HAlign = 1f;
+            Panel.Append(ui_modSet);
             initModSet = ui_modSet.InitializeList;
 
             UIButton1 ui_back = new UIButton1("返回", 0.8f, true);
-            ui_back.Top.Set(ui_panel.Height.Pixels / 2 + 4, 1);
+            ui_back.PaddingLeft = 50f;
+            ui_back.PaddingRight = 50f;
+            ui_back.OnLeftClick += (e, s) => Back(BackUI);
+            AddBtn(ui_back);
+            ui_back.Width.Set(0f, 0f);
             ui_back.HAlign = 0.5f;
-            ui_back.PaddingLeft = 50;
-            ui_back.PaddingRight = 50;
-            ui_back.OnLeftClick += (e, s) => Back(backUI);
-
-            Append(ui_panel);
-            Append(ui_back);
-            ui_panel.Append(ui_sp);
-            ui_panel.Append(ui_title);
-            ui_sp.Append(ui_modList);
-            ui_sp.Append(ui_modSet);
         }
 
         public void InitializeModList(UIState backUI, List<ModObject> mos, ModObject open = null)
         {
-            this.backUI = backUI;
+            BackUI = backUI;
 
             initModSet(null);
 
@@ -117,20 +91,6 @@ namespace tContentPatch.Content.Menus.ModSetSwitch
             }
 
             initModSet(list);
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-
-            if (PlayerInput.Triggers.JustPressed.Inventory) Back(backUI);
-        }
-
-        public void Back(UIState back)
-        {
-            GameUitl.BackMenu(back);
-
-            SoundEngine.PlaySound(SoundID.MenuClose);
         }
     }
 }

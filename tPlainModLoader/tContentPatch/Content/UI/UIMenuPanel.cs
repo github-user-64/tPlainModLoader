@@ -16,15 +16,19 @@ namespace tContentPatch.Content.UI
         /// <summary>
         /// 返回菜单
         /// </summary>
-        protected UIState BackUI = null;
+        public UIState BackUI = null;
         /// <summary>
         /// 页面
         /// </summary>
-        protected UIPanel Panel = null;
+        protected readonly UIPanel Panel = null;
         /// <summary>
         /// 下面的按钮容器
         /// </summary>
-        protected UIWrapPanel Btns = null;
+        protected readonly UIWrapPanel Btns = null;
+        /// <summary>
+        /// 标题
+        /// </summary>
+        protected readonly UITextPanel<string> Title = null;
 
         /// <summary/>
         public UIMenuPanel(string title, float textScale = 0.8f, bool textLarge = true, float titleYOff = 10f,
@@ -32,14 +36,16 @@ namespace tContentPatch.Content.UI
         {
             BackUI = back;
 
-            UITextPanel<string> uitext = new UITextPanel<string>(title, textScale, textLarge);
-            uitext.Recalculate();
-            uitext.Top.Pixels = -uitext.GetOuterDimensions().Height + titleYOff;
-            uitext.HAlign = 0.5f;
-            uitext.BackgroundColor = new Color(63, 82, 151);
+            Title = new UITextPanel<string>(title, textScale, textLarge);
+            Title.Recalculate();
+            Title.Top.Pixels = -Title.GetOuterDimensions().Height + titleYOff;
+            Title.HAlign = 0.5f;
+            Title.BackgroundColor = new Color(73, 94, 171);
 
             Width.Set(-800f, 1f);
-            Height.Set(-100f + uitext.Top.Pixels, 1f);
+            Height.Set(-100f + Title.Top.Pixels, 1f);
+            MinWidth.Set(700f, 0f);
+            MaxWidth.Set(800f, 0f);
             HAlign = 0.5f;
             VAlign = 0.5f;
 
@@ -57,7 +63,7 @@ namespace tContentPatch.Content.UI
             Panel.OnUpdate += _ => Panel.Height.Pixels = -Btns.GetOuterDimensions().Height - 4f;
             Append(Panel);
 
-            Append(uitext);
+            Append(Title);
         }
 
         /// <summary>
@@ -84,7 +90,7 @@ namespace tContentPatch.Content.UI
         /// <summary>
         /// 返回菜单
         /// </summary>
-        public void Back(UIState back = null)
+        public virtual void Back(UIState back = null)
         {
             GameUitl.BackMenu(back);
 
