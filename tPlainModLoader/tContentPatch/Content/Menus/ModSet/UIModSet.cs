@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using tContentPatch.Content.UI;
-using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent.UI.Elements;
 using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.UI;
 
 namespace tContentPatch.Content.Menus.ModSet
@@ -131,25 +132,6 @@ namespace tContentPatch.Content.Menus.ModSet
             if (uie != null) ui_set.Append(uie);
         }
 
-        public void Back(UIState backUI)
-        {
-            if (backUI == null)
-            {
-                if (Main.gameMenu) Main.menuMode = 0;
-                else IngameFancyUI.Close();
-            }
-            else
-            if (Main.gameMenu)
-            {
-                Main.menuMode = 888;
-                Main.MenuUI.SetState(backUI);
-            }
-            else
-            {
-                Main.InGameUI.SetState(backUI);
-            }
-        }
-
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -178,6 +160,13 @@ namespace tContentPatch.Content.Menus.ModSet
             //
 
             if (PlayerInput.Triggers.JustPressed.Inventory) Back(backUI);
+        }
+
+        public void Back(UIState back)
+        {
+            GameUitl.BackMenu(back);
+
+            SoundEngine.PlaySound(SoundID.MenuClose);
         }
     }
 }

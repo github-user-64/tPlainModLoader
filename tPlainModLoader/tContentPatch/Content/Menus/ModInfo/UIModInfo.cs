@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using tContentPatch.Content.UI;
 using tContentPatch.ModLoad;
-using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.UI;
 
 namespace tContentPatch.Content.Menus.ModInfo
@@ -140,30 +141,9 @@ namespace tContentPatch.Content.Menus.ModInfo
             }
         }
 
-        private void Back(UIState BackUI)
-        {
-            if (BackUI == null)
-            {
-                if (Main.gameMenu) Main.menuMode = 0;
-                else IngameFancyUI.Close();
-            }
-            else
-            if (Main.gameMenu)
-            {
-                Main.menuMode = 888;
-                Main.MenuUI.SetState(BackUI);
-            }
-            else
-            {
-                Main.InGameUI.SetState(BackUI);
-            }
-        }
-
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-
-            if (PlayerInput.Triggers.JustPressed.Inventory) Back(BackUI);
 
             if (ui_btn3.IsMouseHovering && ui_btn3.isEnable == false) DrawTip.SetDraw("卸载模组以删除");
             if (ui_btn4.IsMouseHovering && ui_btn4.isEnable)
@@ -171,6 +151,15 @@ namespace tContentPatch.Content.Menus.ModInfo
                 string path = mo.info?.jumpPath;
                 if (path != null) DrawTip.SetDraw($"不要相信可疑链接.跳转到:{path}");
             }
+
+            if (PlayerInput.Triggers.JustPressed.Inventory) Back(BackUI);
+        }
+
+        public void Back(UIState back)
+        {
+            GameUitl.BackMenu(back);
+
+            SoundEngine.PlaySound(SoundID.MenuClose);
         }
     }
 }

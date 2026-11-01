@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using tContentPatch.ModLoad;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.UI;
 
 namespace tContentPatch.Content.Menus.ModSetSwitch
@@ -22,6 +24,8 @@ namespace tContentPatch.Content.Menus.ModSetSwitch
             uistate.InitializeModList(backUI, mos, open);
 
             GameUitl.OpenMenu(uistate);
+
+            SoundEngine.PlaySound(SoundID.MenuOpen);
         }
 
         public static void OpenModSet(List<ModSetting> mss, ModSetting open = null)

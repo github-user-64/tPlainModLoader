@@ -9,7 +9,6 @@ using tContentPatch.ModLoad;
 using tContentPatch.Patch;
 using tContentPatch.Utils;
 using Terraria;
-using Terraria.ID;
 
 namespace tContentPatch
 {
@@ -67,8 +66,14 @@ namespace tContentPatch
             //加载完成时
             LoaderControl.OnModLoad_Ok += () =>
             {
-                if (Main.netMode != 0 && Main.netMode != 1) return;
-                Main.menuMode = MenuID.Title;
+                if (Main.dedServ) return;
+                GameUitl.BackMenu();
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                Content.Menus.CreateMod.CreateMod.OpenMenu();
             };
             //取消时
             LoaderControl.OnModLoad_Cancel += (e) => Content.Menus.ModLoadingMenu.ModLoadingMenu.OpenLoadMenu(e, LoaderControl.CancelLoad);

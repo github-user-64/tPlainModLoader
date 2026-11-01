@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using tContentPatch.Content.UI;
 using tContentPatch.ModLoad;
-using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent.UI.Elements;
 using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.UI;
 
 namespace tContentPatch.Content.Menus.ModManager
@@ -64,7 +65,7 @@ namespace tContentPatch.Content.Menus.ModManager
             ui_buttons[1].OnLeftClick += (e, s) => ModManager.ModNoEnableAll();
             ui_buttons[2].OnLeftClick += (e, s) => ModManager.AgainLoadMod();
             ui_buttons[2].OnUpdate += (e) => { if (ui_buttons[2].IsMouseHovering) DrawTip.SetDraw("建议重启程序"); };
-            ui_buttons[3].OnLeftClick += (e, s) => Button_Back_Click(backUI);
+            ui_buttons[3].OnLeftClick += (e, s) => Back(backUI);
             ui_buttons[3].OnUpdate += (e) => { if (ui_buttons[3].IsMouseHovering && ModManager.CheckModUpdate()) DrawTip.SetDraw("需要重新加载, 建议重启程序"); };
             ui_buttons[4].OnLeftClick += (e, s) => ModManager.OpenModDirectory();
             ui_buttons[5].OnLeftClick += (e, s) => ModManager.OpenModSetSwitch();
@@ -97,10 +98,10 @@ namespace tContentPatch.Content.Menus.ModManager
 
             ui_buttons_wrap.UpdateContainer_Height();
 
-            if (PlayerInput.Triggers.JustPressed.Inventory) Button_Back_Click(backUI);
+            if (PlayerInput.Triggers.JustPressed.Inventory) Back(backUI);
         }
 
-        private void Button_Back_Click(UIState backUi)
+        private void Back(UIState back)
         {
             if (ModManager.CheckModUpdate())
             {
@@ -108,14 +109,9 @@ namespace tContentPatch.Content.Menus.ModManager
                 return;
             }
 
-            if (backUi == null)
-            {
-                Main.menuMode = 0;
-                return;
-            }
+            GameUitl.BackMenu(back);
 
-            Main.menuMode = 888;
-            Main.MenuUI.SetState(backUi);
+            SoundEngine.PlaySound(SoundID.MenuClose);
         }
     }
 }

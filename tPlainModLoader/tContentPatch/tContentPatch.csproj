@@ -56,6 +56,8 @@
     <Compile Include="ContentPatch.cs" />
     <Compile Include="Content\CreateMod\CreateMod.cs" />
     <EmbeddedResource Include="Content\CreateMod\Files\ThisMod.cs" />
+    <Compile Include="Content\Menus\CreateMod\CreateMod.cs" />
+    <Compile Include="Content\Menus\CreateMod\UICreateMod.cs" />
     <Compile Include="Content\Menus\Patch_UIWorkshopHub\PatchUIWorkshopHub.cs" />
     <Compile Include="Content\Network\ModNetworkPacket.cs" />
     <Compile Include="Content\Network\NetTPMLModule.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="Content\UI\UISwitch.cs" />
     <Compile Include="Content\UI\UITextBox.cs" />
     <Compile Include="Content\UI\UIWindow.cs" />
+    <Compile Include="Content\UI\UIMenuPanel.cs" />
     <Compile Include="ModLoad\Inheritance\ModNetPacket.cs" />
     <Compile Include="ModLoad\LoadInstance\LoadInstance.cs" />
     <Compile Include="ModLoad\LoadInstance\LoadInstance_IModLoader.cs" />

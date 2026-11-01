@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using tContentPatch.ModLoad;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.UI;
 
 namespace tContentPatch.Content.Menus.ModInfo
@@ -25,6 +27,8 @@ namespace tContentPatch.Content.Menus.ModInfo
             uistate.BackUI = backUI;
             uistate.InitializeMod(mo, ActionDelMod);
             GameUitl.OpenMenu(uistate);
+
+            SoundEngine.PlaySound(SoundID.MenuOpen);
         }
 
         public static void OpenModDirectory(ModObject mo)

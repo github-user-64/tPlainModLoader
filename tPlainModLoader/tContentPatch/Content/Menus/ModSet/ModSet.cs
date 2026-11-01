@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.UI;
 
 namespace tContentPatch.Content.Menus.ModSet
@@ -21,6 +23,8 @@ namespace tContentPatch.Content.Menus.ModSet
             uistate.InitializeSetList(backUI, mss, open);
 
             GameUitl.OpenMenu(uistate);
+
+            SoundEngine.PlaySound(SoundID.MenuOpen);
         }
 
         public static void SaveData(List<ModSetting> mss)

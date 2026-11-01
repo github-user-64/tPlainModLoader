@@ -81,7 +81,7 @@ namespace tContentPatch.Content.Menus.Patch_UIWorkshopHub
             UIElement ui2 = MakeFancyButton(This, AssemblyResource.LoadNew<Texture2D>($"{nameof(tContentPatch)}.Resources.UI.Workshop.CreateMod.png"),
                 "创建模组", "创建一个新的模组项目", _descriptionText,
                 itemWidth, itemHeight);
-            ui2.OnLeftClick += (e, s) => { };
+            ui2.OnLeftClick += (e, s) => CreateMod.CreateMod.OpenMenu(This);
             wp.Append(ui2);
 
             foreach (UIElement i in uis)

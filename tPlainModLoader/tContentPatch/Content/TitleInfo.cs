@@ -32,7 +32,7 @@ namespace tContentPatch.Content
                 {
                     off += 20;
                 }
-                if (!WorldGen.drunkWorldGen && Main.menuMode == 0)
+                if (!WorldGen.drunkWorldGen && Main.menuMode == MenuID.Title)
                 {
                     off += 32;
                     off += 32;
@@ -49,7 +49,7 @@ namespace tContentPatch.Content
             internal static void Postfix(Color menuColor, float upBump)
             {
                 float off = 6f;
-                if (!WorldGen.drunkWorldGen && Main.menuMode == 0)
+                if (!WorldGen.drunkWorldGen && Main.menuMode == MenuID.Title)
                 {
                     off += 32;
                     off += 32;
