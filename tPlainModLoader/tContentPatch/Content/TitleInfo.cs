@@ -7,6 +7,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.UI.Chat;
 
 namespace tContentPatch.Content
@@ -135,7 +136,7 @@ namespace tContentPatch.Content
             {
                 if (PlayerInput.IgnoreMouseInterface) return;
                 if (!Main.mouseLeft || !Main.mouseLeftRelease) return;
-                SoundEngine.PlaySound(10, -1, -1, 1, 1f, 0f);
+                SoundEngine.PlaySound(SoundID.MenuOpen, -1, -1, 1, 1f, 0f);
                 Main.mouseLeftRelease = false;
                 try
                 {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria.Audio;
+using Terraria.ID;
 using Terraria.UI;
 
 namespace tContentPatch.Content.UI.ModSet
@@ -34,7 +35,7 @@ namespace tContentPatch.Content.UI.ModSet
             textBox.Text_MaxLength = Text_MaxLength;
             textBox.OnLostFocus += () => OnLostFocus?.Invoke();
             textBox.OnTextChanged += s => OnTextChanged?.Invoke(s);
-            textBox.OnLeftClick += (e, s) => SoundEngine.PlaySound(12);
+            textBox.OnLeftClick += (e, s) => SoundEngine.PlaySound(SoundID.MenuTick);
 
             Append(textBox);
         }

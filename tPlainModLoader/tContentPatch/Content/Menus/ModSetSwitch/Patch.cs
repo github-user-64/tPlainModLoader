@@ -4,8 +4,10 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
+using tContentPatch.Utils;
 using Terraria;
 using Terraria.Audio;
+using Terraria.ID;
 using Terraria.Social.Base;
 
 namespace tContentPatch.Content.Menus.ModSetSwitch
@@ -54,7 +56,9 @@ namespace tContentPatch.Content.Menus.ModSetSwitch
             codeMatcher.Advance(cs.Length - 1);//在add前
             if (codeMatcher.IsInvalid)
             {
-                ContentPatch.PrintTry($"无法在游戏选择窗口插入选项:找不到IL位置");
+                string s = $"无法在游戏选择窗口插入选项:找不到IL位置";
+                Log.Add(s);
+                ContentPatch.PrintTry(s);
                 return instructions;
             }
 
@@ -114,7 +118,7 @@ namespace tContentPatch.Content.Menus.ModSetSwitch
 
             if (flag2 && Main.mouseLeft && Main.mouseLeftRelease)
             {
-                SoundEngine.PlaySound(10);
+                SoundEngine.PlaySound(SoundID.MenuOpen);
                 ModSetSwitch.OpenModSetSwitchMenu(null, ContentPatch.GetModObjects());
             }
         }

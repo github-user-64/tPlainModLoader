@@ -42,12 +42,12 @@ namespace tContentPatch.Content.UI
             uie.Height.Precent = 1;
             uie.OnLeftClick += (e, s) =>
             {
-                SoundEngine.PlaySound(12);
+                SoundEngine.PlaySound(SoundID.MenuTick);
                 SetVal(!val);
             };
             uie.OnMouseOver += (e, s) =>
             {
-                SoundEngine.PlaySound(12);
+                SoundEngine.PlaySound(SoundID.MenuTick);
                 ui_text.TextColor = ui_img.Color = Colors.FancyUIFatButtonMouseOver;
             };
             uie.OnMouseOut += (e, s) => ui_text.TextColor = ui_img.Color = Color.White;

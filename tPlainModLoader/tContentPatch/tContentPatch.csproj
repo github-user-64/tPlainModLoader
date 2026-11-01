@@ -56,6 +56,7 @@
     <Compile Include="ContentPatch.cs" />
     <Compile Include="Content\CreateMod\CreateMod.cs" />
     <EmbeddedResource Include="Content\CreateMod\Files\ThisMod.cs" />
+    <Compile Include="Content\Menus\Patch_UIWorkshopHub\PatchUIWorkshopHub.cs" />
     <Compile Include="Content\Network\ModNetworkPacket.cs" />
     <Compile Include="Content\Network\NetTPMLModule.cs" />
     <Compile Include="Content\Network\RegisterNetModule.cs" />
@@ -125,7 +126,7 @@
     <Compile Include="Content\Menus\ModManager\ModManager.cs" />
     <Compile Include="Content\Menus\ModManager\UIModItem.cs" />
     <Compile Include="Content\Menus\ModManager\UIModManager.cs" />
-    <Compile Include="Content\Menus\Patch_UIWorkshopHub\Patch.cs" />
+    <Compile Include="Content\Menus\Patch_UIWorkshopHub\PatchDrawMenu.cs" />
     <Compile Include="Content\GameUitl.cs" />
     <Compile Include="Content\Menus\ModLoadingMenu\ModLoadingMenu.cs" />
     <Compile Include="Content\Menus\ModLoadingMenu\UILoadProgressBar.cs" />
@@ -167,9 +168,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\UI.Workshop.HudModManager.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\UI.ModIcon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +179,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Content\CreateMod\Files\ico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\UI.Workshop.CreateMod.png" />
+    <EmbeddedResource Include="Resources\UI.Workshop.ModManager.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

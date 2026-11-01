@@ -80,7 +80,7 @@ namespace tContentPatch.Content.UI
         private void FadedMouseOver(UIMouseEvent evt, UIElement listeningElement)
         {
             if (isEnable == false) return;
-            SoundEngine.PlaySound(12);
+            SoundEngine.PlaySound(SoundID.MenuTick);
         }
     }
 }

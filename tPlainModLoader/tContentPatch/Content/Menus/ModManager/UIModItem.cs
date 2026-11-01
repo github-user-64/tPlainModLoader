@@ -12,6 +12,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
+using Terraria.ID;
 using Terraria.UI;
 
 namespace tContentPatch.Content.Menus.ModManager
@@ -104,7 +105,7 @@ namespace tContentPatch.Content.Menus.ModManager
             ui_mod_isEnable.SetPadding(8);
             ui_mod_isEnable.OnLeftMouseDown += (e, s) =>
             {
-                SoundEngine.PlaySound(12);
+                SoundEngine.PlaySound(SoundID.MenuTick);
                 ModManager.ModEnableReversal(mo);
             };
 
@@ -148,7 +149,7 @@ namespace tContentPatch.Content.Menus.ModManager
             ui.Height.Pixels = 32;
             ui.ScaleToFit = true;
             ui.Color = Color.Gray;
-            ui.OnMouseOver += (e, s) => { ui.Color = Color.White; SoundEngine.PlaySound(12); };
+            ui.OnMouseOver += (e, s) => { ui.Color = Color.White; SoundEngine.PlaySound(SoundID.MenuTick); };
             ui.OnMouseOut += (e, s) => ui.Color = Color.Gray;
             ui.OnLeftClick += (e, s) => onclick?.Invoke();
             if (mouseText != null) ui.OnUpdate += _ =>
