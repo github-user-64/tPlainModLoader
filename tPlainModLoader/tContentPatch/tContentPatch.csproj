@@ -58,6 +58,7 @@
     <EmbeddedResource Include="Content\CreateMod\Files\ThisMod.cs" />
     <Compile Include="Content\Menus\CreateMod\CreateMod.cs" />
     <Compile Include="Content\Menus\CreateMod\UICreateMod.cs" />
+    <Compile Include="Content\Menus\CreateMod\UITextBoxItem.cs" />
     <Compile Include="Content\Menus\Patch_UIWorkshopHub\PatchUIWorkshopHub.cs" />
     <Compile Include="Content\Network\ModNetworkPacket.cs" />
     <Compile Include="Content\Network\NetTPMLModule.cs" />

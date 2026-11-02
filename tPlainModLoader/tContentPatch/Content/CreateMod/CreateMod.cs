@@ -50,9 +50,8 @@ namespace tContentPatch.Content
         /// <exception cref="Exception"></exception>
         public static void Check(ref string displayName, ref string modName, ref string fullPath)
         {
-            if (string.IsNullOrEmpty(displayName)) displayName = null;
-            if (string.IsNullOrEmpty(modName)) throw new ArgumentNullException(nameof(modName));
-            if (string.IsNullOrEmpty(fullPath)) throw new ArgumentNullException(nameof(fullPath));
+            if (string.IsNullOrEmpty(modName)) throw new Exception("模组名称不可为空");
+            if (string.IsNullOrEmpty(fullPath)) throw new Exception("创建路径不可为空");
 
             modName = modName.Trim();
             fullPath = Path.Combine(fullPath.Trim(), modName);
@@ -60,7 +59,13 @@ namespace tContentPatch.Content
 
             CodeDomProvider cdp = CodeDomProvider.CreateProvider("C#");
 
-            if (cdp.IsValidIdentifier(modName) != true) throw new Exception($"名称不可用:[{modName}]");
+            if (cdp.IsValidIdentifier(modName) != true) throw new Exception($"模组名称不可用:[{modName}]");
+
+            Assembly[] ass = AppDomain.CurrentDomain.GetAssemblies();
+            foreach (Assembly i in ass)
+            {
+                if (i.GetName().Name == modName) throw new Exception($"模组名称和已有的程序集重名:[{modName}]和[{i.FullName}]");
+            }
         }
 
         /// <exception cref="Exception"></exception>
