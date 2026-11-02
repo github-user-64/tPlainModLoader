@@ -80,6 +80,7 @@
     <Compile Include="Content\UI\ModSet\UIItemTitle.cs" />
     <Compile Include="Content\UI\ModSet\UIItemValueSlider.cs" />
     <Compile Include="Content\UI\ModSet\UIItem.cs" />
+    <Compile Include="Content\UI\UIPanel2.cs" />
     <Compile Include="Content\UI\UIRadioButton.cs" />
     <Compile Include="Content\UI\UIScrollViewer2.cs" />
     <Compile Include="Content\UI\UIScrollViewer.cs" />

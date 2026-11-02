@@ -20,12 +20,12 @@ namespace tContentPatch.Content.Menus.ModSet
         public UIModSet() : base(string.Empty)
         {
             MaxWidth.Set(700f, 0f);
-            Panel.BackgroundColor = Color.MidnightBlue * 0.8f;
+            UIPanel.BackgroundColor = Color.MidnightBlue * 0.8f;
 
             uie = new UIElement();
             uie.Width.Set(0f, 1f);
             uie.Height.Set(0f, 1f);
-            Panel.Append(uie);
+            UIPanel.Append(uie);
 
             btn_prev = new UIButton1("<");
             btn_prev.OnLeftClick += (e, s) => SetItem(mssIndex - 1);
@@ -55,7 +55,7 @@ namespace tContentPatch.Content.Menus.ModSet
 
             if (mss == null)
             {
-                Title.SetText(string.Empty);
+                UITitle.SetText(string.Empty);
                 uie.RemoveAllChildren();
                 return;
             }
@@ -85,7 +85,7 @@ namespace tContentPatch.Content.Menus.ModSet
 
             //
 
-            Title.SetText(ms_this?.Title ?? string.Empty);
+            UITitle.SetText(ms_this?.Title ?? string.Empty);
             this.uie.RemoveAllChildren();
 
             UIElement uie = ms_this?.GetUI();

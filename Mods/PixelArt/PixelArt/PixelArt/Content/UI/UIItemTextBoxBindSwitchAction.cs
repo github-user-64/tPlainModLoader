@@ -27,7 +27,7 @@ namespace PixelArt.Content.UI
             ui_t.Width.Set(-(ui_s.Width.Pixels + 2), 1);
             ui_t.Height.Set(-6, 1);
             ui_t.VAlign = 0.5f;
-            ui_t.SetTextScale(0.8f);
+            ui_t.UIText.SetText(string.Empty, 0.8f, false);
 
             Append(uie);
             uie.Append(ui_t);

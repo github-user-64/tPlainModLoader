@@ -20,14 +20,14 @@ namespace tContentPatch.Content.Menus.ModManager
             HAlign = 0.5f;
             VAlign = 0.5f;
 
-            Panel.BackgroundColor = new Color(31, 41, 71, 200);
+            UIPanel.BackgroundColor = new Color(31, 41, 71, 200);
 
             sv = new UIScrollViewer2();
             sv.Width.Precent = 1;
             sv.Height.Set(-10, 1);
             sv.Top.Pixels = 10;
             sv.ItemMargin = 4;
-            Panel.Append(sv);
+            UIPanel.Append(sv);
 
             UIButton1[] btns = new UIButton1[]
             {

@@ -2,15 +2,28 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent.UI.Elements;
+using Terraria.ID;
+using Terraria.UI;
 
 namespace tContentPatch.Content.UI
 {
     /// <summary/>
-    public class UITextBox : UIPanel
+    public class UITextBox : UIElement
     {
         /// <summary/>
+        public Color UITextColor;
+        /// <summary/>
+        public Color UITextColorDeft;
+        /// <summary/>
+        public Color UITextShadowColor;
+        /// <summary/>
+        public Color UITextShadowColorDeft;
+        /// <summary/>
         public Action<string> OnTextChanged = null;
+        /// <summary/>
+        public Action OnGotFocus = null;
         /// <summary/>
         public Action OnLostFocus = null;
         /// <summary/>
@@ -25,7 +38,7 @@ namespace tContentPatch.Content.UI
             {
                 if (focus == value) return;
                 focus = value;
-                if (focus == false) OnLostFocus?.Invoke();
+                (focus ? OnGotFocus : OnLostFocus)?.Invoke();
             }
         }
         private string text = null;
@@ -43,9 +56,17 @@ namespace tContentPatch.Content.UI
             set => textDefault = value ?? string.Empty;
         }
 
+        /// <summary>
+        /// 显示文本的ui
+        /// </summary>
+        public readonly UIText UIText = null;
+        /// <summary>
+        /// ui的背景
+        /// </summary>
+        public readonly UIElement UIBackStyle = null;
+
         private string text_old = null;
-        private UIText ui_text = null;
-        private int time1 = 0;
+        private int time = 0;
         private bool mouseLeftOld = false;
 
         /// <summary/>
@@ -55,16 +76,21 @@ namespace tContentPatch.Content.UI
             text_old = Text;
             TextDefault = text_default;
 
-            OverflowHidden = true;
-            ui_text = new UIText(TextDefault);
+            Width.Set(0f, 1f);
+            Height.Set(25f, 0f);
+            OverflowHidden = true;//溢出隐藏
 
-            SetPadding(2);
-            BackgroundColor = Color.White;
-            BorderColor = Color.White;
-            ui_text.ShadowColor = BackgroundColor;
-            ui_text.VAlign = 0.5f;
+            UIBackStyle = new UIState();
+            Append(UIBackStyle);
 
-            Append(ui_text);
+            UIText = new UIText(TextDefault);
+            UIText.Width.Set(0f, 0f);
+            UIText.Height.Set(0f, 0f);
+            UIText.VAlign = 0.5f;
+            UIText.SetPadding(4f);
+            Append(UIText);
+
+            SetBackStyle();
         }
 
         /// <inheritdoc/>
@@ -72,33 +98,43 @@ namespace tContentPatch.Content.UI
         {
             base.Update(gameTime);
 
-            ++time1;
-            if (time1 * 16 > 2000) time1 = 0;
+            ++time;
+            if (time * 16 > 2000) time = 0;
 
             UpdateFocus();
+            UpdateUIText();
+        }
 
-            string ui_text_text = null;
+        /// <summary/>
+        protected virtual void UpdateUIText()
+        {
+            string uitext_text = string.Empty;
+
             if (Focus)
             {
-                ui_text_text = Text;
-                if (time1 * 16 > 1000) ui_text_text += "|";
+                uitext_text = Text;
+                if (time * 16 > 1000) uitext_text += "|";
 
-                ui_text.TextColor = Color.Black;
+                UIText.TextColor = UITextColor;
+                UIText.ShadowColor = UITextShadowColor;
             }
             else
             {
-                if (Text == "")
+                if (Text.Length < 1)
                 {
-                    ui_text_text = TextDefault;
-                    ui_text.TextColor = Color.Gray;
+                    uitext_text = TextDefault;
+                    UIText.TextColor = UITextColorDeft;
+                    UIText.ShadowColor = UITextShadowColorDeft;
                 }
                 else
                 {
-                    ui_text_text = Text;
-                    ui_text.TextColor = Color.Black;
+                    uitext_text = Text;
+                    UIText.TextColor = UITextColor;
+                    UIText.ShadowColor = UITextShadowColor;
                 }
             }
-            ui_text.SetText(ui_text_text);
+
+            if (uitext_text != UIText.Text) UIText.SetText(uitext_text);
         }
 
         /// <summary/>
@@ -132,7 +168,7 @@ namespace tContentPatch.Content.UI
             Main.instance.HandleIME();
             string s = Main.GetInputText(Text);
 
-            Terraria.UI.CalculatedStyle size = GetDimensions();
+            CalculatedStyle size = GetDimensions();
             DrawIME.NeedIME = true;
             DrawIME.IME_P = new Vector2(size.X, size.Y + size.Height + 36);
 
@@ -170,10 +206,60 @@ namespace tContentPatch.Content.UI
             OnTextChanged?.Invoke(Text);
         }
 
-        /// <summary/>
-        public void SetTextScale(float textScale)
+        /// <summary>
+        /// 设置页面背景
+        /// </summary>
+        protected virtual void SetBackStyle()
         {
-            ui_text.SetText(text, textScale, false);
+            Style1(this);
+        }
+
+        //
+
+        /// <summary/>
+        public static void Style1(UITextBox ui)
+        {
+            UIPanel back = new UIPanel();
+            back.Width.Set(0f, 1f);
+            back.Height.Set(0f, 1f);
+            back.BackgroundColor = Color.White;
+            back.BorderColor = Color.White;
+
+            ui.UIBackStyle.RemoveAllChildren();
+            ui.UIBackStyle.Append(back);
+
+            ui.UITextColor = Color.Black;
+            ui.UITextColorDeft = Color.Gray;
+            ui.UITextShadowColor = ui.UITextShadowColorDeft = back.BackgroundColor;
+        }
+
+        /// <summary/>
+        public static void Style2(UITextBox ui)
+        {
+            UIPanel2 back = new UIPanel2();
+            back.Width.Set(0f, 1f);
+            back.Height.Set(0f, 1f);
+            back.BackgroundColor = default;
+            back.BorderColor = Color.MidnightBlue * 0.6f;
+            back.OnMouseOver += (e, s) => SoundEngine.PlaySound(SoundID.MenuTick);
+            back.OnUpdate += _ =>
+            {
+                back.BorderColor = Color.MidnightBlue;
+                if (ui.Focus != true && back.IsMouseHovering != true) back.BorderColor *= 0.6f;
+
+                back.BackgroundColor = ui.Focus ? Color.MidnightBlue * 0.6f : default;
+            };
+
+            ui.UIBackStyle.RemoveAllChildren();
+            ui.UIBackStyle.Append(back);
+
+            ui.UITextColor = Color.White;
+            ui.UITextColorDeft = Color.MidnightBlue * 0.6f;
+            ui.UITextShadowColor = ui.UITextShadowColorDeft = default;
+
+            ui.UIText.SetPadding(6f);
+            ui.OnGotFocus += () => SoundEngine.PlaySound(SoundID.MenuTick);
+            ui.OnLostFocus += () => SoundEngine.PlaySound(SoundID.MenuClose);
         }
     }
 }

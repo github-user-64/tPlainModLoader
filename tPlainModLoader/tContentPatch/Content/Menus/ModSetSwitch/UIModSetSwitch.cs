@@ -17,20 +17,20 @@ namespace tContentPatch.Content.Menus.ModSetSwitch
         {
             MinWidth.Set(700f, 0f);
             MaxWidth.Set(900f, 0f);
-            Panel.BackgroundColor = Color.MidnightBlue * 0.8f;
+            UIPanel.BackgroundColor = Color.MidnightBlue * 0.8f;
 
             UIModScrollViewer ui_modList = new UIModScrollViewer("模组管理", true);
             ui_modList.Width.Set(-5f, 0.5f);
             ui_modList.Height.Set(0f, 1f);
             ui_modList.HAlign = 0f;
-            Panel.Append(ui_modList);
+            UIPanel.Append(ui_modList);
             initModList = ui_modList.InitializeList;
 
             UIModScrollViewer ui_modSet = new UIModScrollViewer("设置", false);
             ui_modSet.Width.Set(-5f, 0.5f);
             ui_modSet.Height.Set(-5f, 1f);
             ui_modSet.HAlign = 1f;
-            Panel.Append(ui_modSet);
+            UIPanel.Append(ui_modSet);
             initModSet = ui_modSet.InitializeList;
 
             UIButton1 ui_back = new UIButton1("返回", 0.8f, true);

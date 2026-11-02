@@ -34,13 +34,13 @@ namespace OptimizeAndTool.Content.ServerList
             UITextBoxBind<string> ui_ip = new UITextBoxBind<string>(ip, v => v, "地址");
             ui_ip.Width.Precent = 1;
             ui_ip.Height.Pixels = 25;
-            ui_ip.SetTextScale(0.8f);
+            ui_ip.UIText.SetText(string.Empty, 0.8f, false);
 
             UITextBoxBind<int> ui_port = new UITextBoxBind<int>(port, int.Parse, "端口");
             ui_port.Width.Precent = 0.4f;
             ui_port.Height.Pixels = 25;
             ui_port.VAlign = 1;
-            ui_port.SetTextScale(0.8f);
+            ui_port.UIText.SetText(string.Empty, 0.8f, false);
 
             UIImageButton btnDel = new UIImageButton(Main.Assets.Request<Texture2D>("Images/UI/ButtonDelete", ReLogic.Content.AssetRequestMode.ImmediateLoad));
             btnDel.OnUpdate += _ =>

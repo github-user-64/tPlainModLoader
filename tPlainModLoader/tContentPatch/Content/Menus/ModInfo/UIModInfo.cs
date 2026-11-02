@@ -22,7 +22,7 @@ namespace tContentPatch.Content.Menus.ModInfo
             ui_sv.Width.Precent = 1;
             ui_sv.Height.Precent = 1;
             ui_sv.ItemMargin = 4;
-            Panel.Append(ui_sv);
+            UIPanel.Append(ui_sv);
 
             UIButton1 btn1 = new UIButton1("返回");
             btn1.OnLeftClick += (e, s) => Back(BackUI);
@@ -57,11 +57,11 @@ namespace tContentPatch.Content.Menus.ModInfo
 
             if (this.mo == null)
             {
-                Title.SetText("模组信息");
+                UITitle.SetText("模组信息");
                 return;
             }
 
-            Title.SetText($"模组信息: {this.mo.info?.name ?? this.mo.config.key}");
+            UITitle.SetText($"模组信息: {this.mo.info?.name ?? this.mo.config.key}");
             btn3.isEnable = ModInfo.GetModIsLoaded(this.mo) == false;
             btn4.isEnable = this.mo.info?.jumpPath != null;
 
