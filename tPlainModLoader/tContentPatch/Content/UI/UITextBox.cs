@@ -241,17 +241,18 @@ namespace tContentPatch.Content.UI
             back.Height.Set(0f, 1f);
             back.BackgroundColor = default;
             back.BorderColor = Color.MidnightBlue * 0.6f;
-            back.OnMouseOver += (e, s) => SoundEngine.PlaySound(SoundID.MenuTick);
             back.OnUpdate += _ =>
             {
                 back.BorderColor = Color.MidnightBlue;
-                if (ui.Focus != true && back.IsMouseHovering != true) back.BorderColor *= 0.6f;
+                if (ui.Focus != true && ui.IsMouseHovering != true) back.BorderColor *= 0.6f;
 
                 back.BackgroundColor = ui.Focus ? Color.MidnightBlue * 0.6f : default;
             };
 
             ui.UIBackStyle.RemoveAllChildren();
             ui.UIBackStyle.Append(back);
+
+            //
 
             ui.UITextColor = Color.White;
             ui.UITextColorDeft = Color.MidnightBlue * 0.6f;
@@ -260,6 +261,7 @@ namespace tContentPatch.Content.UI
             ui.UIText.SetPadding(6f);
             ui.OnGotFocus += () => SoundEngine.PlaySound(SoundID.MenuTick);
             ui.OnLostFocus += () => SoundEngine.PlaySound(SoundID.MenuClose);
+            ui.OnMouseOver += (e, s) => SoundEngine.PlaySound(SoundID.MenuTick);
         }
     }
 }

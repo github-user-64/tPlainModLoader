@@ -19,32 +19,25 @@ namespace tContentPatch.Content
             ".targets",
         };
 
-        public static string TryCreate(string displayName, string modName, string fullPath)
+        /// <exception cref="Exception"></exception>
+        public static void Create(string displayName, string modName, string fullPath, out string path)
         {
-            try
+            Check(ref displayName, ref modName, ref fullPath);
+            ContentPatch.PrintTry($"{nameof(CreateMod)}:创建路径:{fullPath}");
+
+            if (Directory.Exists(fullPath))
             {
-                Check(ref displayName, ref modName, ref fullPath);
-                ContentPatch.PrintTry($"{nameof(CreateMod)}:创建路径:{fullPath}");
-
-                if (Directory.Exists(fullPath))
-                {
-                    if (Directory.GetDirectories(fullPath).Length > 0) throw new Exception("目录不为空");
-                    if (Directory.GetFiles(fullPath).Length > 0) throw new Exception("目录不为空");
-                }
-                else
-                {
-                    Directory.CreateDirectory(fullPath);
-                }
-
-                CreateFile(displayName, modName, fullPath);
-
-                return fullPath;
+                if (Directory.GetDirectories(fullPath).Length > 0) throw new Exception("目录不为空");
+                if (Directory.GetFiles(fullPath).Length > 0) throw new Exception("目录不为空");
             }
-            catch (Exception ex)
+            else
             {
-                ContentPatch.PrintTry($"{nameof(CreateMod)}:创建失败:{ex.Message}");
-                return null;
+                Directory.CreateDirectory(fullPath);
             }
+
+            CreateFile(displayName, modName, fullPath);
+
+            path = fullPath;
         }
 
         /// <exception cref="Exception"></exception>

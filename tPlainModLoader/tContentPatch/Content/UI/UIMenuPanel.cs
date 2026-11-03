@@ -44,7 +44,7 @@ namespace tContentPatch.Content.UI
 
             Width.Set(-800f, 1f);
             Height.Set(-100f + UITitle.Top.Pixels, 1f);
-            MinWidth.Set(700f, 0f);
+            MinWidth.Set(500f, 0f);
             MaxWidth.Set(800f, 0f);
             HAlign = 0.5f;
             VAlign = 0.5f;

@@ -46,6 +46,7 @@
       <Project>{28032285-ba86-4a99-88c3-82a8483dc05c}</Project>
       <Name>CommandHelp</Name>
     </ProjectReference>
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Command\MsgCommand.cs" />
@@ -56,9 +57,11 @@
     <Compile Include="ContentPatch.cs" />
     <Compile Include="Content\CreateMod\CreateMod.cs" />
     <EmbeddedResource Include="Content\CreateMod\Files\ThisMod.cs" />
-    <Compile Include="Content\Menus\CreateMod\CreateMod.cs" />
+    <Compile Include="Content\Menus\CreateMod\UICreateMod_Create.cs" />
+    <Compile Include="Content\Menus\CreateMod\UICreateMod_Utils.cs" />
     <Compile Include="Content\Menus\CreateMod\UICreateMod.cs" />
     <Compile Include="Content\Menus\CreateMod\UITextBoxItem.cs" />
+    <Compile Include="Content\Menus\CreateMod\UITextLink.cs" />
     <Compile Include="Content\Menus\Patch_UIWorkshopHub\PatchUIWorkshopHub.cs" />
     <Compile Include="Content\Network\ModNetworkPacket.cs" />
     <Compile Include="Content\Network\NetTPMLModule.cs" />

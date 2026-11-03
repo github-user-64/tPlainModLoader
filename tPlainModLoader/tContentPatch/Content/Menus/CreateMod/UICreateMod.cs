@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using System;
+using Microsoft.Xna.Framework.Graphics;
 using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
@@ -8,11 +7,8 @@ using Terraria.UI;
 
 namespace tContentPatch.Content.Menus.CreateMod
 {
-    internal class UICreateMod : UIMenuPanel
+    internal partial class UICreateMod : UIMenuPanel
     {
-        private readonly object _lock = new object();
-        private bool Createing = false;
-
         protected readonly UITextBoxItem UIDisplayName = null;
         protected readonly UITextBoxItem UIModName = null;
         protected readonly UITextBoxItem UIPath = null;
@@ -21,14 +17,18 @@ namespace tContentPatch.Content.Menus.CreateMod
 
         public UICreateMod(UIState back = null) : base("创建模组", back: back)
         {
+            MinWidth.Set(700f, 0f);
+
             UIButton1 btn_back = new UIButton1("返回");
             btn_back.OnLeftClick += (e, s) => Back(BackUI);
             AddBtn(btn_back, 2);
 
             UIButton_Create = new UIButton1("创建");
             UIButton_Create.isEnable = false;
-            UIButton_Create.OnLeftClick += (e, s) => Create();
+            UIButton_Create.OnLeftClick += (e, s) => TryCreate();
             AddBtn(UIButton_Create, 2);
+
+            //
 
             UIStackPanel sp = new UIStackPanel();
             sp.Width.Set(0f, 1f);
@@ -36,18 +36,37 @@ namespace tContentPatch.Content.Menus.CreateMod
             sp.ItemMargin = 20f;
             UIPanel.Append(sp);
 
-            UIDisplayName = new UITextBoxItem("模组显示名称");
+            UIDisplayName = new UITextBoxItem("模组显示名称（可不填）");
+            UIDisplayName.UITextBox.Text_MaxLength = 32;
             sp.Append(UIDisplayName);
 
             UIModName = new UITextBoxItem("模组内部名称");
+            UIModName.UITextBox.Text_MaxLength = 32;
             UIModName.GetTip = GetTipCantNullOrEmpty;
             UIModName.UITip.TextColor = Color.Red;
             sp.Append(UIModName);
 
+            UIElement uie = new UIElement();
+            uie.Width.Set(0f, 1f);
+            uie.OnUpdate += _ => uie.UpdateContainer_Height();
+            sp.Append(uie);
+
+            UIImageButton switchPath = new UIImageButton(Main.Assets.Request<Texture2D>("Images/UI/Camera_6"));
+            switchPath.HAlign = 1f;
+            switchPath.VAlign = 1f;
+            switchPath.OnUpdate += _ =>
+            {
+                if (switchPath.IsMouseHovering) Main.instance.MouseText("左键选择, 右键打开当前路径");
+            };
+            switchPath.OnLeftClick += (e, s) => TrySwitchPath();
+            switchPath.OnRightClick += (e, s) => TryOpenDirectory(UIPath.UITextBox.Text);
+            uie.Append(switchPath);
+
             UIPath = new UITextBoxItem("创建路径");
+            UIPath.Width.Set(-switchPath.Width.Pixels - 4f, 1f);
             UIPath.GetTip = GetTipCantNullOrEmpty;
             UIPath.UITip.TextColor = Color.Red;
-            sp.Append(UIPath);
+            uie.Append(UIPath);
 
             UITip = new UIText(string.Empty);
             sp.Append(UITip);
@@ -61,26 +80,18 @@ namespace tContentPatch.Content.Menus.CreateMod
             tips.IsAutoUpdateSize = true;
             UIPanel.Append(tips);
 
-            UIText tip2 = new UIText("下载开发工具：Visual Studio Community");//https://visualstudio.microsoft.com/
-            tip2.TextColor = Color.DeepSkyBlue;
-            tips.Append(tip2);
+            tips.Append(new UIText("原版的ReLogic.dll文件无法直接引用，可以用tModLoader那的dll替代"));
+            tips.Append(new UIText("在创建出的模组文件ConfigPublic.targets中修改ReLogic的引用位置"));
 
-            UIText tip3 = new UIText("原版的ReLogic.dll文件无法直接引用, 可以用tModLoader那的dll替代");
-            tips.Append(tip3);
+            UITextLink tip = new UITextLink();
+            tip.MarginTop = 6f;
+            tip.AddText("下载开发工具：");
+            tip.AddText("Visual Studio Community", "https://visualstudio.microsoft.com/");
+            tips.Append(tip);
 
-            UIText tip4 = new UIText("在创建出的模组文件ConfigPublic.targets中修改ReLogic的引用位置");
-            tips.Append(tip4);
+            //
 
             SetPathDefault();
-        }
-
-        protected virtual void SetPathDefault()
-        {
-            try
-            {
-                SetPath(typeof(ContentPatch).Assembly.Location);
-            }
-            catch { }
         }
 
         private string GetTipCantNullOrEmpty(string v)
@@ -88,58 +99,40 @@ namespace tContentPatch.Content.Menus.CreateMod
             return string.IsNullOrEmpty(v?.Trim()) ? "不可为空" : null;
         }
 
-        protected void SetPath(string path)
-        {
-            UIPath.UITextBox.SetText(path);
-        }
-
         protected void SetTip(string tip, Color color)
-        {
-            UITip.SetText(tip ?? string.Empty);
-            UITip.TextColor = color;
-        }
-
-        protected void Create()
         {
             try
             {
-                lock (_lock)
-                {
-                    if (Createing) return;
-                    Createing = true;
-                }
-
-                string displayName = UIDisplayName.UITextBox.Text;
-                string modName = UIModName.UITextBox.Text;
-                string path = UIPath.UITextBox.Text;
-
-                Content.CreateMod.Check(ref displayName, ref modName, ref path);
-                SetTip(path, Color.Green);
+                UITip.SetText(GetTextLine(tip, UIPanel.GetInnerDimensions().Width));
+                UITip.TextColor = color;
             }
-            catch (Exception ex)
+            catch
             {
-                SetTip(ex.Message, Color.Red);
-            }
-            finally
-            {
-                Createing = false;
+                if (tip != null) ContentPatch.PrintTry(tip);
             }
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (Main.keyState.IsKeyDown(Keys.LeftControl) && Main.oldKeyState.IsKeyUp(Keys.LeftControl))
-            {
-                CreateMod.OpenMenu(BackUI);
-                return;
-            }
-
             base.Update(gameTime);
 
-            bool enable = UIModName.GetTip?.Invoke(UIModName.UITextBox.Text) == null
+            try
+            {
+                if (UIPath.UITextBox.IsMouseHovering)
+                {
+                    DrawTip.SetDraw(GetTextLine(UIPath.UITextBox.Text, UIPanel.GetInnerDimensions().Width));
+                }
+            }
+            catch { }
+
+            try
+            {
+                bool enable = UIModName.GetTip?.Invoke(UIModName.UITextBox.Text) == null
                 && UIPath.GetTip?.Invoke(UIPath.UITextBox.Text) == null;
 
-            UIButton_Create.isEnable = enable;
+                UIButton_Create.isEnable = enable;
+            }
+            catch { }
         }
     }
 }
