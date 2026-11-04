@@ -32,5 +32,22 @@ namespace tContentPatch.ModPatch
                 }
             }
         }
+
+        [HarmonyPatch(nameof(TileLightScanner.GetTileLight))]
+        [HarmonyPostfix]
+        private static void GetTileLightPostfix(int x, int y, ref Vector3 outputColor)
+        {
+            foreach (PatchTileLightScanner item in mod)
+            {
+                try
+                {
+                    item.GetTileLightPostfix(x, y, ref outputColor);
+                }
+                catch (Exception ex)
+                {
+                    OutputDebug.OutputException(ex);
+                }
+            }
+        }
     }
 }

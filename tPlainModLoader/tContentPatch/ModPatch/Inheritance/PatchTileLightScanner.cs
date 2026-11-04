@@ -13,5 +13,7 @@ namespace tContentPatch
         public virtual void Initialize() { }
         /// <summary/>
         public virtual void ApplyTileLightPrefix(Tile tile, int x, int y, ref FastRandom localRandom, ref Vector3 lightColor) { }
+        /// <summary/>
+        public virtual void GetTileLightPostfix(int x, int y, ref Vector3 outputColor) { }
     }
 }
