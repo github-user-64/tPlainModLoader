@@ -1,15 +1,22 @@
 ﻿using Microsoft.Xna.Framework;
+using Terraria.UI;
 
 namespace tContentPatch.Content.UI
 {
-    /// <summary/>
-    public class UIStackPanel : Terraria.UI.UIElement
+    /// <summary>
+    /// 竖向或横向排列子ui
+    /// </summary>
+    public class UIStackPanel : UIElement
     {
         /// <summary/>
         public float ItemMargin = 0f;
-        /// <summary/>
+        /// <summary>
+        /// 横向
+        /// </summary>
         public bool Horizontal = false;
-        /// <summary/>
+        /// <summary>
+        /// 按<see cref="Horizontal"/>方向自动更新ui的宽或高
+        /// </summary>
         public bool IsAutoUpdateSize = false;
 
         /// <inheritdoc/>
@@ -19,7 +26,7 @@ namespace tContentPatch.Content.UI
 
             float v = 0f;
 
-            foreach (Terraria.UI.UIElement i in Children)
+            foreach (UIElement i in Children)
             {
                 if (i == null) continue;
 

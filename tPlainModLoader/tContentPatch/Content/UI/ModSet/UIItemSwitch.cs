@@ -9,31 +9,20 @@ namespace tContentPatch.Content.UI.ModSet
     public class UIItemSwitch : UIItem
     {
         /// <summary/>
-        public Action<bool> OnValUpdate = null;
-        private UISwitch ui_s = null;
+        public readonly UISwitch UISwitch = null;
+        /// <summary/>
+        public bool IsChecked { get => UISwitch.IsChecked; set => UISwitch.IsChecked = value; }
+        /// <summary/>
+        public Action<bool> OnSetIsChecked { get => UISwitch.OnSetIsChecked; set => UISwitch.OnSetIsChecked = value; }
+        /// <summary/>
+        public Func<bool> OnGetIsChecked { get => UISwitch.OnGetIsChecked; set => UISwitch.OnGetIsChecked = value; }
 
         /// <summary/>
-        public UIItemSwitch(Texture2D ico = null, string text = null) : base(ico, text)
+        public UIItemSwitch(Texture2D ico = null, string title = null) : base(ico, title)
         {
-            ui_s = new UISwitch();
-            ui_s.Height.Precent = 1;
-            ui_s.HAlign = 1;
-            ui_s.VAlign = 0.5f;
-            ui_s.OnValUpdate += v => OnValUpdate?.Invoke(v);
-
-            Append(ui_s);
-        }
-
-        /// <summary/>
-        public void SetVal(bool v)
-        {
-            ui_s.SetVal(v);
-        }
-
-        /// <summary/>
-        public bool GetVal()
-        {
-            return ui_s.GetVal();
+            UISwitch = new UISwitch();
+            UISwitch.HAlign = 1f;
+            Append(UISwitch);
         }
     }
 }

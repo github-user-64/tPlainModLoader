@@ -56,33 +56,27 @@ namespace tContentPatch.Content.Menus.Patch_UIWorkshopHub
         {
             UIElement[] uis = uie.Children.ToArray();
 
-            UIScrollViewer sv = new UIScrollViewer();
+            UIScrollViewer3 sv = new UIScrollViewer3();
             sv.Width.Set(0f, 1f);
             sv.Height.Set(height, 0f);
+            sv.ItemMargin = 4f;
             uie = sv;
 
-            UIWrapPanel wp = new UIWrapPanel();
-            wp.Width.Set(1f, 1f);
-            wp.Height.Set(0f, 0f);
-            wp.ItemMargin = 4f;
-            wp.OnUpdate += _ => wp.UpdateContainer_Height();
-            sv.SetChild(wp);
-
             UIText _descriptionText = (UIText)__descriptionText.GetValue(This);
-            StyleDimension itemWidth = new StyleDimension(-wp.ItemMargin, 0.5f);
+            StyleDimension itemWidth = new StyleDimension(-sv.ItemMargin - 1f, 0.5f);
             StyleDimension itemHeight = new StyleDimension(height / 2f, 0f);
 
             UIElement ui1 = MakeFancyButton(This, AssemblyResource.LoadNew<Texture2D>($"{nameof(tContentPatch)}.Resources.UI.Workshop.ModManager.png"),
                 "模组管理器", "管理模组的启用, 设置和删除", _descriptionText,
                 itemWidth, itemHeight);
             ui1.OnLeftClick += (e, s) => ModManager.ModManager.OpenModManagerMenu(This);
-            wp.Append(ui1);
+            sv.AddChild(ui1);
 
             UIElement ui2 = MakeFancyButton(This, AssemblyResource.LoadNew<Texture2D>($"{nameof(tContentPatch)}.Resources.UI.Workshop.CreateMod.png"),
                 "创建模组", "创建一个新的模组项目", _descriptionText,
                 itemWidth, itemHeight);
             ui2.OnLeftClick += (e, s) => CreateMod.UICreateMod.OpenMenu(This);
-            wp.Append(ui2);
+            sv.AddChild(ui2);
 
             foreach (UIElement i in uis)
             {
@@ -90,7 +84,7 @@ namespace tContentPatch.Content.Menus.Patch_UIWorkshopHub
                 i.Height = itemHeight;
                 i.HAlign = 0f;
                 i.VAlign = 0f;
-                wp.Append(i);
+                sv.AddChild(i);
             }
         }
 

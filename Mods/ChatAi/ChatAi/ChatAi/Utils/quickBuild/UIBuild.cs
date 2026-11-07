@@ -1,8 +1,10 @@
 ﻿using ChatAi.Content.UI;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using tContentPatch.Content.UI;
+using tContentPatch.Content.UI.ModSet;
 using Terraria;
 using Terraria.UI;
 
@@ -26,7 +28,7 @@ namespace ChatAi.Utils.quickBuild
         /// <returns></returns>
         public static UIElement get1<T>(GetSetReset<bool> gsr, GetSetReset<T> setGsr, Func<string, T> parseTry, string mouseText = null, string ico = null, string text = null)
         {
-            Texture2D texture = ico == null ? null : Main.Assets.Request<Texture2D>(ico, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D texture = ico == null ? null : Main.Assets.Request<Texture2D>(ico, AssetRequestMode.ImmediateLoad).Value;
 
             UIItemTextBoxASwitchBind<T> ui = new UIItemTextBoxASwitchBind<T>(gsr, setGsr, parseTry, texture, text);
             ui.MouseText = mouseText;
@@ -44,10 +46,12 @@ namespace ChatAi.Utils.quickBuild
         /// <returns></returns>
         public static UIElement get2(GetSetReset<bool> gsr, string mouseText = null, string ico = null, string text = null)
         {
-            Texture2D texture = ico == null ? null : Main.Assets.Request<Texture2D>(ico, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D texture = ico == null ? null : Main.Assets.Request<Texture2D>(ico, AssetRequestMode.ImmediateLoad).Value;
 
-            UIItemSwitchBind ui = new UIItemSwitchBind(gsr, texture, text);
+            UIItemSwitch ui = new UIItemSwitch(texture, text);
             ui.MouseText = mouseText;
+            ui.OnGetVal = () => gsr.val;
+            ui.OnValUpdate = v => gsr.val = v;
 
             return ui;
         }

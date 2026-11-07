@@ -47,8 +47,6 @@
     <Compile Include="Command.cs" />
     <Compile Include="Content\GameChatAi.cs" />
     <Compile Include="ChatAI.cs" />
-    <Compile Include="Content\UI\UIItemMouseText.cs" />
-    <Compile Include="Content\UI\UIItemSwitchBind.cs" />
     <Compile Include="Content\UI\UIItemTextBoxASwitchBind.cs" />
     <Compile Include="Content\UI\UIItemTextBoxBind.cs" />
     <Compile Include="Content\UI\UIItemValueSliderBind.cs" />

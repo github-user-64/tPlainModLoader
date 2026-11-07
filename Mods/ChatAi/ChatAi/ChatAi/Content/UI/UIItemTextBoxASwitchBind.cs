@@ -2,11 +2,12 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using tContentPatch.Content.UI;
+using tContentPatch.Content.UI.ModSet;
 using Terraria.UI;
 
 namespace ChatAi.Content.UI
 {
-    internal class UIItemTextBoxASwitchBind<T> : UIItemMouseText, IBindUIAVal<bool>
+    internal class UIItemTextBoxASwitchBind<T> : UIItem, IBindUIAVal<bool>
     {
         private UISwitch ui_s = null;
         private UITextBox ui_t = null;

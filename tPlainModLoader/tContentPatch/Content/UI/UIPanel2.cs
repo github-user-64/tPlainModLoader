@@ -5,7 +5,9 @@ using Terraria.GameContent.UI.Elements;
 
 namespace tContentPatch.Content.UI
 {
-    /// <summary/>
+    /// <summary>
+    /// 另一种样式的页面
+    /// </summary>
     public class UIPanel2 : UIPanel
     {
         private static readonly Texture2D OnePixel = TextureAssets.MagicPixel.Value;

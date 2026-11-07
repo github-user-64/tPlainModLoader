@@ -75,7 +75,7 @@ namespace QuickButton.QuickButton
             updateUI += d => item_vs.SetVal(d.btnPos);
 
             //排序
-            UIItemTitle item_title = new UIItemTitle(text: "排序, 左键拖动");
+            UIItemTitle item_title = new UIItemTitle(title: "排序, 左键拖动");
 
             UIKeyOrder item_keyOrder = new UIKeyOrder(QuickButton.GetContainsKey());
             item_keyOrder.OnExchange += (v1, v2) =>

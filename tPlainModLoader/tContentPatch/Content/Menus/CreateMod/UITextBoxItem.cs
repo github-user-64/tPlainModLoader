@@ -41,7 +41,7 @@ namespace tContentPatch.Content.Menus.CreateMod
             UITextBox.Style2(UITextBox);
             Append(UITextBox);
 
-            UITextBox.OnTextChanged += UpdateTip;
+            UITextBox.OnSetText = UpdateTip;
             UITextBox.OnLostFocus += () => UpdateTip(UITextBox.Text);
         }
 

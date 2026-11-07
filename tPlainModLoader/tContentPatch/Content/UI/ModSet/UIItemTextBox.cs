@@ -1,8 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System;
-using Terraria.Audio;
-using Terraria.ID;
-using Terraria.UI;
 
 namespace tContentPatch.Content.UI.ModSet
 {
@@ -12,44 +9,27 @@ namespace tContentPatch.Content.UI.ModSet
     public class UIItemTextBox : UIItem
     {
         /// <summary/>
-        public Action<string> OnTextChanged = null;
+        public readonly UITextBox UITextBox = null;
         /// <summary/>
-        public Action OnLostFocus = null;
+        public string Text { get => UITextBox.Text; set => UITextBox.Text = value; }
         /// <summary/>
-        public StyleDimension TextBoxWidth { set => textBox.Width = value; }
+        public Action<string> OnSetText { get => UITextBox.OnSetText; set => UITextBox.OnSetText = value; }
         /// <summary/>
-        public bool Focus => textBox.Focus;
-        private UITextBox textBox = null;
+        public Func<string> OnGetText { get => UITextBox.OnGetText; set => UITextBox.OnGetText = value; }
 
         /// <summary/>
-        public UIItemTextBox(string text_default = "", int Text_MaxLength = -1,
-            Texture2D ico = null, string text = null) : base(ico, text)
+        public UIItemTextBox(string defaultDisplayText = null, int textMaxLength = -1,
+            Texture2D ico = null, string title = null) : base(ico, title)
         {
             Height.Pixels = 40;
 
-            textBox = new UITextBox(text_default);
-            textBox.Width.Pixels = 200;
-            textBox.Height.Set(-16, 1);
-            textBox.HAlign = 1;
-            textBox.VAlign = 0.5f;
-            textBox.Text_MaxLength = Text_MaxLength;
-            textBox.OnLostFocus += () => OnLostFocus?.Invoke();
-            textBox.OnTextChanged += s => OnTextChanged?.Invoke(s);
-            textBox.OnLeftClick += (e, s) => SoundEngine.PlaySound(SoundID.MenuTick);
-
-            Append(textBox);
-        }
-
-        /// <summary/>
-        public void SetText(string s)
-        {
-            textBox.Text = s;
-        }
-
-        /// <summary/>
-        public string GetText()
-        {
-            return textBox.Text;
+            UITextBox = new UITextBox(defaultDisplayText);
+            UITextBox.Width.Set(200f, 0f);
+            UITextBox.Height.Set(-16, 1f);
+            UITextBox.HAlign = 1f;
+            UITextBox.VAlign = 0.5f;
+            UITextBox.TextMaxLength = textMaxLength;
+            Append(UITextBox);
         }
     }
 }

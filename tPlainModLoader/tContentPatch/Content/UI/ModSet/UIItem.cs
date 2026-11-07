@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
@@ -11,48 +10,51 @@ namespace tContentPatch.Content.UI.ModSet
     /// <summary>
     /// 有图标和文本的项
     /// </summary>
-    public class UIItem : UIElement
+    public class UIItem : UIMouseText
     {
         /// <summary/>
-        public Color color = new Color(73, 94, 171);
-        private Action<string> setText = null;
+        public Color Color = new Color(73, 94, 171);
+        /// <summary/>
+        public readonly UIStackPanel UIIcoTitle = null;
+        /// <summary/>
+        public readonly UIImage UIIco = null;
+        /// <summary/>
+        public readonly UIText UITitle = null;
 
         /// <summary/>
-        public UIItem(Texture2D ico = null, string text = null)
+        public UIItem(Texture2D ico = null, string title = null)
         {
-            Width.Precent = 1;
-            Height.Pixels = 30;
+            Width.Set(0f, 1f);
+            Height.Set(30f, 0f);
             PaddingLeft = PaddingRight = 8;
             PaddingTop = PaddingBottom = 0;
 
-            UIImage ui_ico = null;
+            UIIcoTitle = new UIStackPanel();
+            UIIcoTitle.Height.Set(0f, 1f);
+            UIIcoTitle.Horizontal = true;
+            UIIcoTitle.ItemMargin = 6f;
+            UIIcoTitle.IsAutoUpdateSize = true;
+            Append(UIIcoTitle);
+
+            UIIco = new UIImage(Main.Assets.Request<Texture2D>("Images/UI/OnePixel").Value);
             if (ico != null)
             {
-                ui_ico = new UIImage(ico);
-                float v = ui_ico.Width.Pixels / ui_ico.Height.Pixels;
-                ui_ico.Height.Pixels = Height.Pixels - PaddingLeft;
-                ui_ico.Width.Pixels = ui_ico.Height.Pixels * v;
-                ui_ico.VAlign = 0.5f;
-                ui_ico.ScaleToFit = true;
+                UIIco.SetImage(ico);
+                float v = UIIco.Width.Pixels / UIIco.Height.Pixels;
+                UIIco.Height.Pixels = Height.Pixels - PaddingLeft;
+                UIIco.Width.Pixels = UIIco.Height.Pixels * v;
+                UIIco.VAlign = 0.5f;
+                UIIco.ScaleToFit = true;
+                UIIcoTitle.Append(UIIco);
             }
 
-            UIText ui_text = null;
-            if (text != null)
+            UITitle = new UIText(string.Empty);
+            if (title != null)
             {
-                ui_text = new UIText(text, 0.8f);
-                ui_text.VAlign = 0.5f;
-                if (ui_ico != null) ui_text.Left.Pixels = ui_ico.Width.Pixels + 6;
-                setText = v => ui_text.SetText(v);
+                UITitle.VAlign = 0.5f;
+                UITitle.SetText(title ?? string.Empty, 0.8f, false);
+                UIIcoTitle.Append(UITitle);
             }
-
-            if (ui_ico != null) Append(ui_ico);
-            if (ui_text != null) Append(ui_text);
-        }
-
-        /// <summary/>
-        public void SetTitle(string text)
-        {
-            setText?.Invoke(text);
         }
 
         /// <inheritdoc/>
@@ -60,7 +62,13 @@ namespace tContentPatch.Content.UI.ModSet
         {
             base.DrawSelf(spriteBatch);
 
-            Color color = IsMouseHovering ? this.color : this.color.MultiplyRGBA(new Color(180, 180, 180));
+            DrawPanel(spriteBatch);
+        }
+
+        /// <summary/>
+        public virtual void DrawPanel(SpriteBatch spriteBatch)
+        {
+            Color color = IsMouseHovering ? Color : Color.MultiplyRGBA(new Color(180, 180, 180));
 
             CalculatedStyle dim = GetDimensions();
 
@@ -85,7 +93,6 @@ namespace tContentPatch.Content.UI.ModSet
                 new Rectangle(x + edge, y + edge, width - edge * 2, height - edge * 2),
                 new Rectangle(edge, edge, texture.Width - edge * 2, texture.Height - edge * 2),
                 color);
-
         }
     }
 }

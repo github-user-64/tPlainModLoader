@@ -33,6 +33,8 @@ namespace tContentPatch.Content.UI.ModSet
         private float proportion = 0;
         private bool isInt = false;
         private bool hasSetVal = false;
+        /// <summary/>
+        public readonly UIText UIDisplayVal = null;
 
         /// <summary>
         /// 整型值
@@ -45,14 +47,13 @@ namespace tContentPatch.Content.UI.ModSet
         /// <summary/>
         public UIItemValueSlider(float min, float max, Texture2D ico = null, string text = null) : base(ico, text)
         {
-            PaddingRight = 0;
-
             this.min = min;
             this.max = max;
             this.text = text;
             proportion = Math.Abs(max - min) / 1;
 
-            Height.Pixels = TextureAssets.ColorSlider.Value.Height + 10;
+            Height.Set(TextureAssets.ColorSlider.Value.Height + 10f, 0f);
+            PaddingRight = 0f;
 
             UIColoredSlider cs = new UIColoredSlider(null,
                 () => val,
@@ -63,6 +64,10 @@ namespace tContentPatch.Content.UI.ModSet
             cs.HAlign = 1;
 
             Append(cs);
+
+            UIDisplayVal = new UIText(string.Empty, 0.8f, false);
+            UIDisplayVal.VAlign = 0.5f;
+            UIIcoTitle.Append(UIDisplayVal);
         }
 
         /// <summary>
@@ -106,8 +111,8 @@ namespace tContentPatch.Content.UI.ModSet
         {
             float getV = GetVal(val);
 
-            if (FloatToString == null) SetTitle($"{text}: {getV}");
-            else SetTitle($"{text}: {FloatToString.Invoke(getV)}");
+            if (FloatToString == null) UIDisplayVal.SetText(string.Empty);
+            else UIDisplayVal.SetText($": {FloatToString.Invoke(getV)}");
         }
     }
 }

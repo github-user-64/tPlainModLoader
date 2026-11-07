@@ -1,10 +1,14 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using tContentPatch.Content;
 using tContentPatch.Content.Menus.ModLoadException;
 using tContentPatch.Content.Menus.ModManager;
+using tContentPatch.Content.UI;
+using tContentPatch.Content.UI.ModSet;
 using tContentPatch.ModLoad;
 using tContentPatch.Patch;
 using tContentPatch.Utils;
@@ -68,6 +72,14 @@ namespace tContentPatch
             {
                 if (Main.dedServ) return;
                 GameUitl.BackMenu();
+
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                GameUitl.OpenMenu(new TestMenu());
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             };
             //取消时
             LoaderControl.OnModLoad_Cancel += (e) => Content.Menus.ModLoadingMenu.ModLoadingMenu.OpenLoadMenu(e, LoaderControl.CancelLoad);
@@ -85,6 +97,35 @@ namespace tContentPatch
             {
                 Environment.Exit(0);
             };
+        }
+
+        private class TestMenu : UIMenuPanel
+        {
+            public TestMenu() : base("TEST")
+            {
+                UIScrollViewer2 sv = new UIScrollViewer2();
+                sv.Width.Set(0f, 1f);
+                sv.Height.Set(0f, 1f);
+                sv.ItemMargin = 4f;
+                UIPanel.Append(sv);
+
+                UIItemTextBoxASwitch ui1 = new UIItemTextBoxASwitch();
+                sv.AddChild(ui1);
+
+                UIItemTitle ui2 = new UIItemTitle(Main.Assets.Request<Texture2D>("Images/UI/Camera_1").Value, "标题1");
+                sv.AddChild(ui2);
+
+                UIItemValueSlider ui3 = new UIItemValueSlider(0, 5, null, "asd");
+                ui3.FloatToString = v => v.ToString();
+                sv.AddChild(ui3);
+            }
+
+            public override void Update(GameTime gameTime)
+            {
+                base.Update(gameTime);
+
+                if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftControl)) GameUitl.OpenMenu(new TestMenu());
+            }
         }
 
         private void CheckNetplayConnect()
