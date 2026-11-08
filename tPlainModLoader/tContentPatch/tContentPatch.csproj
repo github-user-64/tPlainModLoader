@@ -94,6 +94,7 @@
     <Compile Include="Content\UI\UIScrollViewer\UIScrollViewer2.cs" />
     <Compile Include="Content\UI\UIScrollViewer\UIScrollViewer.cs" />
     <Compile Include="Content\UI\UISwitch.cs" />
+    <Compile Include="Content\UI\UITextBox\UITextBoxValue.cs" />
     <Compile Include="Content\UI\UITextBox\UITextBox_Style.cs" />
     <Compile Include="Content\UI\UITextBox\UITextBox_Field.cs" />
     <Compile Include="Content\UI\UITextBox\UITextBox.cs" />

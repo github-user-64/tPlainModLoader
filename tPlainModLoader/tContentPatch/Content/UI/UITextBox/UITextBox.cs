@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
@@ -7,8 +6,10 @@ using Terraria.UI;
 
 namespace tContentPatch.Content.UI
 {
-    /// <summary/>
-    public partial class UITextBox : UIElement
+    /// <summary>
+    /// 文本框
+    /// </summary>
+    public partial class UITextBox : UIMouseText
     {
         /// <summary>
         /// 显示文本的ui
@@ -43,7 +44,7 @@ namespace tContentPatch.Content.UI
 
             OnSetBackStyle();
 
-            UV = new Utils.UIVal<string>(UpdateUIText);
+            UV = new Utils.UIVal<string>(UpdateDisplayTextWhenText);
             UV.SetUIVal(null, true);
         }
 
@@ -52,16 +53,14 @@ namespace tContentPatch.Content.UI
         {
             base.Update(gameTime);
 
-            ++time;
-            if (time * 16 > 2000) time = 0;
-
-            UpdateFocus();
             UpdateInput();
-            UV.UpdateUI(true);
+            UpdateFocus();
+            if (Focus != true || NoUpdateDisplayTextWhenHasFocus != true) UV.UpdateUI();
+            UpdateUIText(DisplayText);
         }
 
         /// <summary/>
-        protected virtual void UpdateUIText(string Text)
+        protected virtual void UpdateUIText(string Text = null)
         {
             if (Text == null) Text = string.Empty;
 
@@ -89,6 +88,9 @@ namespace tContentPatch.Content.UI
             bool mouseLeftOld = this.mouseLeftOld;
             this.mouseLeftOld = Main.mouseLeft;
 
+            ++time;
+            if (time * 16 > 2000) time = 0;
+
             if (
                 //Main.gamePaused ||
                 Main.drawingPlayerChat ||
@@ -112,37 +114,66 @@ namespace tContentPatch.Content.UI
 
             Terraria.GameInput.PlayerInput.WritingText = true;
             Main.instance.HandleIME();
-            string s = Main.GetInputText(Text);
+            string s = Main.GetInputText(DisplayText);
 
             CalculatedStyle size = GetDimensions();
             DrawIME.NeedIME = true;
-            DrawIME.IME_P = new Vector2(size.X, size.Y + size.Height + 36);
+            DrawIME.IME_P = new Vector2(size.X, size.Y + size.Height + 36f);
 
-            Text = s;
-        }
+            s = CheckInputText(s);
+            if (s == DisplayText) return;
 
-        /// <inheritdoc/>
-        protected override void DrawSelf(SpriteBatch spriteBatch)
-        {
-            base.DrawSelf(spriteBatch);
-
-            OnDrawUpdateInput();
+            DisplayText = s;
         }
 
         /// <summary/>
-        protected virtual void OnDrawUpdateInput()
-        {
-
-        }
-
-        /// <summary/>
-        protected string CheckSetText(string s)
+        protected virtual string CheckInputText(string s)
         {
             if (s == null) return null;
-            if (TextMaxLength < 0) return s;
-            if (TextMaxLength < s.Length) return s.Substring(0, Math.Min(s.Length, TextMaxLength));
+            if (MaxInputLength < 0) return s;
+            if (MaxInputLength >= s.Length) return s;
 
-            return s;
+            return s.Substring(0, Math.Min(s.Length, MaxInputLength));
+        }
+
+        /// <summary>
+        /// 在<see cref="Text"/>更新时更新<see cref="DisplayText"/>
+        /// </summary>
+        protected virtual void UpdateDisplayTextWhenText()
+        {
+            DisplayText = Text;
+        }
+
+        /// <summary>
+        /// 在<see cref="DisplayText"/>更新时更新<see cref="Text"/>
+        /// </summary>
+        protected virtual void UpdateTextWhenDisplayText()
+        {
+            if (IsUpdateTextWhenDisplayText) Text = DisplayText;
+        }
+
+        /// <summary>
+        /// 在<see cref="Focus"/>为<see langword="false"/>时更新<see cref="Text"/>
+        /// </summary>
+        protected virtual void UpdateTextWhenLostFocus()
+        {
+            if (IsUpdateTextWhenLostFocus) Text = DisplayText;
+        }
+
+        /// <summary/>
+        protected virtual void GotFocus()
+        {
+            Main.GetInputText(null);
+
+            OnGotFocus?.Invoke();
+        }
+
+        /// <summary/>
+        protected virtual void LostFocus()
+        {
+            UpdateTextWhenLostFocus();
+
+            OnLostFocus?.Invoke();
         }
 
         /// <summary>

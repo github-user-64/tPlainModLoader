@@ -34,9 +34,9 @@ namespace tContentPatch.Content.UI.ModSet
         /// <summary/>
         public abstract T Value { get; set; }
         /// <summary/>
-        public Action<T> OnSetValue { get => UV.OnSetVal; set => UV.OnSetVal = value; }
+        public Func<T> OnGetValue { set => UV.OnGetVal = value; }
         /// <summary/>
-        public Func<T> OnGetValue { get => UV.OnGetVal; set => UV.OnGetVal = value; }
+        public Action<T> OnSetValue { set => UV.OnSetVal = value; }
 
         /// <summary/>
         public readonly UIText UIDisplayVal = null;
@@ -64,7 +64,7 @@ namespace tContentPatch.Content.UI.ModSet
             UISlider.HAlign = 1f;
             Append(UISlider);
 
-            UV = new Utils.UIVal<T>(_ => UpdateValueToString());
+            UV = new Utils.UIVal<T>(UpdateValueToString);
             UV.SetUIVal(Min, true);
         }
 

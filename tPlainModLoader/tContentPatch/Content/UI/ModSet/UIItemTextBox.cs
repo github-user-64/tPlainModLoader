@@ -13,22 +13,22 @@ namespace tContentPatch.Content.UI.ModSet
         /// <summary/>
         public string Text { get => UITextBox.Text; set => UITextBox.Text = value; }
         /// <summary/>
-        public Action<string> OnSetText { get => UITextBox.OnSetText; set => UITextBox.OnSetText = value; }
+        public Func<string> OnGetText { set => UITextBox.OnGetText = value; }
         /// <summary/>
-        public Func<string> OnGetText { get => UITextBox.OnGetText; set => UITextBox.OnGetText = value; }
+        public Action<string> OnSetText { set => UITextBox.OnSetText = value; }
 
         /// <summary/>
         public UIItemTextBox(string defaultDisplayText = null, int textMaxLength = -1,
             Texture2D ico = null, string title = null) : base(ico, title)
         {
-            Height.Pixels = 40;
+            Height.Set(40f, 0f);
 
             UITextBox = new UITextBox(defaultDisplayText);
             UITextBox.Width.Set(200f, 0f);
             UITextBox.Height.Set(-16, 1f);
             UITextBox.HAlign = 1f;
             UITextBox.VAlign = 0.5f;
-            UITextBox.TextMaxLength = textMaxLength;
+            UITextBox.MaxInputLength = textMaxLength;
             Append(UITextBox);
         }
     }

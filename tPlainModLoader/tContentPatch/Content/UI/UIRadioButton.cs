@@ -20,9 +20,9 @@ namespace tContentPatch.Content.UI
         /// <summary/>
         public bool IsChecked { get => UV.Val; set => UV.SetUIVal(value); }
         /// <summary/>
-        public Action<bool> OnSetIsChecked { get => UV.OnSetVal; set => UV.OnSetVal = value; }
+        public Func<bool> OnGetIsChecked { set => UV.OnGetVal = value; }
         /// <summary/>
-        public Func<bool> OnGetIsChecked { get => UV.OnGetVal; set => UV.OnGetVal = value; }
+        public Action<bool> OnSetIsChecked { set => UV.OnSetVal = value; }
 
         /// <summary/>
         public readonly UIImage UIIco = null;
@@ -76,9 +76,9 @@ namespace tContentPatch.Content.UI
             }
         }
 
-        private void OnValUpdate(bool v)
+        private void OnValUpdate()
         {
-            if (v != true) return;
+            if (IsChecked != true) return;
 
             Parent?.Children?.AsParallel()?.ForAll((ui) =>
             {

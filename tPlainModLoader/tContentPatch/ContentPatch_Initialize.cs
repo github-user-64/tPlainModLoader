@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -110,7 +111,9 @@ namespace tContentPatch
                 UIPanel.Append(sv);
 
                 UIItemTextBoxASwitch ui1 = new UIItemTextBoxASwitch();
-                sv.AddChild(ui1);
+                ui1.MouseText = "ui1";
+                ui1.UISwitch.MouseText = "kaiguang";
+                //sv.AddChild(ui1);
 
                 UIItemTitle ui2 = new UIItemTitle(Main.Assets.Request<Texture2D>("Images/UI/Camera_1").Value, "标题1");
                 ui2.Height.Set(44f, 0f);
@@ -119,13 +122,25 @@ namespace tContentPatch
                 ui3 = new UIItemValueSliderFloat(10, 15, null, "asd");
                 sv.AddChild(ui3);
 
-                for (int i = 1; i < 8; i++)
-                {
-                    UIRadioButton rb = new UIRadioButton(Main.Assets.Request<Texture2D>($"Images/Item_{i}").Value);
-                    sv.AddChild(rb);
-                }
+                UITextBox tb1 = new UITextBox("big");
+                tb1.OnGetText = () => val.ToString();
+                tb1.OnSetText = v => int.TryParse(v, out val);
+                //sv.AddChild(tb1);
+
+                UITextBoxInt tb2 = new UITextBoxInt();
+                tb2.OnGetValue = () => val;
+                tb2.OnSetValue = v => val = v;
+                sv.AddChild(tb2);
+
+                UITextBoxFloat tb3 = new UITextBoxFloat();
+                tb3.OnGetValue = () => valf;
+                tb3.OnSetValue = v => valf = v;
+                sv.AddChild(tb3);
             }
+
             UIItemValueSlider<float> ui3 = null;
+            int val;
+            float valf;
             public override void Update(GameTime gameTime)
             {
                 base.Update(gameTime);
@@ -133,8 +148,11 @@ namespace tContentPatch
                 if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftControl)) GameUitl.OpenMenu(new TestMenu());
                 if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Space))
                 {
-                    ui3.Value = Main.mouseX;
+                    //ui3.Value = Main.mouseX;
+                    val = Main.mouseX / 5;
+                    valf = Main.mouseX / 5;
                 }
+                Debug.WriteLine(valf);
             }
         }
 

@@ -26,8 +26,8 @@ namespace tContentPatch.Content.UI.ModSet
         {
             Width.Set(0f, 1f);
             Height.Set(30f, 0f);
-            PaddingLeft = PaddingRight = 8;
-            PaddingTop = PaddingBottom = 0;
+            PaddingLeft = PaddingRight = 8f;
+            PaddingTop = PaddingBottom = 0f;
 
             UIIcoTitle = new UIStackPanel();
             UIIcoTitle.Height.Set(0f, 1f);

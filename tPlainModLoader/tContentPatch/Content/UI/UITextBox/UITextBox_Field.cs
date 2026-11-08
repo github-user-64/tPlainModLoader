@@ -1,23 +1,21 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using Terraria.UI;
 
 namespace tContentPatch.Content.UI
 {
-    /// <summary/>
-    public partial class UITextBox : UIElement
+    public partial class UITextBox
     {
         /// <summary/>
         public Utils.UIVal<string> UV = null;
         /// <summary/>
-        public Action<string> OnSetText { get => UV.OnSetVal; set => UV.OnSetVal = value; }
+        public Func<string> OnGetText { set => UV.OnGetVal = value; }
         /// <summary/>
-        public Func<string> OnGetText { get => UV.OnGetVal; set => UV.OnGetVal = value; }
+        public Action<string> OnSetText { set => UV.OnSetVal = value; }
         /// <summary/>
         public string Text
         {
             get => UV.Val;
-            set => UV.SetUIVal(CheckSetText(value));
+            set => UV.SetUIVal(value);
         }
 
         /// <summary/>
@@ -33,9 +31,21 @@ namespace tContentPatch.Content.UI
         /// <summary/>
         public Action OnLostFocus = null;
         /// <summary>
-        /// 文本最大长度, 小于<see langword="0"/>为不限
+        /// 最大输入长度, 小于<see langword="0"/>为不限
         /// </summary>
-        public int TextMaxLength = -1;
+        public int MaxInputLength = -1;
+        /// <summary>
+        /// 及时更新文本, 在显示文本更新时更新<see cref="Text"/>
+        /// </summary>
+        public bool IsUpdateTextWhenDisplayText = true;
+        /// <summary>
+        /// 失焦更新文本, 在失去焦点时更新<see cref="Text"/>
+        /// </summary>
+        public bool IsUpdateTextWhenLostFocus = false;
+        /// <summary>
+        /// 在<see cref="Focus"/>为<see langword="true"/>时不更新显示文本
+        /// </summary>
+        public bool NoUpdateDisplayTextWhenHasFocus = false;
 
         private bool focus = false;
         /// <summary/>
@@ -46,7 +56,8 @@ namespace tContentPatch.Content.UI
             {
                 if (focus == value) return;
                 focus = value;
-                (focus ? OnGotFocus : OnLostFocus)?.Invoke();
+                if (Focus) GotFocus();
+                else LostFocus();
             }
         }
         private string defaultDisplayText = null;
@@ -55,6 +66,17 @@ namespace tContentPatch.Content.UI
         {
             get => defaultDisplayText;
             set => defaultDisplayText = value;
+        }
+        private string displayText = null;
+        /// <summary/>
+        protected string DisplayText
+        {
+            get => displayText;
+            set
+            {
+                displayText = value;
+                UpdateTextWhenDisplayText();
+            }
         }
     }
 }

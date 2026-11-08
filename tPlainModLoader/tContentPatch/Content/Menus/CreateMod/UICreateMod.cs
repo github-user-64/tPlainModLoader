@@ -37,11 +37,11 @@ namespace tContentPatch.Content.Menus.CreateMod
             UIPanel.Append(sp);
 
             UIDisplayName = new UITextBoxItem("模组显示名称（可不填）");
-            UIDisplayName.UITextBox.TextMaxLength = 32;
+            UIDisplayName.UITextBox.MaxInputLength = 32;
             sp.Append(UIDisplayName);
 
             UIModName = new UITextBoxItem("模组内部名称");
-            UIModName.UITextBox.TextMaxLength = 32;
+            UIModName.UITextBox.MaxInputLength = 32;
             UIModName.GetTip = GetTipCantNullOrEmpty;
             UIModName.UITip.TextColor = Color.Red;
             sp.Append(UIModName);

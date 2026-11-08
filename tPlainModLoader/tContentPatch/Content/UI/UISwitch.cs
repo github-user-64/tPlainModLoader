@@ -13,16 +13,16 @@ namespace tContentPatch.Content.UI
     /// <summary>
     /// 开关
     /// </summary>
-    public class UISwitch : UIElement
+    public class UISwitch : UIMouseText
     {
         /// <summary/>
         public readonly Utils.UIVal<bool> UV = null;
         /// <summary/>
         public bool IsChecked { get => UV.Val; set => UV.SetUIVal(value); }
         /// <summary/>
-        public Action<bool> OnSetIsChecked { get => UV.OnSetVal; set => UV.OnSetVal = value; }
+        public Func<bool> OnGetIsChecked { set => UV.OnGetVal = value; }
         /// <summary/>
-        public Func<bool> OnGetIsChecked { get => UV.OnGetVal; set => UV.OnGetVal = value; }
+        public Action<bool> OnSetIsChecked { set => UV.OnSetVal = value; }
 
         /// <summary/>
         public readonly UIText UIText = null;
@@ -76,8 +76,9 @@ namespace tContentPatch.Content.UI
             UV.UpdateUI();
         }
 
-        private void UpdateUI(bool v)
+        private void UpdateUI()
         {
+            bool v = IsChecked;
             UIText.SetText(v ? "开" : "关");
 
             //

@@ -21,11 +21,13 @@ namespace tContentPatch.Content.UI
             /// ui更新时从这获取值, 为<see langword="null"/>不更新
             /// </summary>
             public Func<T> OnGetVal = null;
-            /// <summary/>
-            public Action<T> OnUpdateUI = null;
+            /// <summary>
+            /// 更新ui
+            /// </summary>
+            public Action OnUpdateUI = null;
 
             /// <summary/>
-            public UIVal(Action<T> OnUpdateUI = null)
+            public UIVal(Action OnUpdateUI = null)
             {
                 this.OnUpdateUI = OnUpdateUI;
             }
@@ -45,7 +47,7 @@ namespace tContentPatch.Content.UI
                     }
                 }
 
-                if (hasUpdate) OnUpdateUI?.Invoke(Val);
+                if (hasUpdate) OnUpdateUI?.Invoke();
             }
 
             /// <summary/>
@@ -56,7 +58,7 @@ namespace tContentPatch.Content.UI
                 if (compelUpdateUI != true && Equals(val, Val)) return;
 
                 Val = val;
-                OnUpdateUI?.Invoke(Val);
+                OnUpdateUI?.Invoke();
             }
 
             /// <summary/>

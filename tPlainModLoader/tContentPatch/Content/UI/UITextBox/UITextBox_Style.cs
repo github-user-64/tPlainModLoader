@@ -2,14 +2,11 @@
 using Terraria.Audio;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ID;
-using Terraria.UI;
 
 namespace tContentPatch.Content.UI
 {
-    /// <summary>
-    /// 可输入的文本框
-    /// </summary>
-    public partial class UITextBox : UIElement
+    /// <summary/>
+    public partial class UITextBox
     {
         /// <summary/>
         public static void Style1(UITextBox ui)
