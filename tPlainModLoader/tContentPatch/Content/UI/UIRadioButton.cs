@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Linq;
-using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
@@ -14,112 +13,73 @@ namespace tContentPatch.Content.UI
     /// <summary>
     /// 单选框
     /// </summary>
-    public class UIRadioButton : UIElement
+    public class UIRadioButton : UIMouseText
     {
-        private bool _isChecked = false;
         /// <summary/>
-        public bool IsChecked
-        {
-            get => _isChecked;
-            set
-            {
-                if (_isChecked == value) return;
-                _isChecked = value;
-                if (_isChecked) Checked();
-            }
-        }
+        public readonly Utils.UIVal<bool> UV = null;
         /// <summary/>
-        public Action OnChecked = null;
+        public bool IsChecked { get => UV.Val; set => UV.SetUIVal(value); }
         /// <summary/>
-        public string MouseHoveringText = null;
+        public Action<bool> OnSetIsChecked { get => UV.OnSetVal; set => UV.OnSetVal = value; }
         /// <summary/>
-        protected UIImage ico1 = null;
+        public Func<bool> OnGetIsChecked { get => UV.OnGetVal; set => UV.OnGetVal = value; }
 
         /// <summary/>
-        public UIRadioButton()
+        public readonly UIImage UIIco = null;
+
+        /// <summary/>
+        public UIRadioButton(Texture2D ico, int width = 20, int height = 20)
         {
-            OnLeftClick += (e, s) =>
+            Width.Set(width, 0f);
+            Height.Set(height, 0f);
+
+            UIIco = new UIImage(ico);
+            UIIco.HAlign = 0.5f;
+            UIIco.VAlign = 0.5f;
+            UIIco.ScaleToFit = true;
+            UIIco.AllowResizingDimensions = false;
+            SetIco(ico);
+            Append(UIIco);
+
+            UIElement uie = new UIElement();
+            uie.Width.Set(0f, 1f);
+            uie.Height.Set(0f, 1f);
+            uie.OnLeftClick += (e, s) =>
             {
                 SoundEngine.PlaySound(SoundID.MenuTick);
                 IsChecked = true;
             };
-        }
+            uie.OnMouseOver += (e, s) =>
+            {
+                if (IsChecked != true) SoundEngine.PlaySound(SoundID.MenuTick);
+            };
+            Append(uie);
 
-        /// <summary/>
-        public UIRadioButton(Texture2D ico, int width, int height) : this()
-        {
-            Width.Set(width, 0);
-            Height.Set(height, 0);
-
-            SetIco(ico);
+            UV = new Utils.UIVal<bool>(OnValUpdate);
+            UV.SetUIVal(false, true);
         }
 
         /// <summary/>
         public void SetIco(Texture2D ico)
         {
-            if (ico1 == null)
-            {
-                ico1 = new UIImage(ico);
-                ico1.Width.Pixels = ico1.Height.Pixels = 0;
-                ico1.HAlign = 0.5f;
-                ico1.VAlign = 0.5f;
-                ico1.ScaleToFit = true;
-                ico1.AllowResizingDimensions = false;
-                Append(ico1);
-            }
-            else ico1.SetImage(ico);
-
-            ico1.Width.Pixels = 0;
-            ico1.Height.Pixels = 0;
-            ico1.Width.Precent = 0.72f;
-            ico1.Height.Precent = 0.72f;
+            UIIco.SetImage(ico);
+            UIIco.Width.Set(0f, 0.72f);
+            UIIco.Height.Set(0f, 0.72f);
 
             if (ico.Width < ico.Height)
             {
-                ico1.Width.Precent *= (float)ico.Width / ico.Height;
+                UIIco.Width.Precent *= (float)ico.Width / ico.Height;
             }
             else
             {
-                ico1.Height.Precent *= (float)ico.Height / ico.Width;
-            }
-
-            //ico1.Width.Pixels = Width.Pixels - (Width.Pixels * 0.4f);
-            //ico1.Height.Pixels = Height.Pixels - (Height.Pixels * 0.4f);
-
-            //if (ico.Width < ico.Height)
-            //{
-            //    ico1.Width.Pixels *= (float)ico.Width / ico.Height;
-            //}
-            //else
-            //{
-            //    ico1.Height.Pixels *= (float)ico.Height / ico.Width;
-            //}
-        }
-
-        /// <inheritdoc/>
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-
-            if (IsMouseHovering && MouseHoveringText != null)
-            {
-                Main.instance.MouseText(MouseHoveringText);
+                UIIco.Height.Precent *= (float)ico.Height / ico.Width;
             }
         }
 
-        /// <inheritdoc/>
-        protected override void DrawSelf(SpriteBatch spriteBatch)
+        private void OnValUpdate(bool v)
         {
-            if (IsChecked == false) return;
+            if (v != true) return;
 
-            CalculatedStyle dim = GetDimensions();
-
-            spriteBatch.Draw(TextureAssets.InventoryBack14.Value,
-                new Rectangle((int)dim.X, (int)dim.Y, (int)Width.Pixels, (int)Height.Pixels), Color.White);
-        }
-
-        private void Checked()
-        {
             Parent?.Children?.AsParallel()?.ForAll((ui) =>
             {
                 UIRadioButton rb = ui as UIRadioButton;
@@ -127,8 +87,28 @@ namespace tContentPatch.Content.UI
 
                 rb.IsChecked = false;
             });
+        }
 
-            OnChecked?.Invoke();
+        /// <inheritdoc/>
+        protected override void DrawSelf(SpriteBatch spriteBatch)
+        {
+            ReLogic.Content.Asset<Texture2D> img = TextureAssets.InventoryBack14;
+
+            if (IsChecked != true)
+            {
+                if (IsMouseHovering != true) return;
+                img = TextureAssets.InventoryBack24;
+            }
+
+            spriteBatch.Draw(img.Value, GetDimensions().ToRectangle(), Color.White);
+        }
+
+        /// <inheritdoc/>
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            UV.UpdateUI();
         }
     }
 }

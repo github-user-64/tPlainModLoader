@@ -12,14 +12,6 @@ namespace tContentPatch.Content.UI
     /// </summary>
     public class UIButton1 : UITextPanel<string>
     {
-        /// <summary>
-        /// 为<see langword="false"/>时不触发<see cref="LeftClick(UIMouseEvent)"/>
-        /// </summary>
-        public bool isEnable = true;
-        /// <summary>
-        /// 为<see langword="false"/>时不调用<see cref="Draw"/>
-        /// </summary>
-        public bool isDraw = true;
         /// <summary/>
         public Color EnableColorBack = new Color(63, 82, 151) * 0.8f;
         /// <summary/>
@@ -34,9 +26,29 @@ namespace tContentPatch.Content.UI
         public Color MouseOverColorBoredr = Colors.FancyUIFatButtonMouseOver;
 
         /// <summary/>
+        public string MouseText = null;
+        /// <summary>
+        /// 为<see langword="false"/>时不触发<see cref="LeftClick(UIMouseEvent)"/>
+        /// </summary>
+        public bool isEnable = true;
+        /// <summary>
+        /// 为<see langword="false"/>时不调用<see cref="Draw"/>
+        /// </summary>
+        public bool isDraw = true;
+
+        /// <summary/>
         public UIButton1(string text, float textScale = 1f, bool large = false) : base(text, textScale, large)
         {
-            OnMouseOver += FadedMouseOver;
+            OnMouseOver += (e, s) =>
+            {
+                if (isEnable == true) SoundEngine.PlaySound(SoundID.MenuTick);
+            };
+        }
+
+        /// <summary/>
+        public virtual void ApplyMouseText(string text = null)
+        {
+            if (MouseText != null) DrawTip.SetDraw(MouseText);
         }
 
         /// <inheritdoc/>
@@ -68,19 +80,14 @@ namespace tContentPatch.Content.UI
                 BackgroundColor = NoEnableColorBack;
                 BorderColor = NoEnableColorBoredr;
             }
+
+            if (IsMouseHovering) ApplyMouseText();
         }
 
         /// <inheritdoc/>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (isDraw == false) return;
-            base.Draw(spriteBatch);
-        }
-
-        private void FadedMouseOver(UIMouseEvent evt, UIElement listeningElement)
-        {
-            if (isEnable == false) return;
-            SoundEngine.PlaySound(SoundID.MenuTick);
+            if (isDraw == true) base.Draw(spriteBatch);
         }
     }
 }

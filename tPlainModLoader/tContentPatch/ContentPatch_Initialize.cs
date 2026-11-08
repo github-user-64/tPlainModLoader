@@ -113,18 +113,28 @@ namespace tContentPatch
                 sv.AddChild(ui1);
 
                 UIItemTitle ui2 = new UIItemTitle(Main.Assets.Request<Texture2D>("Images/UI/Camera_1").Value, "标题1");
+                ui2.Height.Set(44f, 0f);
                 sv.AddChild(ui2);
 
-                UIItemValueSlider ui3 = new UIItemValueSlider(0, 5, null, "asd");
-                ui3.FloatToString = v => v.ToString();
+                ui3 = new UIItemValueSliderFloat(10, 15, null, "asd");
                 sv.AddChild(ui3);
-            }
 
+                for (int i = 1; i < 8; i++)
+                {
+                    UIRadioButton rb = new UIRadioButton(Main.Assets.Request<Texture2D>($"Images/Item_{i}").Value);
+                    sv.AddChild(rb);
+                }
+            }
+            UIItemValueSlider<float> ui3 = null;
             public override void Update(GameTime gameTime)
             {
                 base.Update(gameTime);
 
                 if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftControl)) GameUitl.OpenMenu(new TestMenu());
+                if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Space))
+                {
+                    ui3.Value = Main.mouseX;
+                }
             }
         }
 

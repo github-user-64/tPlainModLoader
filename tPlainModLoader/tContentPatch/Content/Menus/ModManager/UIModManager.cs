@@ -44,7 +44,7 @@ namespace tContentPatch.Content.Menus.ModManager
             btns[1].TextColor = color_isEnable_false;
             btns[1].OnLeftClick += (e, s) => ModManager.ModNoEnableAll();
             btns[2].OnLeftClick += (e, s) => ModManager.AgainLoadMod();
-            btns[2].OnUpdate += (e) => { if (btns[2].IsMouseHovering) DrawTip.SetDraw("建议重启程序"); };
+            btns[2].MouseText = "建议重启程序";
             btns[3].OnLeftClick += (e, s) => Back(BackUI);
             btns[3].OnUpdate += (e) => { if (btns[3].IsMouseHovering && ModManager.CheckModUpdate()) DrawTip.SetDraw("需要重新加载, 建议重启程序"); };
             btns[4].OnLeftClick += (e, s) => ModManager.OpenModDirectory();

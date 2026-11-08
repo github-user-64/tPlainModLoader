@@ -83,7 +83,9 @@
     <Compile Include="Content\UI\ModSet\UIItemSwitch.cs" />
     <Compile Include="Content\UI\ModSet\UIItemTextBox.cs" />
     <Compile Include="Content\UI\ModSet\UIItemTitle.cs" />
-    <Compile Include="Content\UI\ModSet\UIItemValueSlider.cs" />
+    <Compile Include="Content\UI\ModSet\UIItemValueSlider\UIItemValueSliderFloat.cs" />
+    <Compile Include="Content\UI\ModSet\UIItemValueSlider\UIItemValueSliderInt.cs" />
+    <Compile Include="Content\UI\ModSet\UIItemValueSlider\UIItemValueSlider.cs" />
     <Compile Include="Content\UI\ModSet\UIItem.cs" />
     <Compile Include="Content\UI\UIMouseText.cs" />
     <Compile Include="Content\UI\UIPanel2.cs" />

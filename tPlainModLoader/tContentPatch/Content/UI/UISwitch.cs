@@ -18,7 +18,7 @@ namespace tContentPatch.Content.UI
         /// <summary/>
         public readonly Utils.UIVal<bool> UV = null;
         /// <summary/>
-        public bool IsChecked { get => UV.Val; set => UV.OnSetVal(value); }
+        public bool IsChecked { get => UV.Val; set => UV.SetUIVal(value); }
         /// <summary/>
         public Action<bool> OnSetIsChecked { get => UV.OnSetVal; set => UV.OnSetVal = value; }
         /// <summary/>

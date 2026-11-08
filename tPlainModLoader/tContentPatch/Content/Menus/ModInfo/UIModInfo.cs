@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using tContentPatch.Content.UI;
 using tContentPatch.ModLoad;
@@ -61,9 +60,13 @@ namespace tContentPatch.Content.Menus.ModInfo
                 return;
             }
 
+            string path = this.mo.info?.jumpPath;
+
             UITitle.SetText($"模组信息: {this.mo.info?.name ?? this.mo.config.key}");
             btn3.isEnable = ModInfo.GetModIsLoaded(this.mo) == false;
-            btn4.isEnable = this.mo.info?.jumpPath != null;
+            btn3.MouseText = btn3.isEnable ? null : "卸载模组以删除";
+            btn4.isEnable = path != null;
+            btn4.MouseText = btn4.isEnable ? $"不要相信可疑链接.跳转到:{path}" : null;
 
             InitializeInfoText();
 
@@ -103,18 +106,6 @@ namespace tContentPatch.Content.Menus.ModInfo
                     if (ss[i] == null) continue;
                     ui_sv.AddChild(new UIText(ss[i]));
                 }
-            }
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-
-            if (btn3.IsMouseHovering && btn3.isEnable == false) DrawTip.SetDraw("卸载模组以删除");
-            if (btn4.IsMouseHovering && btn4.isEnable)
-            {
-                string path = mo.info?.jumpPath;
-                if (path != null) DrawTip.SetDraw($"不要相信可疑链接.跳转到:{path}");
             }
         }
     }

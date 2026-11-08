@@ -13,6 +13,12 @@ namespace tContentPatch.Content.UI
         public Action<string> OnSetText { get => UV.OnSetVal; set => UV.OnSetVal = value; }
         /// <summary/>
         public Func<string> OnGetText { get => UV.OnGetVal; set => UV.OnGetVal = value; }
+        /// <summary/>
+        public string Text
+        {
+            get => UV.Val;
+            set => UV.SetUIVal(CheckSetText(value));
+        }
 
         /// <summary/>
         public Color UITextColor;
@@ -42,12 +48,6 @@ namespace tContentPatch.Content.UI
                 focus = value;
                 (focus ? OnGotFocus : OnLostFocus)?.Invoke();
             }
-        }
-        /// <summary/>
-        public string Text
-        {
-            get => UV.Val;
-            set => UV.SetUIVal(CheckSetText(value));
         }
         private string defaultDisplayText = null;
         /// <summary/>

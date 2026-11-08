@@ -15,9 +15,7 @@ namespace tContentPatch.Content.UI
         /// <summary/>
         public virtual void ApplyMouseText(string text = null)
         {
-            if (MouseText == null) return;
-
-            Main.instance.MouseText(MouseText);
+            if (MouseText != null) Main.instance.MouseText(MouseText);
         }
 
         /// <inheritdoc/>
