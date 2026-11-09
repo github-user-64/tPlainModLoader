@@ -4,32 +4,76 @@ using System;
 namespace tContentPatch.Content.UI.ModSet
 {
     /// <summary>
-    /// 文本框
+    /// 输入输出<typeparamref name="T"/>的文本框
     /// </summary>
-    public class UIItemTextBox : UIItem
+    public class UIItemTextBox<T> : UIItem
     {
         /// <summary/>
-        public readonly UITextBox UITextBox = null;
+        public readonly UITextBoxValue<T> UITextBox = null;
         /// <summary/>
-        public string Text { get => UITextBox.Text; set => UITextBox.Text = value; }
+        public T Value { get => UITextBox.Value; set => UITextBox.Value = value; }
         /// <summary/>
-        public Func<string> OnGetText { set => UITextBox.OnGetText = value; }
+        public Func<T> OnGetValue { set => UITextBox.OnGetValue = value; }
         /// <summary/>
-        public Action<string> OnSetText { set => UITextBox.OnSetText = value; }
+        public Action<T> OnSetValue { set => UITextBox.OnSetValue = value; }
 
         /// <summary/>
-        public UIItemTextBox(string defaultDisplayText = null, int textMaxLength = -1,
-            Texture2D ico = null, string title = null) : base(ico, title)
+        public virtual Func<T, string> ValueToText { get => UITextBox.ValueToText; set => UITextBox.ValueToText = value; }
+        /// <summary/>
+        public virtual Func<string, T> TextToValue { get => UITextBox.TextToValue; set => UITextBox.TextToValue = value; }
+
+        /// <summary/>
+        public UIItemTextBox(Texture2D ico = null, string title = null) : base(ico, title)
         {
-            Height.Set(40f, 0f);
-
-            UITextBox = new UITextBox(defaultDisplayText);
-            UITextBox.Width.Set(200f, 0f);
-            UITextBox.Height.Set(-16, 1f);
+            UITextBox = GetUITextBoxValue();
+            UITextBox.Width.Set(0f, 0.5f);
+            UITextBox.Height.Set(-8, 1f);
             UITextBox.HAlign = 1f;
             UITextBox.VAlign = 0.5f;
-            UITextBox.MaxInputLength = textMaxLength;
             Append(UITextBox);
         }
+
+        /// <summary/>
+        protected virtual UITextBoxValue<T> GetUITextBoxValue() => new UITextBoxValue<T>();
+    }
+
+    /// <inheritdoc/>
+    public class UIItemTextBoxString : UIItemTextBox<string>
+    {
+        /// <inheritdoc/>
+        public UIItemTextBoxString(Texture2D ico = null, string title = null) : base(ico, title) { }
+
+        /// <inheritdoc/>
+        protected override UITextBoxValue<string> GetUITextBoxValue() => new UITextBoxString();
+    }
+
+    /// <inheritdoc/>
+    public class UIItemTextBoxInt : UIItemTextBox<int>
+    {
+        /// <inheritdoc/>
+        public UIItemTextBoxInt(Texture2D ico = null, string title = null) : base(ico, title) { }
+
+        /// <inheritdoc/>
+        protected override UITextBoxValue<int> GetUITextBoxValue() => new UITextBoxInt();
+    }
+
+    /// <inheritdoc/>
+    public class UIItemTextBoxFloat : UIItemTextBox<float>
+    {
+        /// <inheritdoc/>
+        public UIItemTextBoxFloat(Texture2D ico = null, string title = null) : base(ico, title) { }
+
+        /// <inheritdoc/>
+        protected override UITextBoxValue<float> GetUITextBoxValue() => new UITextBoxFloat();
+    }
+
+    /// <inheritdoc/>
+    public class UIItemTextBoxDouble : UIItemTextBox<double>
+    {
+        /// <inheritdoc/>
+        public UIItemTextBoxDouble(Texture2D ico = null, string title = null) : base(ico, title) { }
+
+        /// <inheritdoc/>
+        protected override UITextBoxValue<double> GetUITextBoxValue() => new UITextBoxDouble();
     }
 }

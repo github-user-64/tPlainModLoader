@@ -163,7 +163,7 @@ namespace tContentPatch.Content.UI
         /// <summary/>
         protected virtual void GotFocus()
         {
-            Main.GetInputText(null);
+            Main.GetInputText(null);//在获得焦点前清空输入
 
             OnGotFocus?.Invoke();
         }

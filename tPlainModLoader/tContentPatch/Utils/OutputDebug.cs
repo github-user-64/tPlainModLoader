@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace tContentPatch.Utils
 {
-    internal class OutputDebug
+    internal static class OutputDebug
     {
         public static void OutputException(Exception ex, int stackTrace = 1)
         {

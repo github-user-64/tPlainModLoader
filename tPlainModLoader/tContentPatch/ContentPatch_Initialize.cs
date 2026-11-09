@@ -110,37 +110,31 @@ namespace tContentPatch
                 sv.ItemMargin = 4f;
                 UIPanel.Append(sv);
 
-                UIItemTextBoxASwitch ui1 = new UIItemTextBoxASwitch();
+                UIItemSwitch ui1 = new UIItemSwitch(Main.Assets.Request<Texture2D>("Images/UI/Camera_1").Value, "标题1");
                 ui1.MouseText = "ui1";
                 ui1.UISwitch.MouseText = "kaiguang";
-                //sv.AddChild(ui1);
+                sv.AddChild(ui1);
 
-                UIItemTitle ui2 = new UIItemTitle(Main.Assets.Request<Texture2D>("Images/UI/Camera_1").Value, "标题1");
-                ui2.Height.Set(44f, 0f);
+                UIItemTextBoxString ui2 = new UIItemTextBoxString(Main.Assets.Request<Texture2D>("Images/UI/Camera_1").Value, "标题1");
+                ui2.OnGetValue = () => vals;
+                ui2.OnSetValue = v => vals = v;
                 sv.AddChild(ui2);
 
-                ui3 = new UIItemValueSliderFloat(10, 15, null, "asd");
+                UIItemTextBoxFloat ui3 = new UIItemTextBoxFloat(Main.Assets.Request<Texture2D>("Images/UI/Camera_1").Value, "标题1float");
+                ui3.OnGetValue = () => valf;
+                ui3.OnSetValue = v => valf = v;
                 sv.AddChild(ui3);
 
-                UITextBox tb1 = new UITextBox("big");
-                tb1.OnGetText = () => val.ToString();
-                tb1.OnSetText = v => int.TryParse(v, out val);
-                //sv.AddChild(tb1);
-
-                UITextBoxInt tb2 = new UITextBoxInt();
-                tb2.OnGetValue = () => val;
-                tb2.OnSetValue = v => val = v;
-                sv.AddChild(tb2);
-
-                UITextBoxFloat tb3 = new UITextBoxFloat();
-                tb3.OnGetValue = () => valf;
-                tb3.OnSetValue = v => valf = v;
-                sv.AddChild(tb3);
+                UIItemSwitchATextBoxFloat ui4 = new UIItemSwitchATextBoxFloat(Main.Assets.Request<Texture2D>("Images/UI/Camera_1").Value, "标题1开关float");
+                ui4.OnGetValue = () => valf;
+                ui4.OnSetValue = v => valf = v;
+                ui4.OnGetIsChecked = () => valb;
+                ui4.OnSetIsChecked = v => valb = v;
+                sv.AddChild(ui4);
             }
-
-            UIItemValueSlider<float> ui3 = null;
-            int val;
+            string vals;
             float valf;
+            bool valb;
             public override void Update(GameTime gameTime)
             {
                 base.Update(gameTime);
@@ -148,11 +142,11 @@ namespace tContentPatch
                 if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftControl)) GameUitl.OpenMenu(new TestMenu());
                 if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Space))
                 {
-                    //ui3.Value = Main.mouseX;
-                    val = Main.mouseX / 5;
+                    vals = $"{Main.mouseX / 5}";
                     valf = Main.mouseX / 5;
+                    valb = Main.mouseX / 5 % 2 == 0;
                 }
-                Debug.WriteLine(valf);
+                Debug.WriteLine($"string{vals}, float{valf}, bool{valb}");
             }
         }
 

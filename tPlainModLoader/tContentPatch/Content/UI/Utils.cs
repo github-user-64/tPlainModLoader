@@ -6,7 +6,9 @@ namespace tContentPatch.Content.UI
     /// <summary/>
     public static class Utils
     {
-        /// <summary/>
+        /// <summary>
+        /// ui的值
+        /// </summary>
         public class UIVal<T>
         {
             /// <summary>
@@ -32,7 +34,12 @@ namespace tContentPatch.Content.UI
                 this.OnUpdateUI = OnUpdateUI;
             }
 
-            /// <summary/>
+            /// <summary>
+            /// ui更新, 用于<see cref="UIElement.Update(Microsoft.Xna.Framework.GameTime)"/><para/>
+            /// <see cref="Val">Val</see>更新为<see cref="OnGetVal">OnGetVal</see>得到的值<br/>
+            /// 如果值不同则调用<see cref="OnUpdateUI">OnUpdateUI</see>
+            /// </summary>
+            /// <param name="compelUpdateUI">强制更新ui</param>
             public void UpdateUI(bool compelUpdateUI = false)
             {
                 bool hasUpdate = compelUpdateUI;
@@ -50,7 +57,14 @@ namespace tContentPatch.Content.UI
                 if (hasUpdate) OnUpdateUI?.Invoke();
             }
 
-            /// <summary/>
+            /// <summary>
+            /// 设置ui的值<para/>
+            /// 调用<see cref="OnSetVal">OnSetVal</see><br/>
+            /// <see cref="Val">Val</see>更新为<paramref name="val"/><br/>
+            /// 如果值不同则调用<see cref="OnUpdateUI">OnUpdateUI</see>
+            /// </summary>
+            /// <param name="val"></param>
+            /// <param name="compelUpdateUI">强制更新ui</param>
             public void SetUIVal(T val, bool compelUpdateUI = false)
             {
                 OnSetVal?.Invoke(val);

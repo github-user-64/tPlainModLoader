@@ -6,7 +6,7 @@ using Terraria;
 namespace tContentPatch.Content
 {
     [HarmonyPatch(typeof(Main), "Update")]
-    internal class AutoLoadMod
+    internal static class AutoLoadMod
     {
         private static bool oneLoadMod = true;
 
@@ -18,11 +18,10 @@ namespace tContentPatch.Content
         internal static void Prefix(GameTime gameTime)
         {
             if (oneLoadMod == false) return;
-            if (Main.dedServ) return;
-            if (Main.showSplash) return;
-
             if (Main.gameMenu == false) return;
             if (Main.menuMode != Terraria.ID.MenuID.Title) return;
+            if (Main.dedServ) return;
+            if (Main.showSplash) return;
             if (LoaderControl.CanLoad == false) return;
 
             oneLoadMod = false;

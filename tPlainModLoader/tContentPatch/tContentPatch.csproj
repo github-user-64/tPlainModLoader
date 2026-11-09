@@ -79,7 +79,7 @@
     <Compile Include="Content\Menus\ModSet\ModSet.cs" />
     <Compile Include="Content\Menus\ModSet\UIModSet.cs" />
     <Compile Include="Content\TitleInfo.cs" />
-    <Compile Include="Content\UI\ModSet\UIItemTextBoxASwitch.cs" />
+    <Compile Include="Content\UI\ModSet\UIItemSwitchATextBox.cs" />
     <Compile Include="Content\UI\ModSet\UIItemSwitch.cs" />
     <Compile Include="Content\UI\ModSet\UIItemTextBox.cs" />
     <Compile Include="Content\UI\ModSet\UIItemTitle.cs" />

@@ -15,7 +15,7 @@ namespace tContentPatch.Content
     internal class TitleInfo
     {
         [HarmonyPatch(typeof(Main), "DrawSocialMediaButtons")]
-        public class MainPatch_DrawSocialMediaButtons
+        public static class MainPatch_DrawSocialMediaButtons
         {
             private static TitleLinkButton[] buttons = null;
 
@@ -44,7 +44,7 @@ namespace tContentPatch.Content
         }
 
         [HarmonyPatch(typeof(Main), "DrawVersionNumber")]
-        public class MainPatch_DrawVersionNumber
+        public static class MainPatch_DrawVersionNumber
         {
             internal static void Postfix(Color menuColor, float upBump)
             {

@@ -1,17 +1,17 @@
 ﻿namespace tContentPatch
 {
     /// <summary/>
-    public class InfoList
+    public static class InfoList
     {
         /// <summary/>
-        public class Directorys
+        public static class Directorys
         {
             /// <summary/>
             public const string Mods = "Mods";
         }
 
         /// <summary/>
-        public class Files
+        public static class Files
         {
             /// <summary/>
             public const string Log = "tpmlLog.txt";
