@@ -56,9 +56,7 @@ namespace tContentPatch.Content.Menus.ModSetSwitch
             codeMatcher.Advance(cs.Length - 1);//在add前
             if (codeMatcher.IsInvalid)
             {
-                string s = $"无法在游戏选择窗口插入选项:找不到IL位置";
-                Log.Add(s);
-                ContentPatch.PrintTry(s);
+                PrintLog();
                 return instructions;
             }
 
@@ -85,7 +83,7 @@ namespace tContentPatch.Content.Menus.ModSetSwitch
             codeMatcher.MatchStartForward(cs);
             if (codeMatcher.IsInvalid)
             {
-                ContentPatch.PrintTry($"无法在游戏选择窗口插入选项:找不到IL位置");
+                PrintLog();
                 return instructions;
             }
 
@@ -121,6 +119,13 @@ namespace tContentPatch.Content.Menus.ModSetSwitch
                 SoundEngine.PlaySound(SoundID.MenuOpen);
                 ModSetSwitch.OpenModSetSwitchMenu(null, ContentPatch.GetModObjects());
             }
+        }
+
+        private static void PrintLog()
+        {
+            string s = $"无法在游戏选择窗口插入选项:找不到IL位置";
+            Log.Add(s);
+            ContentPatch.PrintTry(s);
         }
     }
 }

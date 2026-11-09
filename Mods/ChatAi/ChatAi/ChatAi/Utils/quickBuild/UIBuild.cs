@@ -1,5 +1,4 @@
-﻿using ChatAi.Content.UI;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
@@ -18,20 +17,18 @@ namespace ChatAi.Utils.quickBuild
         /// <summary>
         /// 文本框, 开关, 绑定值
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="gsr"></param>
-        /// <param name="setGsr"></param>
-        /// <param name="parseTry"></param>
-        /// <param name="mouseText"></param>
-        /// <param name="ico"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
         public static UIElement get1<T>(GetSetReset<bool> gsr, GetSetReset<T> setGsr, Func<string, T> parseTry, string mouseText = null, string ico = null, string text = null)
         {
             Texture2D texture = ico == null ? null : Main.Assets.Request<Texture2D>(ico, AssetRequestMode.ImmediateLoad).Value;
 
-            UIItemTextBoxASwitchBind<T> ui = new UIItemTextBoxASwitchBind<T>(gsr, setGsr, parseTry, texture, text);
+            UIItemSwitchATextBox<T> ui = new UIItemSwitchATextBox<T>(texture, text);
             ui.MouseText = mouseText;
+            ui.ValueToText = v => $"{v}";
+            ui.TextToValue = parseTry;
+            ui.OnGetIsChecked = () => gsr.val;
+            ui.OnSetIsChecked = v => gsr.val = v;
+            ui.OnGetValue = () => setGsr.val;
+            ui.OnSetValue = v => setGsr.val = v;
 
             return ui;
         }
@@ -39,19 +36,14 @@ namespace ChatAi.Utils.quickBuild
         /// <summary>
         /// 开关, 绑定值
         /// </summary>
-        /// <param name="gsr"></param>
-        /// <param name="mouseText"></param>
-        /// <param name="ico"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
         public static UIElement get2(GetSetReset<bool> gsr, string mouseText = null, string ico = null, string text = null)
         {
             Texture2D texture = ico == null ? null : Main.Assets.Request<Texture2D>(ico, AssetRequestMode.ImmediateLoad).Value;
 
             UIItemSwitch ui = new UIItemSwitch(texture, text);
             ui.MouseText = mouseText;
-            ui.OnGetVal = () => gsr.val;
-            ui.OnValUpdate = v => gsr.val = v;
+            ui.OnGetIsChecked = () => gsr.val;
+            ui.OnSetIsChecked = v => gsr.val = v;
 
             return ui;
         }

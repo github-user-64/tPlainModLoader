@@ -41,7 +41,7 @@ namespace CreativeInventory.CreativeInventory
         public UICreativeInventory(string title, int width, int height) : base(title, width, height)
         {
             panel_rows = new UIStackPanel();
-            panel_row1 = new Terraria.UI.UIState();
+            panel_row1 = new UIState();
             panel_row1_tb = new UITextBox("搜索物品");
             panel_row1_sp = new UIStackPanel();
             panel_row1_sw_tile = new UISearchSwitch("图格");
@@ -63,11 +63,11 @@ namespace CreativeInventory.CreativeInventory
             panel_row1_tb.Height.Set(30, 0);
             panel_row1_tb.Left.Set(-panel_row1_tb.Width.Pixels, 1);
             panel_row1_tb.VAlign = 0.5f;
-            panel_row1_tb.Text_MaxLength = 8;
-            panel_row1_tb.OnTextChanged += (e) =>
+            panel_row1_tb.MaxInputLength = 8;
+            panel_row1_tb.OnTextChanged += v =>
             {
                 Search_Text_cd = (int)((1 / 16f) * 250);
-                Search_Text_new = e;
+                Search_Text_new = v;
             };
 
             panel_row1_sp.Horizontal = true;
@@ -129,9 +129,10 @@ namespace CreativeInventory.CreativeInventory
                     Main.Assets.Request<Texture2D>($"Images/{path}", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value,
                     (int)panel_row2_sp_row1.Height.Pixels - 2, (int)panel_row2_sp_row1.Height.Pixels - 2);
                 rb.VAlign = 0.5f;
-                rb.MouseHoveringText = text;
-                rb.OnChecked += () =>
+                rb.MouseText = text;
+                rb.OnIsCheckChanged += v =>
                 {
+                    if (v != true) return;
                     update_item(id1, id2);
                     switchItemSort1(index);
                 };
@@ -162,9 +163,9 @@ namespace CreativeInventory.CreativeInventory
                 new UIRadioButton(Main.Assets.Request<Texture2D>($"Images/{path}", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value,
                 rbs_size, rbs_size)
                 {
-                    MouseHoveringText = text
+                    MouseText = text
                 };
-                rb.OnChecked += () => update_item(id1, id2);
+                rb.OnIsCheckChanged += v => { if (v) update_item(id1, id2); };
 
                 return rb;
             };

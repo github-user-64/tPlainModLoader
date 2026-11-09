@@ -23,6 +23,8 @@ namespace tContentPatch.Content.UI
         public Func<bool> OnGetIsChecked { set => UV.OnGetVal = value; }
         /// <summary/>
         public Action<bool> OnSetIsChecked { set => UV.OnSetVal = value; }
+        /// <summary/>
+        public Action<bool> OnIsCheckChanged { get => UV.OnValChanged; set => UV.OnValChanged = value; }
 
         /// <summary/>
         public readonly UIImage UIIco = null;
@@ -46,7 +48,7 @@ namespace tContentPatch.Content.UI
             uie.Height.Set(0f, 1f);
             uie.OnLeftClick += (e, s) =>
             {
-                SoundEngine.PlaySound(SoundID.MenuTick);
+
                 IsChecked = true;
             };
             uie.OnMouseOver += (e, s) =>
@@ -79,6 +81,8 @@ namespace tContentPatch.Content.UI
         private void OnValUpdate()
         {
             if (IsChecked != true) return;
+
+            SoundEngine.PlaySound(SoundID.MenuTick);
 
             Parent?.Children?.AsParallel()?.ForAll((ui) =>
             {

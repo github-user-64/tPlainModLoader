@@ -65,8 +65,8 @@ namespace DeadEffect
         private UIElement GetUI(string text, Func<bool> get, Action<bool> set)
         {
             UIItemSwitch ui = new UIItemSwitch(null, text);
-            ui.OnUpdate += v => ui.SetVal(get());
-            ui.OnValUpdate += v => set(v);
+            ui.OnGetIsChecked = get;
+            ui.OnSetIsChecked = set;
 
             return ui;
         }

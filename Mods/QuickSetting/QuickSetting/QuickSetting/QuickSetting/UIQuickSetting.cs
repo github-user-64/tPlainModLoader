@@ -13,9 +13,9 @@ namespace QuickSetting.QuickSetting
     {
         public Action<string> OnAddItem = null;
         public Action<string, string> OnSwitchItem = null;
-        private UIWrapPanel ui_wp = null;
-        private UIScrollViewer2 ui_children = null;
-        private List<(string, UIRadioButton, List<UIElement>)> asd = null;
+        private readonly UIWrapPanel ui_wp = null;
+        private readonly UIScrollViewer2 ui_children = null;
+        private readonly List<(string, UIRadioButton, List<UIElement>)> asd = null;
         private bool switchRb = false;
         private UIRadioButton switchRb_rb = null;
         private UIRadioButton switchRb_rb2 = null;
@@ -145,9 +145,10 @@ namespace QuickSetting.QuickSetting
 
                 List<UIElement> uis = new List<UIElement>();
                 UIRadioButton rb = new UIRadioButton(TextureAssets.Reforge[0].Value, 20, 20);
-                rb.MouseHoveringText = name;
-                rb.OnChecked += () =>
+                rb.MouseText = name;
+                rb.OnSetIsChecked = _ =>
                 {
+                    if (rb.IsChecked != true) return;
                     ui_children.ClearChild();
                     foreach (UIElement i in uis) ui_children.AddChild(i);
                 };

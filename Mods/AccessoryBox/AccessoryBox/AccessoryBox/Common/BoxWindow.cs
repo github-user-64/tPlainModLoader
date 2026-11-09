@@ -53,8 +53,8 @@ namespace AccessoryBox.Common
         private UIElement BuildBtns()
         {
             UIItemSwitch s = new UIItemSwitch();
-            s.OnGetVal = console.GetEnable;
-            s.OnSetVal = console.SetEnable;
+            s.OnGetIsChecked = console.GetEnable;
+            s.OnSetIsChecked = console.SetEnable;
 
             int height = 20;
 

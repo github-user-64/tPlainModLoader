@@ -6,19 +6,6 @@ namespace tContentPatch.Content.UI
     public partial class UITextBox
     {
         /// <summary/>
-        public Utils.UIVal<string> UV = null;
-        /// <summary/>
-        public Func<string> OnGetText { set => UV.OnGetVal = value; }
-        /// <summary/>
-        public Action<string> OnSetText { set => UV.OnSetVal = value; }
-        /// <summary/>
-        public string Text
-        {
-            get => UV.Val;
-            set => UV.SetUIVal(value);
-        }
-
-        /// <summary/>
         public Color UITextColor;
         /// <summary/>
         public Color UITextColorDeft;
@@ -26,10 +13,22 @@ namespace tContentPatch.Content.UI
         public Color UITextShadowColor;
         /// <summary/>
         public Color UITextShadowColorDeft;
+
         /// <summary/>
-        public Action OnGotFocus = null;
+        public Utils.UIVal<string> UV = null;
         /// <summary/>
-        public Action OnLostFocus = null;
+        public string Text
+        {
+            get => UV.Val;
+            set => UV.SetUIVal(value);
+        }
+        /// <summary/>
+        public Func<string> OnGetText { set => UV.OnGetVal = value; }
+        /// <summary/>
+        public Action<string> OnSetText { set => UV.OnSetVal = value; }
+        /// <summary/>
+        public Action<string> OnTextChanged { get => UV.OnValChanged; set => UV.OnValChanged = value; }
+
         /// <summary>
         /// 最大输入长度, 小于<see langword="0"/>为不限
         /// </summary>
@@ -60,6 +59,11 @@ namespace tContentPatch.Content.UI
                 else LostFocus();
             }
         }
+        /// <summary/>
+        public Action OnGotFocus = null;
+        /// <summary/>
+        public Action OnLostFocus = null;
+
         private string defaultDisplayText = null;
         /// <summary/>
         public string DefaultDisplayText
@@ -67,6 +71,7 @@ namespace tContentPatch.Content.UI
             get => defaultDisplayText;
             set => defaultDisplayText = value;
         }
+
         private string displayText = null;
         /// <summary/>
         protected string DisplayText

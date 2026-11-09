@@ -8,20 +8,32 @@ namespace tContentPatch.Content.UI
     public class UITextBoxValue<T> : UIMouseText
     {
         /// <summary/>
-        public Func<T> OnGetValue { set => UITextBox.OnGetText = () => ValueToText(value()); }
-        /// <summary/>
-        public Action<T> OnSetValue { set => UITextBox.OnSetText = v => value(TextToValue(v)); }
-        /// <summary/>
         public T Value
         {
             get => TextToValue(UITextBox.Text);
             set => UITextBox.Text = ValueToText(value);
         }
+        /// <summary/>
+        public Func<T> OnGetValue { set => UITextBox.OnGetText = () => ValueToText(value()); }
+        /// <summary/>
+        public Action<T> OnSetValue { set => UITextBox.OnSetText = v => value(TextToValue(v)); }
+        /// <summary/>
+        protected Action<T> _OnValueChanged = null;
+        /// <summary/>
+        public Action<T> OnValueChanged
+        {
+            get => _OnValueChanged;
+            set
+            {
+                _OnValueChanged = value;
+                UITextBox.OnTextChanged = v => _OnValueChanged(TextToValue(v));
+            }
+        }
 
         /// <summary/>
-        public virtual Func<T, string> ValueToText { get; set; }
+        public virtual Func<T, string> ValueToText { get; set; } = _ => throw new NotImplementedException();
         /// <summary/>
-        public virtual Func<string, T> TextToValue { get; set; }
+        public virtual Func<string, T> TextToValue { get; set; } = _ => throw new NotImplementedException();
 
         /// <summary/>
         public readonly UITextBox UITextBox = null;
@@ -46,6 +58,9 @@ namespace tContentPatch.Content.UI
     public class UITextBoxString : UITextBoxValue<string>
     {
         /// <inheritdoc/>
+        public UITextBoxString(string defaultDisplayText = null) : base(defaultDisplayText) { }
+
+        /// <inheritdoc/>
         public override Func<string, string> ValueToText { get; set; } = v => v;
         /// <inheritdoc/>
         public override Func<string, string> TextToValue { get; set; } = v => v;
@@ -54,6 +69,9 @@ namespace tContentPatch.Content.UI
     /// <inheritdoc/>
     public class UITextBoxInt : UITextBoxValue<int>
     {
+        /// <inheritdoc/>
+        public UITextBoxInt(string defaultDisplayText = null) : base(defaultDisplayText) { }
+
         /// <inheritdoc/>
         public override Func<int, string> ValueToText { get; set; } = v => v.ToString();
         /// <inheritdoc/>
@@ -68,6 +86,9 @@ namespace tContentPatch.Content.UI
     public class UITextBoxFloat : UITextBoxValue<float>
     {
         /// <inheritdoc/>
+        public UITextBoxFloat(string defaultDisplayText = null) : base(defaultDisplayText) { }
+
+        /// <inheritdoc/>
         public override Func<float, string> ValueToText { get; set; } = v => v.ToString();
         /// <inheritdoc/>
         public override Func<string, float> TextToValue { get; set; } = v =>
@@ -80,6 +101,9 @@ namespace tContentPatch.Content.UI
     /// <inheritdoc/>
     public class UITextBoxDouble : UITextBoxValue<double>
     {
+        /// <inheritdoc/>
+        public UITextBoxDouble(string defaultDisplayText = null) : base(defaultDisplayText) { }
+
         /// <inheritdoc/>
         public override Func<double, string> ValueToText { get; set; } = v => v.ToString();
         /// <inheritdoc/>

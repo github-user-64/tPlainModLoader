@@ -40,8 +40,8 @@ namespace AccessoryBox
         public override UIElement GetUI()
         {
             UIItemSwitch ui = new UIItemSwitch(null, "启用");
-            ui.OnGetVal = () => date;
-            ui.OnSetVal = SetVal;
+            ui.OnGetIsChecked = () => date;
+            ui.OnSetIsChecked = SetVal;
 
             return ui;
         }

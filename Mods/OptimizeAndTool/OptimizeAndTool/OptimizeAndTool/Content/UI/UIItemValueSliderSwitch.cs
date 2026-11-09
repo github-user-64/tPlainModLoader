@@ -2,42 +2,35 @@
 using Microsoft.Xna.Framework.Graphics;
 using OptimizeAndTool.Utils;
 using tContentPatch.Content.UI.ModSet;
-using Terraria;
 using Terraria.Audio;
+using Terraria.ID;
 using Terraria.UI;
 
 namespace OptimizeAndTool.Content.UI
 {
-    internal class UIItemValueSliderSwitch : UIItemValueSlider
+    internal class UIItemValueSliderSwitch : UIItemValueSliderFloat
     {
-        public string MouseText = "右键开关";
         public GetSetReset<bool> GSRSwitch = null;
-
-        public UIItemValueSliderSwitch(int min, int max, Texture2D ico = null, string text = null) : base(min, max, ico, text)
-        {
-        }
+        protected Color oldColor;
 
         public UIItemValueSliderSwitch(float min, float max, Texture2D ico = null, string text = null) : base(min, max, ico, text)
         {
+            MouseText = "右键开关";
+            oldColor = Color;
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
 
-            color = GSRSwitch.val ? new Color(100, 100, 71) : new Color(73, 94, 171);
-
-            if (IsMouseHovering == false) return;
-            if (MouseText == null) return;
-
-            Main.instance.MouseText(MouseText);
+            Color = GSRSwitch.val ? new Color(100, 100, 71) : oldColor;
         }
 
         public override void RightClick(UIMouseEvent evt)
         {
             base.RightClick(evt);
 
-            SoundEngine.PlaySound(12);
+            SoundEngine.PlaySound(SoundID.MenuTick);
             GSRSwitch.val = !GSRSwitch.val;
         }
     }

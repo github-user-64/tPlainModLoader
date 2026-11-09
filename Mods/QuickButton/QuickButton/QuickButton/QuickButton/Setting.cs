@@ -22,7 +22,6 @@ namespace QuickButton.QuickButton
         public override string FilePath => "buttonSet.json";
         public override Type DataType => typeof(Data);
         private Data data = null;
-        private Action<Data> updateUI = null;
 
         public override void Load(object v)
         {
@@ -39,8 +38,6 @@ namespace QuickButton.QuickButton
 
         public override UIElement GetUI()
         {
-            updateUI = null;
-
             UIScrollViewer2 sv = new UIScrollViewer2();
             sv.Width.Precent = 1;
             sv.Height.Precent = 1;
@@ -56,9 +53,8 @@ namespace QuickButton.QuickButton
             };
 
             //按钮位置
-            UIItemValueSlider item_vs = new UIItemValueSlider(0, 1, text: "按钮初始位置");
-            item_vs.SetVal(data.btnPos);
-            item_vs.FloatToString += v =>
+            UIItemValueSliderInt item_vs = new UIItemValueSliderInt(0, 1, text: "按钮初始位置");
+            item_vs.ValueToString += v =>
             {
                 switch (v)
                 {
@@ -67,12 +63,12 @@ namespace QuickButton.QuickButton
                     default: return string.Empty;
                 }
             };
-            item_vs.OnValUpdate += v =>
+            item_vs.OnGetValue = () => data.btnPos;
+            item_vs.OnSetValue = v =>
             {
-                data.btnPos = (int)v;
+                data.btnPos = v;
                 NeedSave = true;
             };
-            updateUI += d => item_vs.SetVal(d.btnPos);
 
             //排序
             UIItemTitle item_title = new UIItemTitle(title: "排序, 左键拖动");
@@ -99,8 +95,6 @@ namespace QuickButton.QuickButton
             data.btnPos = 0;
             data.keyOrder = null;
             NeedSave = true;
-
-            updateUI?.Invoke(data);
         }
 
         public override object GetSaveData() => data;

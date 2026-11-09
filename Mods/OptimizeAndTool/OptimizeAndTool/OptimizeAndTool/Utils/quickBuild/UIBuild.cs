@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using OptimizeAndTool.Content.UI;
 using System;
 using System.Collections.Generic;
 using tContentPatch.Content.UI;
+using tContentPatch.Content.UI.ModSet;
 using Terraria;
 using Terraria.UI;
 
@@ -16,20 +16,18 @@ namespace OptimizeAndTool.Utils.quickBuild
         /// <summary>
         /// 文本框, 开关, 绑定值
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="gsr"></param>
-        /// <param name="setGsr"></param>
-        /// <param name="parseTry"></param>
-        /// <param name="mouseText"></param>
-        /// <param name="ico"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
         public static UIElement get1<T>(GetSetReset<bool> gsr, GetSetReset<T> setGsr, Func<string, T> parseTry, string mouseText = null, string ico = null, string text = null)
         {
             Texture2D texture = ico == null ? null : Main.Assets.Request<Texture2D>(ico, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
 
-            UIItemTextBoxASwitchBind<T> ui = new UIItemTextBoxASwitchBind<T>(gsr, setGsr, parseTry, texture, text);
+            UIItemSwitchATextBox<T> ui = new UIItemSwitchATextBox<T>(texture, text);
             ui.MouseText = mouseText;
+            ui.ValueToText = v => $"{v}";
+            ui.TextToValue = parseTry;
+            ui.OnGetIsChecked = () => gsr.val;
+            ui.OnSetIsChecked = v => gsr.val = v;
+            ui.OnGetValue = () => setGsr.val;
+            ui.OnSetValue = v => setGsr.val = v;
 
             return ui;
         }
@@ -37,17 +35,14 @@ namespace OptimizeAndTool.Utils.quickBuild
         /// <summary>
         /// 开关, 绑定值
         /// </summary>
-        /// <param name="gsr"></param>
-        /// <param name="mouseText"></param>
-        /// <param name="ico"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
         public static UIElement get2(GetSetReset<bool> gsr, string mouseText = null, string ico = null, string text = null)
         {
             Texture2D texture = ico == null ? null : Main.Assets.Request<Texture2D>(ico, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
 
-            UIItemSwitchBind ui = new UIItemSwitchBind(gsr, texture, text);
+            UIItemSwitch ui = new UIItemSwitch(texture, text);
             ui.MouseText = mouseText;
+            ui.OnGetIsChecked = () => gsr.val;
+            ui.OnSetIsChecked = v => gsr.val = v;
 
             return ui;
         }

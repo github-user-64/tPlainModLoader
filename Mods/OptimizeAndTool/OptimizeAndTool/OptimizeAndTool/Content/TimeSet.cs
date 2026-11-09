@@ -34,13 +34,13 @@ namespace OptimizeAndTool.Content
         public static List<UIElement> GetUI()
         {
             UIItemValueSliderSwitch timeSet = new UIItemValueSliderSwitch(timeMin, timeMax, null, "时间");
-            timeSet.OnUpdate += _ => timeSet.SetVal(Time.val);
-            timeSet.OnValUpdate += v => Time.val = v;
+            timeSet.OnGetValue = () => Time.val;
+            timeSet.OnSetValue = v => Time.val = v;
             timeSet.GSRSwitch = EnableTime;
 
             UIItemValueSliderSwitch timeRate = new UIItemValueSliderSwitch(timeRateMin, timeRateMax, null, "时间速率");
-            timeRate.OnUpdate += _ => timeRate.SetVal(TimeRate.val);
-            timeRate.OnValUpdate += v => TimeRate.val = (int)v;
+            timeRate.OnGetValue = () => TimeRate.val;
+            timeRate.OnSetValue = v => TimeRate.val = (int)v;
             timeRate.GSRSwitch = EnableTimeRate;
 
             List<UIElement> uis = new List<UIElement>

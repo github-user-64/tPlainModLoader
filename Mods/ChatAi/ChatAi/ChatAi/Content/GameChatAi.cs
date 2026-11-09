@@ -1,11 +1,11 @@
-﻿using ChatAi.Content.UI;
-using ChatAi.Utils;
+﻿using ChatAi.Utils;
 using ChatAi.Utils.quickBuild;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using tContentPatch;
+using tContentPatch.Content.UI.ModSet;
 using Terraria;
 using Terraria.GameContent.NetModules;
 using Terraria.Net;
@@ -28,16 +28,28 @@ namespace ChatAi.Content
         {
             UIBuild.get2(Enable, text: "聊天Ai"),
             UIBuild.get2(DisplayText, text: "输出请求文本"),
-            new UIItemTextBoxBind<string>(StringKey, v => v, text:"关键字"){ MouseText = "<string>" },
-            new UIItemTextBoxBind<string>(ChatHead, v => v, text:"头文本"){ MouseText = "<string>" },
-            new UIItemValueSliderBind<int>(AiType, v => v, v => (int)v, 0, 1, text: "类型")
+            new UIItemTextBoxString(title: "关键字")
             {
-                FloatToString = v =>
+                MouseText = "<string>",
+                OnGetValue = () => StringKey.val,
+                OnSetValue = v => StringKey.val = v,
+            },
+            new UIItemTextBoxString(title: "头文本")
+            {
+                MouseText = "<string>",
+                OnGetValue = () => ChatHead.val,
+                OnSetValue = v => ChatHead.val = v,
+            },
+            new UIItemValueSliderInt(0, 1, title: "类型")
+            {
+                ValueToString = v =>
                 {
                     if (v == 0) return "普通模型";
                     if (v == 1) return "连续对话";
                     return "-";
-                }
+                },
+                OnGetValue = () => AiType.val,
+                OnSetValue = v => AiType.val = v,
             }
         };
 

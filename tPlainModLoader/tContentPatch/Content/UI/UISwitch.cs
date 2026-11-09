@@ -23,6 +23,8 @@ namespace tContentPatch.Content.UI
         public Func<bool> OnGetIsChecked { set => UV.OnGetVal = value; }
         /// <summary/>
         public Action<bool> OnSetIsChecked { set => UV.OnSetVal = value; }
+        /// <summary/>
+        public Action<bool> OnIsCheckChanged { get => UV.OnValChanged; set => UV.OnValChanged = value; }
 
         /// <summary/>
         public readonly UIText UIText = null;

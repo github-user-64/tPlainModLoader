@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
@@ -49,11 +50,24 @@ namespace tContentPatch.Content.UI
         }
 
         /// <inheritdoc/>
+        protected override void DrawSelf(SpriteBatch spriteBatch)
+        {
+            base.DrawSelf(spriteBatch);
+
+            OnDrawUpdateInput();
+        }
+
+        /// <summary/>
+        protected virtual void OnDrawUpdateInput()
+        {
+            UpdateInput();
+        }
+
+        /// <inheritdoc/>
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
 
-            UpdateInput();
             UpdateFocus();
             if (Focus != true || NoUpdateDisplayTextWhenHasFocus != true) UV.UpdateUI();
             UpdateUIText(DisplayText);

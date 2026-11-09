@@ -10,12 +10,15 @@ namespace tContentPatch.Content.UI.ModSet
     {
         /// <summary/>
         public readonly UITextBoxValue<T> UITextBox = null;
+
         /// <summary/>
         public T Value { get => UITextBox.Value; set => UITextBox.Value = value; }
         /// <summary/>
         public Func<T> OnGetValue { set => UITextBox.OnGetValue = value; }
         /// <summary/>
         public Action<T> OnSetValue { set => UITextBox.OnSetValue = value; }
+        /// <summary/>
+        public Action<T> OnValueChanged { get => UITextBox.OnValueChanged; set => UITextBox.OnValueChanged = value; }
 
         /// <summary/>
         public virtual Func<T, string> ValueToText { get => UITextBox.ValueToText; set => UITextBox.ValueToText = value; }
@@ -23,9 +26,9 @@ namespace tContentPatch.Content.UI.ModSet
         public virtual Func<string, T> TextToValue { get => UITextBox.TextToValue; set => UITextBox.TextToValue = value; }
 
         /// <summary/>
-        public UIItemTextBox(Texture2D ico = null, string title = null) : base(ico, title)
+        public UIItemTextBox(Texture2D ico = null, string title = null, string defaultDisplayText = null) : base(ico, title)
         {
-            UITextBox = GetUITextBoxValue();
+            UITextBox = GetUITextBoxValue(defaultDisplayText);
             UITextBox.Width.Set(0f, 0.5f);
             UITextBox.Height.Set(-8, 1f);
             UITextBox.HAlign = 1f;
@@ -34,46 +37,46 @@ namespace tContentPatch.Content.UI.ModSet
         }
 
         /// <summary/>
-        protected virtual UITextBoxValue<T> GetUITextBoxValue() => new UITextBoxValue<T>();
+        protected virtual UITextBoxValue<T> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxValue<T>(defaultDisplayText);
     }
 
     /// <inheritdoc/>
     public class UIItemTextBoxString : UIItemTextBox<string>
     {
         /// <inheritdoc/>
-        public UIItemTextBoxString(Texture2D ico = null, string title = null) : base(ico, title) { }
+        public UIItemTextBoxString(Texture2D ico = null, string title = null, string defaultDisplayText = null) : base(ico, title, defaultDisplayText) { }
 
         /// <inheritdoc/>
-        protected override UITextBoxValue<string> GetUITextBoxValue() => new UITextBoxString();
+        protected override UITextBoxValue<string> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxString();
     }
 
     /// <inheritdoc/>
     public class UIItemTextBoxInt : UIItemTextBox<int>
     {
         /// <inheritdoc/>
-        public UIItemTextBoxInt(Texture2D ico = null, string title = null) : base(ico, title) { }
+        public UIItemTextBoxInt(Texture2D ico = null, string title = null, string defaultDisplayText = null) : base(ico, title, defaultDisplayText) { }
 
         /// <inheritdoc/>
-        protected override UITextBoxValue<int> GetUITextBoxValue() => new UITextBoxInt();
+        protected override UITextBoxValue<int> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxInt();
     }
 
     /// <inheritdoc/>
     public class UIItemTextBoxFloat : UIItemTextBox<float>
     {
         /// <inheritdoc/>
-        public UIItemTextBoxFloat(Texture2D ico = null, string title = null) : base(ico, title) { }
+        public UIItemTextBoxFloat(Texture2D ico = null, string title = null, string defaultDisplayText = null) : base(ico, title, defaultDisplayText) { }
 
         /// <inheritdoc/>
-        protected override UITextBoxValue<float> GetUITextBoxValue() => new UITextBoxFloat();
+        protected override UITextBoxValue<float> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxFloat();
     }
 
     /// <inheritdoc/>
     public class UIItemTextBoxDouble : UIItemTextBox<double>
     {
         /// <inheritdoc/>
-        public UIItemTextBoxDouble(Texture2D ico = null, string title = null) : base(ico, title) { }
+        public UIItemTextBoxDouble(Texture2D ico = null, string title = null, string defaultDisplayText = null) : base(ico, title, defaultDisplayText) { }
 
         /// <inheritdoc/>
-        protected override UITextBoxValue<double> GetUITextBoxValue() => new UITextBoxDouble();
+        protected override UITextBoxValue<double> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxDouble();
     }
 }

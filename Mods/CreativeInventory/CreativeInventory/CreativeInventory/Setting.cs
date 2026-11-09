@@ -14,7 +14,6 @@ namespace CreativeInventory
         public override string FilePath => "setting.json";
         public override Type DataType => typeof(bool);
         private bool date = true;
-        private Action<bool> updateUi = null;
 
         public override void Load(object v)
         {
@@ -37,7 +36,6 @@ namespace CreativeInventory
         {
             date = true;
             NeedSave = true;
-            updateUi?.Invoke(date);
         }
 
         public override UIElement GetUI()
@@ -45,16 +43,14 @@ namespace CreativeInventory
             UIItemSwitch ui = new UIItemSwitch(
                 Main.Assets.Request<Texture2D>("Images/UI/ButtonPlay", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value,
                 "添加到快捷按钮");
-            ui.OnValUpdate += v =>
+            ui.MouseText = "重新加载模组生效";
+            ui.OnGetIsChecked = () => date;
+            ui.OnSetIsChecked = v =>
             {
                 if (date == v) return;
                 date = v;
                 NeedSave = true;
             };
-            ui.OnUpdate += _ => { if (ui.IsMouseHovering) Main.instance.MouseText("重新加载模组生效"); };
-            updateUi = ui.SetVal;
-
-            updateUi(date);
 
             return ui;
         }

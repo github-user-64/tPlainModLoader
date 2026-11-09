@@ -11,18 +11,20 @@ namespace tContentPatch.Content.UI.ModSet
     {
         /// <summary/>
         public readonly UIElement UIS = null;
-
         /// <summary/>
         public readonly UISwitch UISwitch = null;
+
         /// <summary/>
         public bool IsChecked { get => UISwitch.IsChecked; set => UISwitch.IsChecked = value; }
         /// <summary/>
         public Func<bool> OnGetIsChecked { set => UISwitch.OnGetIsChecked = value; }
         /// <summary/>
         public Action<bool> OnSetIsChecked { set => UISwitch.OnSetIsChecked = value; }
+        /// <summary/>
+        public Action<bool> OnIsCheckChanged { get => UISwitch.OnIsCheckChanged; set => UISwitch.OnIsCheckChanged = value; }
 
         /// <summary/>
-        public UIItemSwitchATextBox(Texture2D ico = null, string title = null) : base(ico, title)
+        public UIItemSwitchATextBox(Texture2D ico = null, string title = null, string defaultDisplayText = null) : base(ico, title, defaultDisplayText)
         {
             UIS = new UIElement();
             UIS.Width.Set(0f, 0.5f);
@@ -47,39 +49,39 @@ namespace tContentPatch.Content.UI.ModSet
     public class UIItemSwitchATextBoxString : UIItemSwitchATextBox<string>
     {
         /// <inheritdoc/>
-        public UIItemSwitchATextBoxString(Texture2D ico = null, string title = null) : base(ico, title) { }
+        public UIItemSwitchATextBoxString(Texture2D ico = null, string title = null, string defaultDisplayText = null) : base(ico, title, defaultDisplayText) { }
 
         /// <inheritdoc/>
-        protected override UITextBoxValue<string> GetUITextBoxValue() => new UITextBoxString();
+        protected override UITextBoxValue<string> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxString();
     }
 
     /// <inheritdoc/>
     public class UIItemSwitchATextBoxInt : UIItemSwitchATextBox<int>
     {
         /// <inheritdoc/>
-        public UIItemSwitchATextBoxInt(Texture2D ico = null, string title = null) : base(ico, title) { }
+        public UIItemSwitchATextBoxInt(Texture2D ico = null, string title = null, string defaultDisplayText = null) : base(ico, title, defaultDisplayText) { }
 
         /// <inheritdoc/>
-        protected override UITextBoxValue<int> GetUITextBoxValue() => new UITextBoxInt();
+        protected override UITextBoxValue<int> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxInt();
     }
 
     /// <inheritdoc/>
     public class UIItemSwitchATextBoxFloat : UIItemSwitchATextBox<float>
     {
         /// <inheritdoc/>
-        public UIItemSwitchATextBoxFloat(Texture2D ico = null, string title = null) : base(ico, title) { }
+        public UIItemSwitchATextBoxFloat(Texture2D ico = null, string title = null, string defaultDisplayText = null) : base(ico, title, defaultDisplayText) { }
 
         /// <inheritdoc/>
-        protected override UITextBoxValue<float> GetUITextBoxValue() => new UITextBoxFloat();
+        protected override UITextBoxValue<float> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxFloat();
     }
 
     /// <inheritdoc/>
     public class UIItemSwitchATextBoxDouble : UIItemSwitchATextBox<double>
     {
         /// <inheritdoc/>
-        public UIItemSwitchATextBoxDouble(Texture2D ico = null, string title = null) : base(ico, title) { }
+        public UIItemSwitchATextBoxDouble(Texture2D ico = null, string title = null, string defaultDisplayText = null) : base(ico, title, defaultDisplayText) { }
 
         /// <inheritdoc/>
-        protected override UITextBoxValue<double> GetUITextBoxValue() => new UITextBoxDouble();
+        protected override UITextBoxValue<double> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxDouble();
     }
 }

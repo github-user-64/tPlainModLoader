@@ -13,7 +13,7 @@ namespace tContentPatch.Content.UI.ModSet
         protected readonly float Proportion = 0;
 
         /// <inheritdoc/>
-        public UIItemValueSliderFloat(float min, float max, Texture2D ico = null, string text = null) : base(min, max, ico, text)
+        public UIItemValueSliderFloat(float min, float max, Texture2D ico = null, string title = null) : base(min, max, ico, title)
         {
             if (Max > Min != true) throw new Exception("max需大于min");
             Proportion = Math.Abs(Max - Min) / 1f;

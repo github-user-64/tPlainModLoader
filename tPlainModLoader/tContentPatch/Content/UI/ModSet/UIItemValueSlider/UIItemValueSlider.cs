@@ -37,6 +37,8 @@ namespace tContentPatch.Content.UI.ModSet
         public Func<T> OnGetValue { set => UV.OnGetVal = value; }
         /// <summary/>
         public Action<T> OnSetValue { set => UV.OnSetVal = value; }
+        /// <summary/>
+        public Action<T> OnValueChanged { get => UV.OnValChanged; set => UV.OnValChanged = value; }
 
         /// <summary/>
         public readonly UIText UIDisplayVal = null;
@@ -44,7 +46,7 @@ namespace tContentPatch.Content.UI.ModSet
         public readonly UIColoredSlider UISlider = null;
 
         /// <summary/>
-        public UIItemValueSlider(T min, T max, Texture2D ico = null, string text = null) : base(ico, text)
+        public UIItemValueSlider(T min, T max, Texture2D ico = null, string title = null) : base(ico, title)
         {
             Min = min;
             Max = max;

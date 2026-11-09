@@ -16,6 +16,10 @@ namespace tContentPatch.Content.UI
             /// </summary>
             public T Val;
             /// <summary>
+            /// 在<see cref="Val">Val</see>变更时调用
+            /// </summary>
+            public Action<T> OnValChanged = null;
+            /// <summary>
             /// ui设置值时调用, 为<see langword="null"/>不调用
             /// </summary>
             public Action<T> OnSetVal = null;
@@ -51,6 +55,8 @@ namespace tContentPatch.Content.UI
                     {
                         Val = val;
                         hasUpdate = true;
+
+                        OnValChanged?.Invoke(Val);
                     }
                 }
 
@@ -59,20 +65,26 @@ namespace tContentPatch.Content.UI
 
             /// <summary>
             /// 设置ui的值<para/>
-            /// 调用<see cref="OnSetVal">OnSetVal</see><br/>
             /// <see cref="Val">Val</see>更新为<paramref name="val"/><br/>
+            /// 调用<see cref="OnSetVal">OnSetVal</see><br/>
             /// 如果值不同则调用<see cref="OnUpdateUI">OnUpdateUI</see>
             /// </summary>
             /// <param name="val"></param>
             /// <param name="compelUpdateUI">强制更新ui</param>
             public void SetUIVal(T val, bool compelUpdateUI = false)
             {
-                OnSetVal?.Invoke(val);
+                bool hasUpdate = compelUpdateUI;
 
-                if (compelUpdateUI != true && Equals(val, Val)) return;
+                if (Equals(val, Val) != true)
+                {
+                    Val = val;
+                    OnSetVal?.Invoke(Val);
+                    hasUpdate = true;
 
-                Val = val;
-                OnUpdateUI?.Invoke();
+                    OnValChanged?.Invoke(Val);
+                }
+
+                if (hasUpdate) OnUpdateUI?.Invoke();
             }
 
             /// <summary/>
