@@ -4,6 +4,7 @@ using Skil.Utils;
 using Skil.Utils.quickBuild;
 using System.Collections.Generic;
 using tContentPatch;
+using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.UI;
 using static Skil.Content.Utils;
@@ -31,8 +32,8 @@ namespace Skil.Content
         {
             return new List<UIElement>()
             {
-                UIBuild.get1(Enable, Mode, int.Parse, "0: 自动(npc), 1:自动(玩家), 2:手动<int>", "Images/Buff_285", "技能3"),
-                UIBuild.get6(CD, int.Parse, "<int>", "Images/Buff_285", "技能3cd"),
+                UIBuild.get1(Enable, Mode, UITextBoxValue.StringToInt, "0: 自动(npc), 1:自动(玩家), 2:手动<int>", "Images/Buff_285", "技能3"),
+                UIBuild.get6(CD, UITextBoxValue.StringToInt, "<int>", "Images/Buff_285", "技能3cd"),
             };
         }
 

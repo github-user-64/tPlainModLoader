@@ -3,6 +3,7 @@ using SundryTool.Utils;
 using SundryTool.Utils.quickBuild;
 using System.Collections.Generic;
 using tContentPatch;
+using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.ID;
 using Terraria.UI;
@@ -31,7 +32,7 @@ namespace SundryTool.Content.Function2
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get1(chestAddAll, chestAddAll_set, int.Parse, "<int>", text: "填满箱子"),
+                UIBuild.get1(chestAddAll, chestAddAll_set, UITextBoxValue.StringToInt, "<int>", text: "填满箱子"),
             };
 
             return uis;

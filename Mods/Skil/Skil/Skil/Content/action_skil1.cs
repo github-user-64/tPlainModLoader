@@ -4,6 +4,7 @@ using Skil.Utils;
 using Skil.Utils.quickBuild;
 using System.Collections.Generic;
 using tContentPatch;
+using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.UI;
 
@@ -32,9 +33,9 @@ namespace Skil.Content
         {
             return new List<UIElement>()
             {
-                UIBuild.get1(Enable, Count, int.Parse, "数量<int>", "Images/Projectile_274", "技能1"),
-                UIBuild.get6(Range, int.Parse, "<int>", "Images/Projectile_274", "技能1半径"),
-                UIBuild.get6(Speed, float.Parse, "<float>", "Images/Projectile_274", "技能1速度"),
+                UIBuild.get1(Enable, Count, UITextBoxValue.StringToInt, "数量<int>", "Images/Projectile_274", "技能1"),
+                UIBuild.get6(Range, UITextBoxValue.StringToInt, "<int>", "Images/Projectile_274", "技能1半径"),
+                UIBuild.get6(Speed, UITextBoxValue.StringToFloat, "<float>", "Images/Projectile_274", "技能1速度"),
             };
         }
 

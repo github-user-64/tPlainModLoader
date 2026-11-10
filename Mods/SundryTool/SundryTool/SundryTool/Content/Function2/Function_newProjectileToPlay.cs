@@ -4,6 +4,7 @@ using SundryTool.Utils;
 using SundryTool.Utils.quickBuild;
 using System.Collections.Generic;
 using tContentPatch;
+using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.ID;
 using Terraria.UI;
@@ -59,7 +60,7 @@ namespace SundryTool.Content.Function2
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get1(nptp, nptp_play, int.Parse, "玩家id<int>", null, "生成射弹到玩家"),
+                UIBuild.get1(nptp, nptp_play, UITextBoxValue.StringToInt, "玩家id<int>", null, "生成射弹到玩家"),
             };
 
             return uis;

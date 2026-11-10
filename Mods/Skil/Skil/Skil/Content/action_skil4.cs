@@ -5,6 +5,7 @@ using Skil.Utils.quickBuild;
 using System;
 using System.Collections.Generic;
 using tContentPatch;
+using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.UI;
 using static Skil.Content.Utils;
@@ -32,7 +33,7 @@ namespace Skil.Content
         {
             return new List<UIElement>()
             {
-                UIBuild.get1(Enable, Time_max, int.Parse, "变大时间<int>", "Images/Item_1275", "技能4"),
+                UIBuild.get1(Enable, Time_max, UITextBoxValue.StringToInt, "变大时间<int>", "Images/Item_1275", "技能4"),
             };
         }
 

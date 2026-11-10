@@ -5,6 +5,7 @@ using Skil.Utils;
 using Skil.Utils.quickBuild;
 using System.Collections.Generic;
 using tContentPatch;
+using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.UI;
 
@@ -29,7 +30,7 @@ namespace Skil.Content
         {
             return new List<UIElement>()
             {
-                UIBuild.get1(Enable, ID, int.Parse, "射弹id(132, 79)<int>", "Images/Buff_306", "技能6"),
+                UIBuild.get1(Enable, ID, UITextBoxValue.StringToInt, "射弹id(132, 79)<int>", "Images/Buff_306", "技能6"),
             };
         }
 

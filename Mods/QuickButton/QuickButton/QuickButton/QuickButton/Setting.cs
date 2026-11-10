@@ -53,7 +53,7 @@ namespace QuickButton.QuickButton
             };
 
             //按钮位置
-            UIItemValueSliderInt item_vs = new UIItemValueSliderInt(0, 1, text: "按钮初始位置");
+            UIItemValueSliderInt item_vs = new UIItemValueSliderInt(0, 1, title: "按钮初始位置");
             item_vs.ValueToString += v =>
             {
                 switch (v)

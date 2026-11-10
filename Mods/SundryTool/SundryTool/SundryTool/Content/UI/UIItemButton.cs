@@ -1,9 +1,10 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System;
+using tContentPatch.Content.UI.ModSet;
 
 namespace SundryTool.Content.UI
 {
-    internal class UIItemButton : UIItemMouseText
+    internal class UIItemButton : UIItem
     {
         public Action OnClick = null;
 

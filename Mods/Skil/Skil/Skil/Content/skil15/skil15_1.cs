@@ -2,6 +2,7 @@
 using Skil.Utils;
 using Skil.Utils.quickBuild;
 using System.Collections.Generic;
+using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using Terraria.UI;
@@ -19,8 +20,8 @@ namespace Skil.Content.skil15
         {
             List<UIElement> uis = new List<UIElement>()
             {
-                UIBuild.get1(Enable, Mode, int.Parse, "0: 自己, 1: 全部<int>,", "Images/Item_1513", "触发闪电"),
-                UIBuild.get6(Color, int.Parse, "颜色, 小于0随机<int>", "Images/Item_1513", "闪电颜色"),
+                UIBuild.get1(Enable, Mode, UITextBoxValue.StringToInt, "0: 自己, 1: 全部<int>,", "Images/Item_1513", "触发闪电"),
+                UIBuild.get6(Color, UITextBoxValue.StringToInt, "颜色, 小于0随机<int>", "Images/Item_1513", "闪电颜色"),
             };
 
             return uis;

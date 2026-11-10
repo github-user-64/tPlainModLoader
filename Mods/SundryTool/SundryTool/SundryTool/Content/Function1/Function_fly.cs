@@ -3,6 +3,7 @@ using SundryTool.Utils;
 using SundryTool.Utils.quickBuild;
 using System.Collections.Generic;
 using tContentPatch;
+using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.UI;
@@ -14,7 +15,7 @@ namespace SundryTool.Content.Function1
         public static GetSetReset<bool> fly = new GetSetReset<bool>();
         public static GetSetReset<float> fly_val = new GetSetReset<float>(16, 16);
 
-        public override void UpdatePrefix(Player This, int ThisI)
+        public override void UpdateEquipsPostfix(Player This, int playerI)
         {
             if (This != Main.LocalPlayer) return;
             if (fly.val == false) return;
@@ -33,6 +34,7 @@ namespace SundryTool.Content.Function1
             if (control.Down && This.velocity.Y < fly_val.val && This.position.Y != This.oldPosition.Y)
             {
                 This.velocity.Y += 1f;
+                This.maxFallSpeed = fly_val.val;
             }
             if (control.Left && This.velocity.X > -fly_val.val)
             {
@@ -46,13 +48,9 @@ namespace SundryTool.Content.Function1
             {
                 This.velocity.Y -= 1f;
             }
-            if (control.Down == false && This.velocity.Y > 0f)
+            if (control.Down != true)
             {
-                This.velocity.Y -= 1f;
-                if (This.velocity.Y < 0f)
-                {
-                    This.velocity.Y = 0f;
-                }
+                This.maxFallSpeed = 0f;
             }
 
             This.fallStart = This.fallStart2 = (int)(This.position.Y / 16f);//重置下落高度
@@ -72,7 +70,7 @@ namespace SundryTool.Content.Function1
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get1(fly, fly_val, float.Parse, "<float>", "Images/Buff_8", "飞行"),
+                UIBuild.get1(fly, fly_val, UITextBoxValue.StringToFloat, "<float>", "Images/Buff_8", "飞行"),
             };
 
             return uis;

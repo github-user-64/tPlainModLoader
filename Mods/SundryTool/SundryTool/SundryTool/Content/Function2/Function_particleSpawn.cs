@@ -4,6 +4,7 @@ using SundryTool.Utils;
 using SundryTool.Utils.quickBuild;
 using System.Collections.Generic;
 using tContentPatch;
+using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using Terraria.UI;
@@ -36,10 +37,10 @@ namespace SundryTool.Content.Function2
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get1(particleSpawn, particleSpawn_set, int.Parse, "类型<int>有的可能有问题:39,56-59", text: "生成粒子"),
-                new UI.UIItemTextBoxBind<int>(particleSpawn_info, int.Parse, null, "生成粒子信息"){ MouseText = "<int>" },
-                new UI.UIItemTextBoxBind<float>(particleSpawn_speed, float.Parse, null, "生成粒子速度"){ MouseText = "<float>" },
-                new UI.UIItemTextBoxBind<int>(particleSpawn_cd, int.Parse, null, "生成粒子cd"){ MouseText = "<int>" },
+                UIBuild.get1(particleSpawn, particleSpawn_set, UITextBoxValue.StringToInt, "类型<int>有的可能有问题:39,56-59", text: "生成粒子"),
+                UIBuild.get5(particleSpawn_info, UITextBoxValue.StringToInt, "<int>", null, "生成粒子信息"),
+                UIBuild.get5(particleSpawn_speed, UITextBoxValue.StringToFloat, "<float>", null, "生成粒子速度"),
+                UIBuild.get5(particleSpawn_cd, UITextBoxValue.StringToInt, "<int>", null, "生成粒子cd"),
             };
 
             return uis;

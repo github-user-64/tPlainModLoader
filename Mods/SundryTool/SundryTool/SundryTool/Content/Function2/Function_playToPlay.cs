@@ -4,6 +4,7 @@ using SundryTool.Utils;
 using SundryTool.Utils.quickBuild;
 using System.Collections.Generic;
 using tContentPatch;
+using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.UI;
@@ -98,7 +99,7 @@ namespace SundryTool.Content.Function2
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get1(playToPlay, playToPlay_play, int.Parse, "<int>", null, "传送到玩家"),
+                UIBuild.get1(playToPlay, playToPlay_play, UITextBoxValue.StringToInt, "<int>", null, "传送到玩家"),
             };
 
             return uis;

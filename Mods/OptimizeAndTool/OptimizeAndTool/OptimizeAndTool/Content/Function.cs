@@ -32,7 +32,7 @@ namespace OptimizeAndTool.Content
             uis.AddRange(DisplayProjectileInfo.GetUI());
             uis.Add(new UIItemTitle(Main.Assets.Request<Texture2D>("Images/Item_4766", AssetRequestMode.ImmediateLoad).Value, "缩放限制"));
             uis.AddRange(PatchGameViewMatrixZoomLimit.GetUI());
-            uis.Add(new UIItemTitle(Main.Assets.Request<Texture2D>("Images/Item_15", AssetRequestMode.ImmediateLoad).Value, "时间"));
+            uis.Add(new UIItemTitle(Main.Assets.Request<Texture2D>("Images/Item_3099", AssetRequestMode.ImmediateLoad).Value, "时间"));
             uis.AddRange(TimeSet.GetUI());
             uis.Add(new UIItemTitle(Main.Assets.Request<Texture2D>("Images/Item_7", AssetRequestMode.ImmediateLoad).Value, "其它"));
             uis.AddRange(CleanRepeatChat.GetUI());

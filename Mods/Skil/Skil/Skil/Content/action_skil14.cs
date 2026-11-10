@@ -4,6 +4,7 @@ using Skil.Utils;
 using Skil.Utils.quickBuild;
 using System.Collections.Generic;
 using tContentPatch;
+using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using Terraria.UI;
@@ -28,7 +29,7 @@ namespace Skil.Content
         {
             return new List<UIElement>()
             {
-                UIBuild.get1(Enable, Len, int.Parse, "长度<int>", "Images/Buff_353", "技能14")
+                UIBuild.get1(Enable, Len, UITextBoxValue.StringToInt, "长度<int>", "Images/Buff_353", "技能14")
             };
         }
 

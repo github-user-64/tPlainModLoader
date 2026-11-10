@@ -5,6 +5,7 @@ using Skil.Utils.quickBuild;
 using System;
 using System.Collections.Generic;
 using tContentPatch;
+using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using Terraria.UI;
@@ -33,8 +34,8 @@ namespace Skil.Content
         {
             return new List<UIElement>()
             {
-                UIBuild.get1(Enable, Mode, int.Parse, "0:朝固定方向, 1:自动(npc), 2:自动(玩家)<int>", "Images/Buff_312", "技能8"),
-                UIBuild.get6(Types, int.Parse, "0-2<int>", "Images/Buff_312", "技能8法阵类型"),
+                UIBuild.get1(Enable, Mode, UITextBoxValue.StringToInt, "0:朝固定方向, 1:自动(npc), 2:自动(玩家)<int>", "Images/Buff_312", "技能8"),
+                UIBuild.get6(Types, UITextBoxValue.StringToInt, "0-2<int>", "Images/Buff_312", "技能8法阵类型"),
             };
         }
 

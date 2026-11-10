@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using Skil.Content.UI;
 using System;
 using System.Collections.Generic;
 using tContentPatch.Content.UI;
+using tContentPatch.Content.UI.ModSet;
 using Terraria;
 using Terraria.UI;
 
@@ -16,20 +16,18 @@ namespace Skil.Utils.quickBuild
         /// <summary>
         /// 文本框, 开关, 绑定值
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="gsr"></param>
-        /// <param name="setGsr"></param>
-        /// <param name="parseTry"></param>
-        /// <param name="mouseText"></param>
-        /// <param name="ico"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
         public static UIElement get1<T>(GetSetReset<bool> gsr, GetSetReset<T> setGsr, Func<string, T> parseTry, string mouseText = null, string ico = null, string text = null)
         {
             Texture2D texture = ico == null ? null : Main.Assets.Request<Texture2D>(ico, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
 
-            UIItemTextBoxASwitchBind<T> ui = new UIItemTextBoxASwitchBind<T>(gsr, setGsr, parseTry, texture, text);
+            UIItemSwitchATextBox<T> ui = new UIItemSwitchATextBox<T>(texture, text);
             ui.MouseText = mouseText;
+            ui.ValueToText = v => $"{v}";
+            ui.TextToValue = parseTry;
+            ui.OnGetIsChecked = () => gsr.val;
+            ui.OnSetIsChecked = v => gsr.val = v;
+            ui.OnGetValue = () => setGsr.val;
+            ui.OnSetValue = v => setGsr.val = v;
 
             return ui;
         }
@@ -37,17 +35,14 @@ namespace Skil.Utils.quickBuild
         /// <summary>
         /// 开关, 绑定值
         /// </summary>
-        /// <param name="gsr"></param>
-        /// <param name="mouseText"></param>
-        /// <param name="ico"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
         public static UIElement get2(GetSetReset<bool> gsr, string mouseText = null, string ico = null, string text = null)
         {
             Texture2D texture = ico == null ? null : Main.Assets.Request<Texture2D>(ico, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
 
-            UIItemSwitchBind ui = new UIItemSwitchBind(gsr, texture, text);
+            UIItemSwitch ui = new UIItemSwitch(texture, text);
             ui.MouseText = mouseText;
+            ui.OnGetIsChecked = () => gsr.val;
+            ui.OnSetIsChecked = v => gsr.val = v;
 
             return ui;
         }
@@ -66,52 +61,21 @@ namespace Skil.Utils.quickBuild
             return sv;
         }
 
-        public static UIElement get4(string btnTxt, Action click, string ico = null, string text = null)
-        {
-            Texture2D texture = ico == null ? null : Main.Assets.Request<Texture2D>(ico, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
-
-            UIItemButton ui = new UIItemButton(btnTxt, texture, text);
-            ui.OnClick = click;
-
-            return ui;
-        }
-
-        /// <summary>
-        /// 文本框, 按钮, 绑定值
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="gsr"></param>
-        /// <param name="parseTry"></param>
-        /// <param name="btnText"></param>
-        /// <param name="click"></param>
-        /// <param name="mouseText"></param>
-        /// <returns></returns>
-        public static UIElement get5<T>(GetSetReset<T> gsr, Func<string, T> parseTry, string btnText, Action click, string mouseText = null, string ico = null, string text = null)
-        {
-            Texture2D texture = ico == null ? null : Main.Assets.Request<Texture2D>(ico, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
-
-            UIItemTextBoxAButtonBind<T> ui = new UIItemTextBoxAButtonBind<T>(gsr, parseTry, btnText, texture, text);
-            ui.MouseText = mouseText;
-            ui.OnClick = click;
-
-            return ui;
-        }
-
         /// <summary>
         /// 文本框, 绑定值
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="gsr"></param>
-        /// <param name="parseTry"></param>
-        /// <param name="mouseText"></param>
-        /// <param name="ico"></param>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        public static UIItemTextBoxBind<T> get6<T>(GetSetReset<T> gsr, Func<string, T> parseTry, string mouseText = null, string ico = null, string text = null)
+        public static UIItemTextBox<T> get6<T>(GetSetReset<T> gsr, Func<string, T> parseTry, string mouseText = null, string ico = null, string text = null)
         {
             Texture2D texture = ico == null ? null : Main.Assets.Request<Texture2D>(ico, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
 
-            return new UIItemTextBoxBind<T>(gsr, parseTry, texture, text) { MouseText = mouseText };
+            UIItemTextBox<T> ui = new UIItemTextBox<T>(texture, text);
+            ui.MouseText = mouseText;
+            ui.ValueToText = v => $"{v}";
+            ui.TextToValue = parseTry;
+            ui.OnGetValue = () => gsr.val;
+            ui.OnSetValue = v => gsr.val = v;
+
+            return ui;
         }
     }
 }

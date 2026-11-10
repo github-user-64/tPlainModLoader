@@ -5,6 +5,7 @@ using SundryTool.Utils.quickBuild;
 using System;
 using System.Collections.Generic;
 using tContentPatch;
+using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.UI;
 
@@ -55,7 +56,7 @@ namespace SundryTool.Content.Function2
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get1(mtpa, mtpa_play, int.Parse, "<int>", null, "鼠标指向玩家方向"),
+                UIBuild.get1(mtpa, mtpa_play, UITextBoxValue.StringToInt, "<int>", null, "鼠标指向玩家方向"),
             };
 
             return uis;

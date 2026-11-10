@@ -4,6 +4,7 @@ using Skil.Utils;
 using Skil.Utils.quickBuild;
 using System.Collections.Generic;
 using tContentPatch;
+using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.GameContent.Drawing;
 using Terraria.UI;
@@ -45,15 +46,15 @@ namespace Skil.Content
         {
             return new List<UIElement>()
             {
-                UIBuild.get1(Enable, Mode, int.Parse, "0:自动(npc), 1:自动(玩家), 2:手动<int>", "Images/Buff_213", "技能9"),
-                UIBuild.get6(Count, int.Parse, "<int>", "Images/Buff_213", "技能9数量"),
-                UIBuild.get6(Speed, float.Parse, "<int>", "Images/Buff_213", "技能9速度"),
-                UIBuild.get6(CD, int.Parse, "<int>", "Images/Buff_213", "技能9cd"),
+                UIBuild.get1(Enable, Mode, UITextBoxValue.StringToInt, "0:自动(npc), 1:自动(玩家), 2:手动<int>", "Images/Buff_213", "技能9"),
+                UIBuild.get6(Count, UITextBoxValue.StringToInt, "<int>", "Images/Buff_213", "技能9数量"),
+                UIBuild.get6(Speed, UITextBoxValue.StringToFloat, "<int>", "Images/Buff_213", "技能9速度"),
+                UIBuild.get6(CD, UITextBoxValue.StringToInt, "<int>", "Images/Buff_213", "技能9cd"),
                 UIBuild.get2(TileCollide, ico:"Images/Buff_213", text:"技能9方块碰撞"),
                 UIBuild.get2(fire, ico:"Images/Buff_213", text:"技能9碰撞火花"),
-                UIBuild.get6(VelocityOff, float.Parse, "<int>", "Images/Buff_213", "技能9角度"),
-                UIBuild.get6(R, float.Parse, "<int>", "Images/Buff_213", "技能9半径"),
-                UIBuild.get6(Len, int.Parse, "<int>", "Images/Buff_213", "技能9长度"),
+                UIBuild.get6(VelocityOff, UITextBoxValue.StringToFloat, "<int>", "Images/Buff_213", "技能9角度"),
+                UIBuild.get6(R, UITextBoxValue.StringToFloat, "<int>", "Images/Buff_213", "技能9半径"),
+                UIBuild.get6(Len, UITextBoxValue.StringToInt, "<int>", "Images/Buff_213", "技能9长度"),
             };
         }
 

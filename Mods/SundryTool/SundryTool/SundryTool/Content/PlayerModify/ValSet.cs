@@ -3,6 +3,7 @@ using SundryTool.Utils;
 using SundryTool.Utils.quickBuild;
 using System.Collections.Generic;
 using tContentPatch;
+using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.UI;
 
@@ -65,10 +66,10 @@ namespace SundryTool.Content.PlayerModify
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get1(damage, damage_val, float.Parse, "<float>", "Images/Buff_180", "伤害倍率"),
-                UIBuild.get1(armorPenetration, armorPenetration_val, int.Parse, "<float>", "Images/Buff_159", "穿甲"),
-                UIBuild.get1(maxMinions, maxMinions_val, int.Parse, "<int>", "Images/Buff_150", "召唤物上限"),
-                UIBuild.get1(endurance, endurance_val, float.Parse, "<float>", "Images/Buff_114", "减伤"),
+                UIBuild.get1(damage, damage_val, UITextBoxValue.StringToFloat, "<float>", "Images/Buff_180", "伤害倍率"),
+                UIBuild.get1(armorPenetration, armorPenetration_val, UITextBoxValue.StringToInt, "<float>", "Images/Buff_159", "穿甲"),
+                UIBuild.get1(maxMinions, maxMinions_val, UITextBoxValue.StringToInt, "<int>", "Images/Buff_150", "召唤物上限"),
+                UIBuild.get1(endurance, endurance_val, UITextBoxValue.StringToFloat, "<float>", "Images/Buff_114", "减伤"),
             };
 
             return uis;

@@ -4,6 +4,7 @@ using SundryTool.Utils;
 using SundryTool.Utils.quickBuild;
 using System.Collections.Generic;
 using tContentPatch;
+using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.UI;
@@ -114,7 +115,7 @@ namespace SundryTool.Content.Function1
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get1(fly2, fly2_val, float.Parse, "<float>", "Images/Buff_353", "飞行2"),
+                UIBuild.get1(fly2, fly2_val, UITextBoxValue.StringToFloat, "<float>", "Images/Buff_353", "飞行2"),
             };
 
             return uis;
