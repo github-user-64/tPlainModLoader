@@ -1,12 +1,13 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System;
+using tContentPatch.Content.UI.ModSet;
 
 namespace PixelArt.Content.UI
 {
     /// <summary>
     /// 项, 文本按钮
     /// </summary>
-    internal class UIItemTextButton : UIItemMouseText
+    internal class UIItemTextButton : UIItem
     {
         /// <summary>
         /// 文本按钮被点击

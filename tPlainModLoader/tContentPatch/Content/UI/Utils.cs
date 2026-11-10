@@ -65,8 +65,8 @@ namespace tContentPatch.Content.UI
 
             /// <summary>
             /// 设置ui的值<para/>
-            /// <see cref="Val">Val</see>更新为<paramref name="val"/><br/>
             /// 调用<see cref="OnSetVal">OnSetVal</see><br/>
+            /// <see cref="Val">Val</see>更新为<paramref name="val"/><br/>
             /// 如果值不同则调用<see cref="OnUpdateUI">OnUpdateUI</see>
             /// </summary>
             /// <param name="val"></param>
@@ -77,8 +77,8 @@ namespace tContentPatch.Content.UI
 
                 if (Equals(val, Val) != true)
                 {
+                    OnSetVal?.Invoke(val);
                     Val = val;
-                    OnSetVal?.Invoke(Val);
                     hasUpdate = true;
 
                     OnValChanged?.Invoke(Val);

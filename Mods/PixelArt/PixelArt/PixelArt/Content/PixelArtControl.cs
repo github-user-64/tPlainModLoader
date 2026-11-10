@@ -4,6 +4,7 @@ using PixelArt.Utils.quickBuild;
 using ReLogic.Content;
 using System.Collections.Generic;
 using tContentPatch;
+using tContentPatch.Content.UI.ModSet;
 using Terraria;
 using Terraria.UI;
 
@@ -35,21 +36,53 @@ namespace PixelArt.Content
             {
                 getFile,
 
-                new UIItemTextBoxBindSwitchAction<string>(
-                    () => PixelInfoLoading, CtlLoadPixelInfo, CtlCancelLoadPixelInfo,
-                    LoadPath, v => v, ico1, "加载图片数据"){ MouseText = "文件路径<string>" },
+                new UIItemSwitchATextBoxString(title: "加载图片数据")
+                {
+                    MouseText = "文件路径<string>",
+                    OnGetIsChecked = () => PixelInfoLoading,
+                    OnGetValue = () => LoadPath.val,
+                    OnSetValue = v => LoadPath.val = v,
+                    OnIsCheckChanged = v =>
+                    {
+                        if (v)CtlLoadPixelInfo();
+                        else CtlCancelLoadPixelInfo();
+                    }
+                },
 
-                new UIItemSwitchAction(() => SpawIng, CtlStartSpaw, CtlEndSpaw, text: "生成"),
+                new UIItemSwitch(title: "生成")
+                {
+                    OnGetIsChecked = () => SpawIng,
+                    OnIsCheckChanged = v =>
+                    {
+                        if (v)CtlStartSpaw();
+                        else CtlEndSpaw();
+                    }
+                },
 
-                new UIItemSwitchAction(() => SpawPosSelecting, CtlSetSpawPos, CtlCancelSetSpawPos, text: "生成位置"),
+                new UIItemSwitch(title: "生成位置")
+                {
+                    OnGetIsChecked = () => SpawPosSelecting,
+                    OnIsCheckChanged = v =>
+                    {
+                        if (v)CtlSetSpawPos();
+                        else CtlCancelSetSpawPos();
+                    }
+                },
 
-                new UIItemTextBoxBind<int>(SpawSpeed, int.Parse, null, "生成速度"){ MouseText = "<int>" },
+                new UIItemTextBoxInt(title: "生成速度")
+                {
+                    MouseText = "<int>",
+                    OnGetValue = () => SpawSpeed.val,
+                    OnSetValue = v => SpawSpeed.val = v,
+                },
 
                 UIBuild.get2(SetSelectedItem, text:"设置手中物品"),
 
-                new UIItemValueSliderBind<int>(SpawPosSelectV, v => v, v => (int)v, 0, 3, text: "生成方向")
+                new UIItemValueSliderInt(0, 3, title: "生成方向")
                 {
-                    FloatToString = v =>
+                    OnGetValue = () => SpawPosSelectV.val,
+                    OnSetValue = v => SpawPosSelectV.val = v,
+                    ValueToString = v =>
                     {
                         if (v == 0) return "左上";
                         if (v == 1) return "右上";
@@ -61,9 +94,11 @@ namespace PixelArt.Content
 
                 UIBuild.get2(DisplayWall, text:"显示预览"),
 
-                new UIItemValueSliderBind<int>(LoadType, v => v, v => (int)v, 0, 1, text: "加载方式")
+                new UIItemValueSliderInt(0, 1, title: "加载方式")
                 {
-                    FloatToString = v =>
+                    OnGetValue = () => LoadType.val,
+                    OnSetValue = v => LoadType.val = v,
+                    ValueToString = v =>
                     {
                         if (v == 0) return "普通";
                         if (v == 1) return "快速";
@@ -71,8 +106,12 @@ namespace PixelArt.Content
                     }
                 },
 
-                new UIItemSwitchAction(() => LoadUsePaint.val, CtlSwitchLoadUsePaint, CtlSwitchLoadUsePaint,
-                text: "加载时使用油漆"){ MouseText = "不要频繁开关\n切换后会停下其它操作且需重新加载" },
+                new UIItemSwitch(title: "加载时使用油漆")
+                {
+                    MouseText = "不要频繁开关\n切换后会停下其它操作且需重新加载",
+                    OnGetIsChecked = () => LoadUsePaint.val,
+                    OnIsCheckChanged = _ => CtlSwitchLoadUsePaint(),
+                },
             };
 
             return uis;

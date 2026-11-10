@@ -118,11 +118,13 @@ namespace tContentPatch
                 UIItemTextBoxString ui2 = new UIItemTextBoxString(Main.Assets.Request<Texture2D>("Images/UI/Camera_1").Value, "标题1");
                 ui2.OnGetValue = () => vals;
                 ui2.OnSetValue = v => vals = v;
+                ui2.OnValueChanged += v => Debug.WriteLine(ui2.Value);
                 sv.AddChild(ui2);
 
                 UIItemTextBoxFloat ui3 = new UIItemTextBoxFloat(Main.Assets.Request<Texture2D>("Images/UI/Camera_1").Value, "标题1float");
                 ui3.OnGetValue = () => valf;
                 ui3.OnSetValue = v => valf = v;
+                ui3.OnValueChanged += v => Debug.WriteLine(ui3.Value);
                 sv.AddChild(ui3);
 
                 UIItemSwitchATextBoxFloat ui4 = new UIItemSwitchATextBoxFloat(Main.Assets.Request<Texture2D>("Images/UI/Camera_1").Value, "标题1开关float");
@@ -146,7 +148,7 @@ namespace tContentPatch
                     valf = Main.mouseX / 5;
                     valb = Main.mouseX / 5 % 2 == 0;
                 }
-                Debug.WriteLine($"string{vals}, float{valf}, bool{valb}");
+                //Debug.WriteLine($"string{vals}, float{valf}, bool{valb}");
             }
         }
 

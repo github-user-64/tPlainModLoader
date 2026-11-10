@@ -17,7 +17,6 @@ namespace PixelArt.ModLinkage
         public override string FilePath => "LinkageSetting.json";
         public override Type DataType => typeof(List<bool>);
         private List<bool> data = null;
-        private List<Action<bool>> updateUi = null;
         private List<(Action<bool>, string, string)> asd = null;
 
         public override void Load(object v)
@@ -52,33 +51,28 @@ namespace PixelArt.ModLinkage
         {
             data = Enumerable.Repeat(true, asd.Count).ToList();
             NeedSave = true;
-
-            for (int i = 0; i < updateUi?.Count; ++i) updateUi[i].Invoke(data[i]);
         }
 
         public override UIElement GetUI()
         {
-            updateUi = new List<Action<bool>>();
-
             UIStackPanel ui_sp = new UIStackPanel();
             ui_sp.Width.Precent = 1;
             ui_sp.IsAutoUpdateSize = true;
 
             for (int i = 0; i < data.Count; ++i)
             {
-                int i_ = i;
+                int index = i;
                 UIItemSwitch ui = new UIItemSwitch(
                     Main.Assets.Request<Texture2D>(asd[i].Item2, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value, asd[i].Item3);
-                ui.OnValUpdate += v =>
+                ui.MouseText = "重新加载模组生效";
+                ui.OnGetIsChecked = () => data[index];
+                ui.OnSetIsChecked = v =>
                 {
-                    if (data[i_] == v) return;
-                    data[i_] = v;
+                    if (data[index] == v) return;
+                    data[index] = v;
                     NeedSave = true;
                 };
-                ui.OnUpdate += _ => { if (ui.IsMouseHovering) Main.instance.MouseText("重新加载模组生效"); };
-                ui.SetVal(data[i_]);
 
-                updateUi.Add(ui.SetVal);
                 ui_sp.Append(ui);
             }
 

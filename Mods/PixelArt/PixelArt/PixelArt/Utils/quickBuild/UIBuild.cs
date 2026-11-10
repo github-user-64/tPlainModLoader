@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using PixelArt.Content.UI;
 using System;
 using System.Collections.Generic;
 using tContentPatch.Content.UI;
+using tContentPatch.Content.UI.ModSet;
 using Terraria;
 using Terraria.UI;
 
@@ -28,8 +28,12 @@ namespace PixelArt.Utils.quickBuild
         {
             Texture2D texture = ico == null ? null : Main.Assets.Request<Texture2D>(ico, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
 
-            UIItemTextBoxASwitchBind<T> ui = new UIItemTextBoxASwitchBind<T>(gsr, setGsr, parseTry, texture, text);
+            UIItemSwitchATextBox<T> ui = new UIItemSwitchATextBox<T>(texture, text);
             ui.MouseText = mouseText;
+            ui.OnGetIsChecked = () => gsr.val;
+            ui.OnSetIsChecked = v => gsr.val = v;
+            ui.OnGetValue = () => setGsr.val;
+            ui.OnSetValue = v => setGsr.val = v;
 
             return ui;
         }
@@ -46,8 +50,10 @@ namespace PixelArt.Utils.quickBuild
         {
             Texture2D texture = ico == null ? null : Main.Assets.Request<Texture2D>(ico, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
 
-            UIItemSwitchBind ui = new UIItemSwitchBind(gsr, texture, text);
+            UIItemSwitch ui = new UIItemSwitch(texture, text);
             ui.MouseText = mouseText;
+            ui.OnGetIsChecked = () => gsr.val;
+            ui.OnSetIsChecked = v => gsr.val = v;
 
             return ui;
         }

@@ -146,7 +146,7 @@ namespace QuickSetting.QuickSetting
                 List<UIElement> uis = new List<UIElement>();
                 UIRadioButton rb = new UIRadioButton(TextureAssets.Reforge[0].Value, 20, 20);
                 rb.MouseText = name;
-                rb.OnSetIsChecked = _ =>
+                rb.OnIsCheckChanged = _ =>
                 {
                     if (rb.IsChecked != true) return;
                     ui_children.ClearChild();
