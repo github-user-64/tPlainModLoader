@@ -34,8 +34,8 @@ namespace Skil.Content
         {
             return new List<UIElement>()
             {
-                UIBuild.get1(Enable, Mode, UITextBoxValue.StringToInt, "0:朝固定方向, 1:自动(npc), 2:自动(玩家)<int>", "Images/Buff_312", "技能8"),
-                UIBuild.get6(Types, UITextBoxValue.StringToInt, "0-2<int>", "Images/Buff_312", "技能8法阵类型"),
+                UIBuild.get1(Enable, Mode, UITextBox.StringToInt, "0:朝固定方向, 1:自动(npc), 2:自动(玩家)<int>", "Images/Buff_312", "技能8"),
+                UIBuild.get6(Types, UITextBox.StringToInt, "0-2<int>", "Images/Buff_312", "技能8法阵类型"),
             };
         }
 

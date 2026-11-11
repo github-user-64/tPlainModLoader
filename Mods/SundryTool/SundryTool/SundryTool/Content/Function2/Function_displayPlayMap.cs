@@ -31,7 +31,7 @@ namespace SundryTool.Content.Function2
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get1(displayPlayMap, displayPlayMap_mapStyle1_extraSize, UITextBoxValue.StringToInt, "小地图额外大小<int>", null, "地图显示全部玩家"),
+                UIBuild.get1(displayPlayMap, displayPlayMap_mapStyle1_extraSize, UITextBox.StringToInt, "小地图额外大小<int>", null, "地图显示全部玩家"),
             };
 
             return uis;

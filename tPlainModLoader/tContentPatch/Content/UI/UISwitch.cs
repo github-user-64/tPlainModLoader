@@ -36,7 +36,7 @@ namespace tContentPatch.Content.UI
         public UISwitch()
         {
             Width.Set(50f, 0f);
-            Height.Set(0f, 1f);
+            Height.Set(20f, 0f);
 
             UIText = new UIText("-", 0.8f);
             UIText.VAlign = 0.5f;

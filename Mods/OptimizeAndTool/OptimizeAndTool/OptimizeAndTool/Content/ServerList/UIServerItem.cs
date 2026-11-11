@@ -41,7 +41,7 @@ namespace OptimizeAndTool.Content.ServerList
             ui_port.Width.Precent = 0.4f;
             ui_port.Height.Pixels = 25;
             ui_port.VAlign = 1;
-            ui_port.UITextBox.UIText.SetText(string.Empty, 0.8f, false);
+            ui_port.UITextsBox.UIText.SetText(string.Empty, 0.8f, false);
             ui_port.OnGetValue = () => port.val;
             ui_port.OnSetValue = v => port.val = v;
 

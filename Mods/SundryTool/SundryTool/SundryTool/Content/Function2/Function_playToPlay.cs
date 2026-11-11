@@ -99,7 +99,7 @@ namespace SundryTool.Content.Function2
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get1(playToPlay, playToPlay_play, UITextBoxValue.StringToInt, "<int>", null, "传送到玩家"),
+                UIBuild.get1(playToPlay, playToPlay_play, UITextBox.StringToInt, "<int>", null, "传送到玩家"),
             };
 
             return uis;

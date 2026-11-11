@@ -33,9 +33,9 @@ namespace Skil.Content
         {
             return new List<UIElement>()
             {
-                UIBuild.get1(Enable, Count, UITextBoxValue.StringToInt, "数量<int>", "Images/Projectile_274", "技能1"),
-                UIBuild.get6(Range, UITextBoxValue.StringToInt, "<int>", "Images/Projectile_274", "技能1半径"),
-                UIBuild.get6(Speed, UITextBoxValue.StringToFloat, "<float>", "Images/Projectile_274", "技能1速度"),
+                UIBuild.get1(Enable, Count, UITextBox.StringToInt, "数量<int>", "Images/Projectile_274", "技能1"),
+                UIBuild.get6(Range, UITextBox.StringToInt, "<int>", "Images/Projectile_274", "技能1半径"),
+                UIBuild.get6(Speed, UITextBox.StringToFloat, "<float>", "Images/Projectile_274", "技能1速度"),
             };
         }
 

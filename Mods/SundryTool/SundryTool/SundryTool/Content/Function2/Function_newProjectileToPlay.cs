@@ -60,7 +60,7 @@ namespace SundryTool.Content.Function2
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get1(nptp, nptp_play, UITextBoxValue.StringToInt, "玩家id<int>", null, "生成射弹到玩家"),
+                UIBuild.get1(nptp, nptp_play, UITextBox.StringToInt, "玩家id<int>", null, "生成射弹到玩家"),
             };
 
             return uis;

@@ -46,15 +46,15 @@ namespace Skil.Content
         {
             return new List<UIElement>()
             {
-                UIBuild.get1(Enable, Mode, UITextBoxValue.StringToInt, "0:自动(npc), 1:自动(玩家), 2:手动<int>", "Images/Buff_213", "技能9"),
-                UIBuild.get6(Count, UITextBoxValue.StringToInt, "<int>", "Images/Buff_213", "技能9数量"),
-                UIBuild.get6(Speed, UITextBoxValue.StringToFloat, "<int>", "Images/Buff_213", "技能9速度"),
-                UIBuild.get6(CD, UITextBoxValue.StringToInt, "<int>", "Images/Buff_213", "技能9cd"),
+                UIBuild.get1(Enable, Mode, UITextBox.StringToInt, "0:自动(npc), 1:自动(玩家), 2:手动<int>", "Images/Buff_213", "技能9"),
+                UIBuild.get6(Count, UITextBox.StringToInt, "<int>", "Images/Buff_213", "技能9数量"),
+                UIBuild.get6(Speed, UITextBox.StringToFloat, "<int>", "Images/Buff_213", "技能9速度"),
+                UIBuild.get6(CD, UITextBox.StringToInt, "<int>", "Images/Buff_213", "技能9cd"),
                 UIBuild.get2(TileCollide, ico:"Images/Buff_213", text:"技能9方块碰撞"),
                 UIBuild.get2(fire, ico:"Images/Buff_213", text:"技能9碰撞火花"),
-                UIBuild.get6(VelocityOff, UITextBoxValue.StringToFloat, "<int>", "Images/Buff_213", "技能9角度"),
-                UIBuild.get6(R, UITextBoxValue.StringToFloat, "<int>", "Images/Buff_213", "技能9半径"),
-                UIBuild.get6(Len, UITextBoxValue.StringToInt, "<int>", "Images/Buff_213", "技能9长度"),
+                UIBuild.get6(VelocityOff, UITextBox.StringToFloat, "<int>", "Images/Buff_213", "技能9角度"),
+                UIBuild.get6(R, UITextBox.StringToFloat, "<int>", "Images/Buff_213", "技能9半径"),
+                UIBuild.get6(Len, UITextBox.StringToInt, "<int>", "Images/Buff_213", "技能9长度"),
             };
         }
 

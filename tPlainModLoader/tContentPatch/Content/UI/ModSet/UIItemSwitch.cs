@@ -24,7 +24,9 @@ namespace tContentPatch.Content.UI.ModSet
         public UIItemSwitch(Texture2D ico = null, string title = null) : base(ico, title)
         {
             UISwitch = new UISwitch();
+            UISwitch.Height.Set(0f, 1f);
             UISwitch.HAlign = 1f;
+            UISwitch.VAlign = 0.5f;
             Append(UISwitch);
         }
     }

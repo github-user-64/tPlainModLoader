@@ -66,10 +66,10 @@ namespace SundryTool.Content.PlayerModify
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get1(damage, damage_val, UITextBoxValue.StringToFloat, "<float>", "Images/Buff_180", "伤害倍率"),
-                UIBuild.get1(armorPenetration, armorPenetration_val, UITextBoxValue.StringToInt, "<float>", "Images/Buff_159", "穿甲"),
-                UIBuild.get1(maxMinions, maxMinions_val, UITextBoxValue.StringToInt, "<int>", "Images/Buff_150", "召唤物上限"),
-                UIBuild.get1(endurance, endurance_val, UITextBoxValue.StringToFloat, "<float>", "Images/Buff_114", "减伤"),
+                UIBuild.get1(damage, damage_val, UITextBox.StringToFloat, "<float>", "Images/Buff_180", "伤害倍率"),
+                UIBuild.get1(armorPenetration, armorPenetration_val, UITextBox.StringToInt, "<float>", "Images/Buff_159", "穿甲"),
+                UIBuild.get1(maxMinions, maxMinions_val, UITextBox.StringToInt, "<int>", "Images/Buff_150", "召唤物上限"),
+                UIBuild.get1(endurance, endurance_val, UITextBox.StringToFloat, "<float>", "Images/Buff_114", "减伤"),
             };
 
             return uis;

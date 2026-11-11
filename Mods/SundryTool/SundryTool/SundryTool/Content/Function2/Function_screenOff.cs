@@ -84,7 +84,7 @@ namespace SundryTool.Content.Function2
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get1(Enable, MoveSpeed, UITextBoxValue.StringToFloat, "速度<flot>//鼠标右键退出", null, "灵魂出窍"),
+                UIBuild.get1(Enable, MoveSpeed, UITextBox.StringToFloat, "速度<flot>//鼠标右键退出", null, "灵魂出窍"),
             };
 
             return uis;

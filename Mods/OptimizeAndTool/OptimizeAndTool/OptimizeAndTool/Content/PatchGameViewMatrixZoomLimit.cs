@@ -35,7 +35,7 @@ namespace OptimizeAndTool.Content
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get1(Enable, Scale, UITextBoxValue.StringToFloat, mouseText: "缩放值<float>", text: "取消限制"),
+                UIBuild.get1(Enable, Scale, UITextBox.StringToFloat, mouseText: "缩放值<float>", text: "取消限制"),
                 UIBuild.get2(Light, mouseText: "照明设置为复古或迷幻可看到范围外图格", text: "透视照明"),
             };
 

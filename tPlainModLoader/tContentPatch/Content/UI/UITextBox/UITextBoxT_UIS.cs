@@ -1,46 +1,46 @@
 ﻿namespace tContentPatch.Content.UI
 {
     /// <inheritdoc/>
-    public class UITextBoxString : UITextBoxValue<string>
+    public class UITextBoxString : UITextBox<string>
     {
         /// <inheritdoc/>
         public UITextBoxString(string defaultDisplayText = null) : base(defaultDisplayText)
         {
-            ValueToText = UITextBoxValue.StringToString;
-            TextToValue = UITextBoxValue.StringToString;
+            ValueToText = UITextBox.StringToString;
+            TextToValue = UITextBox.StringToString;
         }
     }
 
     /// <inheritdoc/>
-    public class UITextBoxInt : UITextBoxValue<int>
+    public class UITextBoxInt : UITextBox<int>
     {
         /// <inheritdoc/>
         public UITextBoxInt(string defaultDisplayText = null) : base(defaultDisplayText)
         {
-            ValueToText = UITextBoxValue.IntToString;
-            TextToValue = UITextBoxValue.StringToInt;
+            ValueToText = UITextBox.IntToString;
+            TextToValue = UITextBox.StringToInt;
         }
     }
 
     /// <inheritdoc/>
-    public class UITextBoxFloat : UITextBoxValue<float>
+    public class UITextBoxFloat : UITextBox<float>
     {
         /// <inheritdoc/>
         public UITextBoxFloat(string defaultDisplayText = null) : base(defaultDisplayText)
         {
-            ValueToText = UITextBoxValue.FloatToString;
-            TextToValue = UITextBoxValue.StringToFloat;
+            ValueToText = UITextBox.FloatToString;
+            TextToValue = UITextBox.StringToFloat;
         }
     }
 
     /// <inheritdoc/>
-    public class UITextBoxDouble : UITextBoxValue<double>
+    public class UITextBoxDouble : UITextBox<double>
     {
         /// <inheritdoc/>
         public UITextBoxDouble(string defaultDisplayText = null) : base(defaultDisplayText)
         {
-            ValueToText = UITextBoxValue.DoubleToString;
-            TextToValue = UITextBoxValue.StringToDouble;
+            ValueToText = UITextBox.DoubleToString;
+            TextToValue = UITextBox.StringToDouble;
         }
     }
 }

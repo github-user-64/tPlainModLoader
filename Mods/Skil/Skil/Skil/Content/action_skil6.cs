@@ -30,7 +30,7 @@ namespace Skil.Content
         {
             return new List<UIElement>()
             {
-                UIBuild.get1(Enable, ID, UITextBoxValue.StringToInt, "射弹id(132, 79)<int>", "Images/Buff_306", "技能6"),
+                UIBuild.get1(Enable, ID, UITextBox.StringToInt, "射弹id(132, 79)<int>", "Images/Buff_306", "技能6"),
             };
         }
 

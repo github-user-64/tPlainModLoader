@@ -14,6 +14,7 @@ using tContentPatch.ModLoad;
 using tContentPatch.Patch;
 using tContentPatch.Utils;
 using Terraria;
+using Terraria.GameContent.UI.Elements;
 
 namespace tContentPatch
 {
@@ -133,6 +134,12 @@ namespace tContentPatch
                 ui4.OnGetIsChecked = () => valb;
                 ui4.OnSetIsChecked = v => valb = v;
                 sv.AddChild(ui4);
+
+                sv.AddChild(new UIKeybinding());
+                sv.AddChild(new UIItemKeybinding(title: "按键")
+                {
+                    Color = Color.Lerp(new Color(33, 43, 79) * 0.8f, Color.Green, 0.18f)
+                });
             }
             string vals;
             float valf;
@@ -141,7 +148,7 @@ namespace tContentPatch
             {
                 base.Update(gameTime);
 
-                if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftControl)) GameUitl.OpenMenu(new TestMenu());
+                if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftControl) && Main.oldKeyState.IsKeyUp(Microsoft.Xna.Framework.Input.Keys.LeftControl)) GameUitl.OpenMenu(new TestMenu());
                 if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Space))
                 {
                     vals = $"{Main.mouseX / 5}";

@@ -36,8 +36,8 @@ namespace Skil.Content
         public static List<UIElement> GetUI()
         {
             List<UIElement> uis = new List<UIElement>();
-            uis.Add(UIBuild.get6(damage, UITextBoxValue.StringToInt, "<int>", null, "技能伤害"));
-            uis.Add(UIBuild.get1(aimAdvance, aimAdvance_val, UITextBoxValue.StringToFloat, "应用于[技能2(38), 技能8(40), 技能9(60)]<float>", null, "预瞄"));
+            uis.Add(UIBuild.get6(damage, UITextBox.StringToInt, "<int>", null, "技能伤害"));
+            uis.Add(UIBuild.get1(aimAdvance, aimAdvance_val, UITextBox.StringToFloat, "应用于[技能2(38), 技能8(40), 技能9(60)]<float>", null, "预瞄"));
             uis.AddRange(skil1.GetUI());
             uis.AddRange(skil2.GetUI());
             uis.AddRange(skil3.GetUI());

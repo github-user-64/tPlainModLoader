@@ -52,8 +52,8 @@ namespace SundryTool.Content.Function2
             bool ok = ContentPatch.NoPublic == false;
 
             List<UIElement> uis = new List<UIElement>();
-            if (ok) uis.Add(UIBuild.get5(functionDamage, UITextBoxValue.StringToInt, "\"影响部分功能的伤害<int>\"", null, "功能伤害"));
-            if (ok) uis.Add(UIBuild.get1(aimAdvance, aimAdvance_val, UITextBoxValue.StringToFloat, "应用于[鼠标指向玩家方向,伤害玩家]<float>", null, "预瞄"));
+            if (ok) uis.Add(UIBuild.get5(functionDamage, UITextBox.StringToInt, "\"影响部分功能的伤害<int>\"", null, "功能伤害"));
+            if (ok) uis.Add(UIBuild.get1(aimAdvance, aimAdvance_val, UITextBox.StringToFloat, "应用于[鼠标指向玩家方向,伤害玩家]<float>", null, "预瞄"));
             if (ok) uis.AddRange(Function_newProjectileToPlay.GetUI());
             if (ok) uis.AddRange(Function_newItemToPlay.GetUI());
             if (ok) uis.AddRange(Function_mouseToPlayAngle.GetUI());

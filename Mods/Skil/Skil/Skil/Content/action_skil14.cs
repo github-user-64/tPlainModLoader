@@ -29,7 +29,7 @@ namespace Skil.Content
         {
             return new List<UIElement>()
             {
-                UIBuild.get1(Enable, Len, UITextBoxValue.StringToInt, "长度<int>", "Images/Buff_353", "技能14")
+                UIBuild.get1(Enable, Len, UITextBox.StringToInt, "长度<int>", "Images/Buff_353", "技能14")
             };
         }
 

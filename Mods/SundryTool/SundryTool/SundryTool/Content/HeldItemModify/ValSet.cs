@@ -69,11 +69,11 @@ namespace SundryTool.Content.HeldItemModify
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get1(useTime, useTime_val, UITextBoxValue.StringToInt, "物品使用后需要经过几帧的时间才能再次使用<int>", null, "物品使用帧数"),
-                UIBuild.get1(useAnimation, useAnimation_val, UITextBoxValue.StringToInt, "物品使用后动画会播放几帧<int>", null, "物品动画帧数"),
-                UIBuild.get1(shootSpeed, shootSpeed_val, UITextBoxValue.StringToFloat, "<float>", null, "射弹速度"),
-                UIBuild.get1(shoot, shoot_val, UITextBoxValue.StringToInt, "<int>", null, "射弹id"),
-                UIBuild.get1(tileBoost, tileBoost_val, UITextBoxValue.StringToInt, "<int>", null, "物品使用距离"),
+                UIBuild.get1(useTime, useTime_val, UITextBox.StringToInt, "物品使用后需要经过几帧的时间才能再次使用<int>", null, "物品使用帧数"),
+                UIBuild.get1(useAnimation, useAnimation_val, UITextBox.StringToInt, "物品使用后动画会播放几帧<int>", null, "物品动画帧数"),
+                UIBuild.get1(shootSpeed, shootSpeed_val, UITextBox.StringToFloat, "<float>", null, "射弹速度"),
+                UIBuild.get1(shoot, shoot_val, UITextBox.StringToInt, "<int>", null, "射弹id"),
+                UIBuild.get1(tileBoost, tileBoost_val, UITextBox.StringToInt, "<int>", null, "物品使用距离"),
             };
 
             return uis;

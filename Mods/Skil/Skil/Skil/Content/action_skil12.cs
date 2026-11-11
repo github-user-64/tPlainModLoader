@@ -41,12 +41,12 @@ namespace Skil.Content
             return new List<UIElement>()
             {
                 UIBuild.get2(Enable, ico:"Images/Extra_19", text:"技能12"),
-                UIBuild.get6(ArcLength, UITextBoxValue.StringToFloat, "<float>", "Images/Extra_19", "技能12弧长"),
-                UIBuild.get6(R, UITextBoxValue.StringToInt, "<int>", "Images/Extra_19", "技能12半径"),
-                UIBuild.get6(R_base, UITextBoxValue.StringToInt, "<int>", "Images/Extra_19", "技能12基础半径"),
-                UIBuild.get6(CircleCount, UITextBoxValue.StringToInt, "<int>", "Images/Extra_19", "技能12圈数"),
-                UIBuild.get6(Speed, UITextBoxValue.StringToFloat, "<float>", "Images/Extra_19", "技能12速度"),
-                UIBuild.get6(Size, UITextBoxValue.StringToFloat, "<float>", "Images/Extra_19", "技能12大小"),
+                UIBuild.get6(ArcLength, UITextBox.StringToFloat, "<float>", "Images/Extra_19", "技能12弧长"),
+                UIBuild.get6(R, UITextBox.StringToInt, "<int>", "Images/Extra_19", "技能12半径"),
+                UIBuild.get6(R_base, UITextBox.StringToInt, "<int>", "Images/Extra_19", "技能12基础半径"),
+                UIBuild.get6(CircleCount, UITextBox.StringToInt, "<int>", "Images/Extra_19", "技能12圈数"),
+                UIBuild.get6(Speed, UITextBox.StringToFloat, "<float>", "Images/Extra_19", "技能12速度"),
+                UIBuild.get6(Size, UITextBox.StringToFloat, "<float>", "Images/Extra_19", "技能12大小"),
             };
         }
 

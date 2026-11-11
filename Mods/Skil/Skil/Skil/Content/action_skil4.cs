@@ -33,7 +33,7 @@ namespace Skil.Content
         {
             return new List<UIElement>()
             {
-                UIBuild.get1(Enable, Time_max, UITextBoxValue.StringToInt, "变大时间<int>", "Images/Item_1275", "技能4"),
+                UIBuild.get1(Enable, Time_max, UITextBox.StringToInt, "变大时间<int>", "Images/Item_1275", "技能4"),
             };
         }
 

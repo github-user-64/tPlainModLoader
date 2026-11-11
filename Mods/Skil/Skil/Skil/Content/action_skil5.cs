@@ -68,18 +68,18 @@ namespace Skil.Content
 
         public static List<UIElement> GetUI()
         {
-            UIItemTextBox<int> type = UIBuild.get6(ShootId, UITextBoxValue.StringToInt, "<int>", "Images/Buff_322", "技能5射弹id");
+            UIItemTextBox<int> type = UIBuild.get6(ShootId, UITextBox.StringToInt, "<int>", "Images/Buff_322", "技能5射弹id");
             type.OnUpdate += _ => type.MouseText = $"{shootName}<int>";
 
             return new List<UIElement>()
             {
-                UIBuild.get1(Enable, Size, UITextBoxValue.StringToInt, "范围<int>", "Images/Buff_322", "技能5"),
-                UIBuild.get6(Mode, UITextBoxValue.StringToInt, "0: 宝石法杖, 1:光束, 2:日暮, 3:自定义<int>", "Images/Buff_322", "技能5模式"),
-                UIBuild.get6(ShootSpeed, UITextBoxValue.StringToFloat, "<float>", "Images/Buff_322", "技能5射弹速度"),
+                UIBuild.get1(Enable, Size, UITextBox.StringToInt, "范围<int>", "Images/Buff_322", "技能5"),
+                UIBuild.get6(Mode, UITextBox.StringToInt, "0: 宝石法杖, 1:光束, 2:日暮, 3:自定义<int>", "Images/Buff_322", "技能5模式"),
+                UIBuild.get6(ShootSpeed, UITextBox.StringToFloat, "<float>", "Images/Buff_322", "技能5射弹速度"),
                 type,
-                UIBuild.get6(Ai0, UITextBoxValue.StringToFloat, "<float>", "Images/Buff_322", "技能5射弹ai0"),
-                UIBuild.get6(Ai1, UITextBoxValue.StringToFloat, "<float>", "Images/Buff_322", "技能5射弹ai1"),
-                UIBuild.get6(Ai2, UITextBoxValue.StringToFloat, "<float>", "Images/Buff_322", "技能5射弹ai2"),
+                UIBuild.get6(Ai0, UITextBox.StringToFloat, "<float>", "Images/Buff_322", "技能5射弹ai0"),
+                UIBuild.get6(Ai1, UITextBox.StringToFloat, "<float>", "Images/Buff_322", "技能5射弹ai1"),
+                UIBuild.get6(Ai2, UITextBox.StringToFloat, "<float>", "Images/Buff_322", "技能5射弹ai2"),
                 UIBuild.get2(OriginalDamage, "开启后召唤物射弹才有伤害", "Images/Buff_322", "技能5设置原伤害"),
                 UIBuild.get2(StaffFeatures, null, "Images/Item_739", "法杖样式"),
                 UIBuild.get2(StaffFeatures_Homing, null, "Images/Item_1282", "追踪"),

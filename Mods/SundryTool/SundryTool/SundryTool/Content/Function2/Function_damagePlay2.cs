@@ -99,12 +99,12 @@ namespace SundryTool.Content.Function2
             Texture2D texture = Main.Assets.Request<Texture2D>(ico, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
 
             UIDrawer a = new UIDrawer(ico, "伤害玩家2");
-            a.Add(UIBuild.get5(damagePlay_damage, UITextBoxValue.StringToInt, "<int>", texture, "伤害"));
-            a.Add(UIBuild.get5(damagePlay_play, UITextBoxValue.StringToInt, "<int>", texture, "玩家id"));
-            a.Add(UIBuild.get5(reason_play, UITextBoxValue.StringToInt, "玩家id<int>", texture, "来源玩家"));
-            a.Add(UIBuild.get5(reason_proj, UITextBoxValue.StringToInt, "射弹type<int>", texture, "来源射弹"));
-            a.Add(UIBuild.get5(reason_npc, UITextBoxValue.StringToInt, "npc id<int>", texture, "来源npc"));
-            a.Add(UIBuild.get5(reason_other, UITextBoxValue.StringToInt, "<int>", texture, "来源其它"));
+            a.Add(UIBuild.get5(damagePlay_damage, UITextBox.StringToInt, "<int>", texture, "伤害"));
+            a.Add(UIBuild.get5(damagePlay_play, UITextBox.StringToInt, "<int>", texture, "玩家id"));
+            a.Add(UIBuild.get5(reason_play, UITextBox.StringToInt, "玩家id<int>", texture, "来源玩家"));
+            a.Add(UIBuild.get5(reason_proj, UITextBox.StringToInt, "射弹type<int>", texture, "来源射弹"));
+            a.Add(UIBuild.get5(reason_npc, UITextBox.StringToInt, "npc id<int>", texture, "来源npc"));
+            a.Add(UIBuild.get5(reason_other, UITextBox.StringToInt, "<int>", texture, "来源其它"));
             a.Add(UIBuild.get5(reason_custom, v => v, "<string>", texture, "来源自定义"));
             a.Add(UIBuild.get4("造成来自玩家伤害", () => damage(0), "来源(玩家)", ico));
             a.Add(UIBuild.get4("造成来自射弹伤害", () => damage(1), "来源(玩家, 射弹)", ico));

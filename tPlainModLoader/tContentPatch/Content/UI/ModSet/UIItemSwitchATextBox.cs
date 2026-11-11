@@ -34,7 +34,9 @@ namespace tContentPatch.Content.UI.ModSet
 
             UISwitch = new UISwitch();
             UISwitch.Width.Set(30f, 0f);
+            UISwitch.Height.Set(0f, 1f);
             UISwitch.HAlign = 1f;
+            UISwitch.VAlign = 0.5f;
             UIS.Append(UISwitch);
 
             UITextBox.Width.Set(-UISwitch.Width.Pixels - 2f, 1f);
@@ -52,7 +54,7 @@ namespace tContentPatch.Content.UI.ModSet
         public UIItemSwitchATextBoxString(Texture2D ico = null, string title = null, string defaultDisplayText = null) : base(ico, title, defaultDisplayText) { }
 
         /// <inheritdoc/>
-        protected override UITextBoxValue<string> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxString();
+        protected override UITextBox<string> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxString();
     }
 
     /// <inheritdoc/>
@@ -62,7 +64,7 @@ namespace tContentPatch.Content.UI.ModSet
         public UIItemSwitchATextBoxInt(Texture2D ico = null, string title = null, string defaultDisplayText = null) : base(ico, title, defaultDisplayText) { }
 
         /// <inheritdoc/>
-        protected override UITextBoxValue<int> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxInt();
+        protected override UITextBox<int> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxInt();
     }
 
     /// <inheritdoc/>
@@ -72,7 +74,7 @@ namespace tContentPatch.Content.UI.ModSet
         public UIItemSwitchATextBoxFloat(Texture2D ico = null, string title = null, string defaultDisplayText = null) : base(ico, title, defaultDisplayText) { }
 
         /// <inheritdoc/>
-        protected override UITextBoxValue<float> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxFloat();
+        protected override UITextBox<float> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxFloat();
     }
 
     /// <inheritdoc/>
@@ -82,6 +84,6 @@ namespace tContentPatch.Content.UI.ModSet
         public UIItemSwitchATextBoxDouble(Texture2D ico = null, string title = null, string defaultDisplayText = null) : base(ico, title, defaultDisplayText) { }
 
         /// <inheritdoc/>
-        protected override UITextBoxValue<double> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxDouble();
+        protected override UITextBox<double> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxDouble();
     }
 }

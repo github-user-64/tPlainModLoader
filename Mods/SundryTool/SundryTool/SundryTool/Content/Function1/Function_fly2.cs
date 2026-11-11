@@ -46,11 +46,11 @@ namespace SundryTool.Content.Function1
 
             if (control.Up)
             {
-                fly2_v.Y = -fly2_val.val;
+                fly2_v.Y = -fly2_val.val * This.gravDir;
             }
             if (control.Down)
             {
-                fly2_v.Y = fly2_val.val;
+                fly2_v.Y = fly2_val.val * This.gravDir;
             }
             if (control.Left)
             {
@@ -115,7 +115,7 @@ namespace SundryTool.Content.Function1
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get1(fly2, fly2_val, UITextBoxValue.StringToFloat, "<float>", "Images/Buff_353", "飞行2"),
+                UIBuild.get1(fly2, fly2_val, UITextBox.StringToFloat, "<float>", "Images/Buff_353", "飞行2"),
             };
 
             return uis;

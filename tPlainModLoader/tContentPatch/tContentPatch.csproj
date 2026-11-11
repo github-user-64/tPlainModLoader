@@ -78,7 +78,9 @@
     <Compile Include="Content\Menus\ModSetSwitch\UIModSetSwitch.cs" />
     <Compile Include="Content\Menus\ModSet\ModSet.cs" />
     <Compile Include="Content\Menus\ModSet\UIModSet.cs" />
+    <Compile Include="Content\PlayerInputUtils.cs" />
     <Compile Include="Content\TitleInfo.cs" />
+    <Compile Include="Content\UI\ModSet\UIItemKeybinding.cs" />
     <Compile Include="Content\UI\ModSet\UIItemSwitchATextBox.cs" />
     <Compile Include="Content\UI\ModSet\UIItemSwitch.cs" />
     <Compile Include="Content\UI\ModSet\UIItemTextBox.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Content\UI\ModSet\UIItemValueSlider\UIItemValueSliderInt.cs" />
     <Compile Include="Content\UI\ModSet\UIItemValueSlider\UIItemValueSlider.cs" />
     <Compile Include="Content\UI\ModSet\UIItem.cs" />
+    <Compile Include="Content\UI\UIKeybinding.cs" />
     <Compile Include="Content\UI\UIMouseText.cs" />
     <Compile Include="Content\UI\UIPanel2.cs" />
     <Compile Include="Content\UI\UIRadioButton.cs" />
@@ -94,9 +97,9 @@
     <Compile Include="Content\UI\UIScrollViewer\UIScrollViewer2.cs" />
     <Compile Include="Content\UI\UIScrollViewer\UIScrollViewer.cs" />
     <Compile Include="Content\UI\UISwitch.cs" />
-    <Compile Include="Content\UI\UITextBox\UITextBoxValue_UIS.cs" />
-    <Compile Include="Content\UI\UITextBox\UITextBoxValue_Parse.cs" />
-    <Compile Include="Content\UI\UITextBox\UITextBoxValue.cs" />
+    <Compile Include="Content\UI\UITextBox\UITextBoxT_UIS.cs" />
+    <Compile Include="Content\UI\UITextBox\UITextBox_Parse.cs" />
+    <Compile Include="Content\UI\UITextBox\UITextBoxT.cs" />
     <Compile Include="Content\UI\UITextBox\UITextBox_Style.cs" />
     <Compile Include="Content\UI\UITextBox\UITextBox_Field.cs" />
     <Compile Include="Content\UI\UITextBox\UITextBox.cs" />

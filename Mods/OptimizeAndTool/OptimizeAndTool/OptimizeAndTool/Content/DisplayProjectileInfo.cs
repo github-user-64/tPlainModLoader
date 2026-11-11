@@ -42,7 +42,7 @@ namespace OptimizeAndTool.Content
                 UIBuild.get2(Enable, text: "显示射弹信息"),
                 UIBuild.get2(ptype, text: "射弹type"),
                 UIBuild.get2(pwhoAmI, text: "射弹whoAmI"),
-                UIBuild.get1(pvelocity, pvelocity_val, UITextBoxValue.StringToFloat, "速度线的长度倍率<flost>", text: "射弹速度"),
+                UIBuild.get1(pvelocity, pvelocity_val, UITextBox.StringToFloat, "速度线的长度倍率<flost>", text: "射弹速度"),
                 UIBuild.get2(pai, text: "射弹ai"),
                 UIBuild.get2(plocalAI, text: "射弹localAI"),
             };

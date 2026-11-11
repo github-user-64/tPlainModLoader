@@ -32,7 +32,7 @@ namespace SundryTool.Content.Function2
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get1(chestAddAll, chestAddAll_set, UITextBoxValue.StringToInt, "<int>", text: "填满箱子"),
+                UIBuild.get1(chestAddAll, chestAddAll_set, UITextBox.StringToInt, "<int>", text: "填满箱子"),
             };
 
             return uis;

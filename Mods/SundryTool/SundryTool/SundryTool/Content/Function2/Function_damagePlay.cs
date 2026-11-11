@@ -58,7 +58,7 @@ namespace SundryTool.Content.Function2
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get1(damagePlay, damagePlay_set, UITextBoxValue.StringToInt, "生成机械骷髅王炸弹<int>", "Images/Buff_30", "伤害玩家"),
+                UIBuild.get1(damagePlay, damagePlay_set, UITextBox.StringToInt, "生成机械骷髅王炸弹<int>", "Images/Buff_30", "伤害玩家"),
             };
 
             return uis;

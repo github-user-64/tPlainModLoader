@@ -29,11 +29,11 @@ namespace SundryTool.Content.Function1
 
             if (control.Up && This.velocity.Y > -fly_val.val)
             {
-                This.velocity.Y -= 1f;
+                This.velocity.Y -= 1f * This.gravDir;
             }
             if (control.Down && This.velocity.Y < fly_val.val && This.position.Y != This.oldPosition.Y)
             {
-                This.velocity.Y += 1f;
+                This.velocity.Y += 1f * This.gravDir;
                 This.maxFallSpeed = fly_val.val;
             }
             if (control.Left && This.velocity.X > -fly_val.val)
@@ -70,7 +70,7 @@ namespace SundryTool.Content.Function1
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get1(fly, fly_val, UITextBoxValue.StringToFloat, "<float>", "Images/Buff_8", "飞行"),
+                UIBuild.get1(fly, fly_val, UITextBox.StringToFloat, "<float>", "Images/Buff_8", "飞行"),
             };
 
             return uis;
