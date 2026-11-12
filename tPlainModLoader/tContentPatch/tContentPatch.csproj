@@ -78,7 +78,7 @@
     <Compile Include="Content\Menus\ModSetSwitch\UIModSetSwitch.cs" />
     <Compile Include="Content\Menus\ModSet\ModSet.cs" />
     <Compile Include="Content\Menus\ModSet\UIModSet.cs" />
-    <Compile Include="Content\PlayerInputUtils.cs" />
+    <Compile Include="Content\InputUtils.cs" />
     <Compile Include="Content\TitleInfo.cs" />
     <Compile Include="Content\UI\ModSet\UIItemKeybinding.cs" />
     <Compile Include="Content\UI\ModSet\UIItemSwitchATextBox.cs" />

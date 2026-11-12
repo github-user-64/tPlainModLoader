@@ -76,10 +76,10 @@ namespace tContentPatch.Content.UI
         {
             if (IsBinding != true) return;
 
-            if (PlayerInputUtils.KeyDown.Count < 1) return;
+            if (InputUtils.KeyDown.Count < 1) return;
             IsBinding = false;
 
-            SetBind(PlayerInputUtils.KeyDown[0]);
+            SetBind(InputUtils.KeyDown[0]);
         }
 
         /// <inheritdoc/>

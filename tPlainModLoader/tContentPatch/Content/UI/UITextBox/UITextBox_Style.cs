@@ -16,8 +16,6 @@ namespace tContentPatch.Content.UI
             back.Height.Set(0f, 1f);
             back.BackgroundColor = Color.White;
             back.BorderColor = Color.White;
-
-            ui.UIBackStyle.RemoveAllChildren();
             ui.UIBackStyle.Append(back);
 
             ui.UITextColor = Color.Black;
@@ -40,8 +38,6 @@ namespace tContentPatch.Content.UI
 
                 back.BackgroundColor = ui.Focus ? Color.MidnightBlue * 0.6f : default;
             };
-
-            ui.UIBackStyle.RemoveAllChildren();
             ui.UIBackStyle.Append(back);
 
             //

@@ -20,9 +20,12 @@ namespace tContentPatch.Content.UI
         /// ui的背景
         /// </summary>
         public readonly UIElement UIBackStyle = null;
+        /// <summary>
+        /// 设置样式
+        /// </summary>
+        public Action<UITextBox> Style = Style1;
 
         private int time = 0;
-        private bool mouseLeftOld = false;
 
         /// <summary/>
         public UITextBox(string defaultDisplayText = null)
@@ -43,7 +46,7 @@ namespace tContentPatch.Content.UI
             UIText.SetPadding(4f);
             Append(UIText);
 
-            OnSetBackStyle();
+            SetBackStyle();
 
             UV = new Utils.UIVal<string>(UpdateDisplayTextWhenText);
             UV.SetUIVal(null, true);
@@ -99,9 +102,6 @@ namespace tContentPatch.Content.UI
         /// <summary/>
         protected virtual void UpdateFocus()
         {
-            bool mouseLeftOld = this.mouseLeftOld;
-            this.mouseLeftOld = Main.mouseLeft;
-
             ++time;
             if (time * 16 > 2000) time = 0;
 
@@ -115,10 +115,7 @@ namespace tContentPatch.Content.UI
                 return;
             }
 
-            if (Main.mouseLeft && mouseLeftOld == false)
-            {
-                Focus = IsMouseHovering;
-            }
+            if (InputUtils.MouseLeftClick) Focus = IsMouseHovering;
         }
 
         /// <summary/>
@@ -193,9 +190,9 @@ namespace tContentPatch.Content.UI
         /// <summary>
         /// 设置页面背景
         /// </summary>
-        protected virtual void OnSetBackStyle()
+        protected virtual void SetBackStyle()
         {
-            Style1(this);
+            Style?.Invoke(this);
         }
     }
 }
