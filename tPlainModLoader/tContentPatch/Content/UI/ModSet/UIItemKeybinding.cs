@@ -19,7 +19,7 @@ namespace tContentPatch.Content.UI.ModSet
         /// <summary/>
         public Action<string> OnSetBind { set => UIKeybinding.OnSetBind = value; }
         /// <summary/>
-        public Action<string> OnIsCheckChanged { get => UIKeybinding.OnBindChanged; set => UIKeybinding.OnBindChanged = value; }
+        public Action<string> OnBindChanged { get => UIKeybinding.OnBindChanged; set => UIKeybinding.OnBindChanged = value; }
 
         /// <summary/>
         public UIItemKeybinding(Texture2D ico = null, string title = null) : base(ico, title)

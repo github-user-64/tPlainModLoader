@@ -1,0 +1,41 @@
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
+using tContentPatch;
+using tContentPatch.Content.UI.ModSet;
+using Terraria;
+using Terraria.UI;
+
+namespace CreativeInventory
+{
+    public class SettingKeyBind : ModSetting
+    {
+        public override string Name => "按键绑定";
+        public override string Title => "创造物品栏: 按键绑定";
+        public override string FilePath => "KeyBind.json";
+        public override Type DataType => typeof(string);
+        public static string key = null;
+
+        public override void Load(object v)
+        {
+            key = v as string;
+            NeedSave = false;
+        }
+
+        public override UIElement GetUI()
+        {
+            UIItemKeybinding ui = new UIItemKeybinding(
+                Main.Assets.Request<Texture2D>("Images/Item_306", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value,
+                "开关物品栏");
+            ui.OnGetBind = () => key;
+            ui.OnSetBind = v => key = v;
+            ui.Bind = key;
+            ui.OnBindChanged += _ => NeedSave = true;
+
+            return ui;
+        }
+
+        public override object GetSaveData() => key;
+
+        public override void SetDefault() => key = null;
+    }
+}

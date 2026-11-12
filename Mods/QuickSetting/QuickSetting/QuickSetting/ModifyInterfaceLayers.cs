@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using tContentPatch;
+using tContentPatch.Content;
 using Terraria;
 using Terraria.UI;
 
@@ -22,7 +23,7 @@ namespace QuickSetting
         {
             if (ui == null) return;
 
-            if (tContentPatch.Content.GameUitl.CanGameUI() != true)
+            if (GameUitl.CanGameUI() != true)
             {
                 ui.SetState(null);
             }
@@ -30,6 +31,11 @@ namespace QuickSetting
             {
                 ui.SetState(ui_state);
                 ui.Update(gameTime);
+
+                if (InputUtils.IsClick(SettingKeyBind.key) && InputUtils.WritingText != true)
+                {
+                    QuickSetting.QuickSetting.SwitchOpenOrClose();
+                }
             }
         }
 

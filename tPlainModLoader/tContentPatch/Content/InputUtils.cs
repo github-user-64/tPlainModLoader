@@ -28,7 +28,7 @@ namespace tContentPatch.Content
 
         /// <summary>
         /// 光标左键按下<para/>
-        /// 和<see cref="IsDown(Keys)"/>的区别是会收到按键绑定影响
+        /// 和<see cref="IsDown(Keys[])"/>的区别是会收到按键绑定影响
         /// </summary>
         public static bool MouseLeft { get; private set; } = false;
         /// <summary>
@@ -43,6 +43,11 @@ namespace tContentPatch.Content
         /// 光标右键第一次按下
         /// </summary>
         public static bool MouseRightClick { get; private set; } = false;
+
+        /// <summary>
+        /// 是否在输入
+        /// </summary>
+        public static bool WritingText => PlayerInput.WritingText;
 
         [HarmonyPatch("UpdateInput")]
         [HarmonyPostfix]
@@ -62,48 +67,49 @@ namespace tContentPatch.Content
         }
 
         /// <summary/>
-        public static bool IsClick(string key)
+        public static bool IsClick(params string[] keys) => IsDown(keys) && IsUpOld(keys);
+        /// <summary/>
+        public static bool IsClick(params Keys[] keys) => IsClick(keys.ConvertKey());
+
+        /// <summary/>
+        public static bool IsDown(params string[] keys) => KeyDown.KeyContains(keys);
+        /// <summary/>
+        public static bool IsDown(params Keys[] keys) => IsDown(keys.ConvertKey());
+
+        /// <summary/>
+        public static bool IsUp(params string[] keys) => IsDown(keys) != true;
+        /// <summary/>
+        public static bool IsUp(params Keys[] keys) => IsUp(keys.ConvertKey());
+
+        /// <summary/>
+        public static bool IsDownOld(params string[] keys) => KeyDownOld.KeyContains(keys);
+        /// <summary/>
+        public static bool IsDownOld(params Keys[] keys) => IsDownOld(keys.ConvertKey());
+
+        /// <summary/>
+        public static bool IsUpOld(params string[] keys) => IsDownOld(keys) != true;
+        /// <summary/>
+        public static bool IsUpOld(params Keys[] keys) => IsUpOld(keys.ConvertKey());
+
+        //
+
+        private static bool KeyContains(this List<string> keyState, string[] keys)
         {
-            if (IsDown(key) != true) return false;
-            return IsUpOld(key);
-        }
-        /// <summary/>
-        public static bool IsClick(Keys key) => IsClick(key.ToString());
+            foreach (string key in keys)
+            {
+                if (key == null) return false;
+                if (keyState.Contains(key) != true) return false;
+            }
 
-        /// <summary/>
-        public static bool IsDown(string key)
+            return true;
+        }
+
+        private static string[] ConvertKey(this Keys[] keys)
         {
-            if (key == null) return false;
+            string[] ks = new string[keys.Length];
+            for (int i = 0; i < ks.Length; ++i) ks[i] = keys[i].ToString();
 
-            return KeyDown.Contains(key);
+            return ks;
         }
-        /// <summary/>
-        public static bool IsDown(Keys key) => IsDown(key.ToString());
-
-        /// <summary/>
-        public static bool IsUp(string key)
-        {
-            return IsDown(key) != true;
-        }
-        /// <summary/>
-        public static bool IsUp(Keys key) => IsUp(key.ToString());
-
-        /// <summary/>
-        public static bool IsDownOld(string key)
-        {
-            if (key == null) return false;
-
-            return KeyDownOld.Contains(key);
-        }
-        /// <summary/>
-        public static bool IsDownOld(Keys key) => IsDownOld(key.ToString());
-
-        /// <summary/>
-        public static bool IsUpOld(string key)
-        {
-            return IsDownOld(key) != true;
-        }
-        /// <summary/>
-        public static bool IsUpOld(Keys key) => IsUpOld(key.ToString());
     }
 }

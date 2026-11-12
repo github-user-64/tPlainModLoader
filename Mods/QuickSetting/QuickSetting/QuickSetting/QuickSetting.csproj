@@ -34,9 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="KeyBind\SettingKeyBind.cs" />
-    <Compile Include="KeyBind\UIKeyBind.cs" />
-    <Compile Include="ListenInput.cs" />
+    <Compile Include="SettingKeyBind.cs" />
     <Compile Include="ModifyInterfaceLayers.cs" />
     <Compile Include="ModLinkage\ModQuickButton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

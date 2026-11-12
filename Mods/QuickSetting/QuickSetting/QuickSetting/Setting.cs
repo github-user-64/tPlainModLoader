@@ -11,31 +11,16 @@ namespace QuickSetting
     {
         public override string Name => "设置";
         public override string Title => "快捷设置: 设置";
-        public override string FilePath => "setting.json";
+        public override string FilePath => "Setting.json";
         public override Type DataType => typeof(bool);
-        private bool date = true;
+        private bool data = true;
 
         public override void Load(object v)
         {
-            if (v == null)
-            {
-                SetDefault();
-                Save();
-            }
-            else
-            {
-                date = (bool)v;
-            }
+            data = v as bool? ?? true;
+            NeedSave = false;
 
-            ModLinkage.ModQuickButton.IsLinkage = date;
-        }
-
-        public override object GetSaveData() => date;
-
-        public override void SetDefault()
-        {
-            date = true;
-            NeedSave = true;
+            ModLinkage.ModQuickButton.IsLinkage = data;
         }
 
         public override UIElement GetUI()
@@ -44,15 +29,16 @@ namespace QuickSetting
                 Main.Assets.Request<Texture2D>("Images/UI/ButtonPlay", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value,
                 "添加到快捷按钮");
             ui.MouseText = "重新加载模组生效";
-            ui.OnGetIsChecked = () => date;
-            ui.OnSetIsChecked = v =>
-            {
-                if (date == v) return;
-                date = v;
-                NeedSave = true;
-            };
+            ui.OnGetIsChecked = () => data;
+            ui.OnSetIsChecked = v => data = v;
+            ui.IsChecked = data;
+            ui.OnIsCheckChanged += _ => NeedSave = true;
 
             return ui;
         }
+
+        public override object GetSaveData() => data;
+
+        public override void SetDefault() => data = true;
     }
 }

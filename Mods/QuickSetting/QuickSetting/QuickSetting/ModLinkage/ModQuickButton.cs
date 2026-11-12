@@ -35,7 +35,7 @@ namespace QuickSetting.ModLinkage
             ui_img.ScaleToFit = true;
             ui_img.OnUpdate += _ =>
             {
-                if (ui_img.IsMouseHovering) Main.instance.MouseText("快速设置");
+                if (ui_img.IsMouseHovering) Main.instance.MouseText("快捷设置");
             };
             ui_img.OnLeftClick += (e, s) =>
             {
