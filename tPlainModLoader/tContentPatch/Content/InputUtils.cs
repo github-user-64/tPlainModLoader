@@ -22,9 +22,9 @@ namespace tContentPatch.Content
         public static readonly string KeyMouseRight = "Mouse2";
 
         /// <summary/>
-        public static readonly List<string> KeyDown = new List<string>();
+        public static readonly HashSet<string> KeyDown = new HashSet<string>();
         /// <summary/>
-        public static readonly List<string> KeyDownOld = new List<string>();
+        public static readonly HashSet<string> KeyDownOld = new HashSet<string>();
 
         /// <summary>
         /// 光标左键按下<para/>
@@ -62,8 +62,8 @@ namespace tContentPatch.Content
             foreach (string i in KeyDown) KeyDownOld.Add(i);
             KeyDown.Clear();
 
-            KeyDown.AddRange(PlayerInput.GetPressedKeys().ConvertAll(i => i.ToString()));
-            KeyDown.AddRange(PlayerInput.MouseKeys);
+            foreach (Keys i in PlayerInput.GetPressedKeys()) KeyDown.Add(i.ToString());
+            foreach (string i in PlayerInput.MouseKeys) KeyDown.Add(i);
         }
 
         /// <summary/>
@@ -93,7 +93,7 @@ namespace tContentPatch.Content
 
         //
 
-        private static bool KeyContains(this List<string> keyState, string[] keys)
+        private static bool KeyContains(this HashSet<string> keyState, string[] keys)
         {
             foreach (string key in keys)
             {

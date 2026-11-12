@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent.UI.Elements;
@@ -79,7 +80,7 @@ namespace tContentPatch.Content.UI
             if (InputUtils.KeyDown.Count < 1) return;
             IsBinding = false;
 
-            SetBind(InputUtils.KeyDown[0]);
+            SetBind(InputUtils.KeyDown.First());
         }
 
         /// <inheritdoc/>

@@ -47,7 +47,7 @@ namespace tContentPatch.Content.UI.ModSet
         public UIItemTextBoxString(Texture2D ico = null, string title = null, string defaultDisplayText = null) : base(ico, title, defaultDisplayText) { }
 
         /// <inheritdoc/>
-        protected override UITextBox<string> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxString();
+        protected override UITextBox<string> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxString(defaultDisplayText);
     }
 
     /// <inheritdoc/>
@@ -57,7 +57,7 @@ namespace tContentPatch.Content.UI.ModSet
         public UIItemTextBoxInt(Texture2D ico = null, string title = null, string defaultDisplayText = null) : base(ico, title, defaultDisplayText) { }
 
         /// <inheritdoc/>
-        protected override UITextBox<int> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxInt();
+        protected override UITextBox<int> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxInt(defaultDisplayText);
     }
 
     /// <inheritdoc/>
@@ -67,7 +67,7 @@ namespace tContentPatch.Content.UI.ModSet
         public UIItemTextBoxFloat(Texture2D ico = null, string title = null, string defaultDisplayText = null) : base(ico, title, defaultDisplayText) { }
 
         /// <inheritdoc/>
-        protected override UITextBox<float> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxFloat();
+        protected override UITextBox<float> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxFloat(defaultDisplayText);
     }
 
     /// <inheritdoc/>
@@ -77,6 +77,6 @@ namespace tContentPatch.Content.UI.ModSet
         public UIItemTextBoxDouble(Texture2D ico = null, string title = null, string defaultDisplayText = null) : base(ico, title, defaultDisplayText) { }
 
         /// <inheritdoc/>
-        protected override UITextBox<double> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxDouble();
+        protected override UITextBox<double> GetUITextBoxValue(string defaultDisplayText = null) => new UITextBoxDouble(defaultDisplayText);
     }
 }

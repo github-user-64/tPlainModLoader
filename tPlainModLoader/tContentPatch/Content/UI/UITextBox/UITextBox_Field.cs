@@ -6,13 +6,13 @@ namespace tContentPatch.Content.UI
     public partial class UITextBox
     {
         /// <summary/>
-        public Color UITextColor;
+        public Color UITextColor = Color.White;
         /// <summary/>
-        public Color UITextColorDeft;
+        public Color UITextColorDeft = Color.Gray;
         /// <summary/>
-        public Color UITextShadowColor;
+        public Color UITextShadowColor = Color.Black;
         /// <summary/>
-        public Color UITextShadowColorDeft;
+        public Color UITextShadowColorDeft = Color.Black;
 
         /// <summary/>
         public Utils.UIVal<string> UV = null;

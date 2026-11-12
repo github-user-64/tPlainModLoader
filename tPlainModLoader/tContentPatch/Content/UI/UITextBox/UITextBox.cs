@@ -46,10 +46,16 @@ namespace tContentPatch.Content.UI
             UIText.SetPadding(4f);
             Append(UIText);
 
-            SetBackStyle();
-
             UV = new Utils.UIVal<string>(UpdateDisplayTextWhenText);
             UV.SetUIVal(null, true);
+        }
+
+        /// <inheritdoc/>
+        public override void OnInitialize()
+        {
+            base.OnInitialize();
+
+            SetBackStyle();
         }
 
         /// <inheritdoc/>
