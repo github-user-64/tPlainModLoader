@@ -54,13 +54,12 @@ namespace tContentPatch.Content.UI
             UIBtns.Height.Set(0f, 0f);
             UIBtns.VAlign = 1f;
             UIBtns.ItemMargin = 4f;
-            UIBtns.OnUpdate += _ => UIBtns.UpdateContainer_Height();
+            UIBtns.IsAutoUpdateSize = true;
             Append(UIBtns);
 
             UIPanel = new UIPanel();
             UIPanel.Width.Set(0f, 1f);
             UIPanel.Height.Set(0f, 1f);
-            UIPanel.OnUpdate += _ => UIPanel.Height.Pixels = -UIBtns.GetOuterDimensions().Height - 4f;
             Append(UIPanel);
 
             Append(UITitle);
@@ -83,6 +82,8 @@ namespace tContentPatch.Content.UI
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            UIPanel.Height.Pixels = -UIBtns.GetOuterDimensions().Height - 4f;
 
             if (PlayerInput.Triggers.JustPressed.Inventory) Back(BackUI);
         }

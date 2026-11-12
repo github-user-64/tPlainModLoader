@@ -81,6 +81,8 @@
     <Compile Include="Content\InputUtils.cs" />
     <Compile Include="Content\TitleInfo.cs" />
     <Compile Include="Content\UI\ModSet\UIItemKeybinding.cs" />
+    <Compile Include="Content\UI\ModSet\UIItemTextButtonATextBox.cs" />
+    <Compile Include="Content\UI\ModSet\UIItemTextButton.cs" />
     <Compile Include="Content\UI\ModSet\UIItemSwitchATextBox.cs" />
     <Compile Include="Content\UI\ModSet\UIItemSwitch.cs" />
     <Compile Include="Content\UI\ModSet\UIItemTextBox.cs" />
@@ -105,6 +107,7 @@
     <Compile Include="Content\UI\UITextBox\UITextBox.cs" />
     <Compile Include="Content\UI\UIWindow.cs" />
     <Compile Include="Content\UI\UIMenuPanel.cs" />
+    <Compile Include="Content\UI\UITextButton.cs" />
     <Compile Include="ModLoad\Inheritance\ModNetPacket.cs" />
     <Compile Include="ModLoad\LoadInstance\LoadInstance.cs" />
     <Compile Include="ModLoad\LoadInstance\LoadInstance_IModLoader.cs" />

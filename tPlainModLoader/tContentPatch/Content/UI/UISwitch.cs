@@ -30,6 +30,9 @@ namespace tContentPatch.Content.UI
         public readonly UIText UIText = null;
         /// <summary/>
         public readonly UIImageFramed UIIco = null;
+        /// <summary/>
+        public readonly UIElement UI1 = null;
+
         private Rectangle Frame;
 
         /// <summary/>
@@ -50,21 +53,21 @@ namespace tContentPatch.Content.UI
             UIIco.VAlign = 0.5f;
             Append(UIIco);
 
-            UIElement uie = new UIElement();
-            uie.Width.Set(0f, 1f);
-            uie.Height.Set(0f, 1f);
-            uie.OnLeftClick += (e, s) =>
+            UI1 = new UIElement();
+            UI1.Width.Set(0f, 1f);
+            UI1.Height.Set(0f, 1f);
+            UI1.OnLeftClick += (e, s) =>
             {
                 SoundEngine.PlaySound(SoundID.MenuTick);
                 UV.SetUIVal(!IsChecked);
             };
-            uie.OnMouseOver += (e, s) =>
+            UI1.OnMouseOver += (e, s) =>
             {
                 SoundEngine.PlaySound(SoundID.MenuTick);
                 UIText.TextColor = UIIco.Color = Colors.FancyUIFatButtonMouseOver;
             };
-            uie.OnMouseOut += (e, s) => UIText.TextColor = UIIco.Color = Color.White;
-            Append(uie);
+            UI1.OnMouseOut += (e, s) => UIText.TextColor = UIIco.Color = Color.White;
+            Append(UI1);
 
             UV = new Utils.UIVal<bool>(UpdateUI);
             UV.SetUIVal(false, true);

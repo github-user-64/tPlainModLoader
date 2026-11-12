@@ -18,18 +18,7 @@ namespace tContentPatch.Content.UI
         /// <summary/>
         public Action<T> OnSetValue { set => UITextsBox.OnSetText = v => value(TextToValue(v)); }
         /// <summary/>
-        protected Action<T> _OnValueChanged = null;
-        /// <summary/>
-        public Action<T> OnValueChanged
-        {
-            get => _OnValueChanged;
-            set
-            {
-                _OnValueChanged = value;
-                UITextsBox.OnTextChanged = v => _OnValueChanged(TextToValue(v));
-            }
-        }
-
+        public Action<T> OnValueChanged = null;
         /// <summary/>
         public virtual Func<T, string> ValueToText { get; set; } = _ => throw new NotImplementedException();
         /// <summary/>
@@ -45,6 +34,7 @@ namespace tContentPatch.Content.UI
             UITextsBox.IsUpdateTextWhenDisplayText = false;
             UITextsBox.IsUpdateTextWhenLostFocus = true;
             UITextsBox.NoUpdateDisplayTextWhenHasFocus = true;
+            UITextsBox.OnTextChanged += v => OnValueChanged?.Invoke(TextToValue(v));
             Append(UITextsBox);
 
             Width = UITextsBox.Width;
