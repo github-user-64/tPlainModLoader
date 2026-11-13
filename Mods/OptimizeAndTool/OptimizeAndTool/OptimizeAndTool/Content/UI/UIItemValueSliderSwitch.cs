@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using OptimizeAndTool.Utils;
-using tContentPatch.Content.UI.ModSet;
+using tContentPatch.Content.UI.Item1;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.UI;

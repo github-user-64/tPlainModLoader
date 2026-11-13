@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace tContentPatch.Content.UI.ModSet
+namespace tContentPatch.Content.UI.Item1
 {
     /// <summary>
     /// 开关

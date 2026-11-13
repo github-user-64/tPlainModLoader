@@ -9,7 +9,7 @@ using tContentPatch.Content;
 using tContentPatch.Content.Menus.ModLoadException;
 using tContentPatch.Content.Menus.ModManager;
 using tContentPatch.Content.UI;
-using tContentPatch.Content.UI.ModSet;
+using tContentPatch.Content.UI.Item1;
 using tContentPatch.ModLoad;
 using tContentPatch.Patch;
 using tContentPatch.Utils;

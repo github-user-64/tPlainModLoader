@@ -2,7 +2,7 @@
 using System;
 using tContentPatch;
 using tContentPatch.Content.UI;
-using tContentPatch.Content.UI.ModSet;
+using tContentPatch.Content.UI.Item1;
 using Terraria.UI;
 
 namespace WandsTool

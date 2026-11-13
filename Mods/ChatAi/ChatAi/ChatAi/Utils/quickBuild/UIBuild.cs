@@ -3,7 +3,7 @@ using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using tContentPatch.Content.UI;
-using tContentPatch.Content.UI.ModSet;
+using tContentPatch.Content.UI.Item1;
 using Terraria;
 using Terraria.UI;
 

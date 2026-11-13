@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
 using Terraria.UI;
 
-namespace tContentPatch.Content.UI.ModSet
+namespace tContentPatch.Content.UI.Item1
 {
     /// <summary>
     /// 大标题

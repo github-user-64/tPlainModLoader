@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria.UI;
 
-namespace tContentPatch.Content.UI.ModSet
+namespace tContentPatch.Content.UI.Item1
 {
     /// <summary>
     /// 组合ui: <see cref="UITextButton"/>, <see cref="UIItemTextBox{T}"/>

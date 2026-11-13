@@ -4,7 +4,7 @@ using System;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 
-namespace tContentPatch.Content.UI.ModSet
+namespace tContentPatch.Content.UI.Item1
 {
     /// <summary>
     ///由拖动条调整值

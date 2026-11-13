@@ -5,7 +5,7 @@ using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 
-namespace tContentPatch.Content.UI.ModSet
+namespace tContentPatch.Content.UI.Item1
 {
     /// <summary>
     /// 有图标和文本的项

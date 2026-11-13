@@ -2,7 +2,7 @@
 using System;
 using Terraria.UI;
 
-namespace tContentPatch.Content.UI.ModSet
+namespace tContentPatch.Content.UI.Item1
 {
     /// <summary>
     /// 组合ui: <see cref="UI.UISwitch"/>, <see cref="UIItemTextBox{T}"/>

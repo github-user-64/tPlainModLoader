@@ -38,6 +38,9 @@ namespace tContentPatch.Content.Menus.CreateMod
 
             UIDisplayName = new UITextBoxItem("模组显示名称（可不填）");
             UIDisplayName.UITextBox.MaxInputLength = 32;
+            UIDisplayName.UITextBox.Style = null;
+            UITextBox.Style2(UIDisplayName.UITextBox);
+            UIDisplayName.UITextBox.UITextShadowColor = Color.DeepSkyBlue;
             sp.Append(UIDisplayName);
 
             UIModName = new UITextBoxItem("模组内部名称");

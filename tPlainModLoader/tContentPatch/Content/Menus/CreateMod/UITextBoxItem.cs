@@ -37,8 +37,8 @@ namespace tContentPatch.Content.Menus.CreateMod
             //
 
             UITextBox = new UITextBox();
-            UITextBox.Style = UITextBox.Style2;
             UITextBox.MarginTop = 2f;
+            UITextBox.Style = UITextBox.Style2;
             Append(UITextBox);
 
             UITextBox.OnSetText = UpdateTip;
