@@ -49,7 +49,7 @@ namespace SundryTool.Content.Function2
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get2(MapRevealer_runing, "关闭以取消", text: "点亮全图"),
+                UIBuild.get2(MapRevealer_runing, "关闭以取消", "Images/Map_3", "点亮全图"),
             };
 
             return uis;

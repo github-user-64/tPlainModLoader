@@ -24,7 +24,7 @@ namespace CreativeInventory
         public override UIElement GetUI()
         {
             UIItemKeybinding ui = new UIItemKeybinding(
-                Main.Assets.Request<Texture2D>("Images/Item_306", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value,
+                Main.Assets.Request<Texture2D>("Images/UI/ChestCraft_0", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value,
                 "开关物品栏");
             ui.OnGetBind = () => key;
             ui.OnSetBind = v => key = v;

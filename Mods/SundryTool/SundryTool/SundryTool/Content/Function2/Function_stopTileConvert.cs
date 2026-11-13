@@ -56,7 +56,7 @@ namespace SundryTool.Content.Function2
             List<UIElement> uis = new List<UIElement>
             {
                 //UIBuild.get2(Enable, "阻止方块被转化为腐化圣神猩红\n魔粉改造枪等也无法使用\n默认启用,在服务端使用该功能需要服务端加载该模组", null, "阻止方块转化"),
-                UIBuild.get2(Enable, tip, null, "阻止传播感染"),
+                UIBuild.get2(Enable, tip, "Images/Buff_320", "阻止传播感染"),
             };
 
             return uis;

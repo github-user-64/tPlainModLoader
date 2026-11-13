@@ -24,6 +24,7 @@ namespace tContentPatch.Content.UI
         /// 设置样式
         /// </summary>
         public Action<UITextBox> Style = Style1;
+        private bool StyleLoaded = false;
 
         private int time = 0;
 
@@ -51,14 +52,6 @@ namespace tContentPatch.Content.UI
         }
 
         /// <inheritdoc/>
-        public override void OnInitialize()
-        {
-            base.OnInitialize();
-
-            SetBackStyle();
-        }
-
-        /// <inheritdoc/>
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
             base.DrawSelf(spriteBatch);
@@ -75,6 +68,12 @@ namespace tContentPatch.Content.UI
         /// <inheritdoc/>
         public override void Update(GameTime gameTime)
         {
+            if (StyleLoaded == false)
+            {
+                StyleLoaded = true;
+                SetBackStyle();
+            }
+
             base.Update(gameTime);
 
             UpdateFocus();

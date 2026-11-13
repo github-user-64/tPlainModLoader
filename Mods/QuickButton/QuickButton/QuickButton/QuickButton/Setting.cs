@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using tContentPatch;
 using tContentPatch.Content.UI;
 using tContentPatch.Content.UI.ModSet;
-using Terraria.Audio;
-using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 
 namespace QuickButton.QuickButton
@@ -44,13 +42,11 @@ namespace QuickButton.QuickButton
             sv.ItemMargin = 4;
 
             //复位按钮
-            UIItem btnPosDefault = new UIItem();
-            btnPosDefault.Append(new UIText("按钮复位") { HAlign = 0.5f, VAlign = 0.5f });
-            btnPosDefault.OnLeftClick += (e, s) =>
-            {
-                SoundEngine.PlaySound(12);
-                QuickButton.SetPos(data.btnPos);
-            };
+            UIItemTextButton btnPosDefault = new UIItemTextButton(null, null, "按钮复位");
+            btnPosDefault.UIButton.Width.Set(0f, 1f);
+            btnPosDefault.UIButton.Height.Set(0f, 1f);
+            btnPosDefault.UIButton.UIText.HAlign = 0.5f;
+            btnPosDefault.OnClick += () => QuickButton.SetPos(data.btnPos);
 
             //按钮位置
             UIItemValueSliderInt item_vs = new UIItemValueSliderInt(0, 1, title: "按钮初始位置");

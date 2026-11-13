@@ -26,7 +26,7 @@ namespace QuickSetting
         public override UIElement GetUI()
         {
             UIItemSwitch ui = new UIItemSwitch(
-                Main.Assets.Request<Texture2D>("Images/UI/ButtonPlay", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value,
+                Main.Assets.Request<Texture2D>("Images/UI/Camera_1", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value,
                 "添加到快捷按钮");
             ui.MouseText = "重新加载模组生效";
             ui.OnGetIsChecked = () => data;

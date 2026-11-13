@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using SundryTool.Content.UI;
 using System;
 using System.Collections.Generic;
 using tContentPatch.Content.UI;
@@ -66,9 +65,9 @@ namespace SundryTool.Utils.quickBuild
         {
             Texture2D texture = ico == null ? null : Main.Assets.Request<Texture2D>(ico, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
 
-            UIItemButton ui = new UIItemButton(btnTxt, texture, text);
+            UIItemTextButton ui = new UIItemTextButton(texture, text, btnTxt);
             ui.MouseText = mouseText;
-            ui.OnClick = click;
+            ui.OnClick += click;
 
             return ui;
         }

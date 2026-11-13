@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using PixelArt.Content.UI;
 using PixelArt.Utils.quickBuild;
 using ReLogic.Content;
 using System.Collections.Generic;
@@ -29,7 +28,7 @@ namespace PixelArt.Content
         {
             Texture2D ico1 = Main.Assets.Request<Texture2D>("Images/UI/Camera_6", AssetRequestMode.ImmediateLoad).Value;
 
-            UIItemTextButton getFile = new UIItemTextButton("选择", ico1, "选择文件并加载");
+            UIItemTextButton getFile = new UIItemTextButton(ico1, "选择文件并加载", "选择");
             getFile.OnClick += CtlSetPathAndLoadPixelInfo;
 
             List<UIElement> uis = new List<UIElement>

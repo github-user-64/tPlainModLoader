@@ -30,9 +30,9 @@ namespace SundryTool.Content.Function2
             if (ok) cos.AddRange(Function_newProjectileToPlay.GetCO());
             if (ok) cos.AddRange(Function_newItemToPlay.GetCO());
             if (ok) cos.AddRange(Function_mouseToPlayAngle.GetCO());
+            if (ok) cos.AddRange(Function_playToPlay.GetCO());
             if (ok) cos.AddRange(Function_damagePlay.GetCO());
             if (ok) cos.AddRange(Function_damagePlay2.GetCO());
-            if (ok) cos.AddRange(Function_playToPlay.GetCO());
             cos.AddRange(Function_displayPlayMap.GetCO());
             cos.AddRange(Function_lightHack.GetCO());
             cos.AddRange(Function_mapRevealer.GetCO());
@@ -57,9 +57,9 @@ namespace SundryTool.Content.Function2
             if (ok) uis.AddRange(Function_newProjectileToPlay.GetUI());
             if (ok) uis.AddRange(Function_newItemToPlay.GetUI());
             if (ok) uis.AddRange(Function_mouseToPlayAngle.GetUI());
+            if (ok) uis.AddRange(Function_playToPlay.GetUI());
             if (ok) uis.AddRange(Function_damagePlay.GetUI());
             if (ok) uis.AddRange(Function_damagePlay2.GetUI());
-            if (ok) uis.AddRange(Function_playToPlay.GetUI());
             uis.AddRange(Function_displayPlayMap.GetUI());
             uis.AddRange(Function_lightHack.GetUI());
             uis.AddRange(Function_mapRevealer.GetUI());

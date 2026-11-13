@@ -54,8 +54,6 @@
     <Compile Include="Content\ClientUUIDSetting.cs" />
     <Compile Include="Content\getPlayers.cs" />
     <Compile Include="Content\UI\UIDrawer.cs" />
-    <Compile Include="Content\UI\UITextButton.cs" />
-    <Compile Include="Content\UI\UIItemButton.cs" />
     <Compile Include="Content\Utils.cs" />
     <Compile Include="Content\Function1\Function_displayPlay.cs" />
     <Compile Include="Content\Function1\Function_fly2.cs" />

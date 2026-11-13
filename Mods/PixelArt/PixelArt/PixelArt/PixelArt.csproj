@@ -42,8 +42,6 @@
     <Compile Include="Content\ColorToWall\Get1.cs" />
     <Compile Include="Content\ColorToWall\Get2.cs" />
     <Compile Include="Content\ColorToWall\IGetColorWall.cs" />
-    <Compile Include="Content\UI\UIItemTextButton.cs" />
-    <Compile Include="Content\UI\UITextButton.cs" />
     <Compile Include="Content\DrawUtils.cs" />
     <Compile Include="Content\PixelArt.cs" />
     <Compile Include="Content\MapHelp.cs" />

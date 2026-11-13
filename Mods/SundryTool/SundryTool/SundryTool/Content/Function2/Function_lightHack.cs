@@ -26,7 +26,7 @@ namespace SundryTool.Content.Function2
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get2(lightHack, text: "透视照明"),
+                UIBuild.get2(lightHack, null, "Images/Buff_9", "透视照明"),
             };
 
             return uis;

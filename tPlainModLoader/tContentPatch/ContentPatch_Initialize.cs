@@ -141,9 +141,17 @@ namespace tContentPatch
                     Color = Color.Lerp(new Color(33, 43, 79) * 0.8f, Color.Green, 0.18f)
                 });
 
-                sv.AddChild(new UITextButton() { OnClick = () => Debug.WriteLine("按钮触发") });
-                sv.AddChild(new UIItemTextButton(null, "title1111111111111", "超级button") { OnClick = () => Debug.WriteLine("item按钮触发") });
-                sv.AddChild(new UIItemTextButtonATextBox<string>(null, "title1111111111111", "def", "超级button") { OnClick = () => Debug.WriteLine("itemtext按钮触发") });
+                var t1 = new UITextButton();
+                t1.OnClick += () => Debug.WriteLine("按钮触发");
+                sv.AddChild(t1);
+
+                var t2 = new UIItemTextButton(null, "title1111111111111", "超级button");
+                t2.OnClick += () => Debug.WriteLine("item按钮触发");
+                sv.AddChild(t2);
+
+                var t3 = new UIItemTextButtonATextBox<string>(null, "title1111111111111", "def", "超级button");
+                t3.OnClick += () => Debug.WriteLine("itemtext按钮触发");
+                sv.AddChild(t3);
             }
             string vals;
             float valf;

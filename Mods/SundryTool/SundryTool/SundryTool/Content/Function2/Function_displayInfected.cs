@@ -37,7 +37,7 @@ namespace SundryTool.Content.Function2
         {
             List<UIElement> uis = new List<UIElement>
             {
-                UIBuild.get2(displayInfected_runing, "关闭以取消", text: "显示感染方块"),
+                UIBuild.get2(displayInfected_runing, "关闭以取消", "Images/Buff_17", "显示感染方块"),
             };
 
             return uis;
