@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
+using Microsoft.Xna.Framework.Input;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
@@ -20,13 +20,6 @@ namespace tContentPatch.Content.UI
         /// ui的背景
         /// </summary>
         public readonly UIElement UIBackStyle = null;
-        /// <summary>
-        /// 设置样式
-        /// </summary>
-        public Action<UITextBox> Style = Style1;
-        private bool StyleLoaded = false;
-
-        private int time = 0;
 
         /// <summary/>
         public UITextBox(string defaultDisplayText = null)
@@ -52,17 +45,13 @@ namespace tContentPatch.Content.UI
         }
 
         /// <inheritdoc/>
-        protected override void DrawSelf(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            base.DrawSelf(spriteBatch);
+            base.Draw(spriteBatch);
 
-            OnDrawUpdateInput();
-        }
+            OnDrawUpdateInput();//在绘制里更新, 在Update里输入法会鬼畜
 
-        /// <summary/>
-        protected virtual void OnDrawUpdateInput()
-        {
-            UpdateInput();
+            DrawSelect(spriteBatch);//绘制光标
         }
 
         /// <inheritdoc/>
@@ -76,9 +65,12 @@ namespace tContentPatch.Content.UI
 
             base.Update(gameTime);
 
-            UpdateFocus();
-            if (Focus != true || NoUpdateDisplayTextWhenHasFocus != true) UV.UpdateUI();
-            UpdateUIText(DisplayText);
+            UpdateSelect();//更新光标
+
+            UpdateFocus();//更新焦点
+            UV.UpdateUI();//更新显示文本
+
+            UpdateUIText(DisplayText);//更新ui
         }
 
         /// <summary/>
@@ -90,8 +82,6 @@ namespace tContentPatch.Content.UI
             {
                 UIText.TextColor = UITextColor;
                 UIText.ShadowColor = UITextShadowColor;
-
-                if (Focus && time * 16 > 1000) Text += "|";
             }
             else
             {
@@ -107,14 +97,11 @@ namespace tContentPatch.Content.UI
         /// <summary/>
         protected virtual void UpdateFocus()
         {
-            ++time;
-            if (time * 16 > 2000) time = 0;
-
             if (
                 //Main.gamePaused ||
                 Main.drawingPlayerChat ||
                 Main.ingameOptionsWindow ||
-                Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
+                Main.keyState.IsKeyDown(Keys.Escape))
             {
                 Focus = false;
                 return;
@@ -124,56 +111,9 @@ namespace tContentPatch.Content.UI
         }
 
         /// <summary/>
-        protected virtual void UpdateInput()
+        protected virtual void OnDrawUpdateInput()
         {
-            if (Focus == false) return;
-
-            Terraria.GameInput.PlayerInput.WritingText = true;
-            Main.instance.HandleIME();
-            string s = Main.GetInputText(DisplayText);
-
-            CalculatedStyle size = GetDimensions();
-            DrawIME.NeedIME = true;
-            DrawIME.IME_P = new Vector2(size.X, size.Y + size.Height + 36f);
-
-            s = CheckInputText(s);
-            if (s == DisplayText) return;
-
-            DisplayText = s;
-        }
-
-        /// <summary/>
-        protected virtual string CheckInputText(string s)
-        {
-            if (s == null) return null;
-            if (MaxInputLength < 0) return s;
-            if (MaxInputLength >= s.Length) return s;
-
-            return s.Substring(0, Math.Min(s.Length, MaxInputLength));
-        }
-
-        /// <summary>
-        /// 在<see cref="Text"/>更新时更新<see cref="DisplayText"/>
-        /// </summary>
-        protected virtual void UpdateDisplayTextWhenText()
-        {
-            DisplayText = Text;
-        }
-
-        /// <summary>
-        /// 在<see cref="DisplayText"/>更新时更新<see cref="Text"/>
-        /// </summary>
-        protected virtual void UpdateTextWhenDisplayText()
-        {
-            if (IsUpdateTextWhenDisplayText) Text = DisplayText;
-        }
-
-        /// <summary>
-        /// 在<see cref="Focus"/>为<see langword="false"/>时更新<see cref="Text"/>
-        /// </summary>
-        protected virtual void UpdateTextWhenLostFocus()
-        {
-            if (IsUpdateTextWhenLostFocus) Text = DisplayText;
+            UpdateInput();
         }
 
         /// <summary/>
@@ -181,13 +121,15 @@ namespace tContentPatch.Content.UI
         {
             Main.GetInputText(null);//在获得焦点前清空输入
 
+            ResetSelectTime();//重置光标时间
+
             OnGotFocus?.Invoke();
         }
 
         /// <summary/>
         protected virtual void LostFocus()
         {
-            UpdateTextWhenLostFocus();
+            UpdateTextWhenLostFocus();//将DisplayText更新到Text
 
             OnLostFocus?.Invoke();
         }

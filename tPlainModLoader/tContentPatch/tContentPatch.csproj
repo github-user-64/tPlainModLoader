@@ -99,6 +99,8 @@
     <Compile Include="Content\UI\UIScrollViewer\UIScrollViewer2.cs" />
     <Compile Include="Content\UI\UIScrollViewer\UIScrollViewer.cs" />
     <Compile Include="Content\UI\UISwitch.cs" />
+    <Compile Include="Content\UI\UITextBox\UITextBox_Input.cs" />
+    <Compile Include="Content\UI\UITextBox\UITextBox_Select.cs" />
     <Compile Include="Content\UI\UITextBox\UITextBoxT_UIS.cs" />
     <Compile Include="Content\UI\UITextBox\UITextBox_Parse.cs" />
     <Compile Include="Content\UI\UITextBox\UITextBoxT.cs" />

@@ -18,7 +18,7 @@ namespace tContentPatch.Content.UI
             back.BorderColor = Color.White;
             ui.UIBackStyle.Append(back);
 
-            ui.UITextColor = Color.Black;
+            ui.UITextColor = ui.UISelectColor = Color.Black;
             ui.UITextColorDeft = Color.Gray;
             ui.UITextShadowColor = ui.UITextShadowColorDeft = back.BackgroundColor;
         }

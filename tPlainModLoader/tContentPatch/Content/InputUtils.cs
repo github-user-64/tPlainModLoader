@@ -111,5 +111,45 @@ namespace tContentPatch.Content
 
             return ks;
         }
+
+        /// <summary>
+        /// 第一次按下<see cref="Key">Key</see>时触发, 经过<see cref="CD">CD</see>后一直触发
+        /// </summary>
+        public class KeyTrigger
+        {
+            /// <summary/>
+            public bool Can = false;
+            /// <summary/>
+            public string Key = null;
+            /// <summary/>
+            public uint CD;
+            /// <summary/>
+            protected int DownTime = 0;
+
+            /// <summary/>
+            public KeyTrigger(string key, uint cd = 30)
+            {
+                Key = key;
+                CD = cd;
+            }
+            /// <summary/>
+            public KeyTrigger(Keys key, uint cd = 30) : this(key.ToString(), cd) { }
+
+            /// <summary/>
+            public virtual void Update()
+            {
+                Can = false;
+
+                if (IsDown(Key) != true)
+                {
+                    DownTime = 0;
+                    return;
+                }
+
+                if (DownTime == 0 || DownTime > CD) Can = true;
+
+                if (DownTime < CD) ++DownTime;
+            }
+        }
     }
 }

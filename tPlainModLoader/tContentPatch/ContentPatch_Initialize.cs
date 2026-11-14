@@ -126,14 +126,14 @@ namespace tContentPatch
                 ui3.OnGetValue = () => valf;
                 ui3.OnSetValue = v => valf = v;
                 ui3.OnValueChanged += v => Debug.WriteLine(ui3.Value);
-                sv.AddChild(ui3);
+                //sv.AddChild(ui3);
 
                 UIItemSwitchATextBoxFloat ui4 = new UIItemSwitchATextBoxFloat(Main.Assets.Request<Texture2D>("Images/UI/Camera_1").Value, "标题1开关float");
                 ui4.OnGetValue = () => valf;
                 ui4.OnSetValue = v => valf = v;
                 ui4.OnGetIsChecked = () => valb;
                 ui4.OnSetIsChecked = v => valb = v;
-                sv.AddChild(ui4);
+                //sv.AddChild(ui4);
 
                 sv.AddChild(new UIKeybinding());
                 sv.AddChild(new UIItemKeybinding(title: "按键")
@@ -143,15 +143,15 @@ namespace tContentPatch
 
                 var t1 = new UITextButton();
                 t1.OnClick += () => Debug.WriteLine("按钮触发");
-                sv.AddChild(t1);
+                //sv.AddChild(t1);
 
                 var t2 = new UIItemTextButton(null, "title1111111111111", "超级button");
                 t2.OnClick += () => Debug.WriteLine("item按钮触发");
-                sv.AddChild(t2);
+                //sv.AddChild(t2);
 
                 var t3 = new UIItemTextButtonATextBox<string>(null, "title1111111111111", "def", "超级button");
                 t3.OnClick += () => Debug.WriteLine("itemtext按钮触发");
-                sv.AddChild(t3);
+                //sv.AddChild(t3);
             }
             string vals;
             float valf;

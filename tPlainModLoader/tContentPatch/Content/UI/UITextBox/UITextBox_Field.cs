@@ -6,15 +6,6 @@ namespace tContentPatch.Content.UI
     public partial class UITextBox
     {
         /// <summary/>
-        public Color UITextColor = Color.White;
-        /// <summary/>
-        public Color UITextColorDeft = Color.Gray;
-        /// <summary/>
-        public Color UITextShadowColor = Color.Black;
-        /// <summary/>
-        public Color UITextShadowColorDeft = Color.Black;
-
-        /// <summary/>
         public Utils.UIVal<string> UV = null;
         /// <summary/>
         public string Text
@@ -28,6 +19,20 @@ namespace tContentPatch.Content.UI
         public Action<string> OnSetText { set => UV.OnSetVal = value; }
         /// <summary/>
         public Action<string> OnTextChanged { get => UV.OnValChanged; set => UV.OnValChanged = value; }
+
+        /// <summary/>
+        public Color UITextColor = Color.White;
+        /// <summary/>
+        public Color UITextColorDeft = Color.Gray;
+        /// <summary/>
+        public Color UITextShadowColor = Color.Black;
+        /// <summary/>
+        public Color UITextShadowColorDeft = Color.Black;
+        /// <summary>
+        /// 设置样式
+        /// </summary>
+        public Action<UITextBox> Style = Style1;
+        private bool StyleLoaded = false;
 
         /// <summary>
         /// 最大输入长度, 小于<see langword="0"/>为不限
@@ -46,8 +51,9 @@ namespace tContentPatch.Content.UI
         /// </summary>
         public bool NoUpdateDisplayTextWhenHasFocus = false;
 
-        private bool focus = false;
-        /// <summary/>
+        /// <summary>
+        /// 焦点
+        /// </summary>
         public bool Focus
         {
             get => focus;
@@ -59,21 +65,20 @@ namespace tContentPatch.Content.UI
                 else LostFocus();
             }
         }
+        private bool focus = false;
         /// <summary/>
         public Action OnGotFocus = null;
         /// <summary/>
         public Action OnLostFocus = null;
 
-        private string defaultDisplayText = null;
-        /// <summary/>
-        public string DefaultDisplayText
-        {
-            get => defaultDisplayText;
-            set => defaultDisplayText = value;
-        }
+        /// <summary>
+        /// 默认显示文本
+        /// </summary>
+        public string DefaultDisplayText = null;
 
-        private string displayText = null;
-        /// <summary/>
+        /// <summary>
+        /// 显示文本
+        /// </summary>
         protected string DisplayText
         {
             get => displayText;
@@ -83,5 +88,6 @@ namespace tContentPatch.Content.UI
                 UpdateTextWhenDisplayText();
             }
         }
+        private string displayText = null;
     }
 }
