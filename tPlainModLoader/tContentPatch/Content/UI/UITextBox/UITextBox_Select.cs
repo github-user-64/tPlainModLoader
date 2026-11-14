@@ -14,6 +14,8 @@ namespace tContentPatch.Content.UI
 
         /// <summary/>
         public Color UISelectColor = Color.White;
+        /// <summary/>
+        public Color UISelectShadowColor = Color.Black;
 
         /// <summary>
         /// 光标位置
@@ -31,12 +33,19 @@ namespace tContentPatch.Content.UI
             }
         }
         private int select = 0;
+
         private int SelectTime = 0;
+
+        /// <summary>
+        /// 光标闪烁时间
+        /// </summary>
+        public int SelectTimeMax { get => selectTimeMax; set => selectTimeMax = (int)MathHelper.Clamp(value, 2, value); }
+        private int selectTimeMax = 60;
 
         /// <summary/>
         protected virtual void DrawSelect(SpriteBatch spriteBatch)
         {
-            if (Focus != true || SelectTime * 16 > 1000) return;
+            if (Focus != true || SelectTime > SelectTimeMax / 2) return;
 
             (string, string) ss = GetSelectText();
             Vector2 size = GetUITextSize(ss.Item1);
@@ -45,29 +54,38 @@ namespace tContentPatch.Content.UI
             rect.X += (int)size.X;
             rect.Width = 1;
 
-            spriteBatch.Draw(Main.Assets.Request<Texture2D>("Images/UI/OnePixel").Value, rect, UISelectColor);
+            Texture2D img = Main.Assets.Request<Texture2D>("Images/UI/OnePixel").Value;
+
+            spriteBatch.Draw(img, rect, UISelectColor);
+
+            rect.X += 1;
+            spriteBatch.Draw(img, rect, UISelectShadowColor);
         }
 
         /// <summary/>
         protected virtual void UpdateSelect()
         {
-            if (InputUtils.IsClick(Keys.Left))
+            if (Focus != true) return;
+
+            int count = -1;
+
+            if (InputUtils.DownCount(Keys.Left, out count))
             {
-                --Select;
+                if (count == 1 || count > 30) --Select;
             }
-            else if (InputUtils.IsClick(Keys.Right))
+            else if (InputUtils.DownCount(Keys.Right, out count))
             {
-                ++Select;
+                if (count == 1 || count > 30) ++Select;
             }
-            else if (InputUtils.IsClick(Keys.End))
+            else if (InputUtils.DownCount(Keys.End, out count))
             {
-                Select = DisplayText?.Length ?? 0;
+                if (count == 1 || count > 30) Select = DisplayText?.Length ?? 0;
             }
-            else if (InputUtils.IsClick(Keys.Home))
+            else if (InputUtils.DownCount(Keys.Home, out count))
             {
-                Select = 0;
+                if (count == 1 || count > 30) Select = 0;
             }
-            else if (++SelectTime * 16 > 2000)
+            else if (++SelectTime > SelectTimeMax)
             {
                 ResetSelectTime();
             }
@@ -92,7 +110,7 @@ namespace tContentPatch.Content.UI
         protected virtual (string, string) GetSelectText()
         {
             string txt = DisplayText ?? string.Empty;
-            int select = Select;
+            int select = (int)MathHelper.Clamp(Select, 0, txt.Length);
 
             if (txt.Length < 1) return (string.Empty, string.Empty);
             if (select < 1) return (string.Empty, txt);

@@ -22,9 +22,9 @@ namespace tContentPatch.Content
         public static readonly string KeyMouseRight = "Mouse2";
 
         /// <summary/>
-        public static readonly HashSet<string> KeyDown = new HashSet<string>();
+        public static readonly Dictionary<string, int> KeyDown = new Dictionary<string, int>();
         /// <summary/>
-        public static readonly HashSet<string> KeyDownOld = new HashSet<string>();
+        public static readonly Dictionary<string, int> KeyDownOld = new Dictionary<string, int>();
 
         /// <summary>
         /// 光标左键按下<para/>
@@ -59,12 +59,51 @@ namespace tContentPatch.Content
             MouseRightClick = Main.mouseRight && Main.mouseRightRelease;
 
             KeyDownOld.Clear();
-            foreach (string i in KeyDown) KeyDownOld.Add(i);
+            foreach (KeyValuePair<string, int> i in KeyDown) KeyDownOld.Add(i.Key, i.Value);
             KeyDown.Clear();
 
-            foreach (Keys i in PlayerInput.GetPressedKeys()) KeyDown.Add(i.ToString());
-            foreach (string i in PlayerInput.MouseKeys) KeyDown.Add(i);
+            foreach (Keys i in PlayerInput.GetPressedKeys()) AddKey(i.ToString());
+            foreach (string i in PlayerInput.MouseKeys) AddKey(i);
         }
+
+        private static void AddKey(string key)
+        {
+            if (KeyDownOld.TryGetValue(key, out int count) != true) count = 1;
+            else if (count < 10000) ++count;
+
+            KeyDown.Add(key, count);
+        }
+
+        /// <summary>
+        /// 获取<paramref name="key"/>按下了多久<br/>
+        /// 第一次为<see langword="1"/><br/>
+        /// 没有为<see langword="0"/><br/>
+        /// 最高为<see langword="10000"/>
+        /// </summary>
+        public static int DownCount(string key)
+        {
+            if (key == null) return 0;
+
+            if (KeyDown.TryGetValue(key, out int count) == true) return count;
+
+            return 0;
+        }
+        /// <summary>
+        /// 详见<see cref="DownCount(string)"/>
+        /// </summary>
+        public static int DownCount(Keys key) => DownCount(key.ToString());
+        /// <summary>
+        /// 详见<see cref="DownCount(string)"/>
+        /// </summary>
+        public static bool DownCount(string key, out int count)
+        {
+            count = DownCount(key);
+            return count > 0;
+        }
+        /// <summary>
+        /// 详见<see cref="DownCount(string)"/>
+        /// </summary>
+        public static bool DownCount(Keys key, out int count) => DownCount(key.ToString(), out count);
 
         /// <summary/>
         public static bool IsClick(params string[] keys) => IsDown(keys) && IsUpOld(keys);
@@ -93,12 +132,12 @@ namespace tContentPatch.Content
 
         //
 
-        private static bool KeyContains(this HashSet<string> keyState, string[] keys)
+        private static bool KeyContains(this Dictionary<string, int> keyState, string[] keys)
         {
             foreach (string key in keys)
             {
                 if (key == null) return false;
-                if (keyState.Contains(key) != true) return false;
+                if (keyState.ContainsKey(key) != true) return false;
             }
 
             return true;
@@ -110,46 +149,6 @@ namespace tContentPatch.Content
             for (int i = 0; i < ks.Length; ++i) ks[i] = keys[i].ToString();
 
             return ks;
-        }
-
-        /// <summary>
-        /// 第一次按下<see cref="Key">Key</see>时触发, 经过<see cref="CD">CD</see>后一直触发
-        /// </summary>
-        public class KeyTrigger
-        {
-            /// <summary/>
-            public bool Can = false;
-            /// <summary/>
-            public string Key = null;
-            /// <summary/>
-            public uint CD;
-            /// <summary/>
-            protected int DownTime = 0;
-
-            /// <summary/>
-            public KeyTrigger(string key, uint cd = 30)
-            {
-                Key = key;
-                CD = cd;
-            }
-            /// <summary/>
-            public KeyTrigger(Keys key, uint cd = 30) : this(key.ToString(), cd) { }
-
-            /// <summary/>
-            public virtual void Update()
-            {
-                Can = false;
-
-                if (IsDown(Key) != true)
-                {
-                    DownTime = 0;
-                    return;
-                }
-
-                if (DownTime == 0 || DownTime > CD) Can = true;
-
-                if (DownTime < CD) ++DownTime;
-            }
         }
     }
 }

@@ -20,6 +20,8 @@ namespace tContentPatch.Content.UI
         /// ui的背景
         /// </summary>
         public readonly UIElement UIBackStyle = null;
+        /// <summary/>
+        protected int InputCD = 0;
 
         /// <summary/>
         public UITextBox(string defaultDisplayText = null)
@@ -65,10 +67,10 @@ namespace tContentPatch.Content.UI
 
             base.Update(gameTime);
 
-            UpdateSelect();//更新光标
-
             UpdateFocus();//更新焦点
-            UV.UpdateUI();//更新显示文本
+            UV.UpdateUI();//更新Text
+
+            UpdateSelect();//更新光标
 
             UpdateUIText(DisplayText);//更新ui
         }

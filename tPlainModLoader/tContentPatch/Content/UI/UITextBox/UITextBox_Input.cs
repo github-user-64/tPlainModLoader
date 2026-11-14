@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using ReLogic.Localization.IME;
+using ReLogic.OS;
 using System;
 using Terraria;
 using Terraria.UI;
@@ -13,6 +15,12 @@ namespace tContentPatch.Content.UI
             if (Focus == false) return;
 
             (string, string) ss = GetSelectText();
+
+            //输入法没东西时, 因为使用tPlainModLoader启动时输入法不会正常显示, 所以使用CompositionString
+            if (Platform.Get<IImeService>().CompositionString.Length < 1)
+            {
+                UpdateInput_Delete(ref ss.Item2);
+            }
 
             #region
             Terraria.GameInput.PlayerInput.WritingText = true;
@@ -34,6 +42,17 @@ namespace tContentPatch.Content.UI
 
             DisplayText = s;
             Select = select;
+        }
+
+        /// <summary>
+        /// 向后删除文本
+        /// </summary>
+        protected virtual void UpdateInput_Delete(ref string s)
+        {
+            int count = InputUtils.DownCount(Microsoft.Xna.Framework.Input.Keys.Delete);
+            if (count != 1 && count < 30) return;
+
+            if (s.Length > 0) s = s.Substring(1, s.Length - 1);
         }
 
         /// <summary/>

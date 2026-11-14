@@ -18,9 +18,12 @@ namespace tContentPatch.Content.UI
             back.BorderColor = Color.White;
             ui.UIBackStyle.Append(back);
 
-            ui.UITextColor = ui.UISelectColor = Color.Black;
+            ui.UITextColor = Color.Black;
             ui.UITextColorDeft = Color.Gray;
             ui.UITextShadowColor = ui.UITextShadowColorDeft = back.BackgroundColor;
+
+            ui.UISelectColor = ui.UITextShadowColor;
+            ui.UISelectShadowColor = ui.UITextColor;
         }
 
         /// <summary/>
@@ -45,6 +48,9 @@ namespace tContentPatch.Content.UI
             ui.UITextColor = Color.White;
             ui.UITextColorDeft = Color.MidnightBlue * 0.6f;
             ui.UITextShadowColor = ui.UITextShadowColorDeft = default;
+
+            ui.UISelectColor = ui.UITextShadowColor;
+            ui.UISelectShadowColor = ui.UITextColor;
 
             ui.UIText.SetPadding(6f);
             ui.OnGotFocus += () => SoundEngine.PlaySound(SoundID.MenuTick);

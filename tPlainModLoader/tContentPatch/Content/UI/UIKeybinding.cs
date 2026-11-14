@@ -80,7 +80,7 @@ namespace tContentPatch.Content.UI
             if (InputUtils.KeyDown.Count < 1) return;
             IsBinding = false;
 
-            SetBind(InputUtils.KeyDown.First());
+            SetBind(InputUtils.KeyDown.First().Key);
         }
 
         /// <inheritdoc/>

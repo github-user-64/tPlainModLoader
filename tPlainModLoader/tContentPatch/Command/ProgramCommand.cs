@@ -1,6 +1,7 @@
 ﻿using CommandHelp;
 using System;
 using System.Collections.Generic;
+using tContentPatch.ModLoad;
 
 namespace tContentPatch.Command
 {
@@ -44,8 +45,21 @@ namespace tContentPatch.Command
             };
             console.SubCommand.Add(console_clear);
             console.SubCommand.Add(Utils.GetCO_OutputCOList(console.SubCommand));
-
             cos.Add(console);
+
+            CommandMethod mods = new CommandMethod("mods");
+            mods.Runing += args =>
+            {
+                List<ModObject> mos = ContentPatch.GetModObjects();
+                if (mos == null)
+                {
+                    ContentPatch.PrintTry("未加载");
+                    return;
+                }
+
+                for (int i = 0; i < mos.Count; ++i) ContentPatch.PrintTry($"{i}:[{mos[i].info?.name ?? mos[i].config.key}]");
+            };
+            cos.Add(mods);
 
             return cos;
         }

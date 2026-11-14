@@ -126,14 +126,14 @@ namespace tContentPatch
                 ui3.OnGetValue = () => valf;
                 ui3.OnSetValue = v => valf = v;
                 ui3.OnValueChanged += v => Debug.WriteLine(ui3.Value);
-                //sv.AddChild(ui3);
+                sv.AddChild(ui3);
 
                 UIItemSwitchATextBoxFloat ui4 = new UIItemSwitchATextBoxFloat(Main.Assets.Request<Texture2D>("Images/UI/Camera_1").Value, "标题1开关float");
-                ui4.OnGetValue = () => valf;
-                ui4.OnSetValue = v => valf = v;
-                ui4.OnGetIsChecked = () => valb;
-                ui4.OnSetIsChecked = v => valb = v;
-                //sv.AddChild(ui4);
+                //ui4.OnGetValue = () => valf;
+                //ui4.OnSetValue = v => valf = v;
+                //ui4.OnGetIsChecked = () => valb;
+                //ui4.OnSetIsChecked = v => valb = v;
+                sv.AddChild(ui4);
 
                 sv.AddChild(new UIKeybinding());
                 sv.AddChild(new UIItemKeybinding(title: "按键")
