@@ -117,6 +117,8 @@ namespace tContentPatch
                 sv.AddChild(ui1);
 
                 UIItemTextBoxString ui2 = new UIItemTextBoxString(Main.Assets.Request<Texture2D>("Images/UI/Camera_1").Value, "标题1", "asd");
+                ui2.MouseText = "222\na";
+                ui2.MouseTextStyle = UIMouseText.MouseTextStyle2;
                 ui2.OnGetValue = () => vals;
                 ui2.OnSetValue = v => vals = v;
                 ui2.OnValueChanged += v => Debug.WriteLine(ui2.Value);

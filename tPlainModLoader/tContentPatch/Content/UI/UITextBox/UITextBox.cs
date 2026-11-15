@@ -20,8 +20,6 @@ namespace tContentPatch.Content.UI
         /// ui的背景
         /// </summary>
         public readonly UIElement UIBackStyle = null;
-        /// <summary/>
-        protected int InputCD = 0;
 
         /// <summary/>
         public UITextBox(string defaultDisplayText = null)
@@ -73,6 +71,14 @@ namespace tContentPatch.Content.UI
             UpdateSelect();//更新光标
 
             UpdateUIText(DisplayText);//更新ui
+        }
+
+        /// <inheritdoc/>
+        public override void LeftClick(UIMouseEvent evt)
+        {
+            base.LeftClick(evt);
+
+            ClickUpdateSelect(evt);
         }
 
         /// <summary/>

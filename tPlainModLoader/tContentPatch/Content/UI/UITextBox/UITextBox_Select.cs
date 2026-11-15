@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Reflection;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
+using Terraria.UI;
 
 namespace tContentPatch.Content.UI
 {
@@ -89,6 +90,29 @@ namespace tContentPatch.Content.UI
             {
                 ResetSelectTime();
             }
+        }
+
+        /// <summary>
+        /// 根据点击位置修改光标位置
+        /// </summary>
+        protected virtual void ClickUpdateSelect(UIMouseEvent e)
+        {
+            Vector2 pos = e.MousePosition;
+            pos -= e.Target.GetInnerDimensions().Position();
+            float x = pos.X;
+
+            string txt = DisplayText ?? string.Empty;
+            int select = txt.Length;
+
+            while (txt.Length > 0)
+            {
+                if (x > GetUITextSize(txt).X) break;
+
+                --select;
+                txt = txt.Remove(select);
+            }
+
+            Select = select;
         }
 
         /// <summary/>

@@ -3,6 +3,7 @@ using SundryTool.Utils;
 using SundryTool.Utils.quickBuild;
 using System.Collections.Generic;
 using tContentPatch;
+using tContentPatch.Content.UI;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.UI;
@@ -29,7 +30,7 @@ namespace SundryTool.Content.Function2
 
         public override void UpdateWorldPrefix()
         {
-            if (WorldGen.isGeneratingOrLoadingWorld) return;
+            if (WorldGen.isGeneratingOrLoadingWorld) return;//正在生成或加载世界
 
             CreativePowers.StopBiomeSpreadPower cp = CreativePowerManager.Instance.GetPower<CreativePowers.StopBiomeSpreadPower>();
             cp.SetPowerInfo(Enable.val);
@@ -47,19 +48,15 @@ namespace SundryTool.Content.Function2
 
         public static List<UIElement> GetUI()
         {
-            string tip = "默认启用" +
-                "\n单人和服务端可用" +
+            string tip = "单人和服务端可用" +
                 "\n在服务端使用该功能需要服务端加载该模组" +
                 "\n可以在开服并开始游戏后使用tPlainModLoaderInjector注入服务端(一般叫TerrariaServer)" +
                 "\n关闭注入的窗口不影响使用";
 
-            List<UIElement> uis = new List<UIElement>
-            {
-                //UIBuild.get2(Enable, "阻止方块被转化为腐化圣神猩红\n魔粉改造枪等也无法使用\n默认启用,在服务端使用该功能需要服务端加载该模组", null, "阻止方块转化"),
-                UIBuild.get2(Enable, tip, "Images/Buff_320", "阻止传播感染"),
-            };
+            tContentPatch.Content.UI.Item1.UIItemSwitch ui = UIBuild.get2(Enable, tip, "Images/Buff_320", "阻止传播感染");
+            ui.MouseTextStyle = UIMouseText.MouseTextStyle2;
 
-            return uis;
+            return new List<UIElement> { ui };
         }
     }
 }

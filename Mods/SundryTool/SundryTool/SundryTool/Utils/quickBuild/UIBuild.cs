@@ -35,7 +35,7 @@ namespace SundryTool.Utils.quickBuild
         /// <summary>
         /// 开关, 绑定值
         /// </summary>
-        public static UIElement get2(GetSetReset<bool> gsr, string mouseText = null, string ico = null, string text = null)
+        public static UIItemSwitch get2(GetSetReset<bool> gsr, string mouseText = null, string ico = null, string text = null)
         {
             Texture2D texture = ico == null ? null : Main.Assets.Request<Texture2D>(ico, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
 
