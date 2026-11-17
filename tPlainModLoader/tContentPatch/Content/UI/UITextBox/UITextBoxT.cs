@@ -8,17 +8,19 @@ namespace tContentPatch.Content.UI
     public class UITextBox<T> : UIMouseText
     {
         /// <summary/>
-        public T Value
+        public virtual T Value
         {
             get => TextToValue(UITextsBox.Text);
             set => UITextsBox.Text = ValueToText(value);
         }
         /// <summary/>
-        public Func<T> OnGetValue { set => UITextsBox.OnGetText = () => ValueToText(value()); }
+        public virtual Func<T> OnGetValue { set => UITextsBox.OnGetText = () => ValueToText(value()); }
         /// <summary/>
-        public Action<T> OnSetValue { set => UITextsBox.OnSetText = v => value(TextToValue(v)); }
+        public virtual Action<T> OnSetValue { set => UITextsBox.OnSetText = v => value(TextToValue(v)); }
+
         /// <summary/>
         public Action<T> OnValueChanged = null;
+
         /// <summary/>
         public virtual Func<T, string> ValueToText { get; set; } = _ => throw new NotImplementedException();
         /// <summary/>

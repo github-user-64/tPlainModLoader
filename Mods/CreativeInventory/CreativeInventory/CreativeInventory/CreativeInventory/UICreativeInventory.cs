@@ -19,7 +19,7 @@ namespace CreativeInventory.CreativeInventory
         protected UIScrollViewer panel_items_sv = null;
         protected UIWrapPanel panel_items_wp = null;//物品列表项的容器
         //
-        protected Terraria.UI.UIState panel_row1 = null;//搜索框
+        protected UIState panel_row1 = null;//搜索框
         protected UITextBox panel_row1_tb = null;
         protected UIStackPanel panel_row1_sp = null;//搜索维度的开关
         protected UISearchSwitch panel_row1_sw_tile = null;//按图格id搜索
@@ -82,9 +82,9 @@ namespace CreativeInventory.CreativeInventory
             {
                 if (Search_Text != null && Search_Text.Length > 0) update_itemUI();
             };
-            panel_row1_sw_tile.OnValUpdate += sw_update;
-            panel_row1_sw_buff.OnValUpdate += sw_update;
-            panel_row1_sw_proj.OnValUpdate += sw_update;
+            panel_row1_sw_tile.OnIsCheckChanged += sw_update;
+            panel_row1_sw_buff.OnIsCheckChanged += sw_update;
+            panel_row1_sw_proj.OnIsCheckChanged += sw_update;
 
             panel_row2.Height.Set(40 + 5 + 5, 0);
             panel_row2.MarginTop = 2;
@@ -261,9 +261,9 @@ namespace CreativeInventory.CreativeInventory
                 //各维度有没有命中
                 if (is_num)
                 {
-                    if (panel_row1_sw_tile.GetVal() && match_tile(item, sid)) hit_tile = true;
-                    if (panel_row1_sw_buff.GetVal() && match_buff(item, sid)) hit_buff = true;
-                    if (panel_row1_sw_proj.GetVal() && match_proj(item, sid)) hit_proj = true;
+                    if (panel_row1_sw_tile.IsChecked && match_tile(item, sid)) hit_tile = true;
+                    if (panel_row1_sw_buff.IsChecked && match_buff(item, sid)) hit_buff = true;
+                    if (panel_row1_sw_proj.IsChecked && match_proj(item, sid)) hit_proj = true;
                 }
 
                 //根据搜索文本筛选
@@ -290,9 +290,9 @@ namespace CreativeInventory.CreativeInventory
 
             if (is_num)
             {
-                if (panel_row1_sw_tile.GetVal() && !hit_tile) dims += "图格、";
-                if (panel_row1_sw_buff.GetVal() && !hit_buff) dims += "Buff、";
-                if (panel_row1_sw_proj.GetVal() && !hit_proj) dims += "弹幕、";
+                if (panel_row1_sw_tile.IsChecked && !hit_tile) dims += "图格、";
+                if (panel_row1_sw_buff.IsChecked && !hit_buff) dims += "Buff、";
+                if (panel_row1_sw_proj.IsChecked && !hit_proj) dims += "弹幕、";
             }
 
             if (dims != null)
@@ -374,9 +374,9 @@ namespace CreativeInventory.CreativeInventory
             //图格/buff/弹幕: 开了开关才参与, 只在输入是纯数字时按精确相等
             if (int.TryParse(Search_Text, out int id) && id > 0)
             {
-                if (panel_row1_sw_tile.GetVal() && match_tile(item, id)) return 0;
-                if (panel_row1_sw_buff.GetVal() && match_buff(item, id)) return 1;
-                if (panel_row1_sw_proj.GetVal() && match_proj(item, id)) return 2;
+                if (panel_row1_sw_tile.IsChecked && match_tile(item, id)) return 0;
+                if (panel_row1_sw_buff.IsChecked && match_buff(item, id)) return 1;
+                if (panel_row1_sw_proj.IsChecked && match_proj(item, id)) return 2;
             }
 
             int pos = searchItem(item.type.ToString(), Search_Text);

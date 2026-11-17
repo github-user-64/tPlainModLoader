@@ -18,13 +18,13 @@ namespace tContentPatch.Content.UI
         /// <summary/>
         public readonly Utils.UIVal<bool> UV = null;
         /// <summary/>
-        public bool IsChecked { get => UV.Val; set => UV.SetUIVal(value); }
+        public virtual bool IsChecked { get => UV.Val; set => UV.SetUIVal(value); }
         /// <summary/>
-        public Func<bool> OnGetIsChecked { set => UV.OnGetVal = value; }
+        public virtual Func<bool> OnGetIsChecked { set => UV.OnGetVal = value; }
         /// <summary/>
-        public Action<bool> OnSetIsChecked { set => UV.OnSetVal = value; }
+        public virtual Action<bool> OnSetIsChecked { set => UV.OnSetVal = value; }
         /// <summary/>
-        public Action<bool> OnIsCheckChanged { get => UV.OnValChanged; set => UV.OnValChanged = value; }
+        public virtual Action<bool> OnIsCheckChanged { get => UV.OnValChanged; set => UV.OnValChanged = value; }
 
         /// <summary/>
         public readonly UIImage UIIco = null;

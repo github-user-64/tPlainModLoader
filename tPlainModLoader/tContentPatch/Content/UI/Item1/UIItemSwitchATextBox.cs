@@ -14,14 +14,16 @@ namespace tContentPatch.Content.UI.Item1
         /// <summary/>
         public readonly UISwitch UISwitch = null;
 
+        /// <summary>
+        /// <see cref="UISwitch.IsChecked"/>
+        /// </summary>
+        public virtual bool IsChecked { get => UISwitch.IsChecked; set => UISwitch.IsChecked = value; }
         /// <summary/>
-        public bool IsChecked { get => UISwitch.IsChecked; set => UISwitch.IsChecked = value; }
+        public virtual Func<bool> OnGetIsChecked { set => UISwitch.OnGetIsChecked = value; }
         /// <summary/>
-        public Func<bool> OnGetIsChecked { set => UISwitch.OnGetIsChecked = value; }
+        public virtual Action<bool> OnSetIsChecked { set => UISwitch.OnSetIsChecked = value; }
         /// <summary/>
-        public Action<bool> OnSetIsChecked { set => UISwitch.OnSetIsChecked = value; }
-        /// <summary/>
-        public Action<bool> OnIsCheckChanged { get => UISwitch.OnIsCheckChanged; set => UISwitch.OnIsCheckChanged = value; }
+        public virtual Action<bool> OnIsCheckChanged { get => UISwitch.OnIsCheckChanged; set => UISwitch.OnIsCheckChanged = value; }
 
         /// <summary/>
         public UIItemSwitchATextBox(Texture2D ico = null, string title = null, string defaultDisplayText = null) : base(ico, title, defaultDisplayText)
@@ -32,14 +34,20 @@ namespace tContentPatch.Content.UI.Item1
             UIS.HAlign = 1f;
             Append(UIS);
 
+            int Width = 30;
+
             UISwitch = new UISwitch();
-            UISwitch.Width.Set(30f, 0f);
-            UISwitch.Height.Set(0f, 1f);
+            UISwitch.Style = v =>
+            {
+                UISwitch.Style1(v);
+                v.Width.Set(Width, 0f);
+                v.Height.Set(0f, 1f);
+            };
             UISwitch.HAlign = 1f;
             UISwitch.VAlign = 0.5f;
             UIS.Append(UISwitch);
 
-            UITextBox.Width.Set(-UISwitch.Width.Pixels - 2f, 1f);
+            UITextBox.Width.Set(-Width - 2f, 1f);
             UITextBox.Height.Set(-8f, 1f);
             UITextBox.HAlign = 0f;
             UITextBox.VAlign = 0.5f;

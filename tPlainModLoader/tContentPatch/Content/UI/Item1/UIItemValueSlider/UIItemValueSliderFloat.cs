@@ -7,10 +7,11 @@ namespace tContentPatch.Content.UI.Item1
     /// <inheritdoc/>
     public class UIItemValueSliderFloat : UIItemValueSlider<float>
     {
-        /// <inheritdoc/>
-        public override float Value { get => UV.Val; set => UV.SetUIVal(MathHelper.Clamp(value, Min, Max)); }
         /// <summary/>
         protected readonly float Proportion = 0;
+
+        /// <inheritdoc/>
+        public override float Value { get => UV.Val; set => UV.SetUIVal(MathHelper.Clamp(value, Min, Max)); }
 
         /// <inheritdoc/>
         public UIItemValueSliderFloat(float min, float max, Texture2D ico = null, string title = null) : base(min, max, ico, title)

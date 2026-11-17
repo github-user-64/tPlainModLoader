@@ -12,14 +12,16 @@ namespace tContentPatch.Content.UI.Item1
         /// <summary/>
         public readonly UIKeybinding UIKeybinding = null;
 
+        /// <summary>
+        /// <see cref="UIKeybinding.Bind"/>
+        /// </summary>
+        public virtual string Bind { get => UIKeybinding.Bind; set => UIKeybinding.Bind = value; }
         /// <summary/>
-        public string Bind { get => UIKeybinding.Bind; set => UIKeybinding.Bind = value; }
+        public virtual Func<string> OnGetBind { set => UIKeybinding.OnGetBind = value; }
         /// <summary/>
-        public Func<string> OnGetBind { set => UIKeybinding.OnGetBind = value; }
+        public virtual Action<string> OnSetBind { set => UIKeybinding.OnSetBind = value; }
         /// <summary/>
-        public Action<string> OnSetBind { set => UIKeybinding.OnSetBind = value; }
-        /// <summary/>
-        public Action<string> OnBindChanged { get => UIKeybinding.OnBindChanged; set => UIKeybinding.OnBindChanged = value; }
+        public virtual Action<string> OnBindChanged { get => UIKeybinding.OnBindChanged; set => UIKeybinding.OnBindChanged = value; }
 
         /// <summary/>
         public UIItemKeybinding(Texture2D ico = null, string title = null) : base(ico, title)

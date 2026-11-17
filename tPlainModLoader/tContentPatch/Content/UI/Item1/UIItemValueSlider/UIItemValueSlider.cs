@@ -14,7 +14,7 @@ namespace tContentPatch.Content.UI.Item1
         /// <summary>
         /// 值会显示在标题右方, <see cref="ValueToString"/>则用于修改显示的文本, 为<see langword="null"/>时不显示
         /// </summary>
-        public Func<T, string> ValueToString
+        public virtual Func<T, string> ValueToString
         {
             get => _floatToString;
             set
@@ -34,11 +34,11 @@ namespace tContentPatch.Content.UI.Item1
         /// <summary/>
         public abstract T Value { get; set; }
         /// <summary/>
-        public Func<T> OnGetValue { set => UV.OnGetVal = value; }
+        public virtual Func<T> OnGetValue { set => UV.OnGetVal = value; }
         /// <summary/>
-        public Action<T> OnSetValue { set => UV.OnSetVal = value; }
+        public virtual Action<T> OnSetValue { set => UV.OnSetVal = value; }
         /// <summary/>
-        public Action<T> OnValueChanged { get => UV.OnValChanged; set => UV.OnValChanged = value; }
+        public virtual Action<T> OnValueChanged { get => UV.OnValChanged; set => UV.OnValChanged = value; }
 
         /// <summary/>
         public readonly UIText UIDisplayVal = null;

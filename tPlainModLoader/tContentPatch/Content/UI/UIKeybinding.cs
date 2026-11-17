@@ -19,14 +19,16 @@ namespace tContentPatch.Content.UI
 
         /// <summary/>
         public readonly Utils.UIVal<string> UV = null;
+        /// <summary>
+        /// 会为<see langword="null"/>
+        /// </summary>
+        public virtual string Bind { get => UV.Val; set => UV.SetUIVal(value); }
         /// <summary/>
-        public string Bind { get => UV.Val; set => UV.SetUIVal(value); }
+        public virtual Func<string> OnGetBind { set => UV.OnGetVal = value; }
         /// <summary/>
-        public Func<string> OnGetBind { set => UV.OnGetVal = value; }
+        public virtual Action<string> OnSetBind { set => UV.OnSetVal = value; }
         /// <summary/>
-        public Action<string> OnSetBind { set => UV.OnSetVal = value; }
-        /// <summary/>
-        public Action<string> OnBindChanged { get => UV.OnValChanged; set => UV.OnValChanged = value; }
+        public virtual Action<string> OnBindChanged { get => UV.OnValChanged; set => UV.OnValChanged = value; }
         /// <summary/>
         public bool IsBinding = false;
 

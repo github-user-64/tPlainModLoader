@@ -16,7 +16,7 @@ namespace tContentPatch.Content.UI.Item1
         public readonly UITextButton UIButton = null;
 
         /// <summary/>
-        public Action OnClick { get => UIButton.OnClick; set => UIButton.OnClick = value; }
+        public virtual Action OnClick { get => UIButton.OnClick; set => UIButton.OnClick = value; }
 
         /// <summary/>
         public UIItemTextButtonATextBox(Texture2D ico = null, string title = null, string defaultDisplayText = null, string buttonText = null) : base(ico, title, defaultDisplayText)

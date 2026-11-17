@@ -9,6 +9,23 @@ namespace tContentPatch.Content.UI
 {
     public partial class UITextBox
     {
+        /// <summary>
+        /// 最大输入长度, 小于<see langword="0"/>为不限
+        /// </summary>
+        public int MaxInputLength = -1;
+        /// <summary>
+        /// 及时更新文本, 在显示文本更新时更新<see cref="Text"/>
+        /// </summary>
+        public bool IsUpdateTextWhenDisplayText = true;
+        /// <summary>
+        /// 失焦更新文本, 在失去焦点时更新<see cref="Text"/>
+        /// </summary>
+        public bool IsUpdateTextWhenLostFocus = false;
+        /// <summary>
+        /// 在<see cref="Focus"/>为<see langword="true"/>时不更新显示文本
+        /// </summary>
+        public bool NoUpdateDisplayTextWhenHasFocus = false;
+
         /// <summary/>
         protected virtual void UpdateInput()
         {

@@ -60,7 +60,7 @@ namespace tContentPatch.Content.UI
             if (StyleLoaded == false)
             {
                 StyleLoaded = true;
-                SetBackStyle();
+                ApplyBackStyle();
             }
 
             base.Update(gameTime);
@@ -145,7 +145,7 @@ namespace tContentPatch.Content.UI
         /// <summary>
         /// 设置页面背景
         /// </summary>
-        protected virtual void SetBackStyle()
+        protected virtual void ApplyBackStyle()
         {
             Style?.Invoke(this);
         }

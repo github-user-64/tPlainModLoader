@@ -8,7 +8,9 @@ namespace tContentPatch.Content.UI
     /// <summary/>
     public partial class UITextBox
     {
-        /// <summary/>
+        /// <summary>
+        /// 白色圆角框
+        /// </summary>
         public static void Style1(UITextBox ui)
         {
             UIPanel back = new UIPanel();
@@ -26,7 +28,9 @@ namespace tContentPatch.Content.UI
             ui.UISelectShadowColor = ui.UITextColor;
         }
 
-        /// <summary/>
+        /// <summary>
+        /// 透明方角框
+        /// </summary>
         public static void Style2(UITextBox ui)
         {
             UIPanel2 back = new UIPanel2();

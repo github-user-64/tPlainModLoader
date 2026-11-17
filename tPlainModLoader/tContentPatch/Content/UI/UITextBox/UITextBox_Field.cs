@@ -7,18 +7,20 @@ namespace tContentPatch.Content.UI
     {
         /// <summary/>
         public Utils.UIVal<string> UV = null;
-        /// <summary/>
-        public string Text
+        /// <summary>
+        /// 会为<see langword="null"/>
+        /// </summary>
+        public virtual string Text
         {
             get => UV.Val;
             set => UV.SetUIVal(value);
         }
         /// <summary/>
-        public Func<string> OnGetText { set => UV.OnGetVal = value; }
+        public virtual Func<string> OnGetText { set => UV.OnGetVal = value; }
         /// <summary/>
-        public Action<string> OnSetText { set => UV.OnSetVal = value; }
+        public virtual Action<string> OnSetText { set => UV.OnSetVal = value; }
         /// <summary/>
-        public Action<string> OnTextChanged { get => UV.OnValChanged; set => UV.OnValChanged = value; }
+        public virtual Action<string> OnTextChanged { get => UV.OnValChanged; set => UV.OnValChanged = value; }
 
         /// <summary/>
         public Color UITextColor = Color.White;
@@ -35,26 +37,9 @@ namespace tContentPatch.Content.UI
         private bool StyleLoaded = false;
 
         /// <summary>
-        /// 最大输入长度, 小于<see langword="0"/>为不限
-        /// </summary>
-        public int MaxInputLength = -1;
-        /// <summary>
-        /// 及时更新文本, 在显示文本更新时更新<see cref="Text"/>
-        /// </summary>
-        public bool IsUpdateTextWhenDisplayText = true;
-        /// <summary>
-        /// 失焦更新文本, 在失去焦点时更新<see cref="Text"/>
-        /// </summary>
-        public bool IsUpdateTextWhenLostFocus = false;
-        /// <summary>
-        /// 在<see cref="Focus"/>为<see langword="true"/>时不更新显示文本
-        /// </summary>
-        public bool NoUpdateDisplayTextWhenHasFocus = false;
-
-        /// <summary>
         /// 焦点
         /// </summary>
-        public bool Focus
+        public virtual bool Focus
         {
             get => focus;
             set
@@ -77,9 +62,12 @@ namespace tContentPatch.Content.UI
         public string DefaultDisplayText = null;
 
         /// <summary>
-        /// 显示文本
+        /// 显示文本<br/>
+        /// 会为<see langword="null"/><br/>
+        /// <see cref="UIText"/>显示此文本<br/>
+        /// 编辑此文本会更新到<see cref="Text"/>
         /// </summary>
-        protected string DisplayText
+        protected virtual string DisplayText
         {
             get => displayText;
             set

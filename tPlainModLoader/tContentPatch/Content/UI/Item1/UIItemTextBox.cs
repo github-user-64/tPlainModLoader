@@ -11,14 +11,16 @@ namespace tContentPatch.Content.UI.Item1
         /// <summary/>
         public readonly UITextBox<T> UITextBox = null;
 
+        /// <summary>
+        /// <see cref="UITextBox{T}.Value"/>
+        /// </summary>
+        public virtual T Value { get => UITextBox.Value; set => UITextBox.Value = value; }
         /// <summary/>
-        public T Value { get => UITextBox.Value; set => UITextBox.Value = value; }
+        public virtual Func<T> OnGetValue { set => UITextBox.OnGetValue = value; }
         /// <summary/>
-        public Func<T> OnGetValue { set => UITextBox.OnGetValue = value; }
+        public virtual Action<T> OnSetValue { set => UITextBox.OnSetValue = value; }
         /// <summary/>
-        public Action<T> OnSetValue { set => UITextBox.OnSetValue = value; }
-        /// <summary/>
-        public Action<T> OnValueChanged { get => UITextBox.OnValueChanged; set => UITextBox.OnValueChanged = value; }
+        public virtual Action<T> OnValueChanged { get => UITextBox.OnValueChanged; set => UITextBox.OnValueChanged = value; }
 
         /// <summary/>
         public virtual Func<T, string> ValueToText { get => UITextBox.ValueToText; set => UITextBox.ValueToText = value; }

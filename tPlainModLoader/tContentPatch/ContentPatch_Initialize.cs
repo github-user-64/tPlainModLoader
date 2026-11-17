@@ -154,6 +154,23 @@ namespace tContentPatch
                 var t3 = new UIItemTextButtonATextBox<string>(null, "title1111111111111", "def", "超级button");
                 t3.OnClick += () => Debug.WriteLine("itemtext按钮触发");
                 //sv.AddChild(t3);
+
+                UISwitch uiS2 = new UISwitch();
+                uiS2.Style = UISwitch.Style2;
+                uiS2.MouseText = "asd222";
+                uiS2.MouseTextStyle = UIMouseText.MouseTextStyle2;
+                uiS2.OnIsCheckChanged += v => uiS2.MouseText = uiS2.IsChecked.ToString();
+                sv.AddChild(uiS2);
+
+                UIItemSwitch uiS2_1 = new UIItemSwitch();
+                uiS2_1.UISwitch.Style = UISwitch.Style2;
+                uiS2_1.MouseText = "asd1";
+                sv.AddChild(uiS2_1);
+
+                UIItemSwitchATextBoxString uiS2_2 = new UIItemSwitchATextBoxString();
+                uiS2_2.UISwitch.Style = UISwitch.Style2;
+                sv.AddChild(uiS2_2);
+
             }
             string vals;
             float valf;

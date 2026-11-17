@@ -7,10 +7,11 @@ namespace tContentPatch.Content.UI.Item1
     /// <inheritdoc/>
     public class UIItemValueSliderInt : UIItemValueSlider<int>
     {
+        /// <summary/>
+        protected readonly float Proportion = 0f;
+
         /// <inheritdoc/>
         public override int Value { get => UV.Val; set => UV.SetUIVal((int)MathHelper.Clamp(value, Min, Max)); }
-        /// <summary/>
-        protected readonly float Proportion = 0;
 
         /// <inheritdoc/>
         public UIItemValueSliderInt(int min, int max, Texture2D ico = null, string title = null) : base(min, max, ico, title)
