@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
-using System.Diagnostics;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent.UI.Elements;
@@ -37,7 +36,7 @@ namespace tContentPatch.Content.UI
             Action<bool> update = v =>
             {
                 v = ui.IsChecked;
-                Debug.WriteLine($"更新{v}");
+
                 text.SetText(v ? "开" : "关");
 
                 Rectangle f = Frame;

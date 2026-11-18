@@ -1,20 +1,14 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Diagnostics;
+﻿using System;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using tContentPatch.Content;
 using tContentPatch.Content.Menus.ModLoadException;
 using tContentPatch.Content.Menus.ModManager;
-using tContentPatch.Content.UI;
-using tContentPatch.Content.UI.Item1;
 using tContentPatch.ModLoad;
 using tContentPatch.Patch;
 using tContentPatch.Utils;
 using Terraria;
-using Terraria.GameContent.UI.Elements;
 
 namespace tContentPatch
 {
@@ -74,14 +68,6 @@ namespace tContentPatch
             {
                 if (Main.dedServ) return;
                 GameUitl.BackMenu();
-
-                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                GameUitl.OpenMenu(new TestMenu());
-                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             };
             //取消时
             LoaderControl.OnModLoad_Cancel += (e) => Content.Menus.ModLoadingMenu.ModLoadingMenu.OpenLoadMenu(e, LoaderControl.CancelLoad);
@@ -99,95 +85,6 @@ namespace tContentPatch
             {
                 Environment.Exit(0);
             };
-        }
-
-        private class TestMenu : UIMenuPanel
-        {
-            public TestMenu() : base("TEST")
-            {
-                UIScrollViewer2 sv = new UIScrollViewer2();
-                sv.Width.Set(0f, 1f);
-                sv.Height.Set(0f, 1f);
-                sv.ItemMargin = 4f;
-                UIPanel.Append(sv);
-
-                UIItemSwitch ui1 = new UIItemSwitch(Main.Assets.Request<Texture2D>("Images/UI/Camera_1").Value, "标题1");
-                ui1.MouseText = "ui1";
-                ui1.UISwitch.MouseText = "kaiguang";
-                sv.AddChild(ui1);
-
-                UIItemTextBoxString ui2 = new UIItemTextBoxString(Main.Assets.Request<Texture2D>("Images/UI/Camera_1").Value, "标题1", "asd");
-                ui2.MouseText = "222\na";
-                ui2.MouseTextStyle = UIMouseText.MouseTextStyle2;
-                ui2.OnGetValue = () => vals;
-                ui2.OnSetValue = v => vals = v;
-                ui2.OnValueChanged += v => Debug.WriteLine(ui2.Value);
-                sv.AddChild(ui2);
-
-                UIItemTextBoxFloat ui3 = new UIItemTextBoxFloat(Main.Assets.Request<Texture2D>("Images/UI/Camera_1").Value, "标题1float");
-                ui3.OnGetValue = () => valf;
-                ui3.OnSetValue = v => valf = v;
-                ui3.OnValueChanged += v => Debug.WriteLine(ui3.Value);
-                sv.AddChild(ui3);
-
-                UIItemSwitchATextBoxFloat ui4 = new UIItemSwitchATextBoxFloat(Main.Assets.Request<Texture2D>("Images/UI/Camera_1").Value, "标题1开关float");
-                //ui4.OnGetValue = () => valf;
-                //ui4.OnSetValue = v => valf = v;
-                //ui4.OnGetIsChecked = () => valb;
-                //ui4.OnSetIsChecked = v => valb = v;
-                sv.AddChild(ui4);
-
-                sv.AddChild(new UIKeybinding());
-                sv.AddChild(new UIItemKeybinding(title: "按键")
-                {
-                    Color = Color.Lerp(new Color(33, 43, 79) * 0.8f, Color.Green, 0.18f)
-                });
-
-                var t1 = new UITextButton();
-                t1.OnClick += () => Debug.WriteLine("按钮触发");
-                //sv.AddChild(t1);
-
-                var t2 = new UIItemTextButton(null, "title1111111111111", "超级button");
-                t2.OnClick += () => Debug.WriteLine("item按钮触发");
-                //sv.AddChild(t2);
-
-                var t3 = new UIItemTextButtonATextBox<string>(null, "title1111111111111", "def", "超级button");
-                t3.OnClick += () => Debug.WriteLine("itemtext按钮触发");
-                //sv.AddChild(t3);
-
-                UISwitch uiS2 = new UISwitch();
-                uiS2.Style = UISwitch.Style2;
-                uiS2.MouseText = "asd222";
-                uiS2.MouseTextStyle = UIMouseText.MouseTextStyle2;
-                uiS2.OnIsCheckChanged += v => uiS2.MouseText = uiS2.IsChecked.ToString();
-                sv.AddChild(uiS2);
-
-                UIItemSwitch uiS2_1 = new UIItemSwitch();
-                uiS2_1.UISwitch.Style = UISwitch.Style2;
-                uiS2_1.MouseText = "asd1";
-                sv.AddChild(uiS2_1);
-
-                UIItemSwitchATextBoxString uiS2_2 = new UIItemSwitchATextBoxString();
-                uiS2_2.UISwitch.Style = UISwitch.Style2;
-                sv.AddChild(uiS2_2);
-
-            }
-            string vals;
-            float valf;
-            bool valb;
-            public override void Update(GameTime gameTime)
-            {
-                base.Update(gameTime);
-
-                if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftControl) && Main.oldKeyState.IsKeyUp(Microsoft.Xna.Framework.Input.Keys.LeftControl)) GameUitl.OpenMenu(new TestMenu());
-                if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Space))
-                {
-                    vals = $"{Main.mouseX / 5}";
-                    valf = Main.mouseX / 5;
-                    valb = Main.mouseX / 5 % 2 == 0;
-                }
-                //Debug.WriteLine($"string{vals}, float{valf}, bool{valb}");
-            }
         }
 
         private void CheckNetplayConnect()

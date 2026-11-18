@@ -4,7 +4,7 @@ using Terraria.UI;
 namespace tContentPatch.Content.UI
 {
     /// <summary>
-    /// 有滚动条的ui
+    /// 有滚动条的ui, 组合ui: <see cref="Terraria.GameContent.UI.Elements.UIList"/>, <see cref="Terraria.GameContent.UI.Elements.UIScrollbar"/>
     /// </summary>
     public class UIScrollViewer : UIElement
     {
