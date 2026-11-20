@@ -77,7 +77,7 @@ namespace ChatAi
             try
             {
                 Apis.Chat.SetApiKey(key);
-                tContentPatch.ContentPatch.PrintTry($"设置api的key为: [{Apis.Chat.apiKey}]");
+                tContentPatch.ContentPatch.PrintTry($"设置api的key成功");
             }
             catch (Exception ex)
             {

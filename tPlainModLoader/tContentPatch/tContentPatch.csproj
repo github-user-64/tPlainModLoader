@@ -91,6 +91,7 @@
     <Compile Include="Content\UI\Item1\UIItemValueSlider\UIItemValueSliderInt.cs" />
     <Compile Include="Content\UI\Item1\UIItemValueSlider\UIItemValueSlider.cs" />
     <Compile Include="Content\UI\Item1\UIItem.cs" />
+    <Compile Include="Content\UI\UIElementEmpty.cs" />
     <Compile Include="Content\UI\UIKeybinding.cs" />
     <Compile Include="Content\UI\UIMouseText.cs" />
     <Compile Include="Content\UI\UIPanel2.cs" />

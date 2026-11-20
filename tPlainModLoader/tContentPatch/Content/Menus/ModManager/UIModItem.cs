@@ -10,33 +10,12 @@ using tContentPatch.Content.UI;
 using tContentPatch.ModLoad;
 using Terraria;
 using Terraria.Audio;
-using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ID;
 using Terraria.UI;
 
 namespace tContentPatch.Content.Menus.ModManager
 {
-    internal class UIElementEmpty : UIElement
-    {
-        public UIElementEmpty()
-        {
-            Width.Set(-10, 1);
-            Height.Pixels = 4;
-            MarginTop = 10;
-            MarginBottom = 10;
-            HAlign = 0.5f;
-        }
-
-        protected override void DrawSelf(SpriteBatch spriteBatch)
-        {
-            CalculatedStyle dim = GetDimensions();
-            Rectangle rect = new Rectangle(0, 0, (int)dim.Width, 2);
-            Main.spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Vector2(dim.X, dim.Y), rect, Color.White * 0.1f);
-            Main.spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Vector2(dim.X, dim.Y + 2), rect, Color.Black * 0.1f);
-        }
-    }
-
     internal class UIModItem : UIPanel
     {
         private readonly static Texture2D defaultIco = null;
@@ -77,6 +56,10 @@ namespace tContentPatch.Content.Menus.ModManager
             ui_sp.VAlign = 0.5f;
 
             UIElementEmpty ui_sp_Empty = new UIElementEmpty();
+            ui_sp_Empty.Width.Set(-10f, 1f);
+            ui_sp_Empty.HAlign = 0.5f;
+            ui_sp_Empty.MarginTop = 10f;
+            ui_sp_Empty.MarginBottom = 10f;
 
             ui_sp_uie = new UIElement();
             ui_sp_uie.Width.Precent = 1;
