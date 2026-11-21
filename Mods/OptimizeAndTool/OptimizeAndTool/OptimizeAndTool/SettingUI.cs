@@ -7,7 +7,7 @@ using Terraria.UI;
 
 namespace OptimizeAndTool
 {
-    internal class SettingUI_player : ModSetting
+    internal class SettingUI : ModSetting
     {
         public class Data
         {
@@ -19,7 +19,7 @@ namespace OptimizeAndTool
 
         public override string Name => "设置";
         public override string Title => "优化和工具: 设置";
-        public override string FilePath => "setting.json";
+        public override string FilePath => "Setting.json";
         public override Type DataType => typeof(Data);
 
         public override void Load(object v)
