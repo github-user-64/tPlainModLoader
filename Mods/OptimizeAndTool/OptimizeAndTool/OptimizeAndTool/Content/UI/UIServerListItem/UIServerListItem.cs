@@ -12,7 +12,7 @@ using Terraria.UI;
 
 namespace OptimizeAndTool.Content.UI
 {
-    public partial class UIServerWorldListItem : AWorldListItem
+    public partial class UIServerListItem : AWorldListItem
     {
         private Asset<Texture2D> _dividerTexture;
         private Asset<Texture2D> _innerPanelTexture;
@@ -34,7 +34,7 @@ namespace OptimizeAndTool.Content.UI
 
         public readonly UIStackPanel UILeftButtons = null;
 
-        public UIServerWorldListItem(ServerInfo info)
+        public UIServerListItem(ServerInfo info)
         {
             _data = this.info = info ?? throw new ArgumentNullException(nameof(info));
 

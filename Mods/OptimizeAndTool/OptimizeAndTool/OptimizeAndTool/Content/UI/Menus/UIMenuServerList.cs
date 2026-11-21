@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using OptimizeAndTool.Content.ServerList;
 using System.Collections.Generic;
 using tContentPatch.Content.UI;
 using Terraria;
@@ -8,14 +9,15 @@ using Terraria.GameContent.UI.Elements;
 using Terraria.ID;
 using Terraria.UI;
 
-namespace OptimizeAndTool.Content.ServerList
+namespace OptimizeAndTool.Content.UI.Menus
 {
     public class UIMenuServerList : UIMenuPanel
     {
         public readonly ListData.IControl Control = null;
         public List<ServerInfo> Data => Control?.Data;
+        public UIServerListItem CheckedItem = null;
 
-        public readonly UIScrollViewer2 UISV = null;
+        public readonly UIStackPanelMove UISP = null;
 
         public UIMenuServerList(ListData.IControl control = null, UIState back = null) : base("选择服务器", back: back)
         {
@@ -27,17 +29,22 @@ namespace OptimizeAndTool.Content.ServerList
 
             UIButton1 btn2 = new UIButton1("添加服务器");
             btn2.MouseText = "在当前选中服务器下方插入";
-            //btn2.OnLeftClick += (e, s) => Back(BackUI);
+            btn2.OnLeftClick += (e, s) => AddData();
             AddBtn(btn2, 2);
 
             //
 
             InitializeButtons();
 
-            UISV = new UIScrollViewer2();
-            UISV.Width.Set(0f, 1f);
-            UISV.Height.Set(0f, 1f);
-            UIPanel.Append(UISV);
+            UIScrollViewer sv = new UIScrollViewer();
+            sv.Width.Set(0f, 1f);
+            sv.Height.Set(0f, 1f);
+            sv.Append(sv);
+
+            UISP = new UIStackPanelMove();
+            UISP.Width.Set(0f, 1f);
+            UISP.IsAutoUpdateSize = true;
+            sv.SetChild(UISP);
 
             //
 
@@ -88,17 +95,39 @@ namespace OptimizeAndTool.Content.ServerList
             return ui;
         }
 
-        public virtual void UpdateUIData()
+        protected virtual void AddUIItem(ServerInfo data, int index)
         {
-            UISV.ClearChild();
+            //uiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+
+            UISP.AddItem(null, index);
+        }
+
+        protected virtual void UpdateUIData()
+        {
+            CheckedItem = null;
+            UISP.RemoveAllChildren();
 
             List<ServerInfo> data = Data;
             if (data == null) return;
 
-
+            for (int i = 0; i < data.Count; ++i) AddUIItem(data[i], i);
         }
 
-        public virtual void LoadData()
+        #region
+        protected virtual void AddData()
+        {
+            if (Control == null) return;
+
+            int index = UISP.ElementsIndexOf(CheckedItem);
+
+            //
+
+            Control.Add(Control.GetDefault(), index);
+
+            AddUIItem(Control.Data[index], index);
+        }
+
+        protected virtual void LoadData()
         {
             if (Control == null) return;
 
@@ -107,6 +136,7 @@ namespace OptimizeAndTool.Content.ServerList
             UpdateUIData();
         }
 
-        public virtual void SaveData() => Control?.Save();
+        protected virtual void SaveData() => Control?.Save();
+        #endregion
     }
 }

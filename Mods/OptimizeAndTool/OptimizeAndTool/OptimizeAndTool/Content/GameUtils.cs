@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using Terraria;
 using Terraria.IO;
 using Terraria.WorldBuilding;
 
-namespace OptimizeAndTool.Utils
+namespace OptimizeAndTool.Content
 {
-    public static class Utils
+    public static class GameUtils
     {
         /// <summary>
         /// 获取现在的<see cref="WorldFileData"/>, 失败返回<see langword="null"/>
@@ -53,22 +52,6 @@ namespace OptimizeAndTool.Utils
             {
                 return null;
             }
-        }
-
-        /// <summary>
-        /// 交换<see langword="index1"/>和<see langword="index2"/>的位置<br/>
-        /// <see langword="index1"/>是:<paramref name="item"/><br/>
-        /// <see langword="index2"/>是:<paramref name="item"/>加上<paramref name="off"/>
-        /// </summary>
-        public static void MoveItem<T>(this List<T> list, T item, int off)
-        {
-            int index1 = list.IndexOf(item);
-            if (list.IndexInRange(index1) != true) return;
-            int index2 = index1 + off;
-            if (list.IndexInRange(index2) != true) return;
-
-            list[index1] = list[index2];
-            list[index2] = item;
         }
     }
 }

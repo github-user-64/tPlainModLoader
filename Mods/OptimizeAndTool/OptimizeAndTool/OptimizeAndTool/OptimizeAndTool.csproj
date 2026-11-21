@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="Command.cs" />
     <Compile Include="Content\DisplayItemType.cs" />
+    <Compile Include="Content\GameUtils.cs" />
     <Compile Include="Content\PatchGameViewMatrixZoomLimit.cs" />
     <Compile Include="Content\ItemToolTipAdditional.cs" />
     <Compile Include="Content\CleanRepeatChat.cs" />
@@ -48,8 +49,9 @@
     <Compile Include="Content\Patch\Patch_RemadeChatMonitor.cs" />
     <Compile Include="Content\ServerList\ServerInfo.cs" />
     <Compile Include="Content\ServerList\ServerList.cs" />
+    <Compile Include="Content\UI\UIStackPanelMove.cs" />
     <Compile Include="ThisMod.cs" />
-    <Compile Include="Utils\Utils.cs" />
+    <Compile Include="Utils\ListHelp.cs" />
     <None Include="Content\_ServerList\ServerInfo.cs" />
     <None Include="Content\_ServerList\Setting.cs" />
     <None Include="Content\_ServerList\UIButton.cs" />
@@ -57,14 +59,14 @@
     <None Include="Content\_ServerList\UIServerList.cs" />
     <None Include="Content\_ServerList\ServerList.cs" />
     <Compile Include="Content\ServerList\ListData.cs" />
-    <Compile Include="Content\ServerList\UIMenuServerList.cs" />
+    <Compile Include="Content\UI\Menus\UIMenuServerList.cs" />
     <Compile Include="Content\TimeSet.cs" />
     <Compile Include="Content\UI\UIItemValueSliderSwitch.cs" />
-    <Compile Include="Content\UI\UIServerListItem\UIPanel2Text.cs" />
-    <Compile Include="Content\UI\UIServerListItem\UIServerName.cs" />
-    <Compile Include="Content\UI\UIServerListItem\UIServerWorldListItem.cs" />
-    <Compile Include="Content\UI\UIServerListItem\UIServerWorldListItem_Buttons.cs" />
-    <Compile Include="Content\UI\UIServerListItem\UIServerWorldListItem_Infos.cs" />
+    <Compile Include="Content\UI\UIPanel2Text.cs" />
+    <Compile Include="Content\UI\UIServerName.cs" />
+    <Compile Include="Content\UI\UIServerListItem\UIServerListItem.cs" />
+    <Compile Include="Content\UI\UIServerListItem\UIServerListItem_Buttons.cs" />
+    <Compile Include="Content\UI\UIServerListItem\UIServerListItem_Infos.cs" />
     <Compile Include="ModifyInterfaceLayers.cs" />
     <Compile Include="ModLinkage\LinkageSetting.cs" />
     <Compile Include="ModLinkage\ModQuickSetting.cs" />

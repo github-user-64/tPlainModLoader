@@ -7,7 +7,7 @@ using Terraria.Localization;
 
 namespace OptimizeAndTool.Content.UI
 {
-    public partial class UIServerWorldListItem : AWorldListItem
+    public partial class UIServerListItem : AWorldListItem
     {
         protected virtual void InitializeInfos()
         {
