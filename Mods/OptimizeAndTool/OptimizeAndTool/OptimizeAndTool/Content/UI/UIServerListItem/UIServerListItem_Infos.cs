@@ -17,13 +17,14 @@ namespace OptimizeAndTool.Content.UI
             sp.IsAutoUpdateSize = true;
             Append(sp);
 
-            UIServerName name = new UIServerName(info);
+            UIServerName name = new UIServerName(Info);
             name.Width.Set(-6f, 1f);
             name.HAlign = 1f;
+            name.MarginTop = -4f;
             sp.Append(name);
 
             UIElementEmpty uiee = new UIElementEmpty();
-            uiee.MarginTop = 5f;
+            uiee.MarginTop = 2f;
             sp.Append(uiee);
 
             //
@@ -48,9 +49,9 @@ namespace OptimizeAndTool.Content.UI
             {
                 worldSizeWidth += 40f;
             }
-            UIPanel2Text worldSize = GetInfoUI(Language.GetTextValue("UI.WorldSizeFormat", info.WorldSizeName));
+            UIPanel2Text worldSize = GetInfoUI(Language.GetTextValue("UI.WorldSizeFormat", Info.WorldSizeName));
             worldSize.Width.Set(worldSizeWidth, 0f);
-            worldSize.MouseText = $"{info.WorldSizeX}x{info.WorldSizeY}";
+            worldSize.MouseText = $"{Info.WorldSizeX}x{Info.WorldSizeY}";
             infos.Append(worldSize);
 
             UIPanel2Text ipPort = GetInfoUI(string.Empty);
@@ -69,7 +70,7 @@ namespace OptimizeAndTool.Content.UI
             ipPortSP.IsAutoUpdateSize = true;
             ipPort.Append(ipPortSP);
 
-            UIText ip = GetCopyTextUI(info.IP, 0.8f);
+            UIText ip = GetCopyTextUI(Info.IP, 0.8f);
             ip.VAlign = 0.5f;
             ipPortSP.Append(ip);
 
@@ -77,7 +78,7 @@ namespace OptimizeAndTool.Content.UI
             uit.VAlign = 0.5f;
             ipPortSP.Append(uit);
 
-            UIText port = GetCopyTextUI(info.Port.ToString(), 0.8f);
+            UIText port = GetCopyTextUI(Info.Port.ToString(), 0.8f);
             port.VAlign = 0.5f;
             ipPortSP.Append(port);
         }

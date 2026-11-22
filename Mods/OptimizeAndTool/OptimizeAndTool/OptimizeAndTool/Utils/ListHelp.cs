@@ -10,12 +10,14 @@ namespace OptimizeAndTool.Utils
         /// 将<paramref name="item"/>添加到<paramref name="index"/>处<br/>
         /// <paramref name="index"/>会被限制在范围内
         /// </summary>
-        public static void Add<T>(this List<T> list, T item, int index)
+        public static int Add<T>(this List<T> list, T item, int index)
         {
             index = (int)MathHelper.Clamp(index, 0, list.Count);
 
             if (index == list.Count) list.Add(item);
             else list.Insert(index, item);
+
+            return index;
         }
 
         /// <summary>

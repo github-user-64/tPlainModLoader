@@ -2,6 +2,7 @@
 using Terraria.Audio;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ID;
+using Terraria.UI;
 
 namespace tContentPatch.Content.UI
 {
@@ -59,7 +60,10 @@ namespace tContentPatch.Content.UI
             ui.UIText.SetPadding(6f);
             ui.OnGotFocus += () => SoundEngine.PlaySound(SoundID.MenuTick);
             ui.OnLostFocus += () => SoundEngine.PlaySound(SoundID.MenuClose);
-            ui.OnMouseOver += (e, s) => SoundEngine.PlaySound(SoundID.MenuTick);
+
+            UIState overSound = new UIState();
+            overSound.OnMouseOver += (e, s) => SoundEngine.PlaySound(SoundID.MenuTick);
+            ui.Append(overSound);//放在最上面, 防止多个子ui多次触发OnMouseOver
         }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using tContentPatch;
+using tContentPatch.Utils;
 
 namespace OptimizeAndTool.Content.ServerList
 {
@@ -11,6 +12,19 @@ namespace OptimizeAndTool.Content.ServerList
         public override bool HasUI => false;
         public override string FilePath => "ServerList.json";
         public override Type DataType => typeof(List<ServerInfo>);
+
+        public override object Read()
+        {
+            object v = null;
+
+            ModFile.ReadFileTry(FilePath, file =>
+            {
+                v = ServerInfo.Read<List<ServerInfo>>(file);
+                return true;
+            });
+
+            return v;
+        }
 
         public override void Load(object v)
         {
@@ -23,23 +37,22 @@ namespace OptimizeAndTool.Content.ServerList
 
             ServerList.SetControl(this);
         }
-
-        public override object GetSaveData() => Data;
         #endregion
 
         #region
         public interface IControl
         {
-            List<ServerInfo> Data { get; set; }
+            List<ServerInfo> Data { get; }
             void Save();
             void Load();
             ServerInfo GetDefault();
 
             /// <summary>
             /// 将<paramref name="data"/>添加到<paramref name="index"/>处<br/>
-            /// <paramref name="index"/>会被限制在范围内
+            /// <paramref name="index"/>会被限制在范围内<br/>
+            /// 添加成功返回插入的位置, 否则返回<see langword="-1"/>
             /// </summary>
-            void Add(ServerInfo data, int index);
+            int Add(ServerInfo data, int index);
             void Del(ServerInfo data);
             void OffUp(ServerInfo data);
             void OffDown(ServerInfo data);
@@ -48,20 +61,25 @@ namespace OptimizeAndTool.Content.ServerList
         /// <summary>
         /// 不为<see langword="null"/>
         /// </summary>
-        public virtual List<ServerInfo> Data { get; set; } = new List<ServerInfo>();
+        public virtual List<ServerInfo> Data { get; protected set; } = new List<ServerInfo>();
 
         public virtual void Load() => Load(Read());
 
         public override void Save()
         {
-            NeedSave = true;
-            base.Save();
+            ModFile.SaveFileTry(FilePath, file =>
+            {
+                ServerInfo.Save(file, Data);
+                return true;
+            });
         }
 
         public virtual ServerInfo GetDefault() => ServerInfo.GetEmpty();
-        public virtual void Add(ServerInfo data, int index)
+        public virtual int Add(ServerInfo data, int index)
         {
-            if (data != null) Data.Add(data, index);
+            if (data == null) return -1;
+
+            return Data.Add(data, index);
         }
         public virtual void Del(ServerInfo data) => Data.Remove(data);
         public virtual void OffUp(ServerInfo data) => Data.OffUp(data);

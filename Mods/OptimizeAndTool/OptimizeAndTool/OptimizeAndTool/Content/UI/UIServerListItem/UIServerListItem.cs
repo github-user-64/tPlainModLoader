@@ -14,38 +14,37 @@ namespace OptimizeAndTool.Content.UI
 {
     public partial class UIServerListItem : AWorldListItem
     {
-        private Asset<Texture2D> _dividerTexture;
-        private Asset<Texture2D> _innerPanelTexture;
-        private Asset<Texture2D> _buttonCloudActiveTexture;
-        private Asset<Texture2D> _buttonCloudInactiveTexture;
-        private Asset<Texture2D> _buttonFavoriteActiveTexture;
-        private Asset<Texture2D> _buttonFavoriteInactiveTexture;
         private Asset<Texture2D> _buttonPlayTexture;
         private Asset<Texture2D> _buttonSeedTexture;
-        private Asset<Texture2D> _buttonRenameTexture;
         private Asset<Texture2D> _buttonDeleteTexture;
-        private Asset<Texture2D> _hasBeenPlayedByActivePlayerTexture;
-        private Asset<Texture2D> _isNewlyGeneratedTexture;
-
-        public readonly ServerInfo info = null;
 
         private UIElement _worldIcon = null;
         private UIText _buttonLabel = null;
 
+        public Func<bool> GetIsChecked = null;
+        public Action OnUp = null;
+        public Action OnDown = null;
+        public Action OnDel = null;
+        public readonly ServerInfo Info = null;
         public readonly UIStackPanel UILeftButtons = null;
 
         public UIServerListItem(ServerInfo info)
         {
-            _data = this.info = info ?? throw new ArgumentNullException(nameof(info));
+            _data = this.Info = info ?? throw new ArgumentNullException(nameof(info));
 
             //
 
             LoadTextures();
-            InitializeAppearance();
+
+            Width.Set(0f, 1f);
+            Height.Set(96f, 0f);
+            BackgroundColor = new Color(63, 82, 151) * 0.7f;
+            BorderColor = new Color(89, 116, 213) * 0.7f;
+            SetPadding(6f);
 
             //
 
-            _worldIcon = GetIcoUI(this.info);
+            _worldIcon = GetIcoUI(this.Info);
             Append(_worldIcon);
 
             InitializeInfos();
@@ -102,41 +101,6 @@ namespace OptimizeAndTool.Content.UI
             _buttonLabel.SetText(txt ?? string.Empty);
         }
 
-        private void InitializeAppearance()
-        {
-            Height.Set(96f, 0f);
-            Width.Set(0f, 1f);
-            SetPadding(6f);
-            SetColorsToNotHovered();
-        }
-
-        private void SetColorsToNotHovered()
-        {
-            BackgroundColor = new Color(63, 82, 151) * 0.7f;
-            BorderColor = new Color(89, 116, 213) * 0.7f;
-            //if (!_canBePlayed)
-            //{
-            //    BorderColor = new Color(127, 127, 127) * 0.7f;
-            //    BackgroundColor = Color.Lerp(new Color(63, 82, 151), new Color(80, 80, 80), 0.5f) * 0.7f;
-            //}
-        }
-
-        private void LoadTextures()
-        {
-            _dividerTexture = Main.Assets.Request<Texture2D>("Images/UI/Divider");
-            _innerPanelTexture = Main.Assets.Request<Texture2D>("Images/UI/InnerPanelBackground");
-            _buttonCloudActiveTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonCloudActive");
-            _buttonCloudInactiveTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonCloudInactive");
-            _buttonFavoriteActiveTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonFavoriteActive");
-            _buttonFavoriteInactiveTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonFavoriteInactive");
-            _buttonPlayTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonPlay");
-            _buttonSeedTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonSeed");
-            _buttonRenameTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonRename");
-            _buttonDeleteTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonDelete");
-            _hasBeenPlayedByActivePlayerTexture = Main.Assets.Request<Texture2D>("Images/UI/IconPlayedBefore");
-            _isNewlyGeneratedTexture = Main.Assets.Request<Texture2D>("Images/UI/IconNewlyGenerated");
-        }
-
         protected void TryCopyText(string text = null)
         {
             try
@@ -144,6 +108,13 @@ namespace OptimizeAndTool.Content.UI
                 if (text != null) Platform.Get<IClipboard>().Value = text;
             }
             catch { }
+        }
+
+        private void LoadTextures()
+        {
+            _buttonPlayTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonPlay");
+            _buttonSeedTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonSeed");
+            _buttonDeleteTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonDelete");
         }
     }
 }

@@ -15,10 +15,10 @@ namespace OptimizeAndTool.Content.UI
             SetButton(play, () => Language.GetTextValue("UI.Play"), PlayGame);
             UILeftButtons.Append(play);
 
-            if (info.WorldGeneratorVersion != 0L)
+            if (Info.WorldGeneratorVersion != 0L)
             {
                 UIImageButton seed = new UIImageButton(_buttonSeedTexture);
-                SetButton(seed, () => Language.GetTextValue("UI.CopySeed", info.GetFullSeedText(allowCropping: true)), CopySeed);
+                SetButton(seed, () => Language.GetTextValue("UI.CopySeed", Info.GetFullSeedText(allowCropping: true)), CopySeed);
                 UILeftButtons.Append(seed);
             }
 
@@ -51,13 +51,10 @@ namespace OptimizeAndTool.Content.UI
 
         protected virtual void CopySeed()
         {
-            TryCopyText(info.GetFullSeedText());
+            TryCopyText(Info.GetFullSeedText());
             SetLabel(Language.GetTextValue("UI.SeedCopied"));
         }
 
-        protected virtual void Delete()
-        {
-
-        }
+        protected virtual void Delete() => OnDel?.Invoke();
     }
 }

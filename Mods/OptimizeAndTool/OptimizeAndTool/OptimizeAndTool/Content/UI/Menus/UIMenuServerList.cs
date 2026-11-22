@@ -11,7 +11,7 @@ using Terraria.UI;
 
 namespace OptimizeAndTool.Content.UI.Menus
 {
-    public class UIMenuServerList : UIMenuPanel
+    public partial class UIMenuServerList : UIMenuPanel
     {
         public readonly ListData.IControl Control = null;
         public List<ServerInfo> Data => Control?.Data;
@@ -29,7 +29,7 @@ namespace OptimizeAndTool.Content.UI.Menus
 
             UIButton1 btn2 = new UIButton1("添加服务器");
             btn2.MouseText = "在当前选中服务器下方插入";
-            btn2.OnLeftClick += (e, s) => AddData();
+            btn2.OnLeftClick += (e, s) => ControlAdd();
             AddBtn(btn2, 2);
 
             //
@@ -39,10 +39,11 @@ namespace OptimizeAndTool.Content.UI.Menus
             UIScrollViewer sv = new UIScrollViewer();
             sv.Width.Set(0f, 1f);
             sv.Height.Set(0f, 1f);
-            sv.Append(sv);
+            UIPanel.Append(sv);
 
             UISP = new UIStackPanelMove();
             UISP.Width.Set(0f, 1f);
+            UISP.ItemMargin = 6f;
             UISP.IsAutoUpdateSize = true;
             sv.SetChild(UISP);
 
@@ -97,9 +98,14 @@ namespace OptimizeAndTool.Content.UI.Menus
 
         protected virtual void AddUIItem(ServerInfo data, int index)
         {
-            //uiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+            UIServerListItem item = new UIServerListItem(data);
+            item.GetIsChecked = () => CheckedItem == item;
+            item.OnLeftClick += (e, s) => CheckedItem = item;
+            item.OnDel += () => ControlDel(item);
+            item.OnUp += () => ControlUp(item);
+            item.OnDown += () => ControlDown(item);
 
-            UISP.AddItem(null, index);
+            UISP.AddItem(item, index);
         }
 
         protected virtual void UpdateUIData()
@@ -112,31 +118,5 @@ namespace OptimizeAndTool.Content.UI.Menus
 
             for (int i = 0; i < data.Count; ++i) AddUIItem(data[i], i);
         }
-
-        #region
-        protected virtual void AddData()
-        {
-            if (Control == null) return;
-
-            int index = UISP.ElementsIndexOf(CheckedItem);
-
-            //
-
-            Control.Add(Control.GetDefault(), index);
-
-            AddUIItem(Control.Data[index], index);
-        }
-
-        protected virtual void LoadData()
-        {
-            if (Control == null) return;
-
-            Control.Load();
-
-            UpdateUIData();
-        }
-
-        protected virtual void SaveData() => Control?.Save();
-        #endregion
     }
 }

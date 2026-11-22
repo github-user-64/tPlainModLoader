@@ -29,29 +29,29 @@ namespace OptimizeAndTool.Content.ServerList
         {
             string text = DataToString(data);
 
-            return StringToData(text);
+            return StringToData<ServerInfo>(text);
         }
 
         //
 
-        public static void Save(string path, ServerInfo data)
+        public static void Save<T>(string path, T data)
         {
             File.WriteAllText(path, DataToString(data), Encoding.UTF8);
         }
 
-        public static ServerInfo Read(string path)
+        public static T Read<T>(string path)
         {
-            return StringToData(File.ReadAllText(path, Encoding.UTF8));
+            return StringToData<T>(File.ReadAllText(path, Encoding.UTF8));
         }
 
-        public static string DataToString(WorldFileData data = null)
+        public static string DataToString<T>(T data)
         {
             return JsonConvert.SerializeObject(data, Formatting.Indented, GetJsonSettings());
         }
 
-        public static ServerInfo StringToData(string text = null)
+        public static T StringToData<T>(string text)
         {
-            return JsonConvert.DeserializeObject<ServerInfo>(text, GetJsonSettings());
+            return JsonConvert.DeserializeObject<T>(text, GetJsonSettings());
         }
 
         protected static JsonSerializerSettings GetJsonSettings()

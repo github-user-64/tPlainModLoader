@@ -4,6 +4,7 @@ using System;
 using tContentPatch.Content.UI;
 using Terraria.Audio;
 using Terraria.ID;
+using Terraria.UI;
 
 namespace OptimizeAndTool.Content.UI
 {
@@ -18,8 +19,9 @@ namespace OptimizeAndTool.Content.UI
             string serverWorldName = Info.GetWorldName(allowCropping: true);
 
             DefaultDisplayText = serverWorldName;
-            MouseText = serverWorldName;
+            if (serverWorldName != null) MouseText = $"世界名:{serverWorldName}";
             Style = StyleServerName;
+            MouseTextStyle = MouseTextStyle2;
 
             OnGetText = () => Info.DisplayText;
             OnSetText = v => Info.DisplayText = v;
@@ -41,13 +43,18 @@ namespace OptimizeAndTool.Content.UI
             };
             ui.UIBackStyle.Append(back);
 
+            //
+
             ui.UITextColor = ui.UITextColorDeft = Color.White;
             ui.UITextColorDeft *= 0.9f;
 
             ui.UIText.SetPadding(6f);
             ui.OnGotFocus += () => SoundEngine.PlaySound(SoundID.MenuTick);
             ui.OnLostFocus += () => SoundEngine.PlaySound(SoundID.MenuClose);
-            ui.OnMouseOver += (e, s) => SoundEngine.PlaySound(SoundID.MenuTick);
+
+            UIState overSound = new UIState();
+            overSound.OnMouseOver += (e, s) => SoundEngine.PlaySound(SoundID.MenuTick);
+            ui.Append(overSound);
         }
     }
 }

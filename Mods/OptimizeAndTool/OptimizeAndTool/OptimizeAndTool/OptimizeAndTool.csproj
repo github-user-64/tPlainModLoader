@@ -49,6 +49,7 @@
     <Compile Include="Content\Patch\Patch_RemadeChatMonitor.cs" />
     <Compile Include="Content\ServerList\ServerInfo.cs" />
     <Compile Include="Content\ServerList\ServerList.cs" />
+    <Compile Include="Content\UI\Menus\UIMenuServerList_Control.cs" />
     <Compile Include="Content\UI\UIStackPanelMove.cs" />
     <Compile Include="ThisMod.cs" />
     <Compile Include="Utils\ListHelp.cs" />

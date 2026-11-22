@@ -23,6 +23,7 @@ namespace OptimizeAndTool.Content.UI
             UIMouseText = new UIMouseText();
             UIMouseText.Width.Set(0f, 1f);
             UIMouseText.Height.Set(0f, 1f);
+            UIMouseText.MouseTextStyle = UIMouseText.MouseTextStyle2;
             Append(UIMouseText);
         }
 
