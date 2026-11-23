@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using tContentPatch.Content.UI;
-using Terraria.Audio;
 using Terraria.GameContent.UI.Elements;
-using Terraria.ID;
 using Terraria.Localization;
 
 namespace OptimizeAndTool.Content.UI
@@ -21,6 +19,7 @@ namespace OptimizeAndTool.Content.UI
             name.Width.Set(-6f, 1f);
             name.HAlign = 1f;
             name.MarginTop = -4f;
+            SetUILabel(name, () => $"世界名:{Info.GetWorldName(allowCropping: true)}");
             sp.Append(name);
 
             UIElementEmpty uiee = new UIElementEmpty();
@@ -51,7 +50,7 @@ namespace OptimizeAndTool.Content.UI
             }
             UIPanel2Text worldSize = GetInfoUI(Language.GetTextValue("UI.WorldSizeFormat", Info.WorldSizeName));
             worldSize.Width.Set(worldSizeWidth, 0f);
-            worldSize.MouseText = $"{Info.WorldSizeX}x{Info.WorldSizeY}";
+            SetUILabel(worldSize, () => $"世界大小:{Info.WorldSizeX}x{Info.WorldSizeY}");
             infos.Append(worldSize);
 
             UIPanel2Text ipPort = GetInfoUI(string.Empty);
@@ -70,7 +69,7 @@ namespace OptimizeAndTool.Content.UI
             ipPortSP.IsAutoUpdateSize = true;
             ipPort.Append(ipPortSP);
 
-            UIText ip = GetCopyTextUI(Info.IP, 0.8f);
+            UITextButton ip = GetCopyTextUI(Info.IP, 0.8f);
             ip.VAlign = 0.5f;
             ipPortSP.Append(ip);
 
@@ -78,7 +77,7 @@ namespace OptimizeAndTool.Content.UI
             uit.VAlign = 0.5f;
             ipPortSP.Append(uit);
 
-            UIText port = GetCopyTextUI(Info.Port.ToString(), 0.8f);
+            UITextButton port = GetCopyTextUI(Info.Port.ToString(), 0.8f);
             port.VAlign = 0.5f;
             ipPortSP.Append(port);
         }
@@ -92,26 +91,16 @@ namespace OptimizeAndTool.Content.UI
             return ui;
         }
 
-        protected UIText GetCopyTextUI(string text = null, float textScale = 1f)
+        protected UITextButton GetCopyTextUI(string text = null, float textScale = 1f)
         {
-            UIText ui = new UIText(text ?? string.Empty, textScale);
-            ui.OnLeftClick += (e, s) =>
+            UITextButton ui = new UITextButton(string.Empty);
+            ui.UIText.SetText(text ?? string.Empty, textScale, false);
+            ui.OnClick += () =>
             {
-                SoundEngine.PlaySound(SoundID.MenuTick);
                 TryCopyText(text);
                 SetLabel("已复制");
             };
-            ui.OnMouseOver += (e, s) =>
-            {
-                ui.TextColor = Color.Yellow;
-                SoundEngine.PlaySound(SoundID.MenuTick);
-                SetLabel($"复制:{text}");
-            };
-            ui.OnMouseOut += (e, s) =>
-            {
-                ui.TextColor = Color.White;
-                SetLabel();
-            };
+            SetUILabel(ui, () => $"复制:{text}");
 
             return ui;
         }

@@ -27,6 +27,7 @@ namespace OptimizeAndTool.Content.Patch
         public static void SelectPlayerPostfix()
         {
             if (Main.menuMode != MenuID.ServerIP) return;
+            if (Main.gameMenu != true) return;
 
             if (ServerList.ServerList.Enable.val == true) ServerList.ServerList.OpenMenu();
         }

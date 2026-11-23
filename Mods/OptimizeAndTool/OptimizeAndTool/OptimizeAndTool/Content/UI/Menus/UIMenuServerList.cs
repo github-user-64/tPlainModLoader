@@ -1,12 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using OptimizeAndTool.Content.ServerList;
+using System;
 using System.Collections.Generic;
 using tContentPatch.Content.UI;
-using Terraria;
-using Terraria.Audio;
 using Terraria.GameContent.UI.Elements;
-using Terraria.ID;
 using Terraria.UI;
 
 namespace OptimizeAndTool.Content.UI.Menus
@@ -15,8 +12,12 @@ namespace OptimizeAndTool.Content.UI.Menus
     {
         public readonly ListData.IControl Control = null;
         public List<ServerInfo> Data => Control?.Data;
-        public UIServerListItem CheckedItem = null;
 
+        /// <summary>
+        /// <see cref="UIElement.Update(GameTime)"/>前的操作
+        /// </summary>
+        protected Action UpdatePrefixControl = null;
+        public UIServerListItem CheckedItem = null;
         public readonly UIStackPanelMove UISP = null;
 
         public UIMenuServerList(ListData.IControl control = null, UIState back = null) : base("选择服务器", back: back)
@@ -29,7 +30,7 @@ namespace OptimizeAndTool.Content.UI.Menus
 
             UIButton1 btn2 = new UIButton1("添加服务器");
             btn2.MouseText = "在当前选中服务器下方插入";
-            btn2.OnLeftClick += (e, s) => ControlAdd();
+            btn2.OnLeftClick += (e, s) => SetControlAdd();
             AddBtn(btn2, 2);
 
             //
@@ -65,35 +66,26 @@ namespace OptimizeAndTool.Content.UI.Menus
             btns.ItemMargin = 10f;
             Append(btns);
 
-            UIImage save = GetImageButton(btns.Width.Pixels, "Images/UI/IconQuickload", "保存");
-            save.OnLeftClick += (e, s) => SaveData();
+            UIImageButton save = new UIImageButton(btns.Width.Pixels, "Images/UI/IconQuickload");
+            save.MouseText = "保存";
+            save.OnLeftClick += (e, s) => SetControlSave();
             btns.Append(save);
 
-            UIImage load = GetImageButton(btns.Width.Pixels, "Images/UI/Sort_0", "加载");
-            load.OnLeftClick += (e, s) => LoadData();
+            UIImageButton load = new UIImageButton(btns.Width.Pixels, "Images/UI/Sort_0");
+            load.MouseText = "加载";
+            load.OnLeftClick += (e, s) => SetControlLoad();
             btns.Append(load);
         }
 
-        private UIImage GetImageButton(float size, string img, string mouseText)
+        public override void Update(GameTime gameTime)
         {
-            UIImage ui = new UIImage(Main.Assets.Request<Texture2D>(img));
-            ui.Width.Set(size, 0f);
-            ui.Height.Set(size, 0f);
-            ui.Color = Color.White * 0.6f;
-            ui.ScaleToFit = true;
-            ui.OnUpdate += _ =>
+            if (UpdatePrefixControl != null)
             {
-                if (ui.IsMouseHovering) Main.instance.MouseText(mouseText);
-            };
-            ui.OnMouseOver += (e, s) =>
-            {
-                ui.Color = Color.White;
-                SoundEngine.PlaySound(SoundID.MenuTick);
-            };
-            ui.OnMouseOut += (e, s) => ui.Color = Color.White * 0.6f;
-            ui.OnLeftClick += (e, s) => SoundEngine.PlaySound(SoundID.MenuTick);
+                UpdatePrefixControl();
+                UpdatePrefixControl = null;
+            }
 
-            return ui;
+            base.Update(gameTime);
         }
 
         protected virtual void AddUIItem(ServerInfo data, int index)
@@ -101,9 +93,9 @@ namespace OptimizeAndTool.Content.UI.Menus
             UIServerListItem item = new UIServerListItem(data);
             item.GetIsChecked = () => CheckedItem == item;
             item.OnLeftClick += (e, s) => CheckedItem = item;
-            item.OnDel += () => ControlDel(item);
-            item.OnUp += () => ControlUp(item);
-            item.OnDown += () => ControlDown(item);
+            item.OnDel += () => SetControlDel(item);
+            item.OnUp += () => SetControlUp(item);
+            item.OnDown += () => SetControlDown(item);
 
             UISP.AddItem(item, index);
         }

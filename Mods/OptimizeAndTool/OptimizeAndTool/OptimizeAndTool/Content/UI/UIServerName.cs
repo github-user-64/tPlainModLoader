@@ -16,12 +16,8 @@ namespace OptimizeAndTool.Content.UI
         {
             Info = info ?? throw new ArgumentNullException(nameof(info));
 
-            string serverWorldName = Info.GetWorldName(allowCropping: true);
-
-            DefaultDisplayText = serverWorldName;
-            if (serverWorldName != null) MouseText = $"世界名:{serverWorldName}";
+            DefaultDisplayText = Info.GetWorldName(allowCropping: true);
             Style = StyleServerName;
-            MouseTextStyle = MouseTextStyle2;
 
             OnGetText = () => Info.DisplayText;
             OnSetText = v => Info.DisplayText = v;

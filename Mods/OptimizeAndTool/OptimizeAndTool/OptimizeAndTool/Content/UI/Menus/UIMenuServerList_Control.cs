@@ -1,7 +1,25 @@
-﻿namespace OptimizeAndTool.Content.UI.Menus
+﻿using System;
+
+namespace OptimizeAndTool.Content.UI.Menus
 {
     public partial class UIMenuServerList
     {
+        #region 设置UpdatePrefixControl
+        protected virtual void SetControl(Action action)
+        {
+            if (Control == null) return;
+
+            UpdatePrefixControl = action;
+        }
+
+        protected virtual void SetControlAdd() => SetControl(ControlAdd);
+        protected virtual void SetControlDel(UIServerListItem item) => SetControl(() => ControlDel(item));
+        protected virtual void SetControlUp(UIServerListItem item) => SetControl(() => ControlUp(item));
+        protected virtual void SetControlDown(UIServerListItem item) => SetControl(() => ControlDown(item));
+        protected virtual void SetControlLoad() => SetControl(ControlLoad);
+        protected virtual void SetControlSave() => SetControl(ControlSave);
+        #endregion
+
         protected virtual void ControlAdd()
         {
             if (Control == null) return;
@@ -43,7 +61,7 @@
             UISP.DownItem(item);
         }
 
-        protected virtual void LoadData()
+        protected virtual void ControlLoad()
         {
             if (Control == null) return;
 
@@ -51,6 +69,6 @@
             UpdateUIData();
         }
 
-        protected virtual void SaveData() => Control?.Save();
+        protected virtual void ControlSave() => Control?.Save();
     }
 }

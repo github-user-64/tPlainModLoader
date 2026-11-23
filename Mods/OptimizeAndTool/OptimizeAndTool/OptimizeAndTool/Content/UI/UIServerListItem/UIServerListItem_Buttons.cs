@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using ReLogic.Content;
+using System;
+using tContentPatch.Content.UI;
 using Terraria.Audio;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ID;
@@ -11,37 +15,46 @@ namespace OptimizeAndTool.Content.UI
     {
         protected virtual void InitializeButtons()
         {
-            UIImageButton play = new UIImageButton(_buttonPlayTexture);
-            SetButton(play, () => Language.GetTextValue("UI.Play"), PlayGame);
-            UILeftButtons.Append(play);
+            UILeftButtons.Append(GetButton(PlayGame, _buttonPlayTexture, () => Language.GetTextValue("UI.Play")));
 
             if (Info.WorldGeneratorVersion != 0L)
             {
-                UIImageButton seed = new UIImageButton(_buttonSeedTexture);
-                SetButton(seed, () => Language.GetTextValue("UI.CopySeed", Info.GetFullSeedText(allowCropping: true)), CopySeed);
-                UILeftButtons.Append(seed);
+                UILeftButtons.Append(GetButton(
+                    CopySeed,
+                    _buttonSeedTexture,
+                    () => Language.GetTextValue("UI.CopySeed", Info.GetFullSeedText(allowCropping: true))));
             }
 
-            UIImageButton del = new UIImageButton(_buttonDeleteTexture);
-            del.VAlign = 1f;
-            del.HAlign = 1f;
-            SetButton(del, () => Language.GetTextValue("UI.Delete"), Delete);
-            Append(del);
+            //
+
+            UIRightButtons.Append(GetTextButton(Up, "上", () => $"选中时按{Keys.Up}也可移动"));
+            UIRightButtons.Append(GetTextButton(Down, "下", () => $"选中时按{Keys.Down}也可移动"));
+
+            UIElement del = GetButton(Delete, _buttonDeleteTexture, () => Language.GetTextValue("UI.Delete"));
+            del.MarginLeft = 6f;
+            UIRightButtons.Append(del);
         }
 
-        protected void SetButton(UIElement uie, Func<string> OnGetText, Action OnClick)
+        protected UIElement GetButton(Action OnClick, Asset<Texture2D> texture, Func<string> OnGetText = null)
         {
-            uie.OnLeftClick += (e, s) =>
+            Terraria.GameContent.UI.Elements.UIImageButton ui = new Terraria.GameContent.UI.Elements.UIImageButton(texture);
+            ui.OnLeftClick += (e, s) =>
             {
                 SoundEngine.PlaySound(SoundID.MenuTick);
                 OnClick();
             };
-            uie.OnMouseOver += (e, s) =>
-            {
-                SoundEngine.PlaySound(SoundID.MenuTick);
-                SetLabel(OnGetText());
-            };
-            uie.OnMouseOut += (e, s) => SetLabel();
+            if (OnGetText != null) SetUILabel(ui, OnGetText);
+
+            return ui;
+        }
+
+        protected UIElement GetTextButton(Action OnClick, string text, Func<string> OnGetText = null)
+        {
+            UITextButton ui = new UITextButton(text);
+            ui.OnClick += OnClick;
+            if (OnGetText != null) SetUILabel(ui, OnGetText);
+
+            return ui;
         }
 
         protected virtual void PlayGame()
@@ -56,5 +69,9 @@ namespace OptimizeAndTool.Content.UI
         }
 
         protected virtual void Delete() => OnDel?.Invoke();
+
+        protected virtual void Down() => OnDown?.Invoke();
+
+        protected virtual void Up() => OnUp?.Invoke();
     }
 }

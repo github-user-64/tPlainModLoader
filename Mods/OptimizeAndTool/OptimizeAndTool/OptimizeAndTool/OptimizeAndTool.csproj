@@ -50,15 +50,10 @@
     <Compile Include="Content\ServerList\ServerInfo.cs" />
     <Compile Include="Content\ServerList\ServerList.cs" />
     <Compile Include="Content\UI\Menus\UIMenuServerList_Control.cs" />
+    <Compile Include="Content\UI\UIImageButton.cs" />
     <Compile Include="Content\UI\UIStackPanelMove.cs" />
     <Compile Include="ThisMod.cs" />
     <Compile Include="Utils\ListHelp.cs" />
-    <None Include="Content\_ServerList\ServerInfo.cs" />
-    <None Include="Content\_ServerList\Setting.cs" />
-    <None Include="Content\_ServerList\UIButton.cs" />
-    <None Include="Content\_ServerList\UIServerItem.cs" />
-    <None Include="Content\_ServerList\UIServerList.cs" />
-    <None Include="Content\_ServerList\ServerList.cs" />
     <Compile Include="Content\ServerList\ListData.cs" />
     <Compile Include="Content\UI\Menus\UIMenuServerList.cs" />
     <Compile Include="Content\TimeSet.cs" />
