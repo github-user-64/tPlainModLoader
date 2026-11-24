@@ -66,7 +66,10 @@ namespace tContentPatch.Content.UI
         /// </summary>
         protected virtual void ApplyBackStyle()
         {
-            Style?.Invoke(this);
+            if (Style == null) return;
+
+            Style(this);
+            Recalculate();
         }
     }
 }

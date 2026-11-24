@@ -21,7 +21,9 @@ namespace tContentPatch.Content.Menus.CreateMod
             if (Main.dedServ) return;
             if (Main.showSplash) return;
 
-            GameUitl.OpenMenu(new UICreateMod(back));
+            UIState state = new UICreateMod(back);
+            state.NoGamepadSupport = true;//不支持游戏手柄, 取消按移动键鼠标会定位到ui上的功能
+            GameUitl.OpenMenu(state);
         }
 
         protected void SetPath(string path)

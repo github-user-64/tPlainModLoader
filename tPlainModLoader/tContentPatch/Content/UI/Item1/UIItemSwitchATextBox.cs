@@ -44,7 +44,6 @@ namespace tContentPatch.Content.UI.Item1
                 v.Height.Set(0f, 1f);
             };
             UISwitch.HAlign = 1f;
-            UISwitch.VAlign = 0.5f;
             UIS.Append(UISwitch);
 
             UITextBox.Width.Set(-Width - 2f, 1f);

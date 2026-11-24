@@ -12,7 +12,6 @@ namespace tContentPatch.Content.Menus.ModSet
         private ModSetting ms_this = null;
         private int mssIndex = -1;
 
-        private UIElement uie = null;
         private UIButton1 btn_prev = null;
         private UIButton1 btn_next = null;
         private UIButton1 btn_save = null;
@@ -21,11 +20,6 @@ namespace tContentPatch.Content.Menus.ModSet
         {
             MaxWidth.Set(700f, 0f);
             UIPanel.BackgroundColor = Color.MidnightBlue * 0.8f;
-
-            uie = new UIElement();
-            uie.Width.Set(0f, 1f);
-            uie.Height.Set(0f, 1f);
-            UIPanel.Append(uie);
 
             btn_prev = new UIButton1("<");
             btn_prev.OnLeftClick += (e, s) => SetItem(mssIndex - 1);
@@ -56,7 +50,8 @@ namespace tContentPatch.Content.Menus.ModSet
             if (mss == null)
             {
                 UITitle.SetText(string.Empty);
-                uie.RemoveAllChildren();
+                UITitle.Recalculate();
+                UIPanel.RemoveAllChildren();
                 return;
             }
 
@@ -81,15 +76,16 @@ namespace tContentPatch.Content.Menus.ModSet
 
             mssIndex = index;
 
-            ms_this = mssIndex == -1 ? null : mss[mssIndex];
+            ms_this = mssIndex < 0 ? null : mss[mssIndex];
 
             //
 
             UITitle.SetText(ms_this?.Title ?? string.Empty);
-            this.uie.RemoveAllChildren();
+            UITitle.Recalculate();
+            UIPanel.RemoveAllChildren();
 
-            UIElement uie = ms_this?.GetUI();
-            if (uie != null) this.uie.Append(uie);
+            UIElement ui = ms_this?.GetUI();
+            if (ui != null) UIPanel.Append(ui);
         }
 
         public override void Update(GameTime gameTime)

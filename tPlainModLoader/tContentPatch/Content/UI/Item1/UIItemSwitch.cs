@@ -32,7 +32,6 @@ namespace tContentPatch.Content.UI.Item1
                 v.Height.Set(0f, 1f);
             };
             UISwitch.HAlign = 1f;
-            UISwitch.VAlign = 0.5f;
             Append(UISwitch);
         }
     }
