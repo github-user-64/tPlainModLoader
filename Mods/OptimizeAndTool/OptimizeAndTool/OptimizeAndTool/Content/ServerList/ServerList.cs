@@ -13,11 +13,18 @@ namespace OptimizeAndTool.Content.ServerList
     internal class ServerList : PatchMain
     {
         public static GetSetReset<bool> Enable = new GetSetReset<bool>(true, true);
+        public static GetSetReset<int> ItemStyle = new GetSetReset<int>(0, 0);
         protected static ListData.IControl control = null;
 
         public static void OpenMenu()
         {
-            GameUitl.OpenMenu(new UIMenuServerList(control, Main.MenuUI?.CurrentState));
+            UIMenuServerList ui = new UIMenuServerList(control, Main.MenuUI?.CurrentState);
+            ui.SwitchItemStyle(ItemStyle.val);
+            ui.OnSwitchItemStyle += v => ItemStyle.val = v;
+
+            ui.NoGamepadSupport = true;//不支持游戏手柄, 取消按移动键鼠标会定位到ui上的功能
+
+            GameUitl.OpenMenu(ui);
         }
 
         public static List<CommandObject> GetCO()

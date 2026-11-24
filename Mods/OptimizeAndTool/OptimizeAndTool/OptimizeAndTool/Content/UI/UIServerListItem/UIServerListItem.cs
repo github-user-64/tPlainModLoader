@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using OptimizeAndTool.Content.ServerList;
 using ReLogic.Content;
-using ReLogic.OS;
 using System;
 using tContentPatch.Content;
 using tContentPatch.Content.UI;
@@ -19,17 +18,28 @@ namespace OptimizeAndTool.Content.UI
         private Asset<Texture2D> _buttonPlayTexture;
         private Asset<Texture2D> _buttonSeedTexture;
         private Asset<Texture2D> _buttonDeleteTexture;
+        private Asset<Texture2D> _buttonMoveTexture;
+        private Asset<Texture2D> _buttonEditInfoTexture;
 
-        private UIElement _worldIcon = null;
-        private UIText _buttonLabel = null;
+        /// <summary>
+        /// ui的背景
+        /// </summary>
+        public readonly UIElement UIBackStyle = null;
+        /// <summary>
+        /// 设置样式
+        /// </summary>
+        public Action<UIServerListItem> Style = Style1;
+        private bool StyleLoaded = false;
 
         public Func<bool> GetIsChecked = null;
         public Action OnUp = null;
         public Action OnDown = null;
         public Action OnDel = null;
         public readonly ServerInfo Info = null;
+
         public readonly UIStackPanel UILeftButtons = null;
         public readonly UIStackPanel UIRightButtons = null;
+        public readonly UIText UILabel = null;
 
         public UIServerListItem(ServerInfo info)
         {
@@ -40,17 +50,10 @@ namespace OptimizeAndTool.Content.UI
             LoadTextures();
 
             Width.Set(0f, 1f);
-            Height.Set(100f, 0f);
-            BackgroundColor = new Color(63, 82, 151) * 0.7f;
-            BorderColor = new Color(89, 116, 213) * 0.7f;
-            SetPadding(8f);
+            OnLeftDoubleClick += (e, s) => PlayGame();
 
-            //
-
-            _worldIcon = GetIcoUI(Info);
-            Append(_worldIcon);
-
-            InitializeInfos();
+            UIBackStyle = new UIState();
+            Append(UIBackStyle);
 
             //
 
@@ -67,21 +70,27 @@ namespace OptimizeAndTool.Content.UI
             UIRightButtons.VAlign = 1f;
             UIRightButtons.Horizontal = true;
             UIRightButtons.IsAutoUpdateSize = true;
-            UIRightButtons.ItemMargin = 4f;
+            UIRightButtons.ItemMargin = 8f;
             UIRightButtons.OnUpdate += _ => UIRightButtons.UpdateContainer_Height();
             Append(UIRightButtons);
 
             InitializeButtons();
 
-            _buttonLabel = new UIText(string.Empty);
-            _buttonLabel.VAlign = 1f;
-            _buttonLabel.MarginLeft = 4f;
-            _buttonLabel.MarginBottom = 3f;
-            UILeftButtons.Append(_buttonLabel);
+            UILabel = new UIText(string.Empty);
+            UILabel.VAlign = 1f;
+            UILabel.MarginLeft = 4f;
+            UILabel.MarginBottom = 3f;
+            UILeftButtons.Append(UILabel);
         }
 
         public override void Update(GameTime gameTime)
         {
+            if (StyleLoaded == false)
+            {
+                StyleLoaded = true;
+                ApplyBackStyle();
+            }
+
             base.Update(gameTime);
 
             bool IsChecked = GetIsChecked?.Invoke() == true;
@@ -93,6 +102,14 @@ namespace OptimizeAndTool.Content.UI
             if (InputUtils.DownCount(Keys.Up) == 1 || InputUtils.DownCount(Keys.Up) > 30) Up();
             else
             if (InputUtils.DownCount(Keys.Down) == 1 || InputUtils.DownCount(Keys.Down) > 30) Down();
+        }
+
+        /// <summary>
+        /// 设置页面背景
+        /// </summary>
+        protected virtual void ApplyBackStyle()
+        {
+            Style?.Invoke(this);
         }
 
         protected UIElement GetIcoUI(WorldFileData data)
@@ -123,24 +140,10 @@ namespace OptimizeAndTool.Content.UI
             return ico;
         }
 
-        protected void SetLabel(string txt = null)
-        {
-            _buttonLabel.SetText(txt ?? string.Empty);
-        }
-
         protected void SetUILabel(UIElement ui, Func<string> OnGetText)
         {
             ui.OnMouseOver += (e, s) => SetLabel(OnGetText());
             ui.OnMouseOut += (e, s) => SetLabel(null);
-        }
-
-        protected void TryCopyText(string text = null)
-        {
-            try
-            {
-                if (text != null) Platform.Get<IClipboard>().Value = text;
-            }
-            catch { }
         }
 
         private void LoadTextures()
@@ -148,6 +151,8 @@ namespace OptimizeAndTool.Content.UI
             _buttonPlayTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonPlay");
             _buttonSeedTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonSeed");
             _buttonDeleteTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonDelete");
+            _buttonMoveTexture = Main.Assets.Request<Texture2D>("Images/UI/TexturePackButtons");
+            _buttonEditInfoTexture = Main.Assets.Request<Texture2D>("Images/UI/ButtonRename");
         }
     }
 }

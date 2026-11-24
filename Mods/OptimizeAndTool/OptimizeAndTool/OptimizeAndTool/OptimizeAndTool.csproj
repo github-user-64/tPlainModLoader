@@ -51,6 +51,9 @@
     <Compile Include="Content\ServerList\ServerList.cs" />
     <Compile Include="Content\UI\Menus\UIMenuServerList_Control.cs" />
     <Compile Include="Content\UI\UIImageButton.cs" />
+    <Compile Include="Content\UI\UIServerListItem\UIServerListItem_Action.cs" />
+    <Compile Include="Content\UI\UIServerListItem\UIServerListItem_Buttons.cs" />
+    <Compile Include="Content\UI\UIServerListItem\UIServerListItem_Style2.cs" />
     <Compile Include="Content\UI\UIStackPanelMove.cs" />
     <Compile Include="ThisMod.cs" />
     <Compile Include="Utils\ListHelp.cs" />
@@ -58,11 +61,9 @@
     <Compile Include="Content\UI\Menus\UIMenuServerList.cs" />
     <Compile Include="Content\TimeSet.cs" />
     <Compile Include="Content\UI\UIItemValueSliderSwitch.cs" />
-    <Compile Include="Content\UI\UIPanel2Text.cs" />
     <Compile Include="Content\UI\UIServerName.cs" />
     <Compile Include="Content\UI\UIServerListItem\UIServerListItem.cs" />
-    <Compile Include="Content\UI\UIServerListItem\UIServerListItem_Buttons.cs" />
-    <Compile Include="Content\UI\UIServerListItem\UIServerListItem_Infos.cs" />
+    <Compile Include="Content\UI\UIServerListItem\UIServerListItem_Style1.cs" />
     <Compile Include="ModifyInterfaceLayers.cs" />
     <Compile Include="ModLinkage\LinkageSetting.cs" />
     <Compile Include="ModLinkage\ModQuickSetting.cs" />

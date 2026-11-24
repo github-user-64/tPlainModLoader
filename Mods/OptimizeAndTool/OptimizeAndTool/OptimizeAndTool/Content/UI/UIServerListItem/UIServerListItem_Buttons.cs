@@ -1,77 +1,53 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ReLogic.Content;
 using System;
-using tContentPatch.Content.UI;
-using Terraria.Audio;
-using Terraria.GameContent.UI.Elements;
-using Terraria.ID;
+using Terraria;
 using Terraria.Localization;
-using Terraria.UI;
 
 namespace OptimizeAndTool.Content.UI
 {
-    public partial class UIServerListItem : AWorldListItem
+    public partial class UIServerListItem
     {
         protected virtual void InitializeButtons()
         {
-            UILeftButtons.Append(GetButton(PlayGame, _buttonPlayTexture, () => Language.GetTextValue("UI.Play")));
+            UILeftButtons.Append(GetButton(PlayGame, () => Language.GetTextValue("UI.Play"), _buttonPlayTexture));
 
             if (Info.WorldGeneratorVersion != 0L)
             {
                 UILeftButtons.Append(GetButton(
                     CopySeed,
-                    _buttonSeedTexture,
-                    () => Language.GetTextValue("UI.CopySeed", Info.GetFullSeedText(allowCropping: true))));
+                    () => Language.GetTextValue("UI.CopySeed", Info.GetFullSeedText(allowCropping: true)),
+                    _buttonSeedTexture));
             }
+
+            UILeftButtons.Append(GetButton(EditInfo, () => "编辑信息", _buttonEditInfoTexture));
 
             //
 
-            UIRightButtons.Append(GetTextButton(Up, "上", () => $"选中时按{Keys.Up}也可移动"));
-            UIRightButtons.Append(GetTextButton(Down, "下", () => $"选中时按{Keys.Down}也可移动"));
+            UIImageButton up = GetButton(Up, () => $"选中时按{Keys.Up}也可移动", _buttonMoveTexture);
+            up.Frame = _buttonMoveTexture.Frame(horizontalFrames: 2, verticalFrames: 2);
+            up.TextureColor = Color.GreenYellow;
+            UIRightButtons.Append(up);
 
-            UIElement del = GetButton(Delete, _buttonDeleteTexture, () => Language.GetTextValue("UI.Delete"));
-            del.MarginLeft = 6f;
+            UIImageButton down = GetButton(Down, () => $"选中时按{Keys.Down}也可移动", _buttonMoveTexture);
+            down.Frame = _buttonMoveTexture.Frame(horizontalFrames: 2, verticalFrames: 2, frameX: 1);
+            down.TextureColor = Color.GreenYellow;
+            UIRightButtons.Append(down);
+
+            UIImageButton del = GetButton(Delete, () => Language.GetTextValue("UI.Delete"), _buttonDeleteTexture);
+            del.MarginLeft = 10f;
             UIRightButtons.Append(del);
         }
 
-        protected UIElement GetButton(Action OnClick, Asset<Texture2D> texture, Func<string> OnGetText = null)
+        protected UIImageButton GetButton(Action OnClick, Func<string> OnGetText, Asset<Texture2D> texture)
         {
-            Terraria.GameContent.UI.Elements.UIImageButton ui = new Terraria.GameContent.UI.Elements.UIImageButton(texture);
-            ui.OnLeftClick += (e, s) =>
-            {
-                SoundEngine.PlaySound(SoundID.MenuTick);
-                OnClick();
-            };
-            if (OnGetText != null) SetUILabel(ui, OnGetText);
+            UIImageButton ui = new UIImageButton(22f, texture);
+            ui.OnLeftClick += (e, s) => OnClick();
+            SetUILabel(ui, OnGetText);
 
             return ui;
         }
-
-        protected UIElement GetTextButton(Action OnClick, string text, Func<string> OnGetText = null)
-        {
-            UITextButton ui = new UITextButton(text);
-            ui.OnClick += OnClick;
-            if (OnGetText != null) SetUILabel(ui, OnGetText);
-
-            return ui;
-        }
-
-        protected virtual void PlayGame()
-        {
-
-        }
-
-        protected virtual void CopySeed()
-        {
-            TryCopyText(Info.GetFullSeedText());
-            SetLabel(Language.GetTextValue("UI.SeedCopied"));
-        }
-
-        protected virtual void Delete() => OnDel?.Invoke();
-
-        protected virtual void Down() => OnDown?.Invoke();
-
-        protected virtual void Up() => OnUp?.Invoke();
     }
 }

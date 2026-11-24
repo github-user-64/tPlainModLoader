@@ -12,11 +12,14 @@ namespace OptimizeAndTool.Content.UI.Menus
     {
         public readonly ListData.IControl Control = null;
         public List<ServerInfo> Data => Control?.Data;
-
         /// <summary>
         /// <see cref="UIElement.Update(GameTime)"/>前的操作
         /// </summary>
         protected Action UpdatePrefixControl = null;
+
+        public Action<int> OnSwitchItemStyle = null;
+        public Action<UIServerListItem> ItemStyle = UIServerListItem.Style1;
+
         public UIServerListItem CheckedItem = null;
         public readonly UIStackPanelMove UISP = null;
 
@@ -29,7 +32,7 @@ namespace OptimizeAndTool.Content.UI.Menus
             AddBtn(btn1, 2);
 
             UIButton1 btn2 = new UIButton1("添加服务器");
-            btn2.MouseText = "在当前选中服务器下方插入";
+            btn2.MouseText = "在当前选中服务器处插入\n或在游戏内将服务器添加到列表(优化和工具)";
             btn2.OnLeftClick += (e, s) => SetControlAdd();
             AddBtn(btn2, 2);
 
@@ -51,8 +54,6 @@ namespace OptimizeAndTool.Content.UI.Menus
             //
 
             Control = control;
-
-            UpdateUIData();
         }
 
         protected virtual void InitializeButtons()
@@ -75,6 +76,11 @@ namespace OptimizeAndTool.Content.UI.Menus
             load.MouseText = "加载";
             load.OnLeftClick += (e, s) => SetControlLoad();
             btns.Append(load);
+
+            UIImageButton switchStyle = new UIImageButton(btns.Width.Pixels, "Images/UI/ChestCraft_2");
+            switchStyle.MouseText = "切换样式";
+            switchStyle.OnLeftClick += (e, s) => SwitchItemStyle(ItemStyle == UIServerListItem.Style1 ? 1 : 0);
+            btns.Append(switchStyle);
         }
 
         public override void Update(GameTime gameTime)
@@ -90,17 +96,31 @@ namespace OptimizeAndTool.Content.UI.Menus
 
         protected virtual void AddUIItem(ServerInfo data, int index)
         {
-            UIServerListItem item = new UIServerListItem(data);
-            item.GetIsChecked = () => CheckedItem == item;
-            item.OnLeftClick += (e, s) => CheckedItem = item;
-            item.OnDel += () => SetControlDel(item);
-            item.OnUp += () => SetControlUp(item);
-            item.OnDown += () => SetControlDown(item);
+            UIServerListItem ui = new UIServerListItem(data);
+            ui.Style = ItemStyle;
+            ui.GetIsChecked = () => CheckedItem == ui;
+            ui.OnLeftClick += (e, s) => CheckedItem = ui;
+            ui.OnDel += () => SetControlDel(ui);
+            ui.OnUp += () => SetControlUp(ui);
+            ui.OnDown += () => SetControlDown(ui);
 
-            UISP.AddItem(item, index);
+            UISP.AddItem(ui, index);
         }
 
-        protected virtual void UpdateUIData()
+        public virtual void SwitchItemStyle(int style)
+        {
+            switch (style)
+            {
+                case 1: ItemStyle = UIServerListItem.Style2; break;
+                default: ItemStyle = UIServerListItem.Style1; break;
+            }
+
+            OnSwitchItemStyle?.Invoke(style);
+
+            UpdateUIData();
+        }
+
+        public virtual void UpdateUIData()
         {
             CheckedItem = null;
             UISP.RemoveAllChildren();

@@ -14,6 +14,7 @@ namespace OptimizeAndTool
             public bool CleanRepeatChat = true;
             public bool CopyChat = true;
             public bool ServerList = true;
+            public int ServerListItemStyle = 0;
             public bool ItemToolTipAdditional = true;
         }
 
@@ -29,18 +30,15 @@ namespace OptimizeAndTool
                 CleanRepeatChat.Enable.val = data.CleanRepeatChat;
                 CopyChat.Enable.val = data.CopyChat;
                 ServerList.Enable.val = data.ServerList;
+                ServerList.ItemStyle.val = data.ServerListItemStyle;
                 ItemToolTipAdditional.Enable.val = data.ItemToolTipAdditional;
             }
 
             CleanRepeatChat.Enable.OnValUpdate += _ => NeedSave = true;
             CopyChat.Enable.OnValUpdate += _ => NeedSave = true;
             ServerList.Enable.OnValUpdate += _ => NeedSave = true;
+            ServerList.ItemStyle.OnValUpdate += _ => NeedSave = true;
             ItemToolTipAdditional.Enable.OnValUpdate += _ => NeedSave = true;
-        }
-
-        public override UIElement GetUI()
-        {
-            return UIBuild.get3(Function.GetUI());
         }
 
         public override void SetDefault()
@@ -48,6 +46,7 @@ namespace OptimizeAndTool
             CleanRepeatChat.Enable.Reset();
             CopyChat.Enable.Reset();
             ServerList.Enable.Reset();
+            ServerList.ItemStyle.Reset();
             ItemToolTipAdditional.Enable.Reset();
         }
 
@@ -58,8 +57,14 @@ namespace OptimizeAndTool
                 CleanRepeatChat = CleanRepeatChat.Enable.val,
                 CopyChat = CopyChat.Enable.val,
                 ServerList = ServerList.Enable.val,
+                ServerListItemStyle = ServerList.ItemStyle.val,
                 ItemToolTipAdditional = ItemToolTipAdditional.Enable.val,
             };
+        }
+
+        public override UIElement GetUI()
+        {
+            return UIBuild.get3(Function.GetUI());
         }
     }
 }
