@@ -32,5 +32,19 @@ namespace tContentPatch.ModPatch
         {
             mod.ForTry(item => item.UpdateWorldPostfix());
         }
+
+        [HarmonyPatch("SaveAndQuit")]
+        [HarmonyPrefix]
+        public static void SaveAndQuitPrefix(Action callback = null)
+        {
+            mod.ForTry(item => item.SaveAndQuitPrefix(callback));
+        }
+
+        [HarmonyPatch("SaveAndQuit")]
+        [HarmonyPostfix]
+        public static void SaveAndQuitPostfix(Action callback = null)
+        {
+            mod.ForTry(item => item.SaveAndQuitPostfix(callback));
+        }
     }
 }

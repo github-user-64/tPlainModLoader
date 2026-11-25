@@ -17,6 +17,8 @@ namespace tContentPatch.Content.Menus.ModInfo
 
         public UIModInfo() : base(string.Empty)
         {
+            NoGamepadSupport = true;//不支持游戏手柄, 取消按移动键鼠标会定位到ui上的功能
+
             ui_sv = new UIScrollViewer2();
             ui_sv.Width.Precent = 1;
             ui_sv.Height.Precent = 1;

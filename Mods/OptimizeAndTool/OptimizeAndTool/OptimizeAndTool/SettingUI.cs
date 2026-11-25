@@ -23,8 +23,12 @@ namespace OptimizeAndTool
         public override string FilePath => "Setting.json";
         public override Type DataType => typeof(Data);
 
+        protected static SettingUI Instance = null;
+
         public override void Load(object v)
         {
+            Instance = this;
+
             if (v is Data data)
             {
                 CleanRepeatChat.Enable.val = data.CleanRepeatChat;
@@ -65,6 +69,15 @@ namespace OptimizeAndTool
         public override UIElement GetUI()
         {
             return UIBuild.get3(Function.GetUI());
+        }
+
+        private class AutoSave_Unload : Mod
+        {
+            public override void Unload() => Instance?.Save();
+        }
+        private class AutoSave_SaveSettings : PatchMain
+        {
+            public override void SaveSettingsPostfix() => Instance?.Save();
         }
     }
 }

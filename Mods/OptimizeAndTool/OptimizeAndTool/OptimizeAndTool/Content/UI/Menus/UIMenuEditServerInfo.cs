@@ -6,14 +6,16 @@ using Terraria.UI;
 
 namespace OptimizeAndTool.Content.UI.Menus
 {
-    public class UIEditServerInfo : UIMenuPanel
+    public class UIMenuEditServerInfo : UIMenuPanel
     {
         public readonly ServerInfo Info = null;
 
         public readonly UIScrollViewer2 UIStack = null;
 
-        public UIEditServerInfo(ServerInfo info, UIState back = null) : base(title: "编辑服务器信息", back: back)
+        public UIMenuEditServerInfo(ServerInfo info, UIState back = null) : base(title: "编辑服务器信息", back: back)
         {
+            NoGamepadSupport = true;//不支持游戏手柄, 取消按移动键鼠标会定位到ui上的功能
+
             Info = info ?? throw new ArgumentNullException(nameof(info));
 
             //

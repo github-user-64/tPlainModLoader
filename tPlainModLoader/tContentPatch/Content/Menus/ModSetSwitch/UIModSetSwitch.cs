@@ -15,8 +15,10 @@ namespace tContentPatch.Content.Menus.ModSetSwitch
 
         public UIModSetSwitch() : base("模组设置")
         {
+            NoGamepadSupport = true;//不支持游戏手柄, 取消按移动键鼠标会定位到ui上的功能
             MinWidth.Set(700f, 0f);
             MaxWidth.Set(900f, 0f);
+
             UIPanel.BackgroundColor = Color.MidnightBlue * 0.8f;
 
             UIModScrollViewer ui_modList = new UIModScrollViewer("模组管理", true);

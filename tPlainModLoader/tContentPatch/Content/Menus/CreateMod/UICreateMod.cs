@@ -17,6 +17,7 @@ namespace tContentPatch.Content.Menus.CreateMod
 
         public UICreateMod(UIState back = null) : base("创建模组", back: back)
         {
+            NoGamepadSupport = true;//不支持游戏手柄, 取消按移动键鼠标会定位到ui上的功能
             MinWidth.Set(700f, 0f);
 
             UIButton1 btn_back = new UIButton1("返回");

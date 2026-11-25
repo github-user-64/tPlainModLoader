@@ -116,6 +116,7 @@ namespace WandsTool.Content
         public wandsPanel()
         {
             container = new UIState();
+            container.NoGamepadSupport = true;//不支持游戏手柄, 取消按移动键鼠标会定位到ui上的功能
 
             btns = new UIElement();
             btns.Width.Set(0f, 1f);

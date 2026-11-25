@@ -31,7 +31,6 @@ namespace tContentPatch.Content.Menus.ModManager
                 loadConfig = new LoadConfig(ContentPatch.ModDirectory);
 
                 uistate = new UIModManager();
-                uistate.NoGamepadSupport = true;//不支持游戏手柄, 取消按移动键鼠标会定位到ui上的功能
             }
 
             uistate.BackUI = backUI;

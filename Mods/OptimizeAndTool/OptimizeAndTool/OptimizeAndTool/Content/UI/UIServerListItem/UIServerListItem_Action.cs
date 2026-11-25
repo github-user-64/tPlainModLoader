@@ -21,10 +21,7 @@ namespace OptimizeAndTool.Content.UI
 
         protected virtual void EditInfo()
         {
-            UIEditServerInfo ui = new UIEditServerInfo(Info, Main.MenuUI?.CurrentState);
-            ui.NoGamepadSupport = true;//不支持游戏手柄, 取消按移动键鼠标会定位到ui上的功能
-
-            GameUitl.OpenMenu(ui);
+            GameUitl.OpenMenu(new UIMenuEditServerInfo(Info, Main.MenuUI?.CurrentState));
         }
 
         protected virtual void Delete() => OnDel?.Invoke();

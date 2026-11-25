@@ -36,7 +36,7 @@ namespace OptimizeAndTool.Content.UI
                 sp.IsAutoUpdateSize = true;
                 Append(sp);
 
-                UIServerName name = new UIServerName(Info);
+                UIEditServerName name = new UIEditServerName(Info);
                 name.Width.Set(-6f, 1f);
                 name.HAlign = 1f;
                 name.MarginTop = -4f;

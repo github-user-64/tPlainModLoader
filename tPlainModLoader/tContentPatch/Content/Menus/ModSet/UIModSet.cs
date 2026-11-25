@@ -18,7 +18,9 @@ namespace tContentPatch.Content.Menus.ModSet
 
         public UIModSet() : base(string.Empty)
         {
+            NoGamepadSupport = true;//不支持游戏手柄, 取消按移动键鼠标会定位到ui上的功能
             MaxWidth.Set(700f, 0f);
+
             UIPanel.BackgroundColor = Color.MidnightBlue * 0.8f;
 
             btn_prev = new UIButton1("<");

@@ -28,12 +28,8 @@ namespace OptimizeAndTool.Content.UI
         {
             public UIServerListItemStyle2(UIServerListItem parent) : base(parent)
             {
-                UITextBox text = new UITextBox();
+                UIEditServerName text = new UIEditServerName(Info);
                 text.Width.Set(-2f, 0.6f);
-                text.MaxInputLength = 50;
-                text.Style = UITextBox.Style3;
-                text.OnGetText = () => Info.DisplayName;
-                text.OnSetText = v => Info.DisplayName = v;
                 SetUILabel(text, () => $"世界名：{parent.Info.GetWorldName(allowCropping: true)}");
                 Append(text);
 

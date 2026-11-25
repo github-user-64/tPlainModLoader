@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using tContentPatch;
 using tContentPatch.Patch;
 using Terraria.GameContent.UI.Chat;
@@ -72,7 +73,7 @@ namespace OptimizeAndTool.Content.Patch
             }
             catch (Exception ex)
             {
-                Terraria.Main.NewText($"{nameof(Patch_RemadeChatMonitor)}.{nameof(AddNewMessagePrefix)}:{ex.Message}");
+                Debug.WriteLine($"{nameof(Patch_RemadeChatMonitor)}.{nameof(AddNewMessagePrefix)}:{ex.Message}");
             }
         }
     }

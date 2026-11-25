@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using System;
+using Terraria;
 using Terraria.ID;
 
 namespace tContentPatch
@@ -23,5 +24,13 @@ namespace tContentPatch
         /// 在客户端不会调用, <see cref="Main.netMode"/>=1
         /// </summary>
         public virtual void UpdateWorldPostfix() { }
+        /// <summary>
+        /// 保存并退出前
+        /// </summary>
+        public virtual void SaveAndQuitPrefix(Action callback = null) { }
+        /// <summary>
+        /// 保存并退出后
+        /// </summary>
+        public virtual void SaveAndQuitPostfix(Action callback = null) { }
     }
 }

@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using tContentPatch;
 using tContentPatch.Utils;
 
 namespace tPlainModLoader

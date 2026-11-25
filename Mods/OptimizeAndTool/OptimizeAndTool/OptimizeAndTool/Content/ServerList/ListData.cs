@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using tContentPatch;
 using tContentPatch.Utils;
+using Terraria;
 
 namespace OptimizeAndTool.Content.ServerList
 {
@@ -30,7 +31,12 @@ namespace OptimizeAndTool.Content.ServerList
         {
             List<ServerInfo> data = v as List<ServerInfo>;
 
-            if (data != null) data.RemoveAll(i => i == null);
+            if (data != null)
+            {
+                //检查数据
+                data.RemoveAll(i => i == null);
+                foreach (ServerInfo i in data) i.SetWorldSize(i.WorldSizeX, i.WorldSizeY);
+            }
             else data = new List<ServerInfo>();
 
             Data = data;
@@ -54,6 +60,10 @@ namespace OptimizeAndTool.Content.ServerList
             /// </summary>
             int Add(ServerInfo data, int index);
             void Del(ServerInfo data);
+            /// <summary>
+            /// 替换
+            /// </summary>
+            void Replace(int index, ServerInfo data);
             void OffUp(ServerInfo data);
             void OffDown(ServerInfo data);
         }
@@ -82,6 +92,13 @@ namespace OptimizeAndTool.Content.ServerList
             return Data.Add(data, index);
         }
         public virtual void Del(ServerInfo data) => Data.Remove(data);
+        public virtual void Replace(int index, ServerInfo data)
+        {
+            if (data == null) return;
+            if (Data.IndexInRange(index) != true) return;
+
+            Data[index] = data;
+        }
         public virtual void OffUp(ServerInfo data) => Data.OffUp(data);
         public virtual void OffDown(ServerInfo data) => Data.OffDown(data);
         #endregion

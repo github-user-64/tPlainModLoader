@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
+using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ID;
 using Terraria.UI.Gamepad;
 
 namespace OptimizeAndTool.Content.Patch
@@ -23,16 +23,12 @@ namespace OptimizeAndTool.Content.Patch
             TimeSet.UpdateTimeRate();
         }
 
+        public static Action OnSelectPlayerPostfix = null;
         [HarmonyPatch(nameof(Main.SelectPlayer))]
         [HarmonyPostfix]
         public static void SelectPlayerPostfix()
         {
-            if (Main.menuMode != MenuID.ServerIP) return;
-            if (Main.gameMenu != true) return;
-
-            //ResetUILink();
-
-            if (ServerList.ServerList.Enable.val == true) ServerList.ServerList.OpenMenu();
+            OnSelectPlayerPostfix?.Invoke();
         }
 
         /// <summary>

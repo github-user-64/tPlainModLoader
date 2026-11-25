@@ -1,4 +1,4 @@
-﻿namespace tContentPatch
+﻿namespace tPlainModLoader
 {
     internal class LauncherConfig
     {

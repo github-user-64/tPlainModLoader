@@ -15,11 +15,7 @@ namespace tContentPatch.Content.Menus.ModSet
             if (Main.dedServ) return;
             if (Main.showSplash) return;
 
-            if (uistate == null)
-            {
-                uistate = new UIModSet();
-                uistate.NoGamepadSupport = true;//不支持游戏手柄, 取消按移动键鼠标会定位到ui上的功能
-            }
+            if (uistate == null) uistate = new UIModSet();
 
             uistate.InitializeSetList(backUI, mss, open);
 

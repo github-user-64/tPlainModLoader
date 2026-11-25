@@ -45,11 +45,12 @@
     <Compile Include="Content\Function.cs" />
     <Compile Include="Content\Patch\PatchInit.cs" />
     <Compile Include="Content\Patch\Patch_Lighting.cs" />
+    <Compile Include="Content\Patch\Patch_WorldGen.cs" />
     <Compile Include="Content\Patch\Patch_Main.cs" />
     <Compile Include="Content\Patch\Patch_RemadeChatMonitor.cs" />
     <Compile Include="Content\ServerList\ServerInfo.cs" />
     <Compile Include="Content\ServerList\ServerList.cs" />
-    <Compile Include="Content\UI\Menus\UIEditServerInfo.cs" />
+    <Compile Include="Content\UI\Menus\UIMenuEditServerInfo.cs" />
     <Compile Include="Content\UI\Menus\UIMenuServerList\UIMenuServerList_Control.cs" />
     <Compile Include="Content\UI\UIImageButton.cs" />
     <Compile Include="Content\UI\UIServerListItem\UIServerListItem_Action.cs" />
@@ -63,7 +64,7 @@
     <Compile Include="Content\UI\Menus\UIMenuServerList\UIMenuServerList.cs" />
     <Compile Include="Content\TimeSet.cs" />
     <Compile Include="Content\UI\UIItemValueSliderSwitch.cs" />
-    <Compile Include="Content\UI\UIServerName.cs" />
+    <Compile Include="Content\UI\UIEditServerName.cs" />
     <Compile Include="Content\UI\UIServerListItem\UIServerListItem.cs" />
     <Compile Include="Content\UI\UIServerListItem\UIServerListItem_Style1.cs" />
     <Compile Include="ModifyInterfaceLayers.cs" />

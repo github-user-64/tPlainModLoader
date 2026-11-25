@@ -20,7 +20,6 @@ namespace tContentPatch.Content.Menus.ModInfo
             if (Main.showSplash) return;
 
             uistate = new UIModInfo();
-            uistate.NoGamepadSupport = true;//不支持游戏手柄, 取消按移动键鼠标会定位到ui上的功能
             uistate.BackUI = backUI;
             uistate.InitializeMod(mo, ActionDelMod);
             GameUitl.OpenMenu(uistate);

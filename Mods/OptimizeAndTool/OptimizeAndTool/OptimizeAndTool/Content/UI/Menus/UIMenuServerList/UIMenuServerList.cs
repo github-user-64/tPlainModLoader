@@ -3,7 +3,9 @@ using OptimizeAndTool.Content.ServerList;
 using System;
 using System.Collections.Generic;
 using tContentPatch.Content.UI;
+using Terraria.Audio;
 using Terraria.GameContent.UI.Elements;
+using Terraria.ID;
 using Terraria.UI;
 
 namespace OptimizeAndTool.Content.UI.Menus
@@ -30,6 +32,9 @@ namespace OptimizeAndTool.Content.UI.Menus
 
         public UIMenuServerList(ListData.IControl control = null, UIState back = null) : base(title: "选择服务器", back: back)
         {
+            NoGamepadSupport = true;//不支持游戏手柄, 取消按移动键鼠标会定位到ui上的功能
+            MinWidth.Set(600f, 0f);
+
             UIPanel.BackgroundColor = new Color(33, 43, 79) * 0.8f;
 
             UIButton1 btn1 = new UIButton1("返回");
@@ -40,6 +45,14 @@ namespace OptimizeAndTool.Content.UI.Menus
             btn2.MouseText = $"在当前选中服务器处插入\n或在游戏内将服务器添加到列表({ThisMod.ModName})";
             btn2.OnLeftClick += (e, s) => SetControlAdd();
             AddBtn(btn2, 2);
+
+            UIButton1 btn3 = new UIButton1("直接进入");
+            btn3.OnLeftClick += (e, s) =>
+            {
+                SoundEngine.PlaySound(SoundID.MenuOpen);
+                ServerList.ServerList.OpenMenuServerIP();
+            };
+            AddBtn(btn3, 1);
 
             //
 

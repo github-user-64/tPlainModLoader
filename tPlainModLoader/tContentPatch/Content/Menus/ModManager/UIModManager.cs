@@ -15,6 +15,7 @@ namespace tContentPatch.Content.Menus.ModManager
 
         public UIModManager() : base("模组列表", titleYOff: 20f)
         {
+            NoGamepadSupport = true;//不支持游戏手柄, 取消按移动键鼠标会定位到ui上的功能
             Width.Set(600f, 0f);
             Height.Set(-100, 1f);
             HAlign = 0.5f;
