@@ -30,7 +30,7 @@ namespace OptimizeAndTool.ModLinkage
 
             if (IsLinkage_OptimizeAndTool_QuickSetting)
             {
-                AddItem(mi, "Images/Item_3611", "优化和工具", Content.Function.GetUI());
+                AddItem(mi, "Images/Item_3611", $"{ThisMod.ModName}", Content.Function.GetUI());
             }
         }
 

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using OptimizeAndTool.Content.ServerList;
-using System;
+using tContentPatch.Content.UI;
 using Terraria.UI;
 
 namespace OptimizeAndTool.Content.UI
@@ -9,28 +8,48 @@ namespace OptimizeAndTool.Content.UI
     {
         public static void Style2(UIServerListItem ui)
         {
-            ui.Height.Set(80f, 0f);
+            UIStackPanel sp = new UIStackPanel();
+            sp.Width.Set(0f, 1f);
+            sp.IsAutoUpdateSize = true;
+            sp.ItemMargin = 2f;
+            ui.Append(sp);
+
             ui.BackgroundColor = new Color(63, 82, 151) * 0.7f;
             ui.BorderColor = new Color(89, 116, 213) * 0.7f;
             ui.SetPadding(6f);
+            ui.OnUpdate += _ => ui.UpdateContainer_Height();
 
-            ui.UIBackStyle.Append(new UIServerListItemStyle2(ui));
+            sp.Append(new UIServerListItemStyle2(ui));
+            sp.Append(new UIElementEmpty());
+            sp.Append(ui.UIButtons);
         }
 
-        public class UIServerListItemStyle2 : UIState
+        public class UIServerListItemStyle2 : UIServerListItemStyleTemplate
         {
-            public readonly UIServerListItem ParentUI = null;
-            public ServerInfo Info => ParentUI.Info;
-
-            public UIServerListItemStyle2(UIServerListItem parent)
+            public UIServerListItemStyle2(UIServerListItem parent) : base(parent)
             {
-                ParentUI = parent ?? throw new ArgumentNullException(nameof(parent));
+                UITextBox text = new UITextBox();
+                text.Width.Set(-2f, 0.6f);
+                text.MaxInputLength = 50;
+                text.Style = UITextBox.Style3;
+                text.OnGetText = () => Info.DisplayName;
+                text.OnSetText = v => Info.DisplayName = v;
+                SetUILabel(text, () => $"世界名：{parent.Info.GetWorldName(allowCropping: true)}");
+                Append(text);
+
+                UIElement ipPort = GetIpPortUI();
+                ipPort.Width = text.Width;
+                ipPort.Width.Precent = 1f - ipPort.Width.Precent;
+                ipPort.HAlign = 1f;
+                Append(ipPort);
             }
 
-            protected void GetDifficulty(out string expertText, out Color gameModeColor) => ParentUI.GetDifficulty(out expertText, out gameModeColor);
-            protected void TryCopyText(string text) => ParentUI.TryCopyText(text);
-            protected void SetLabel(string txt = null) => ParentUI.SetLabel(txt);
-            protected void SetUILabel(UIElement ui, Func<string> OnGetText) => ParentUI.SetUILabel(ui, OnGetText);
+            public override void Update(GameTime gameTime)
+            {
+                base.Update(gameTime);
+
+                this.UpdateContainer_Height();
+            }
         }
     }
 }

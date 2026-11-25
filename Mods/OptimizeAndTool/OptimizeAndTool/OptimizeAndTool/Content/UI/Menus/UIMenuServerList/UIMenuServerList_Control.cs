@@ -50,6 +50,8 @@ namespace OptimizeAndTool.Content.UI.Menus
 
             Control.OffUp(item.Info);
             UISP.UpItem(item);
+
+            UISV.UIScrollbar.ViewPosition -= item.GetOuterDimensions().Height + UISP.ItemMargin;
         }
 
         protected virtual void ControlDown(UIServerListItem item)
@@ -59,6 +61,8 @@ namespace OptimizeAndTool.Content.UI.Menus
 
             Control.OffDown(item.Info);
             UISP.DownItem(item);
+
+            UISV.UIScrollbar.ViewPosition += item.GetOuterDimensions().Height + UISP.ItemMargin;
         }
 
         protected virtual void ControlLoad()

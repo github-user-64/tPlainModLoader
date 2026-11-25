@@ -14,7 +14,7 @@ namespace OptimizeAndTool.Content.ServerList
 {
     public class ServerInfo : WorldFileData
     {
-        public string DisplayText = null;
+        public string DisplayName = null;
         public string IP = null;
         public int Port = 0;
 
@@ -73,7 +73,7 @@ namespace OptimizeAndTool.Content.ServerList
 
                 IEnumerable<MemberInfo> ms = objectType.GetFields(f);
 
-                ms = ms.Concat(objectType.GetProperties(f).Where(i => i.CanWrite));
+                ms = ms.Concat(objectType.GetProperties(f).Where(i => i.CanWrite && i.CanRead));
 
                 return ms.ToList();
             }

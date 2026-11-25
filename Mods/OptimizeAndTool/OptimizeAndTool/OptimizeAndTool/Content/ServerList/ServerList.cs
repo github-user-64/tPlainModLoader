@@ -3,6 +3,7 @@ using OptimizeAndTool.Content.UI.Menus;
 using OptimizeAndTool.Utils;
 using OptimizeAndTool.Utils.quickBuild;
 using System.Collections.Generic;
+using System.Reflection;
 using tContentPatch;
 using tContentPatch.Content;
 using Terraria;
@@ -16,11 +17,15 @@ namespace OptimizeAndTool.Content.ServerList
         public static GetSetReset<int> ItemStyle = new GetSetReset<int>(0, 0);
         protected static ListData.IControl control = null;
 
+        private static readonly MethodInfo OnSubmitServerPort = typeof(Main).GetMethod("OnSubmitServerPort", BindingFlags.Static | BindingFlags.NonPublic);
+
         public static void OpenMenu()
         {
             UIMenuServerList ui = new UIMenuServerList(control, Main.MenuUI?.CurrentState);
             ui.SwitchItemStyle(ItemStyle.val);
             ui.OnSwitchItemStyle += v => ItemStyle.val = v;
+            ui.OnGetEnable = () => Enable.val;
+            ui.OnSetEnable = v => Enable.val = v;
 
             ui.NoGamepadSupport = true;//不支持游戏手柄, 取消按移动键鼠标会定位到ui上的功能
 
@@ -56,12 +61,15 @@ namespace OptimizeAndTool.Content.ServerList
 
         public static void Join(ServerInfo si)
         {
-            //Main.getIP = si.ip;
-            //Netplay.ListenPort = si.port;
+            Main.getIP = si.IP;
+            //Netplay.ListenPort = si.Port;
+
             //Main.autoPass = false;
-            //Netplay.SetRemoteIPAsync(Main.getIP, new Action(Main.StartClientGameplay));
+            //Netplay.SetRemoteIPAsync(Main.getIP, Main.StartClientGameplay);
             //Main.menuMode = 14;
             //Main.statusText = Language.GetTextValue("Net.ConnectingTo", Main.getIP);
+
+            OnSubmitServerPort.Invoke(null, new object[] { si.Port.ToString() });
         }
     }
 }

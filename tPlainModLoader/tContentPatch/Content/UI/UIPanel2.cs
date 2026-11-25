@@ -10,8 +10,6 @@ namespace tContentPatch.Content.UI
     /// </summary>
     public class UIPanel2 : UIPanel
     {
-        private static readonly Texture2D OnePixel = TextureAssets.MagicPixel.Value;
-
         /// <summary/>
         protected int barSize = 0;
 
@@ -42,7 +40,7 @@ namespace tContentPatch.Content.UI
 
         private void Draw(SpriteBatch sb, Color color, Rectangle rect)
         {
-            sb.Draw(OnePixel, rect, new Rectangle(0, 0, 1, 1), color);
+            sb.Draw(TextureAssets.MagicPixel.Value, rect, new Rectangle(0, 0, 1, 1), color);
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using ReLogic.OS;
+﻿using OptimizeAndTool.Content.UI.Menus;
+using ReLogic.OS;
+using tContentPatch.Content;
+using Terraria;
 using Terraria.Localization;
 
 namespace OptimizeAndTool.Content.UI
@@ -7,7 +10,7 @@ namespace OptimizeAndTool.Content.UI
     {
         protected virtual void PlayGame()
         {
-
+            ServerList.ServerList.Join(Info);
         }
 
         protected virtual void CopySeed()
@@ -18,7 +21,10 @@ namespace OptimizeAndTool.Content.UI
 
         protected virtual void EditInfo()
         {
+            UIEditServerInfo ui = new UIEditServerInfo(Info, Main.MenuUI?.CurrentState);
+            ui.NoGamepadSupport = true;//不支持游戏手柄, 取消按移动键鼠标会定位到ui上的功能
 
+            GameUitl.OpenMenu(ui);
         }
 
         protected virtual void Delete() => OnDel?.Invoke();

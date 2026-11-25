@@ -19,7 +19,7 @@ namespace OptimizeAndTool
         }
 
         public override string Name => "设置";
-        public override string Title => "优化和工具: 设置";
+        public override string Title => $"{ThisMod.ModName}: 设置";
         public override string FilePath => "Setting.json";
         public override Type DataType => typeof(Data);
 

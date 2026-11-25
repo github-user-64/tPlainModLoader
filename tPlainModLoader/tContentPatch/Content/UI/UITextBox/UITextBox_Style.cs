@@ -67,5 +67,29 @@ namespace tContentPatch.Content.UI
             overSound.OnMouseOver += (e, s) => SoundEngine.PlaySound(SoundID.MenuTick);
             ui.Append(overSound);//放在最上面, 防止多个子ui多次触发OnMouseOver
         }
+
+        /// <summary>
+        /// 和<see cref="Style2(UITextBox)"/>相同, 但没焦点和鼠标悬浮时不显示边框
+        /// </summary>
+        public static void Style3(UITextBox ui)
+        {
+            Style2(ui);
+
+            ui.UIBackStyle.RemoveAllChildren();
+
+            UIPanel2 back = new UIPanel2();
+            back.Width.Set(0f, 1f);
+            back.Height.Set(0f, 1f);
+            back.BackgroundColor = default;
+            back.BorderColor = default;
+            back.OnUpdate += _ =>
+            {
+                if (ui.Focus || ui.IsMouseHovering) back.BorderColor = Color.MidnightBlue;
+                else back.BorderColor = default;
+
+                back.BackgroundColor = ui.Focus ? Color.MidnightBlue * 0.6f : default;
+            };
+            ui.UIBackStyle.Append(back);
+        }
     }
 }

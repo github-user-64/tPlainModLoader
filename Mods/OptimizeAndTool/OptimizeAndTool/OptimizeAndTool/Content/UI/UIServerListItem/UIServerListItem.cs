@@ -37,6 +37,7 @@ namespace OptimizeAndTool.Content.UI
         public Action OnDel = null;
         public readonly ServerInfo Info = null;
 
+        public readonly UIElement UIButtons = null;
         public readonly UIStackPanel UILeftButtons = null;
         public readonly UIStackPanel UIRightButtons = null;
         public readonly UIText UILabel = null;
@@ -59,22 +60,25 @@ namespace OptimizeAndTool.Content.UI
 
             //
 
+            UIButtons = new UIElement();
+            UIButtons.Width.Set(0f, 1f);
+            UIButtons.OnUpdate += _ => UIButtons.UpdateContainer_Height();
+            Append(UIButtons);
+
             UILeftButtons = new UIStackPanel();
-            UILeftButtons.VAlign = 1f;
             UILeftButtons.Horizontal = true;
             UILeftButtons.IsAutoUpdateSize = true;
             UILeftButtons.ItemMargin = 4f;
             UILeftButtons.OnUpdate += _ => UILeftButtons.UpdateContainer_Height();
-            Append(UILeftButtons);
+            UIButtons.Append(UILeftButtons);
 
             UIRightButtons = new UIStackPanel();
             UIRightButtons.HAlign = 1f;
-            UIRightButtons.VAlign = 1f;
             UIRightButtons.Horizontal = true;
             UIRightButtons.IsAutoUpdateSize = true;
             UIRightButtons.ItemMargin = 8f;
             UIRightButtons.OnUpdate += _ => UIRightButtons.UpdateContainer_Height();
-            Append(UIRightButtons);
+            UIButtons.Append(UIRightButtons);
 
             InitializeButtons();
 

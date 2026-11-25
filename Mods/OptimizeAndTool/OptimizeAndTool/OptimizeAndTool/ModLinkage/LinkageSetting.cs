@@ -13,7 +13,7 @@ namespace OptimizeAndTool.ModLinkage
     internal class LinkageSetting : ModSetting
     {
         public override string Name => "模组联动设置";
-        public override string Title => "优化和工具: 模组联动设置";
+        public override string Title => $"{ThisMod.ModName}: 模组联动设置";
         public override string FilePath => "LinkageSetting.json";
         public override Type DataType => typeof(List<bool>);
         private List<bool> data = null;
