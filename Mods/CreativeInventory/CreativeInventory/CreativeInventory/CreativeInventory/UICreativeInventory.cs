@@ -19,7 +19,7 @@ namespace CreativeInventory.CreativeInventory
         protected UIScrollViewer panel_items_sv = null;
         protected UIWrapPanel panel_items_wp = null;//物品列表项的容器
         //
-        protected UIState panel_row1 = null;//搜索框
+        protected UIElement panel_row1 = null;//搜索框
         protected UITextBox panel_row1_tb = null;
         protected UIStackPanel panel_row1_sp = null;//搜索维度的开关
         protected UISearchSwitch panel_row1_sw_tile = null;//按图格id搜索
@@ -41,7 +41,7 @@ namespace CreativeInventory.CreativeInventory
         public UICreativeInventory(string title, int width, int height) : base(title, width, height)
         {
             panel_rows = new UIStackPanel();
-            panel_row1 = new UIState();
+            panel_row1 = new UIElement();
             panel_row1_tb = new UITextBox("搜索物品");
             panel_row1_sp = new UIStackPanel();
             panel_row1_sw_tile = new UISearchSwitch("图格");
@@ -57,6 +57,7 @@ namespace CreativeInventory.CreativeInventory
 
             //
 
+            panel_row1.Width.Set(0, 1);
             panel_row1.Height.Set(30, 0);
 
             panel_row1_tb.Width.Set(150, 0);

@@ -86,10 +86,10 @@ namespace WandsTool.Content
     public class wandsPanel : UserInterface
     {
         protected UIState container = null;
-        protected UIState btns = null;
-        protected UIState btns_2 = null;
-        protected UIState btns_3 = null;
-        protected UIState btns_4 = null;
+        protected UIElement btns = null;
+        protected UIElement btns_2 = null;
+        protected UIElement btns_3 = null;
+        protected UIElement btns_4 = null;
         protected wandsPanel_btn1 btn1 = null;//破坏放置
         protected wandsPanel_btn1 btn2 = null;//方块墙壁
         protected wandsPanel_btn1 btn2_tile = null;
@@ -116,10 +116,23 @@ namespace WandsTool.Content
         public wandsPanel()
         {
             container = new UIState();
-            btns = new UIState();
-            btns_2 = new UIState();
-            btns_3 = new UIState();
-            btns_4 = new UIState();
+
+            btns = new UIElement();
+            btns.Width.Set(0f, 1f);
+            btns.Height.Set(0f, 1f);
+
+            btns_2 = new UIElement();
+            btns_2.Width.Set(0f, 1f);
+            btns_2.Height.Set(0f, 1f);
+
+            btns_3 = new UIElement();
+            btns_3.Width.Set(0f, 1f);
+            btns_3.Height.Set(0f, 1f);
+
+            btns_4 = new UIElement();
+            btns_4.Width.Set(0f, 1f);
+            btns_4.Height.Set(0f, 1f);
+
             btn1 = new wandsPanel_btn1("Images/Item_1", "破坏放置");
             btn2 = new wandsPanel_btn1("Images/Item_2", "方块墙壁");
             btn2_tile = new wandsPanel_btn1("Images/Item_2", "方块");

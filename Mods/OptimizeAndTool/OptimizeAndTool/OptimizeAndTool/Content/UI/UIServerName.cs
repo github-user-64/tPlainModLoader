@@ -48,7 +48,9 @@ namespace OptimizeAndTool.Content.UI
             ui.OnGotFocus += () => SoundEngine.PlaySound(SoundID.MenuTick);
             ui.OnLostFocus += () => SoundEngine.PlaySound(SoundID.MenuClose);
 
-            UIState overSound = new UIState();
+            UIElement overSound = new UIElement();
+            overSound.Width.Set(0f, 1f);
+            overSound.Height.Set(0f, 1f);
             overSound.OnMouseOver += (e, s) => SoundEngine.PlaySound(SoundID.MenuTick);
             ui.Append(overSound);
         }

@@ -52,7 +52,9 @@ namespace OptimizeAndTool.Content.UI
             Width.Set(0f, 1f);
             OnLeftDoubleClick += (e, s) => PlayGame();
 
-            UIBackStyle = new UIState();
+            UIBackStyle = new UIElement();
+            UIBackStyle.Width.Set(0f, 1f);
+            UIBackStyle.Height.Set(0f, 1f);
             Append(UIBackStyle);
 
             //

@@ -36,10 +36,14 @@ namespace tContentPatch.Content.UI
         /// <summary/>
         public UISwitch()
         {
-            UIBackStyle = new UIState();
+            UIBackStyle = new UIElement();
+            UIBackStyle.Width.Set(0f, 1f);
+            UIBackStyle.Height.Set(0f, 1f);
             Append(UIBackStyle);
 
-            UI1 = new UIState();
+            UI1 = new UIElement();
+            UI1.Width.Set(0f, 1f);
+            UI1.Height.Set(0f, 1f);
             UI1.OnLeftClick += (e, s) => UV.SetUIVal(!IsChecked);
             Append(UI1);
 

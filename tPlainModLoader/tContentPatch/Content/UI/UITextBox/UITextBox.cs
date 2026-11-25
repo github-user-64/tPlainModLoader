@@ -30,7 +30,9 @@ namespace tContentPatch.Content.UI
             Height.Set(25f, 0f);
             OverflowHidden = true;//溢出隐藏
 
-            UIBackStyle = new UIState();
+            UIBackStyle = new UIElement();
+            UIBackStyle.Width.Set(0f, 1f);
+            UIBackStyle.Height.Set(0f, 1f);
             Append(UIBackStyle);
 
             UIText = new UIText(string.Empty);
