@@ -27,13 +27,13 @@ namespace OptimizeAndTool.Content.ServerList
         {
             if (Main.dedServ) return;
 
-            Patch_Main.OnSelectPlayerPostfix += () =>
-            {
-                if (Main.menuMode != MenuID.ServerIP) return;
-                if (Main.gameMenu != true) return;
+            //Patch_Main.OnSelectPlayerPostfix += () =>
+            //{
+            //    if (Main.menuMode != MenuID.ServerIP) return;
+            //    if (Main.gameMenu != true) return;
 
-                if (Enable.val == true) OpenMenu();
-            };
+            //    if (Enable.val == true) OpenMenu();
+            //};
 
             Patch_WorldGen.OnSaveAndQuitPrefix += () =>
             {

@@ -56,18 +56,20 @@ namespace SundryTool.Content.Function2
                 default: reason = PlayerDeathReason.ByPlayer(255); break;
             }
 
+            bool dodgeable = false;//可躲避
             if (damagePlay_play.val == -1)
             {
                 for (int i = 0; i < 255; ++i)
                 {
-                    NetMessage.SendPlayerHurt(i, reason, damagePlay_damage.val, -1, true, true, -1, -1, -1);
+
+                    NetMessage.SendPlayerHurt(i, reason, damagePlay_damage.val, -1, true, true, -1, dodgeable, -1, -1);
                 }
             }
             else
             {
                 if (damagePlay_play.val < 0) return;
 
-                NetMessage.SendPlayerHurt(damagePlay_play.val, reason, damagePlay_damage.val, -1, true, true, -1, -1, -1);
+                NetMessage.SendPlayerHurt(damagePlay_play.val, reason, damagePlay_damage.val, -1, true, true, -1, dodgeable, -1, -1);
             }
         }
 

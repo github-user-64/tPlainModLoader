@@ -52,7 +52,7 @@ namespace Skil.Content.skil15
 
             Projectile.NewProjectile(null, This.Center, v,
                 ProjectileID.PaladinsHammerFriendly, SkilListControl1.damage.val, 1, This.whoAmI,
-                modifer: SetNoTp);
+                modifier: SetNoTp);
 
             ++count;
         }

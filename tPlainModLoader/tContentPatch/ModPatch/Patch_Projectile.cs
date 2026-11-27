@@ -70,10 +70,10 @@ namespace tContentPatch.ModPatch
             float X, float Y, float SpeedX, float SpeedY,
             int Type, int Damage, float KnockBack, int Owner,
             float ai0, float ai1, float ai2,
-            NewProjectileModifier modifer)
+            NewProjectileModifier modifier = null)
         {
             mod.ForTry(item => item.NewProjectilePostfix(
-                __result, spawnSource, X, Y, SpeedX, SpeedY, Type, Damage, KnockBack, Owner, ai0, ai1, ai2, modifer));
+                __result, spawnSource, X, Y, SpeedX, SpeedY, Type, Damage, KnockBack, Owner, ai0, ai1, ai2, modifier));
         }
 
         [HarmonyPatch("AI_203_GetLightningColor")]

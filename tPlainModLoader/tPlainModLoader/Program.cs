@@ -84,7 +84,7 @@ namespace tPlainModLoader
 
             string[] titles = new string[] { "tPlainModLoader", "固态泰拉瑞亚", "固态地面:)", "static tile", "this is 固态硬盘", "泰拉瑞亚!启动!",
                 "简易模组加载器的意思是做的很简陋", "试试tModLoader", "你知道吗?传说有个叫tModLoader的比这个好一万倍!",
-                "如果tPML崩溃了请冷静, 这是正常现象", "你让我怎么棱镜!", "按[Alt]和[F4]免费领取天顶剑", "Null", "1.4.5现已更新!",
+                "如果tPML崩溃了请冷静, 这是正常现象", "你让我怎么棱镜!", "按[Alt]和[F4]免费领取天顶剑", "Null", "1.4.6现已更新!",
                 "修修补补又一年", "传奇BUG王[c/FF69B4:404]", "世纪之花灯泡",
                 "哈!哈!你发现了彩蛋!"};
             Console.Title = titles[new Random().Next(0, titles.Length - 1)];

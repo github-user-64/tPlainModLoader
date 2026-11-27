@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.UI.Gamepad;
@@ -21,14 +20,6 @@ namespace OptimizeAndTool.Content.Patch
         public static void UpdateTimeRatePostfix()
         {
             TimeSet.UpdateTimeRate();
-        }
-
-        public static Action OnSelectPlayerPostfix = null;
-        [HarmonyPatch(nameof(Main.SelectPlayer))]
-        [HarmonyPostfix]
-        public static void SelectPlayerPostfix()
-        {
-            OnSelectPlayerPostfix?.Invoke();
         }
 
         /// <summary>

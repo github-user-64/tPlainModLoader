@@ -6,7 +6,7 @@
 		<OutPathSwitch>0</OutPathSwitch>
 
 		<!--用于引用的Terraria.exe文件位置-->
-		<DllTerraria>$(MSBuildThisFileDirectory)\dll\Terraria_v1.4.5.8.exe</DllTerraria>
+		<DllTerraria>$(MSBuildThisFileDirectory)\dll\Terraria_v1.4.6.1.exe</DllTerraria>
 		<!--用于引用的ReLogic.dll文件位置-->
 		<!--原版游戏的ReLogic.dll文件无法直接引用, 可以用tModLoader那的dll替代-->
 		<DllReLogic>$(MSBuildThisFileDirectory)\dll\ReLogic.dll</DllReLogic>

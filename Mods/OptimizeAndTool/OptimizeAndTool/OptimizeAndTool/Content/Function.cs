@@ -2,14 +2,13 @@
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.Collections.Generic;
-using tContentPatch;
 using tContentPatch.Content.UI.Item1;
 using Terraria;
 using Terraria.UI;
 
 namespace OptimizeAndTool.Content
 {
-    internal partial class Function : PatchPlayer
+    internal static class Function
     {
         public static List<CommandObject> GetCO()
         {

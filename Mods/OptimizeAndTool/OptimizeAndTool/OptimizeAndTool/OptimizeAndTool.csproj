@@ -44,6 +44,7 @@
     <Compile Include="Content\DisplayProjectileInfo.cs" />
     <Compile Include="Content\Function.cs" />
     <Compile Include="Content\Patch\PatchInit.cs" />
+    <Compile Include="Content\Patch\Patch_UIMultiplayerLobby.cs" />
     <Compile Include="Content\Patch\Patch_Lighting.cs" />
     <Compile Include="Content\Patch\Patch_WorldGen.cs" />
     <Compile Include="Content\Patch\Patch_Main.cs" />

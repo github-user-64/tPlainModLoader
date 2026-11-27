@@ -8,7 +8,6 @@ using tContentPatch.Utils;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
-using Terraria.Social.Base;
 
 namespace tContentPatch.Content.Menus.ModSetSwitch
 {
@@ -16,6 +15,9 @@ namespace tContentPatch.Content.Menus.ModSetSwitch
     internal static class Patch
     {
         private static float scale = 0f;
+        /// <summary>
+        /// 记录绘制到第几个菜单
+        /// </summary>
         private static readonly int index_num10 = 21;
         private static readonly int index_num8 = 18;
 
@@ -30,9 +32,10 @@ namespace tContentPatch.Content.Menus.ModSetSwitch
             #region 改数量
             cs = new CodeMatch[]
             {
-                new CodeMatch(OpCodes.Callvirt, typeof(NetSocialModule).GetMethod(nameof(NetSocialModule.CanInvite))),
-                new CodeMatch(OpCodes.Br_S),
+                //flag5 = Main.netMode != 0;
+                new CodeMatch(OpCodes.Ldsfld, typeof(Main).GetField(nameof(Main.netMode))),
                 new CodeMatch(OpCodes.Ldc_I4_0),
+                new CodeMatch(OpCodes.Cgt_Un),
                 new CodeMatch(OpCodes.Stloc_S),//16
 
                 //int num7 = (flag5 ? 1 : 0);
@@ -90,8 +93,8 @@ namespace tContentPatch.Content.Menus.ModSetSwitch
             codeMatcher.InsertAndAdvance(
                 new CodeMatch(OpCodes.Ldarg_1),
                 new CodeMatch(OpCodes.Ldloca_S, index_num10),
-                new CodeMatch(OpCodes.Ldloc_S, 19),
-                new CodeMatch(OpCodes.Ldloc_S, 20),
+                new CodeMatch(OpCodes.Ldloc_S, 19),//anchor
+                new CodeMatch(OpCodes.Ldloc_S, 20),//offset
                 new CodeMatch(OpCodes.Call, typeof(Patch).GetMethod(nameof(DrawLeftSide), BindingFlags.Static | BindingFlags.NonPublic)));
             #endregion
 
@@ -123,7 +126,7 @@ namespace tContentPatch.Content.Menus.ModSetSwitch
 
         private static void PrintLog()
         {
-            string s = $"无法在游戏选择窗口插入选项:找不到IL位置";
+            string s = $"无法在游戏选择窗口插入模组设置选项:找不到IL位置";
             Log.Add(s);
             ContentPatch.PrintTry(s);
         }

@@ -35,7 +35,7 @@ namespace tPlainModLoader
 
                 if (Directory.Exists(dir) == false) throw new Exception($"目录不存在[{dir}]");
 
-                string[] fileNames = { "Terraria.exe", "Terraria_v1.4.5.8.exe", "Terraria_v1.4.5.exe" };
+                string[] fileNames = { "Terraria.exe", "Terraria_v1.4.6.1.exe", "Terraria_v1.4.6.exe" };
                 foreach (string i in fileNames)
                 {
                     string s = Path.Combine(dir, i);
