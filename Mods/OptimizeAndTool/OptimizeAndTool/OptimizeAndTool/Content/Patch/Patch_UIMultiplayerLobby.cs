@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Linq;
 using System.Reflection;
 using tContentPatch;
+using tContentPatch.Content.UI;
 using tContentPatch.ModLoad;
 using Terraria;
 using Terraria.Audio;
@@ -57,8 +58,11 @@ namespace OptimizeAndTool.Content.Patch
             btn.MarginLeft = -(6f + btn.Width.Pixels);
             btn.MarginTop = 10f;
             btn.MouseText = "打开服务器列表(优化和工具)";
+            btn.MouseTextStyle = UIMouseText.MouseTextStyle2;
             btn.OnUpdate += _ =>
             {
+                btn.Recalculate();
+
                 CalculatedStyle pos = panel.GetOuterDimensions();
                 btn.Left.Pixels = pos.X;
                 btn.Top.Pixels = pos.Y;

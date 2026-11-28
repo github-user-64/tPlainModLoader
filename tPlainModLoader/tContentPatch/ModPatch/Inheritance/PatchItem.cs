@@ -17,7 +17,7 @@ namespace tContentPatch
         /// <summary/>
         public virtual void SetDefaultsPostfix(Item This, int Type, ItemVariant variant) { }
         /// <summary/>
-        public virtual void NewItemPostfix(int __result, IEntitySource source,
+        public virtual void NewItemPostfix(int result, IEntitySource source,
             Vector2 center, int type, int stack, int prefix,
             NewItemOwnership ownership,
             Vector2? velocity, Item.NewItemModifier modifier, bool noBroadcast)

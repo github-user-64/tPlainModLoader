@@ -23,7 +23,7 @@ namespace tContentPatch
         /// <summary/>
         public virtual void SetDefaultsPostfix(NPC This, int Type, NPCSpawnParams spawnparams) { }
         /// <summary/>
-        public virtual void NewNPCPostfix(int __result, IEntitySource source,
+        public virtual void NewNPCPostfix(int result, IEntitySource source,
             int X, int Y, int Type, int Start, float ai0, float ai1, float ai2, float ai3, int Target)
         { }
         /// <summary/>
